@@ -6,51 +6,23 @@
 /*   By: iniska <iniska@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/11 10:51:25 by iniska            #+#    #+#             */
-/*   Updated: 2024/10/11 12:48:56 by iniska           ###   ########.fr       */
+/*   Updated: 2024/10/11 10:54:04 by iniska           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../cube.h"
+#include "../cube.h"
 
-void	exiting(char *map, char str)
+bool	map_validator(char **map)
 {
-	printf("%s\n", str);
-	free(map);
-	exit(1);
-}
+	int	i;
 
-static bool parse_pictures(char **map)
-{
-	if (valid_pic())
-		return(false);
-	//save stuff to struct;
-	
-}
-
-static bool	parse_colours(char **map)
-{
+	i = 0;
 
 }
 
-static bool	parse_map(char **map)
+bool	parsing(char **map)
 {
-	//first fill all empty pplaces with 1
-	valid_map()
-}
-
-void	parsing(char **arv)
-{
-	char **map;
-
-	map = strdup(arv); // FT_IT!
-	if(!map)
-		exit(1);
-	// create a copy, delete lines as you go
-	if (!parse_pictures(&map))
-		exiting(map, "Funky pictures");
-	if (!parse_colours(&map))
-		exiting(map, "Funky colours");
-	if (!parse_map(&map));
-		exiting(map, "Funky map");
-	free (map);
+	if(!map_validator(map));
+		return (false);
+	return (true);
 }
