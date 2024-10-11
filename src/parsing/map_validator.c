@@ -6,7 +6,7 @@
 /*   By: iniska <iniska@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/11 10:55:57 by iniska            #+#    #+#             */
-/*   Updated: 2024/10/11 11:51:05 by iniska           ###   ########.fr       */
+/*   Updated: 2024/10/11 12:56:50 by iniska           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,11 +15,15 @@
 bool	valid_pic(char **map)
 {
 	int	i;
+	char *line;
 
 	i = 0;
-	while(map[i])
+	line = *map;
+	while (i < 4)
 	{
-
+		if (i == 0 && !(strncmp(line, "NO ", 3)))
+			return (false);
+		
 	}
 
 }
