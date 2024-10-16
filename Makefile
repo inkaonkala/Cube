@@ -5,7 +5,8 @@ GREEN = \033[0;32m
 
 # Compiler flags
 CFLAGS = -Wall -Wextra -Werror -g 
-MLX_FLAGS = -lglfw -framework Cocoa -framework OpenGL -framework IOKit
+#MLX_FLAGS = -lglfw -framework Cocoa -framework OpenGL -framework IOKit
+MLX_FLAGS = -framework Cocoa -framework OpenGL -framework IOKit
 
 # Library directories and files
 LIBFT_DIR = ./libft
