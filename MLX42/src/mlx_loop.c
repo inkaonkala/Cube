@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   mlx_loop.c                                         :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: yhsu <yhsu@hive.student.fi>                +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/12/28 01:24:36 by W2Wizard          #+#    #+#             */
-/*   Updated: 2024/03/12 11:57:00 by yhsu             ###   ########.fr       */
+/*                                                        ::::::::            */
+/*   mlx_loop.c                                         :+:    :+:            */
+/*                                                     +:+                    */
+/*   By: W2Wizard <main@w2wizard.dev>                 +#+                     */
+/*                                                   +#+                      */
+/*   Created: 2021/12/28 01:24:36 by W2Wizard      #+#    #+#                 */
+/*   Updated: 2023/03/28 16:34:17 by W2Wizard      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,13 +90,21 @@ bool mlx_loop_hook(mlx_t* mlx, void (*f)(void*), void* param)
 }
 
 // glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
+/**
+ * In Emscripten the lood is defined differently, there the this function
+ * is passed to the while loop instead
+ */
 void mlx_loop(mlx_t* mlx)
 {
 	MLX_NONNULL(mlx);
 
+#ifdef EMSCRIPTEN
+	static double start, oldstart = 0;
+#else
 	double start, oldstart = 0;
-	while (!glfwWindowShouldClose(mlx->window))
+    while (!glfwWindowShouldClose(mlx->window))
 	{
+#endif
 		start = glfwGetTime();
 		mlx->delta_time = start - oldstart;
 		oldstart = start;
@@ -114,5 +122,7 @@ void mlx_loop(mlx_t* mlx)
 
 		glfwSwapBuffers(mlx->window);
 		glfwPollEvents();
+#ifndef EMSCRIPTEN
 	}
+#endif
 }

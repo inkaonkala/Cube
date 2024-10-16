@@ -10,8 +10,8 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <cub3D.h>
-
+#include "../include/cub3D.h"
+//#include "cub3D.h"
 
 int check_file_extesion(char *filename)
 {
@@ -24,18 +24,20 @@ int check_file_extesion(char *filename)
 }
 
 
-int main (int argc, char *argv[])
+int main ()
 {
-	t_game *game;
 	
-	if (argc != 2)
-		err_message_exit(game, "Invalid input.");
-	if (check_file_extesion(argv[1]))
-		err_message(game, "please provide a .cub file");
-	//parse map
-	init_game(game, argv[1]);
-	//initializing the MLX library
-	// Window Creation
+	ft_putstr( "for compile");
+	// t_game *game;
+	
+	// if (argc != 2)
+	// 	err_message_exit(game, "Invalid input.");
+	// if (check_file_extesion(argv[1]))
+	// 	err_message(game, "please provide a .cub file");
+	// //parse map
+	// init_game(game, argv[1]);
+	// //initializing the MLX library
+	// // Window Creation
 
 
 

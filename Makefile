@@ -13,11 +13,14 @@ LIBFT_INCLUDE = -I ${LIBFT_DIR}
 
 MLX42_DIR = ./MLX42/build
 MLX42 = ./MLX42/build/libmlx42.a
-LD_FLAGS = -L/Users/${USER}/.brew/opt/glfw/lib/
+#LD_FLAGS = -L/Users/${USER}/.brew/opt/glfw/lib/
+
+#for yunchia's mac
+LD_FLAGS = -L/usr/local/opt/glfw/lib/
 
 INCLUDES = -I/opt/X11/include -Imlx
 
-SOURCES  = 	
+SOURCES  = 	./src/main.c\
 		   
 #SOURCES_BONUS  = 	
 
@@ -53,3 +56,5 @@ clean:
 	rm -rf MLX42/build
 
 fclean: clean
+
+re: fclean all
