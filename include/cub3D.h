@@ -63,6 +63,7 @@ typedef struct s_game
 	
 }	t_game;
 
+int check_file_extesion(char *filename);
 void	init_game(void);
 
 void 	err_message_exit(char * message);

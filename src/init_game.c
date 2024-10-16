@@ -10,18 +10,26 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3D.h"
+#include "../include/cub3D.h"
 
 
-init_game(t_game *game, char *mapfile)
-{
-	//parse file : create sd array map,  parse element
-	//map validation: check map size too big too small, empty , invalid char, has NSEW once, if map is closed
+// init_game(t_game *game, char *mapfile)
+// {
+// 	//parse file : create sd array map,  parse element
+// 	//map validation: check map size too big too small, empty , invalid char, has NSEW once, if map is closed
 	
-	//get position 
+// 	//get position 
+// }
+
+int check_file_extesion(char *filename)
+{
+	int len;
+	
+	len = ft_strlen(filename);
+	if (len <= 4 || ft_strncmp(filename + (len - 4), ".cub", 4) != 0)
+		return (0); 
+	return (1); //filename with .cub
 }
-
-
 
 
 

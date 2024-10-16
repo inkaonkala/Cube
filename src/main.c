@@ -13,15 +13,7 @@
 #include "../include/cub3D.h"
 //#include "cub3D.h"
 
-int check_file_extesion(char *filename)
-{
-	int len;
-	
-	len = ft_strlen(filename);
-	if (len <= 4 || ft_strncmp(filename + (len - 4), ".cub", 4) != 0)
-		return (0); 
-	return (1); //filename with .cub
-}
+
 
 
 int main ()
