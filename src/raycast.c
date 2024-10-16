@@ -6,24 +6,45 @@
 /*   By: iniska <iniska@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/15 20:39:06 by iniska            #+#    #+#             */
-/*   Updated: 2024/10/16 11:26:48 by iniska           ###   ########.fr       */
+/*   Updated: 2024/10/16 19:53:28 by iniska           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/cub3D.h"
 
+static float	get_horizon(t_game *game)
+{
+
+}
+
+static float	get_wall_height(t_game *game)
+{
+
+}
+
 void raycast(t_game *game)
 {
-	int	ray;
+	double	horizon_line;
+	double	verctical_line;
+	int		ray;
 
 	ray = 0;
+	game->rays->ray_angl = game->player_angl - (game->fow / 2);
+	while (ray < WINDOW_WIDTH)
+	{
+		game->rays->wall_flag = false;
+		horizon_line = get_horizon();
+		verctical_line = get_wall_height();
+		if(verctical_line <= horizon_line)
+			game->rays->distance = verctical_line;
+		else
+		{
+			game->rays->distance = horizon_line;
+			game->rays->ray_angl = true;
+		}
+		set_walls(game, ray);
+		ray++;
+		game->rays->ray_angl += (game->fow / WINDOW_WIDTH);
 
-	//ray_angle = player_angle - (player_face / 2) // fov_rd?
-	//while (ray < SOUTH_WALL)
-	//{
-	//	BEAM!!
-	//}
-	printf("%d", ray);
-	game = NULL;
-
+	}
 }
