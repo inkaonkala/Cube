@@ -1,18 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   MLX42.h                                            :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: yhsu <yhsu@hive.student.fi>                +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/12/28 02:29:06 by W2Wizard          #+#    #+#             */
-/*   Updated: 2024/02/28 15:50:45 by yhsu             ###   ########.fr       */
+/*                                                        ::::::::            */
+/*   MLX42.h                                            :+:    :+:            */
+/*                                                     +:+                    */
+/*   By: W2Wizard <main@w2wizard.dev>                 +#+                     */
+/*                                                   +#+                      */
+/*   Created: 2021/12/28 02:29:06 by W2Wizard      #+#    #+#                 */
+/*   Updated: 2023/03/30 16:23:19 by ntamayo-      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 /**
  *
- * MLX42 is a cross-platform low level and simple cross-platform graphics
+ * MLX42 is a cross-platform low level and simple graphics
  * library written in C and uses OpenGL and GLFW for it's underlying windowing
  * and rendering system.
  * 
@@ -822,17 +822,6 @@ void mlx_delete_xpm42(xpm_t* xpm);
  * @return mlx_image_t* The image created from the texture.
  */
 mlx_image_t* mlx_texture_to_image(mlx_t* mlx, mlx_texture_t* texture);
-
-/**
- * Draws the texture on an already existing image.
- * 
- * @param[in] image The image to draw on.
- * @param[in] texture The texture to use to draw on the image.
- * @param[in] x X position relative to the image.
- * @param[in] y Y position relative to the image.
- * @return In-case of any issues, false else true.
- */
-bool mlx_draw_texture(mlx_image_t* image, mlx_texture_t* texture, uint32_t x, uint32_t y);
 
 //= Image Functions =//
 

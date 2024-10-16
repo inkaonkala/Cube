@@ -6,11 +6,11 @@
 /*   By: iniska <iniska@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/15 20:39:06 by iniska            #+#    #+#             */
-/*   Updated: 2024/10/15 20:44:22 by iniska           ###   ########.fr       */
+/*   Updated: 2024/10/16 11:26:48 by iniska           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../cub3D.h"
+#include "../include/cub3D.h"
 
 void raycast(t_game *game)
 {
@@ -18,9 +18,12 @@ void raycast(t_game *game)
 
 	ray = 0;
 
-	ray_angle = player_angle - (player_face / 2) // fov_rd?
-	while (ray < SOUTH_WALL)
-	{
-		BEAM!!
-	}
+	//ray_angle = player_angle - (player_face / 2) // fov_rd?
+	//while (ray < SOUTH_WALL)
+	//{
+	//	BEAM!!
+	//}
+	printf("%d", ray);
+	game = NULL;
+
 }

@@ -1,23 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   error.c                                            :+:      :+:    :+:   */
+/*   screenpop.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: iniska <iniska@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/10/15 17:11:17 by yhsu              #+#    #+#             */
-/*   Updated: 2024/10/16 11:26:48 by iniska           ###   ########.fr       */
+/*   Created: 2024/10/16 10:04:39 by iniska            #+#    #+#             */
+/*   Updated: 2024/10/16 12:45:30 by iniska           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/cub3D.h"
 
-void err_message_exit(char * message)
+void	screenpop(t_game *game)
 {
-	//ft_putendl_fd( "Error ", 2);
-	if (message)
-		dprintf(2, "there is a message here!\n");
-		//ft_putendl_fd(message, 2);
-	exit (1);	
+	
+	game->mlx = mlx_init(WINDOW_WIDTH, WINDOW_HEIGHT, "This is a cube", true);
+	if(!game->mlx)
+		err_message_exit("Mlx failed to create a window\n Or, was it me ....\n");
+	
+	game->canvas = mlx_new_image(game->mlx, WINDOW_WIDTH, WINDOW_HEIGHT);
+	if(!game->canvas)
+		err_message_exit("No canvas for screen\n");
+	
+	mlx_image_to_window(game->mlx, game->canvas, 0, 0);
+	
+	mlx_loop(game->mlx);
 }
-

@@ -6,26 +6,26 @@
 /*   By: iniska <iniska@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/15 12:55:19 by yhsu              #+#    #+#             */
-/*   Updated: 2024/10/15 20:36:37 by iniska           ###   ########.fr       */
+/*   Updated: 2024/10/16 13:24:01 by iniska           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #  ifndef CUB3D_H
 #define CUB3D_H
 
-#include"../libft/ft_printf.h"
-#include "MLX42.h"
+# include "../libft/libft.h"
+# include"../libft/ft_printf.h"
+# include "../MLX42/include/MLX42/MLX42.h"
+
 
 #include <math.h>
 #include <stdlib.h>
 #include <stdio.h>
-
+#include <string.h>
 
 
 # define WINDOW_WIDTH 1000
-# define WINDOW_WIDTH 1000
-
-
+# define WINDOW_HEIGHT 1000
 
 typedef struct s_flag
 {
@@ -38,10 +38,11 @@ typedef struct s_flag
 	int all_flags;
 }	t_flag;
 
-typedef struct s_raycast
+typedef struct s_rays
 {
+	float	n_ray;
 	
-}	t_raycast;
+}	t_rays;
 
 typedef struct s_game
 {
@@ -59,14 +60,14 @@ typedef struct s_game
 	mlx_texture_t	*we_texture;
 	mlx_texture_t	*ea_texture;
 	
-	t_raycast 		*raycast;
+	t_rays 		*rays;
 	
 }	t_game;
 
-typedef struct s_rays
-{
-	
-}	t_rays;
+void	init_game(void);
 
+void 	err_message_exit(char * message);
+
+void	screenpop(t_game *game);
 
 #endif
