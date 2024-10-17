@@ -6,7 +6,7 @@
 /*   By: iniska <iniska@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/15 12:55:19 by yhsu              #+#    #+#             */
-/*   Updated: 2024/10/17 10:59:19 by iniska           ###   ########.fr       */
+/*   Updated: 2024/10/17 14:02:16 by iniska           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,9 @@ typedef struct s_rays
 	float	ray_angl;
 	bool	wall_flag;
 	int		distance;
+
+	float	horizon_inter;
+	float	vertical_inter;
 	
 }	t_rays;
 
