@@ -6,29 +6,32 @@
 /*   By: iniska <iniska@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/15 20:39:06 by iniska            #+#    #+#             */
-/*   Updated: 2024/10/16 19:53:28 by iniska           ###   ########.fr       */
+/*   Updated: 2024/10/17 09:23:22 by iniska           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/cub3D.h"
 
+/*
 static float	get_horizon(t_game *game)
 {
-
+	printf("printer: %f", game->rays->ray_angl);
 }
 
 static float	get_wall_height(t_game *game)
 {
-
+	printf("printer: %f", game->rays->ray_angl);
 }
+*/
 
 void raycast(t_game *game)
 {
-	double	horizon_line;
-	double	verctical_line;
+	//double	horizon_line;
+	//double	verctical_line;
 	int		ray;
 
 	ray = 0;
+	/*
 	game->rays->ray_angl = game->player_angl - (game->fow / 2);
 	while (ray < WINDOW_WIDTH)
 	{
@@ -47,4 +50,8 @@ void raycast(t_game *game)
 		game->rays->ray_angl += (game->fow / WINDOW_WIDTH);
 
 	}
+	*/
+	printf("printer: %d", ray);
+	printf("printer: %f", game->rays->ray_angl);
+
 }

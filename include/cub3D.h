@@ -6,7 +6,7 @@
 /*   By: iniska <iniska@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/15 12:55:19 by yhsu              #+#    #+#             */
-/*   Updated: 2024/10/16 19:42:13 by iniska           ###   ########.fr       */
+/*   Updated: 2024/10/17 09:21:28 by iniska           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,4 +76,5 @@ void 	err_message_exit(char * message);
 
 void	screenpop(t_game *game);
 
+void raycast(t_game *game);
 #endif
