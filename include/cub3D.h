@@ -6,7 +6,7 @@
 /*   By: iniska <iniska@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/15 12:55:19 by yhsu              #+#    #+#             */
-/*   Updated: 2024/10/17 09:21:28 by iniska           ###   ########.fr       */
+/*   Updated: 2024/10/17 10:59:19 by iniska           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,10 @@
 
 # define WINDOW_WIDTH 1000
 # define WINDOW_HEIGHT 1000
+# define TILE 30
+
+# define FOW 60 // fieald of view
+# define PI 3.14159
 
 typedef struct s_flag
 {
@@ -57,7 +61,7 @@ typedef struct s_game
 	size_t			player_y;
 	float			player_angl; //Where is player facing
 
-	int				fow; // field of view
+	float			fow; // field of view
 	
 	mlx_t			*mlx;
 	mlx_image_t		*canvas;
@@ -66,7 +70,7 @@ typedef struct s_game
 	mlx_texture_t	*we_texture;
 	mlx_texture_t	*ea_texture;
 	
-	t_rays 		*rays;
+	t_rays 			*rays;
 	
 }	t_game;
 
@@ -76,5 +80,10 @@ void 	err_message_exit(char * message);
 
 void	screenpop(t_game *game);
 
-void raycast(t_game *game);
+void	move_and_beam(void *data);
+void 	raycast(t_game *game);
+
+// math_stuff
+void	count_values(t_game *sgame);
+
 #endif

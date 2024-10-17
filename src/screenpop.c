@@ -6,7 +6,7 @@
 /*   By: iniska <iniska@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/16 10:04:39 by iniska            #+#    #+#             */
-/*   Updated: 2024/10/16 12:45:30 by iniska           ###   ########.fr       */
+/*   Updated: 2024/10/17 10:22:45 by iniska           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,6 @@ void	screenpop(t_game *game)
 		err_message_exit("No canvas for screen\n");
 	
 	mlx_image_to_window(game->mlx, game->canvas, 0, 0);
-	
+	mlx_loop_hook(game->mlx, move_and_beam, game); // mave_and_beam() has the movehook and raycast in it!
 	mlx_loop(game->mlx);
 }

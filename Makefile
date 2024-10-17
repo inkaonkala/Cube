@@ -1,6 +1,5 @@
 NAME = cub3D
 
-# Compiler and flags
 CC = cc    
 CFLAGS = -Wall -Wextra -Werror -g 
 MLX_FLAGS = -L/opt/X11/lib -lX11 -lXext -lglfw -lm # Linux-specific flags

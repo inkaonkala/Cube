@@ -6,7 +6,7 @@
 /*   By: iniska <iniska@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/15 12:54:09 by yhsu              #+#    #+#             */
-/*   Updated: 2024/10/16 19:51:21 by iniska           ###   ########.fr       */
+/*   Updated: 2024/10/17 10:26:23 by iniska           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,15 +40,13 @@ int main (int argc, char *argv[])
 	//	err_message(game, "please provide a .cub file");
 	//parse map
 	//init_game(game, argv[1]);
+	
 	//initializing the MLX library
-
-	screenpop(game); // opens a window 
 	game->rays = malloc(sizeof(t_rays));
 	if(!game->rays)
 		err_message_exit("Failed to malloc for the BEAM\n");
-	// count_values(); // count the game->player_angl, game->rays->ray_angl, game->fow
-	raycast(game); //mlx_loop_hook(game->mlx, move_and_beam, game); mave_and_beam() has the movehook and raycast in it!
-
+	count_values(game);
+	screenpop(game); // opens a window 
 	free(game);
 
 
