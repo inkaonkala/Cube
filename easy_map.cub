@@ -1,0 +1,15 @@
+NO ./textures/alice.png
+SO ./textures/yunchia.png
+WE ./textures/lempi.png
+
+
+EA ./textures/miyuki.png
+
+C 0,225,255
+F 99,78,255
+
+111111
+100101
+101001
+1100N1
+111111

@@ -6,8 +6,11 @@
 /*   By: yhsu <yhsu@student.hive.fi>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/15 17:58:39 by yhsu              #+#    #+#             */
-/*   Updated: 2024/10/15 17:59:04 by yhsu             ###   ########.fr       */
+/*   Updated: 2024/10/17 20:01:54 by yhsu             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3D.h"
+#include "../include/cub3D.h"
+
+
+clean_all_exit(t_game *game, char *message);

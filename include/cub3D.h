@@ -6,7 +6,7 @@
 /*   By: yhsu <yhsu@student.hive.fi>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/15 12:55:19 by yhsu              #+#    #+#             */
-/*   Updated: 2024/10/15 18:34:12 by yhsu             ###   ########.fr       */
+/*   Updated: 2024/10/17 19:39:46 by yhsu             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,14 +38,23 @@ typedef struct s_flag
 	int all_flags;
 }	t_flag;
 
-typedef struct s_raycast
-{
-	float	n_ray;
-}	t_raycast;
+typedef struct s_rays
+{	
+	float	n_ray; // float can hold decimals ->fractional numbers
+	float	ray_angl;
+	bool	wall_flag;
+	int		distance;
+
+	float	horizon_inter;
+	float	vertical_inter;
+	
+}	t_rays;
 
 typedef struct s_game
 {
+	char			**file_content;
 	char 			**map;
+	int 			index;
 	t_flag 			*flags;
 	size_t 			height;
 	size_t 			width;
@@ -59,13 +68,14 @@ typedef struct s_game
 	mlx_texture_t	*we_texture;
 	mlx_texture_t	*ea_texture;
 	
-	t_raycast 		*ray;
+	t_rays		*ray;
 	
 }	t_game;
 
 int check_file_extesion(char *filename);
-void	init_game(void);
+void init_game(t_game *game, char *mapfile);
 
 void 	err_message_exit(char * message);
+void err_message(char * message);
 
 #endif
