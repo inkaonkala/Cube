@@ -6,7 +6,7 @@
 /*   By: iniska <iniska@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/16 10:04:39 by iniska            #+#    #+#             */
-/*   Updated: 2024/10/17 10:22:45 by iniska           ###   ########.fr       */
+/*   Updated: 2024/10/18 14:02:54 by iniska           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,6 @@
 
 void	screenpop(t_game *game)
 {
-	
 	game->mlx = mlx_init(WINDOW_WIDTH, WINDOW_HEIGHT, "This is a cube", true);
 	if(!game->mlx)
 		err_message_exit("Mlx failed to create a window\n Or, was it me ....\n");

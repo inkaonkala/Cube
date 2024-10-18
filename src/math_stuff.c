@@ -6,11 +6,20 @@
 /*   By: iniska <iniska@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/17 10:24:06 by iniska            #+#    #+#             */
-/*   Updated: 2024/10/18 09:16:51 by iniska           ###   ########.fr       */
+/*   Updated: 2024/10/18 13:14:10 by iniska           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/cub3D.h"
+
+float	beam_angl(float angl)
+{
+	if (angl < 0)
+		angl += (2 * PI);
+	if (angl > (2 * PI))
+		angl -= (2 * PI);
+	return (angl);
+}
 
 // count the game->player_angl, game->rays->ray_angl, game->fow
 void	count_values(t_game *game)

@@ -6,15 +6,31 @@
 /*   By: iniska <iniska@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/15 20:39:06 by iniska            #+#    #+#             */
-/*   Updated: 2024/10/18 10:29:03 by iniska           ###   ########.fr       */
+/*   Updated: 2024/10/18 12:07:46 by iniska           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/cub3D.h"
 
+//looks the specific spot "map_x/y" where the ray hits
 static int	wall(t_game *game, float x, float y)
 {
-	
+	int	map_x;
+	int	map_y;
+
+	if (x < 0 || y < 0)
+		return (0);
+	map_x = floor(x/TILE);
+	map_y = floor(y/TILE);
+	//edges of the map
+	if(map_y >= (int)game->height || map_x >= (int)game->width)
+		return (1);
+	// "1" on the map
+	if ((size_t)map_y >= game->height || (size_t)map_x >= game->width)
+ //if (game->map[map_y] && game->map[map_x] <= ft_strlen(game->map[map_y]))
+		if(game->map[map_y][map_x] == '1' )
+			return (1);
+	return (0);
 }
 
 static int		move_ray(float angl, float *inter, float *step, int is_vert)
@@ -63,7 +79,7 @@ static float	get_horizon(t_game *game, float angl)
 	else
 		x_step = fabs(x_step);
 	
-	while (!wall(game, x, y - move_ray))
+	while (!wall(game, x, y - ray_move))
 	{
 		x += x_step;
 		y += y_step;
@@ -93,7 +109,7 @@ static float	get_wall_height(t_game *game, float angl)
 		y_step = fabs(y_step);
 	else
 		y_step = -fabs(y_step);
-	while (!wall(x - move_ray, y, game))
+	while (!wall(game, x - ray_move, y))
 	{
 		x += x_step;
 		y += y_step;
@@ -102,7 +118,6 @@ static float	get_wall_height(t_game *game, float angl)
 	game->rays->vertical_inter_y = y;
 	return (distance(game, x, y));
 }
-
 
 void raycast(t_game *game)
 {

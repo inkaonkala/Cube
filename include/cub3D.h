@@ -6,7 +6,7 @@
 /*   By: iniska <iniska@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/15 12:55:19 by yhsu              #+#    #+#             */
-/*   Updated: 2024/10/18 10:26:21 by iniska           ###   ########.fr       */
+/*   Updated: 2024/10/18 13:23:23 by iniska           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,9 @@ typedef struct s_rays
 	float	n_ray; // float can hold decimals ->fractional numbers
 	float	ray_angl;
 	bool	wall_flag;
+	
 	int		distance;
+	int		i;
 
 	float	horizon_inter_x;
 	float	horizon_inter_y;
@@ -64,8 +66,8 @@ typedef struct s_game
 	size_t 			width;
 	size_t			player_x;
 	size_t			player_y;
-	float			player_angl; //Where is player facing
 
+	float			player_angl; //Where is player facing
 	float			fow; // field of view
 	
 	mlx_t			*mlx;
@@ -88,7 +90,13 @@ void	screenpop(t_game *game);
 void	move_and_beam(void *data);
 void 	raycast(t_game *game);
 
+void	set_walls(t_game *game, int ray);
+
 // math_stuff
+float	beam_angl(float angl);
 void	count_values(t_game *sgame);
+float	distance(t_game *game, float x, float y);
+
+void	set_pixels(t_game *game, int x, int y, int colour);
 
 #endif
