@@ -6,7 +6,7 @@
 /*   By: yhsu <yhsu@student.hive.fi>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/15 12:55:19 by yhsu              #+#    #+#             */
-/*   Updated: 2024/10/17 19:39:46 by yhsu             ###   ########.fr       */
+/*   Updated: 2024/10/18 16:04:55 by yhsu             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,7 @@ typedef struct s_flag
 	int	ea;
 	int	f;
 	int	c;
+	int duplicate;
 	int all_flags;
 }	t_flag;
 
@@ -54,12 +55,28 @@ typedef struct s_game
 {
 	char			**file_content;
 	char 			**map;
+	char 			*no_texture_path;//./maps/photo.png
+	char 			*so_texture_path;
+	char 			*we_texture_path;
+	char 			*ea_texture_path;
+	char			*floor_color;
+	char			*ceiling_color;
+	char			**f_split;// save number without ,
+	char			**c_split;
+	uint32_t		f_r;//save color rgb  eg.number 0
+	uint32_t		f_g;//255
+	uint32_t		f_b;//255
+	uint32_t		c_r;
+	uint32_t		c_g;
+	uint32_t		c_b;
+	
 	int 			index;
 	t_flag 			*flags;
 	size_t 			height;
 	size_t 			width;
 	size_t			player_x;
 	size_t			player_y;
+	
 	
 	mlx_t			*mlx;
 	mlx_image_t		*canvas;

@@ -6,7 +6,7 @@
 /*   By: yhsu <yhsu@student.hive.fi>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/15 14:02:51 by yhsu              #+#    #+#             */
-/*   Updated: 2024/10/17 20:04:20 by yhsu             ###   ########.fr       */
+/*   Updated: 2024/10/18 15:47:29 by yhsu             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,6 +81,16 @@ char **get_2d_array( char *mapfile)
 	return (result);
 }
 
+int parse_element(t_game *game, char *mapfile)
+{
+	//check map info 
+
+	//parse map info (make map regtangular)
+
+	//check color 
+	//set color 
+}
+
 void parse_file(t_game *game, char *mapfile)
 {
 	game->file_content = get_2d_array( mapfile);
@@ -88,11 +98,10 @@ void parse_file(t_game *game, char *mapfile)
 		clean_all_exit(game, "Cannot read the mapfile!");
 	if (game->file_content[0] == NULL)
 		clean_all_exit(game, "The file is empty!");
-	
 
-//start from here
-
-
+	parse_element(game, mapfile);
+	clean_grid(game, );
+	game->file_content = NULL;
 	
 }
 	
