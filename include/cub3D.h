@@ -6,7 +6,7 @@
 /*   By: iniska <iniska@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/15 12:55:19 by yhsu              #+#    #+#             */
-/*   Updated: 2024/10/17 14:02:16 by iniska           ###   ########.fr       */
+/*   Updated: 2024/10/18 10:26:21 by iniska           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@
 
 # define WINDOW_WIDTH 1000
 # define WINDOW_HEIGHT 1000
-# define TILE 30
+# define TILE 30 // should it be 60 or 64?
 
 # define FOW 60 // fieald of view
 # define PI 3.14159
@@ -49,8 +49,10 @@ typedef struct s_rays
 	bool	wall_flag;
 	int		distance;
 
-	float	horizon_inter;
-	float	vertical_inter;
+	float	horizon_inter_x;
+	float	horizon_inter_y;
+	float	vertical_inter_x;
+	float	vertical_inter_y;
 	
 }	t_rays;
 

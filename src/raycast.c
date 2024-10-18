@@ -6,7 +6,7 @@
 /*   By: iniska <iniska@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/15 20:39:06 by iniska            #+#    #+#             */
-/*   Updated: 2024/10/17 14:02:53 by iniska           ###   ########.fr       */
+/*   Updated: 2024/10/18 10:29:03 by iniska           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,19 +68,39 @@ static float	get_horizon(t_game *game, float angl)
 		x += x_step;
 		y += y_step;
 	}
-	game->rays->horizon_inter = x;
-	game->rays->vertical_inter = y;
+	game->rays->horizon_inter_x = x;
+	game->rays->horizon_inter_y = y;
 	return (distance(game, x, y));
-
-
-
-	
-	printf("printer: %f", game->rays->ray_angl);
 }
 
 static float	get_wall_height(t_game *game, float angl)
 {
-	printf("printer: %f", game->rays->ray_angl);
+	float	x_step;
+	float	y_step;
+	float	x;
+	float	y;
+	int		ray_move;
+
+	if (angl == 0)
+		angl = 0.00001;
+
+	y_step = TILE;
+	x_step = TILE / tan(angl);
+	x = floor(game->player_x / TILE) * TILE;
+	ray_move = move_ray(angl, &y, &x, 1);
+	y = game->player_y + (x - game->player_x) * tan(angl);
+	if (angl > 0 && angl < PI)
+		y_step = fabs(y_step);
+	else
+		y_step = -fabs(y_step);
+	while (!wall(x - move_ray, y, game))
+	{
+		x += x_step;
+		y += y_step;
+	}
+	game->rays->vertical_inter_x = x;
+	game->rays->vertical_inter_y = y;
+	return (distance(game, x, y));
 }
 
 
@@ -107,8 +127,6 @@ void raycast(t_game *game)
 		set_walls(game, ray);
 		ray++;
 		game->rays->ray_angl += (game->fow / WINDOW_WIDTH);
-
 	}
-	printf("printer: %d", ray);
 
 }
