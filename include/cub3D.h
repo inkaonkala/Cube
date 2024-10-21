@@ -25,7 +25,8 @@
 # define WINDOW_WIDTH 1000
 # define WINDOW_WIDTH 1000
 
-
+// Forward declaration of t_game
+typedef struct s_game t_game;
 
 typedef struct s_flag
 {
@@ -37,6 +38,8 @@ typedef struct s_flag
 	int	c;
 	int duplicate;
 	int all_flags;
+	t_game *game;
+
 }	t_flag;
 
 typedef struct s_rays
@@ -71,6 +74,7 @@ typedef struct s_game
 	uint32_t		c_b;
 	
 	int 			index;
+	int 			last_item;
 	t_flag 			*flags;
 	size_t 			height;
 	size_t 			width;
@@ -94,5 +98,6 @@ void init_game(t_game *game, char *mapfile);
 
 void 	err_message_exit(char * message);
 void err_message(char * message);
-
+void free_grid(char **grid);
+void clean_all_exit(t_game *game, char *message);
 #endif

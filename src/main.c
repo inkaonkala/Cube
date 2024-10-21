@@ -32,6 +32,7 @@ int main (int argc, char *argv[])
 	if (check_file_extesion(argv[1]) == 0)
 		err_message( "please provide a .cub file");
 	//parse map
+	
 	init_game(game, argv[1]);
 	//initializing the MLX library
 	//Window Creation
