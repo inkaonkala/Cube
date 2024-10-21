@@ -6,7 +6,7 @@
 /*   By: iniska <iniska@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/18 13:16:18 by iniska            #+#    #+#             */
-/*   Updated: 2024/10/18 13:23:18 by iniska           ###   ########.fr       */
+/*   Updated: 2024/10/21 12:03:57 by iniska           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,5 +22,6 @@ void	set_pixels(t_game *game, int x, int y, int colour)
 		return ;
 	if (y >= WINDOW_HEIGHT)
 		return ;
+
 	mlx_put_pixel(game->canvas, x, y, colour);
 }

@@ -6,7 +6,7 @@
 /*   By: iniska <iniska@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/15 12:55:19 by yhsu              #+#    #+#             */
-/*   Updated: 2024/10/18 13:23:23 by iniska           ###   ########.fr       */
+/*   Updated: 2024/10/21 11:48:30 by iniska           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ typedef struct s_rays
 	float	ray_angl;
 	bool	wall_flag;
 	
-	int		distance;
+	float		distance;
 	int		i;
 
 	float	horizon_inter_x;
@@ -68,7 +68,7 @@ typedef struct s_game
 	size_t			player_y;
 
 	float			player_angl; //Where is player facing
-	float			fow; // field of view
+	float			fow; // field of view for the player
 	
 	mlx_t			*mlx;
 	mlx_image_t		*canvas;

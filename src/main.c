@@ -6,7 +6,7 @@
 /*   By: iniska <iniska@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/15 12:54:09 by yhsu              #+#    #+#             */
-/*   Updated: 2024/10/17 10:26:23 by iniska           ###   ########.fr       */
+/*   Updated: 2024/10/21 09:37:39 by iniska           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ int main (int argc, char *argv[])
 	
 	t_game *game;
 
-	game = malloc(sizeof(t_game));
+	game = (t_game *)ft_calloc(1, sizeof(t_game));
 	if(!game)
 		err_message_exit("Malloc fail");
 	
