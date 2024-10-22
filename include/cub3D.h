@@ -6,7 +6,7 @@
 /*   By: yhsu <yhsu@student.hive.fi>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/15 12:55:19 by yhsu              #+#    #+#             */
-/*   Updated: 2024/10/18 16:04:55 by yhsu             ###   ########.fr       */
+/*   Updated: 2024/10/22 16:44:38 by yhsu             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,7 @@ typedef struct s_rays
 typedef struct s_game
 {
 	char			**file_content;
+	char			**file_content_newline;
 	char 			**map;
 	char 			*no_texture_path;//./maps/photo.png
 	char 			*so_texture_path;
@@ -66,12 +67,12 @@ typedef struct s_game
 	char			*ceiling_color;
 	char			**f_split;// save number without ,
 	char			**c_split;
-	uint32_t		f_r;//save color rgb  eg.number 0
-	uint32_t		f_g;//255
-	uint32_t		f_b;//255
-	uint32_t		c_r;
-	uint32_t		c_g;
-	uint32_t		c_b;
+	uint32_t		floor_r;//save color rgb  eg.number 0
+	uint32_t		floor_g;//255
+	uint32_t		floor_b;//255
+	uint32_t		ceiling_r;
+	uint32_t		ceiling_g;
+	uint32_t		ceiling_b;
 	
 	int 			index;
 	int 			last_item;
@@ -100,4 +101,6 @@ void 	err_message_exit(char * message);
 void err_message(char * message);
 void free_grid(char **grid);
 void clean_all_exit(t_game *game, char *message);
+
+char	**split_newline(char const *s, char c);
 #endif
