@@ -1,55 +1,61 @@
 NAME = cub3D
-#NAME_BONUS = cub3D_bonus
 
 CC = cc    
-GREEN = \033[0;32m
+CFLAGS = -Wall -Wextra -Werror -g 
+MLX_FLAGS = -L/opt/X11/lib -lX11 -lXext -lglfw -lm # Linux-specific flags
 
-FLAGS = -Wall -Wextra -Werror -I./libft -g 
-MLX_FLAGS = -lglfw -framework Cocoa -framework OpenGL -framework IOKit
-
+# Library directories and files
 LIBFT_DIR = ./libft
-LIBFT = ./libft/libft.a
-LIBFT_INCLUDE = -I ${LIBFT_DIR}
+LIBFT = $(LIBFT_DIR)/libft.a
+LIBFT_INCLUDE = -I$(LIBFT_DIR)
 
 MLX42_DIR = ./MLX42/build
-MLX42 = ./MLX42/build/libmlx42.a
-LD_FLAGS = -L/Users/${USER}/.brew/opt/glfw/lib/
+MLX42 = $(MLX42_DIR)/libmlx42.a
 
-INCLUDES = -I/opt/X11/include -Imlx
+# Include directories
+INCLUDES = -I/opt/X11/include -Iinclude -Ilibft -IMLX42/include
 
-SOURCES  = 	
-		   
-#SOURCES_BONUS  = 	
+# Source files and object files
+SOURCES = $(wildcard src/*.c)
+OBJECTS = $(SOURCES:src/%.c=objs/%.o)
 
+# Rule to build everything
+all: makelibft makemlx $(NAME)
 
-OBJECTS = ${SOURCES:.c=.o}
-#BONUS_OBJECTS = ${SOURCES_BONUS:.c=.o}
+# Build the executable
+$(NAME): ${OBJECTS} $(LIBFT) $(MLX42)
+	@echo "\033[0;32mCreating The Executable✅: ${NAME}\033[0m"
+	@$(CC) ${OBJECTS} $(LIBFT) $(MLX42) $(INCLUDES) $(MLX_FLAGS) -o ${NAME}
+	
+# Compile object files
+objs/%.o: src/%.c
+	@mkdir -p objs
+	@$(CC) $(CFLAGS) $(INCLUDES) -c $< -o $@
+	@echo "Compiling: $(notdir $<)"
 
-
-all: makelibft ${NAME} ${NAME_BONUS}
-
-
-%.o: %.c 
-	${CC} ${FLAGS} ${INCLUDES} -c $< -o $@
-
+# Rule for building libft
 makelibft:
-	make -C ${LIBFT_DIR}
+	@make -C $(LIBFT_DIR)
 
-${NAME}: ${LIBFT} ${MLX42} ${OBJECTS}
-	@(echo "${GREEN}Creating The Executable✅: ${NAME}" && ${CC} ${CFLAGS} ${OBJECTS} ${LIBFT_INCLUDE} $(MLX42) $(MLX_FLAGS) ${LD_FLAGS} -L${LIBFT_DIR} ${INCLUDES} -lft -o ${NAME})
+# Rule for building MLX42
+makemlx:
+	@if [ ! -f "$(MLX42)" ]; then \
+		cd MLX42 && cmake -B build && cmake --build build; \
+	fi
 
-#${NAME_BONUS}: ${LIBFT} ${MLX42} ${BONUS_OBJECTS}
-#	@(echo "${GREEN}Creating The Executable✅: ${NAME_BONUS}" && ${CC} ${CFLAGS} ${BONUS_OBJECTS} ${LIBFT_INCLUDE} $(MLX42) $(MLX_FLAGS) ${LD_FLAGS} -L${LIBFT_DIR} ${INCLUDES} -lft -o ${NAME_BONUS})
-
-${LIBFT}:
-	make -C ./libft
-
-${MLX42}:
-	cd MLX42 &&    cmake -B build && cmake --build build -j4
-
+# Clean up object files
 clean:
-	rm -f ${OBJECTS} ${BONUS_OBJECTS}
+	@rm -f ${OBJECTS}
 	@make clean -C ${LIBFT_DIR}
-	rm -rf MLX42/build
+	@echo "Cleaning MLX42..."
+	@rm -rf $(MLX42_DIR)
 
+# Full clean
 fclean: clean
+	@rm -f $(NAME)
+	@echo "Executable and objects removed."
+
+# Rebuild everything
+re: fclean all
+
+.PHONY: all clean fclean re makelibft makemlx

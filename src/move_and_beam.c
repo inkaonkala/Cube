@@ -1,23 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   error.c                                            :+:      :+:    :+:   */
+/*   move_and_beam.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: iniska <iniska@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/10/15 17:11:17 by yhsu              #+#    #+#             */
-/*   Updated: 2024/10/16 11:26:48 by iniska           ###   ########.fr       */
+/*   Created: 2024/10/17 09:41:09 by iniska            #+#    #+#             */
+/*   Updated: 2024/10/21 10:30:18 by iniska           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/cub3D.h"
 
-void err_message_exit(char * message)
+void	move_and_beam(void	*data)
 {
-	//ft_putendl_fd( "Error ", 2);
-	if (message)
-		dprintf(2, "there is a message here!\n");
-		//ft_putendl_fd(message, 2);
-	exit (1);	
-}
+	t_game *game;
 
+	game = (t_game *) data;
+	if (mlx_is_key_down(game->mlx, MLX_KEY_ESCAPE))
+		mlx_close_window(game->mlx);
+	//move_hook(game);
+	raycast(game);
+}
