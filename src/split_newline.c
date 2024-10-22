@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_split.c                                         :+:      :+:    :+:   */
+/*   split_newline.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yhsu <yhsu@student.hive.fi>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/11/03 15:32:26 by yhsu              #+#    #+#             */
-/*   Updated: 2024/10/22 17:09:55 by yhsu             ###   ########.fr       */
+/*   Created: 2024/10/22 16:39:05 by yhsu              #+#    #+#             */
+/*   Updated: 2024/10/22 17:53:17 by yhsu             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "../include/cub3D.h"
 
 static int	count_string(const char *s, char c)
 {
@@ -42,7 +42,7 @@ static char	*write_word(char *result, const char *s, char c)
 	{
 		i++;
 	} 
-	while (s[i] != c && s[i])
+	while ((s[i] != c && s[i]) )
 		result[j++] = s[i++];
 	result[j] = '\0';
 	return (result);
@@ -63,6 +63,7 @@ static int	ft_free(char **result, int k)
 	else
 		return (0);
 }
+
 
 static char	**write_result(char **result, char const *s, char c)
 {
@@ -85,6 +86,7 @@ static char	**write_result(char **result, char const *s, char c)
 			if (ft_free(result, k) == 1)
 				return (NULL);
 			result[k] = write_word(result[k], s + i, c);
+			//result[k] = ft_strjoin(result[k], "\n");
 			i = i + j;
 			k++;
 		}
@@ -92,7 +94,7 @@ static char	**write_result(char **result, char const *s, char c)
 	return (result);
 }
 
-char	**ft_split(char const *s, char c)
+char	**split_newline(char const *s, char c)
 {
 	char	**result;
 	int		i;

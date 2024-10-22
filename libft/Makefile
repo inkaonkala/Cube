@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: yhsu <yhsu@hive.student.fi>                +#+  +:+       +#+         #
+#    By: yhsu <yhsu@student.hive.fi>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/11/02 10:30:37 by yhsu              #+#    #+#              #
-#    Updated: 2024/02/27 17:29:24 by yhsu             ###   ########.fr        #
+#    Updated: 2024/10/17 14:25:08 by yhsu             ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -81,6 +81,7 @@ ${NAME}: ${OBJECTS}
 
 ${OBJECTS}:	${SOURCES}
 	    cc ${FLAGS} -c ${SOURCES} -I libft.h
+
 
 BONUS = .bonus
 
