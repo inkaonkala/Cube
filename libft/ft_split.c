@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_split.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yhsu <yhsu@student.hive.fi>                +#+  +:+       +#+        */
+/*   By: yhsu <yhsu@hive.student.fi>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/03 15:32:26 by yhsu              #+#    #+#             */
-/*   Updated: 2024/10/22 17:09:55 by yhsu             ###   ########.fr       */
+/*   Updated: 2023/11/19 13:06:25 by yhsu             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,6 @@ static int	count_string(const char *s, char c)
 	}
 	return (count_string);
 }
-#include <stdio.h>
 
 static char	*write_word(char *result, const char *s, char c)
 {
@@ -39,9 +38,7 @@ static char	*write_word(char *result, const char *s, char c)
 	j = 0;
 	i = 0;
 	while (s[i] == c && s[i])
-	{
 		i++;
-	} 
 	while (s[i] != c && s[i])
 		result[j++] = s[i++];
 	result[j] = '\0';

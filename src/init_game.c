@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_game.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yhsu <yhsu@student.hive.fi>                +#+  +:+       +#+        */
+/*   By: iniska <iniska@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/15 14:02:51 by yhsu              #+#    #+#             */
-/*   Updated: 2024/10/22 18:40:31 by yhsu             ###   ########.fr       */
+/*   Updated: 2024/10/23 14:15:21 by iniska           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ int check_file_extesion(char *filename)
 	return (1); //filename with .cub
 }
 
-char *readfile(char *mapfile)
+static char *readfile(char *mapfile)
 {
 
 	char *new_line;
@@ -61,7 +61,7 @@ char *readfile(char *mapfile)
 }
 
 
-char **get_2d_array( char *mapfile)
+static char **get_2d_array( char *mapfile)
 {
 	char	*file_str;
 	char	**result;
@@ -83,7 +83,7 @@ char **get_2d_array( char *mapfile)
 }
 
 
-char **twod_array( char *mapfile)
+static char **twod_array( char *mapfile)
 {
 	char	*file_str;
 	char	**result;
@@ -104,7 +104,7 @@ char **twod_array( char *mapfile)
 	return (result);
 }
 
-void init_flags(t_flag *flags)
+static void init_flags(t_flag *flags)
 {
 	flags->no = 0;
 	flags->so = 0;
@@ -117,7 +117,7 @@ void init_flags(t_flag *flags)
 	flags->game = NULL;
 }
 
-int empty_line(char * file)
+static int empty_line(char * file)
 {	
 	int i;
 	
@@ -135,8 +135,9 @@ int empty_line(char * file)
 	
 	return (1);
 }
+
 ////////////有 texture
-int set_flag(char *file_line, t_flag *flags, int *flag, char **texture_path)
+static int set_flag(char *file_line, t_flag *flags, int *flag, char **texture_path)
 {
 	
 	if (*flag == 1)
@@ -156,7 +157,7 @@ int set_flag(char *file_line, t_flag *flags, int *flag, char **texture_path)
 }
 
 
-int set_flags(char *file_line, t_flag *flags)// 1 already has the info,  0 new 
+static int set_flags(char *file_line, t_flag *flags)// 1 already has the info,  0 new 
 {
 	if (*file_line == ' ' || *file_line == '\t')
 		file_line++;
@@ -182,7 +183,7 @@ int set_flags(char *file_line, t_flag *flags)// 1 already has the info,  0 new
 }
 
 
-int check_all_elements(char **file, t_flag *flags)
+static int check_all_elements(char **file, t_flag *flags)
 {
 	int i;
 	int count;
@@ -216,7 +217,7 @@ int check_all_elements(char **file, t_flag *flags)
 	return (i);// i = last item
 }
 
-void check_duplicate(char **file, t_flag *flags, int last_item)
+static void check_duplicate(char **file, t_flag *flags, int last_item)
 {
 	
 	while(file[last_item])
@@ -233,7 +234,7 @@ void check_duplicate(char **file, t_flag *flags, int last_item)
 }
 
 
-int check_elements_info(t_game *game,char **file_content, t_flag *flags)//return 1代表錯誤
+static int check_elements_info(t_game *game,char **file_content, t_flag *flags)//return 1代表錯誤
 {
 	int last; // last element
 	
@@ -260,7 +261,7 @@ int check_elements_info(t_game *game,char **file_content, t_flag *flags)//return
 }
 
 //int save_colors(t_game *game, char **file_content, t_flag *flags)
-int save_colors(t_game *game, char **file_content)
+static int save_colors(t_game *game, char **file_content)
 {
 	int i;
 	int j;
@@ -289,7 +290,7 @@ int save_colors(t_game *game, char **file_content)
 	return (0);
 }
 
-int count_char(char *color, char a)
+static int count_char(char *color, char a)
 {
 	int i;
 	int j;
@@ -305,7 +306,7 @@ int count_char(char *color, char a)
 	return (j);
 }
 
-int check_rgb_digit(t_game *game, char c)
+static int check_rgb_digit(t_game *game, char c)
 {
 	int i;
 	int j;
@@ -329,7 +330,7 @@ int check_rgb_digit(t_game *game, char c)
 	return (0);
 }
 
-int  check_rgb_range(t_game *game)
+static int  check_rgb_range(t_game *game)
 {
 	if (game->floor_r > 255 || game->floor_r < 0)
 		return (-1);
@@ -347,7 +348,7 @@ int  check_rgb_range(t_game *game)
 }
 
 
-void find_color(char **c_split, char **f_split, t_game *game)
+static void find_color(char **c_split, char **f_split, t_game *game)
 {
 	int i;
 
@@ -378,7 +379,7 @@ void find_color(char **c_split, char **f_split, t_game *game)
 		clean_all_exit(game, "available color range is 0 to 255");
 }
 
-void set_color(t_game *game)
+static void set_color(t_game *game)
 {
 	if (count_char(game->ceiling_color, ',')  != 2 || count_char(game->floor_color, ',')  != 2)// ,
 		clean_all_exit(game, "wrong color fomat, not with two ,");
@@ -404,7 +405,7 @@ void set_color(t_game *game)
 	game->c_split = NULL;
 }
 
-int check_empty_map(t_game *game)
+static int check_empty_map(t_game *game)
 {
 	int i;
 
@@ -450,7 +451,7 @@ int check_empty_map(t_game *game)
 // 	return (0);
 // }
 
-int	count_2darray_size(char **src)
+static int	count_2darray_size(char **src)
 {
 	int	i;
 
@@ -477,7 +478,7 @@ static int	copy_string(char **copy, char *src, int i)
 	return (1);
 }
 
-char	**copy_2darray(char **src)
+static char	**copy_2darray(char **src)
 {
 	char	**copy;
 	int		size;
@@ -503,7 +504,7 @@ char	**copy_2darray(char **src)
 	return (copy);
 }
 
-char	**create_map(char **file_copy)
+static char	**create_map(char **file_copy)
 {
 	char	**map;
 	int		i;
@@ -530,7 +531,7 @@ char	**create_map(char **file_copy)
 
 
 //int parse_element(t_game *game, char *mapfile, t_flag *flags)
-int parse_element(t_game *game, t_flag *flags)
+static int parse_element(t_game *game, t_flag *flags)
 {
 	
 	//check walls f  info 確認牆天地資訊有沒有齊
@@ -588,7 +589,7 @@ int parse_element(t_game *game, t_flag *flags)
 	return (0);
 }
 
-void parse_file(t_game *game, char *mapfile)
+static void parse_file(t_game *game, char *mapfile)
 {
 	
 	game->flags = ft_calloc(1, sizeof(t_flag));

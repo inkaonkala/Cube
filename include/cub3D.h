@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3D.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yhsu <yhsu@student.hive.fi>                +#+  +:+       +#+        */
+/*   By: iniska <iniska@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/15 12:55:19 by yhsu              #+#    #+#             */
-/*   Updated: 2024/10/22 18:38:11 by yhsu             ###   ########.fr       */
+/*   Updated: 2024/10/23 14:22:28 by iniska           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,7 @@
 
 // Forward declaration of t_game
 typedef struct s_game t_game;
+extern t_rays *rays;
 
 typedef struct s_flag
 {
@@ -55,7 +56,7 @@ typedef struct s_rays
 	float	ray_angl;
 	bool	wall_flag;
 	
-	float		distance;
+	float	distance;
 	int		i;
 
 	float	horizon_inter_x;
@@ -96,7 +97,6 @@ typedef struct s_game
 	float			player_angl; //Where is player facing
 	float			fow; // field of view for the player
 	
-	
 	mlx_t			*mlx;
 	mlx_image_t		*canvas;
 	mlx_texture_t	*no_texture;
@@ -125,17 +125,15 @@ void	count_values(t_game *sgame);
 float	distance(t_game *game, float x, float y);
 
 void	set_pixels(t_game *game, int x, int y, int colour);
-	t_rays		*ray;
-	
 
-
-int check_file_extesion(char *filename);
-void init_game(t_game *game, char *mapfile);
+int 	check_file_extesion(char *filename);
+void 	init_game(t_game *game, char *mapfile);
 
 void 	err_message_exit(char * message);
-void err_message(char * message);
-void free_grid(char **grid);
-void clean_all_exit(t_game *game, char *message);
+void 	err_message(char * message);
+void 	free_grid(char **grid);
+void 	clean_all_exit(t_game *game, char *message);
 
 char	**split_newline(char const *s, char c);
+
 #endif

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   split_newline.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yhsu <yhsu@student.hive.fi>                +#+  +:+       +#+        */
+/*   By: iniska <iniska@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/22 16:39:05 by yhsu              #+#    #+#             */
-/*   Updated: 2024/10/22 17:53:17 by yhsu             ###   ########.fr       */
+/*   Updated: 2024/10/23 14:08:13 by iniska           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,6 @@ static int	count_string(const char *s, char c)
 	}
 	return (count_string);
 }
-#include <stdio.h>
 
 static char	*write_word(char *result, const char *s, char c)
 {
