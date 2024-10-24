@@ -6,7 +6,7 @@
 /*   By: iniska <iniska@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/15 20:39:06 by iniska            #+#    #+#             */
-/*   Updated: 2024/10/21 10:49:03 by iniska           ###   ########.fr       */
+/*   Updated: 2024/10/23 14:10:04 by iniska           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -149,11 +149,8 @@ void raycast(t_game *game)
 	{
 		game->rays->ray_angl = update_rayangl(game->rays->ray_angl);
 		game->rays->wall_flag = false;
-		printf(" \n 111 HERE HERE!\n");
 		horizon_line = get_horizon(game, game->rays->ray_angl);
-		printf(" \n222 HERE HERE!\n");
 		vertical_line = get_wall_height(game, game->rays->ray_angl);
-		printf(" \n333 HERE HERE!\n");
 		if(vertical_line <= horizon_line)
 			game->rays->distance = vertical_line;
 		else
@@ -161,7 +158,6 @@ void raycast(t_game *game)
 			game->rays->distance = horizon_line;
 			game->rays->ray_angl = true;
 		}
-		printf(" \nHERE HERE!\n");
 		set_walls(game, ray);
 		ray++;
 		game->rays->ray_angl += (game->fow / WINDOW_WIDTH);

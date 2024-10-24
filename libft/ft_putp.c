@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_putp.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yhsu <yhsu@student.hive.fi>                +#+  +:+       +#+        */
+/*   By: yhsu <yhsu@hive.student.fi>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/22 15:09:14 by yhsu              #+#    #+#             */
-/*   Updated: 2024/10/17 13:37:40 by yhsu             ###   ########.fr       */
+/*   Updated: 2023/11/22 19:17:30 by yhsu             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,13 +18,13 @@ static int	ft_putdigit_p(unsigned long n, unsigned int base)
 	char	*symbols;
 
 	symbols = "0123456789abcdef";
-	// if (n < 0)
-	// {
-	// 	if (write(1, "-", 1) == -1)
-	// 		return (-1);
-	// 	return (ft_putdigit(-n, base) + 1);
-	// }
-	if (n < base)
+	if (n < 0)
+	{
+		if (write(1, "-", 1) == -1)
+			return (-1);
+		return (ft_putdigit(-n, base) + 1);
+	}
+	else if (n < base)
 		return (ft_putchar(symbols[n]));
 	else
 	{
