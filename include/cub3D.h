@@ -6,7 +6,7 @@
 /*   By: iniska <iniska@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/15 12:55:19 by yhsu              #+#    #+#             */
-/*   Updated: 2024/10/23 14:22:28 by iniska           ###   ########.fr       */
+/*   Updated: 2024/10/24 12:43:20 by iniska           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,21 +34,6 @@
 
 // Forward declaration of t_game
 typedef struct s_game t_game;
-extern t_rays *rays;
-
-typedef struct s_flag
-{
-	int	no;
-	int	so;
-	int	we;
-	int	ea;
-	int	f;
-	int	c;
-	int duplicate;
-	int all_flags;
-	t_game *game;
-
-}	t_flag;
 
 typedef struct s_rays
 {	
@@ -65,6 +50,20 @@ typedef struct s_rays
 	float	vertical_inter_y;
 	
 }	t_rays;
+
+typedef struct s_flag
+{
+	int	no;
+	int	so;
+	int	we;
+	int	ea;
+	int	f;
+	int	c;
+	int duplicate;
+	int all_flags;
+	t_game *game;
+
+}	t_flag;
 
 typedef struct s_game
 {
