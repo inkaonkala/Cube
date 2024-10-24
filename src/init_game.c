@@ -6,7 +6,7 @@
 /*   By: yhsu <yhsu@student.hive.fi>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/15 14:02:51 by yhsu              #+#    #+#             */
-/*   Updated: 2024/10/22 18:27:57 by yhsu             ###   ########.fr       */
+/*   Updated: 2024/10/24 19:16:19 by yhsu             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,26 +83,26 @@ char **get_2d_array( char *mapfile)
 }
 
 
-char **twod_array( char *mapfile)
-{
-	char	*file_str;
-	char	**result;
+// char **twod_array( char *mapfile)
+// {
+// 	char	*file_str;
+// 	char	**result;
 	
-	file_str = readfile(mapfile);
-	if (file_str == NULL)
-	{
-		perror("Cannot read the map!");
-		return (NULL);
-	}
-	result = split_newline(file_str, '\n');
-	free(file_str);
-	if (result == NULL)
-	{
-		perror(" Spit failed.");
-		return (NULL);
-	}
-	return (result);
-}
+// 	file_str = readfile(mapfile);
+// 	if (file_str == NULL)
+// 	{
+// 		perror("Cannot read the map!");
+// 		return (NULL);
+// 	}
+// 	result = split_newline(file_str, '\n');
+// 	free(file_str);
+// 	if (result == NULL)
+// 	{
+// 		perror(" Spit failed.");
+// 		return (NULL);
+// 	}
+// 	return (result);
+// }
 
 void init_flags(t_flag *flags)
 {
@@ -395,7 +395,7 @@ void set_color(t_game *game)
 		clean_all_exit(game, "ceiling color format must be digit");
 
 	dprintf(2, "before find color\n");
-	// save them to struct f_r f_g f_b
+	
 	find_color(game->c_split, game->f_split, game);
 	
 	free_grid(game->c_split);
@@ -422,111 +422,7 @@ int check_empty_map(t_game *game)
 }
 
 
-// int create_map(t_game *game)
-// {
-// 	int i;
-// 	int j;
-	
-// 	game->map = ft_calloc(1, sizeof(char **));
-	
-// 	game->map = ft_calloc(100, sizeof(char *)); 
-	
-// 	j = 0;
-// 	i = game->last_item + 1;
-// 	while (game->file_content[i][0] == '\n' || empty_line(game->file_content[i]) == 1)
-// 			i++;
-// 	while (game->file_content[i] && game->file_content[i][0] != 'N' && game->file_content[i][0] != 'W' 
-// 		&& game->file_content[i][0] != 'S' && game->file_content[i][0] != 'E' 
-// 		&& game->file_content[i][0] != 'C'&& game->file_content[i][0] != 'F')
-// 	{
-// 		if (game->file_content_newline[i][0] == '\n' || empty_line(game->file_content_newline[i]) == 1)
-// 			clean_all_exit(game, "the map is not valid");
-// 		game->map[j] = game->file_content_newline[i];
-// 		i++;
-// 		j++;
-// 	}
-	
-// 	game->map[j] = NULL;
-// 	return (0);
-// }
 
-int	count_2darray_size(char **src)
-{
-	int	i;
-
-	i = 0;
-	while (src[i] != NULL)
-		i++;
-	return (i);
-}
-
-static int	copy_string(char **copy, char *src, int i)
-{
-	int	j;
-
-	copy[i] = malloc(sizeof(char) * (ft_strlen(src) + 1));
-	if (!copy[i])
-		return (0);
-	j = 0;
-	while (src[j] != '\0')
-	{
-		copy[i][j] = src[j];
-		j++;
-	}
-	copy[i][j] = '\0';
-	return (1);
-}
-
-char	**copy_2darray(char **src)
-{
-	char	**copy;
-	int		size;
-	int		i;
-
-	i = 0;
-	size = count_2darray_size(src);
-	copy = malloc(sizeof(char *) * (size + 1));
-	if (!copy)
-		return (NULL);
-	while (src[i] != NULL)
-	{
-		if (!copy_string(copy, src[i], i))
-		{
-			while (i > 0)
-				free(copy[--i]);
-			free(copy);
-			return (NULL);
-		}
-		i++;
-	}
-	copy[i] = NULL;
-	return (copy);
-}
-
-char	**create_map(char **file_copy)
-{
-	char	**map;
-	int		i;
-	int		j;
-
-	i = 0;
-	j = 0;
-	map = copy_2darray(file_copy);
-	if (!map)
-		return (NULL);
-	while (file_copy[i] != NULL)
-	{
-		j = 0;
-		while (file_copy[i][j] != '\0')
-		{
-			if (file_copy[i][j] == ' ' || file_copy[i][j] == '\t')
-				map[i][j] = '1';
-			j++;
-		}
-		i++;
-	}
-	return (map);
-}
 
 
 //int parse_element(t_game *game, char *mapfile, t_flag *flags)
@@ -536,7 +432,6 @@ int parse_element(t_game *game, t_flag *flags)
 	//check walls f  info 確認牆天地資訊有沒有齊
 	if (check_elements_info(game, game->file_content, flags) == 1)
 	{    
-	
 		free(game->flags);
 		clean_all_exit(game, "unvalid elements");
 	} // return 1 代表錯誤
@@ -544,46 +439,29 @@ int parse_element(t_game *game, t_flag *flags)
 	
 	//parse walls f  info
 	//set_color(game, game->file_content, flags);
-	// dprintf(2, "game->no_texture_path: %s\n", game->no_texture_path);
-	// dprintf(2, "game->ea_texture_path: %s\n", game->ea_texture_path);
-	// dprintf(2, "game->so_texture_path: %s\n", game->so_texture_path);
-	// dprintf(2, "game->we_texture_path: %s\n", game->we_texture_path);
-	
 	save_colors(game, game->file_content);
-	
-	// dprintf(2, "game->ceiling_color: %s\n", game->ceiling_color);
-	// dprintf(2, "game->floor_color: %s\n", game->floor_color);
 
-	
 	//check color 
 	set_color(game); 
 	
-	// dprintf(2, "game->floor_r: %d\n", game->floor_r);
-	// dprintf(2, "game->floor_g: %d\n", game->floor_g);
-	// dprintf(2, "game->floor_b: %d\n", game->floor_b);
-	// dprintf(2, "game->ceiling_r: %d\n", game->ceiling_r);
-	// dprintf(2, "game->ceiling_g: %d\n", game->ceiling_g);
-	// dprintf(2, "game->ceiling_b: %d\n", game->ceiling_b);
-
+	
 	
 	//check empty map
 	if (check_empty_map(game) ==1)
 		clean_all_exit(game, "The map is EMPTY!");
+	
 	//check empty line
+			// if (game->file_content_newline[i][0] == '\n' || empty_line(game->file_content_newline[i]) == 1)
+					// 	clean_all_exit(game, "the map is not valid");
 	
 	
-	//create_map(game);
-	game->map = create_map(game->file_content+(game->last_item + 1));
-
-	int l = 0;
-
-	while (game->map[l])
-	{
-		dprintf(2, "game->map[%d]: %s\n",l, game->map[l]);
-		l++;
-	}
-
+	if (create_map(game, game->file_content + (game->last_item + 1))== 1)
+		clean_all_exit(game, "The map memory allocation failed"); // map didn allocate correctly
 	
+	
+	
+
+
 	/////inka can test RACAST
 	return (0);
 }
@@ -596,7 +474,7 @@ void parse_file(t_game *game, char *mapfile)
 		clean_all_exit(game, "malloc failed");
 	
 	game->file_content = get_2d_array(mapfile);
-	game->file_content_newline = twod_array(mapfile);
+	//game->file_content_newline = twod_array(mapfile);
 	
 	if (game->file_content == NULL)
 		clean_all_exit(game, "Cannot read the mapfile!");
@@ -612,7 +490,36 @@ void parse_file(t_game *game, char *mapfile)
 	game->file_content = NULL;
 	
 }
+
+void create_rectagle(t_game *game)
+{
+	size_t k;
+	size_t j;
 	
+	j = 0;
+	while (game->map[j])
+	{
+		k = 0;
+		while ( k < game->longest) 
+		{
+			
+			if (game->map[j][k] == ' ' || game->map[j][k] == '\t')
+				game->map[j][k] = '1';
+			if (game->map[j][k] == '\0')
+				game->map[j][k] = '1';
+			k++;
+			
+		}
+		j++;
+	}
+	
+	
+}
+
+
+
+
+
 
 void init_game(t_game *game, char *mapfile)
 {
@@ -623,10 +530,48 @@ void init_game(t_game *game, char *mapfile)
 	parse_file(game, mapfile);
 
 	
+	int l = 0;
+
+	while (game->map[l])
+	{
+		dprintf(2, "game->map[%d]: %s\n",l, game->map[l]);
+		l++;
+	}
+
 	
-	//map validation: check map size too big too small, empty , invalid char, has NSEW once, if map is closed
+	
+	map_validate(game);
+		
 	//create ractagle map
+	create_rectagle(game);//create rectangle amd fill space with 1
+	
+	dprintf(2, "after retangle\n");
+	
+	l = 0;
+	while (game->map[l])
+	{
+		dprintf(2, "game->map[%d]: %s\n",l, game->map[l]);
+		l++;
+	}
+
+	
 	//get position 
+
+	// dprintf(2, "game->no_texture_path: %s\n", game->no_texture_path);
+	// dprintf(2, "game->ea_texture_path: %s\n", game->ea_texture_path);
+	// dprintf(2, "game->so_texture_path: %s\n", game->so_texture_path);
+	// dprintf(2, "game->we_texture_path: %s\n", game->we_texture_path);
+
+	// dprintf(2, "game->ceiling_color: %s\n", game->ceiling_color);
+	// dprintf(2, "game->floor_color: %s\n", game->floor_color);
+
+	// dprintf(2, "game->floor_r: %d\n", game->floor_r);
+	// dprintf(2, "game->floor_g: %d\n", game->floor_g);
+	// dprintf(2, "game->floor_b: %d\n", game->floor_b);
+	// dprintf(2, "game->ceiling_r: %d\n", game->ceiling_r);
+	// dprintf(2, "game->ceiling_g: %d\n", game->ceiling_g);
+	// dprintf(2, "game->ceiling_b: %d\n", game->ceiling_b);
+
 }
 
 

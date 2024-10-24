@@ -6,7 +6,7 @@
 /*   By: yhsu <yhsu@student.hive.fi>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/15 12:55:19 by yhsu              #+#    #+#             */
-/*   Updated: 2024/10/22 16:44:38 by yhsu             ###   ########.fr       */
+/*   Updated: 2024/10/24 19:18:19 by yhsu             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ typedef struct s_rays
 typedef struct s_game
 {
 	char			**file_content;
-	char			**file_content_newline;
+	//char			**file_content_newline;
 	char 			**map;
 	char 			*no_texture_path;//./maps/photo.png
 	char 			*so_texture_path;
@@ -74,7 +74,7 @@ typedef struct s_game
 	uint32_t		ceiling_g;
 	uint32_t		ceiling_b;
 	
-	int 			index;
+	size_t 			longest;
 	int 			last_item;
 	t_flag 			*flags;
 	size_t 			height;
@@ -95,7 +95,9 @@ typedef struct s_game
 }	t_game;
 
 int check_file_extesion(char *filename);
+//init_game
 void init_game(t_game *game, char *mapfile);
+int empty_line(char * file);
 
 void 	err_message_exit(char * message);
 void err_message(char * message);
@@ -103,4 +105,11 @@ void free_grid(char **grid);
 void clean_all_exit(t_game *game, char *message);
 
 char	**split_newline(char const *s, char c);
+
+//create_map
+int create_map(t_game * game, char **file_content);
+//char	**create_map(char **file_copy);
+
+
+void map_validate(t_game *game);
 #endif

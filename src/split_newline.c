@@ -6,7 +6,7 @@
 /*   By: yhsu <yhsu@student.hive.fi>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/22 16:39:05 by yhsu              #+#    #+#             */
-/*   Updated: 2024/10/22 17:53:17 by yhsu             ###   ########.fr       */
+/*   Updated: 2024/10/24 15:20:57 by yhsu             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ static int	count_string(const char *s, char c)
 	}
 	return (count_string);
 }
-#include <stdio.h>
+
 
 static char	*write_word(char *result, const char *s, char c)
 {
