@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_game.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: iniska <iniska@student.hive.fi>            +#+  +:+       +#+        */
+/*   By: yhsu <yhsu@student.hive.fi>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/15 14:02:51 by yhsu              #+#    #+#             */
-/*   Updated: 2024/10/23 14:15:21 by iniska           ###   ########.fr       */
+/*   Updated: 2024/10/24 14:08:40 by yhsu             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,15 +16,14 @@ int check_file_extesion(char *filename)
 {
 	int len;
 	
+	dprintf(2, "check_file_extesion 0\n");
 	len = ft_strlen(filename);
 	if (len <= 4 || ft_strncmp(filename + (len - 4), ".cub", 4) != 0)
 	{
-		dprintf(2, "len\n");
 		return (0); 
 	}
 	if (filename[len - 1] == '/')//file name with /
 	{
-		dprintf(2, "len2\n");
 		return (0); 
 	}
 	return (1); //filename with .cub
@@ -55,7 +54,6 @@ static char *readfile(char *mapfile)
 		free(new_line);
 		new_line = get_next_line(fd);
 	}
-	
 	close (fd);
 	return (map_str);
 }
