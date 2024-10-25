@@ -6,7 +6,7 @@
 /*   By: yhsu <yhsu@student.hive.fi>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/24 14:40:04 by yhsu              #+#    #+#             */
-/*   Updated: 2024/10/24 18:20:04 by yhsu             ###   ########.fr       */
+/*   Updated: 2024/10/25 17:57:48 by yhsu             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,9 +69,7 @@ int create_map(t_game * game, char **file_content)
 	i = 0;
 	j = 0;
 	game->longest = check_longest(file_content);
-	//dprintf(2, "game->longest: %d\n", game->longest);
 	game->height = count_mapline(file_content);
-	dprintf(2, "game->height: %zu\n",game->height);
 	game->map = (char **)malloc((game->height + 1) * sizeof(char *)); 
 	if (game->map == NULL)
 		return (1);

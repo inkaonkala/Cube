@@ -6,7 +6,7 @@
 /*   By: yhsu <yhsu@student.hive.fi>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/15 14:02:51 by yhsu              #+#    #+#             */
-/*   Updated: 2024/10/24 19:16:19 by yhsu             ###   ########.fr       */
+/*   Updated: 2024/10/25 17:53:10 by yhsu             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -500,7 +500,7 @@ void create_rectagle(t_game *game)
 	while (game->map[j])
 	{
 		k = 0;
-		while ( k < game->longest) 
+		while (k < game->longest) 
 		{
 			
 			if (game->map[j][k] == ' ' || game->map[j][k] == '\t')
