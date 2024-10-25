@@ -6,7 +6,7 @@
 /*   By: iniska <iniska@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/15 12:55:19 by yhsu              #+#    #+#             */
-/*   Updated: 2024/10/24 13:17:04 by iniska           ###   ########.fr       */
+/*   Updated: 2024/10/25 13:58:57 by iniska           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -134,5 +134,7 @@ void 	free_grid(char **grid);
 void 	clean_all_exit(t_game *game, char *message);
 
 char	**split_newline(char const *s, char c);
+
+void	draw_wall(t_game *game, int ray, double bot_pixl, double top_pixl);
 
 #endif

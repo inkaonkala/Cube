@@ -6,7 +6,7 @@
 /*   By: iniska <iniska@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/17 10:24:06 by iniska            #+#    #+#             */
-/*   Updated: 2024/10/18 13:14:10 by iniska           ###   ########.fr       */
+/*   Updated: 2024/10/25 14:06:52 by iniska           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,15 @@ float	beam_angl(float angl)
 // count the game->player_angl, game->rays->ray_angl, game->fow
 void	count_values(t_game *game)
 {
-	game->player_angl = 0; // this needs to be counted according to player y and x, divided by PI, BUT EAST is 0 so let's use it
+	// FOR TESTING
+	game->player_x = 20;
+	game->player_y = 20;
+	game->player_angl =  atan2(game->player_y, game->player_x);
+	if (game->player_angl < 0)
+		game->player_angl += 2 * PI; // this needs to be counted according to player y and x, divided by PI, BUT EAST is 0 so let's use it
+	
+	// FOR TESTING ENDS
+	
 	game->fow = (FOW * PI / 180);
 	game->rays->ray_angl = game->player_angl - (game->fow / 2);
 }

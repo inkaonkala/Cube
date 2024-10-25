@@ -6,7 +6,7 @@
 /*   By: iniska <iniska@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/15 20:39:06 by iniska            #+#    #+#             */
-/*   Updated: 2024/10/24 13:15:41 by iniska           ###   ########.fr       */
+/*   Updated: 2024/10/25 14:05:07 by iniska           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -172,7 +172,6 @@ void raycast(t_game *game)
 	int		ray;
 
 	ray = 0;
-	game->fow = 60; // FOR  TESTING
 	game->rays->ray_angl = game->player_angl - (game->fow / 2);
 
 	while (ray < WINDOW_WIDTH)
