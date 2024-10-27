@@ -22,23 +22,31 @@ int count_mapline(char **file_content)
 		i++;
 	return (i);
 }
-void copy_string(t_game *game, char *s1, char *s2)// s1 map, s2 file content
+
+void copy_string( char *s1, char *s2)// s1 map, s2 file content
 {
 	size_t i;
 
 	i = 0;
-	while(i < game->longest + 1)
+	
+	//while(i < game->longest)
+	while (s2[i])
 	{
 		if (s2[i])
-			s1[i] = s2[i];
+		{
+			if (s2[i] == ' ' || s2[i] == '\t')
+				s1[i] = '0';
+			else
+				s1[i] = s2[i];
+		}
 		else
 			s1[i] = '\0';
 		i++;	
 	}
-	
+	s1[i] = '\0';
 }
 
-int check_longest(char **map_content)
+static int check_longest(char **map_content)
 {
 	size_t i;
 	size_t j;
@@ -82,7 +90,7 @@ int create_map(t_game * game, char **file_content)
 		game->map[j] = (char *) malloc (game->longest * sizeof(char));
 		if (game->map[j] == NULL)
 			return (1);
-		copy_string(game, game->map[j],file_content[i]);
+		copy_string(game->map[j], file_content[i]);
 		i++;
 		j++;
 	}
@@ -90,80 +98,28 @@ int create_map(t_game * game, char **file_content)
 	return (0);
 }
 
-// int	count_2darray_size(char **src)
-// {
-// 	int	i;
 
-// 	i = 0;
-// 	while (src[i] != NULL)
-// 		i++;
-// 	return (i);
-// }
-
-// static int	copy_string(char **copy, char *src, int i)
-// {
-// 	int	j;
-
-// 	copy[i] = malloc(sizeof(char) * (ft_strlen(src) + 1));
-// 	if (!copy[i])
-// 		return (0);
-// 	j = 0;
-// 	while (src[j] != '\0')
-// 	{
-// 		copy[i][j] = src[j];
-// 		j++;
-// 	}
-// 	copy[i][j] = '\0';
-// 	return (1);
-// }
-
-// char	**copy_2darray(char **src)
-// {
-// 	char	**copy;
-// 	int		size;
-// 	int		i;
-
-// 	i = 0;
-// 	size = count_2darray_size(src);
-// 	copy = malloc(sizeof(char *) * (size + 1));
-// 	if (!copy)
-// 		return (NULL);
-// 	while (src[i] != NULL)
-// 	{
-// 		if (!copy_string(copy, src[i], i))
-// 		{
-// 			while (i > 0)
-// 				free(copy[--i]);
-// 			free(copy);
-// 			return (NULL);
-// 		}
-// 		i++;
-// 	}
-// 	copy[i] = NULL;
-// 	return (copy);
-// }
-
-// char	**create_map(char **file_copy)
-// {
-// 	char	**map;
-// 	int		i;
-// 	int		j;
-
-// 	i = 0;
-// 	j = 0;
-// 	map = copy_2darray(file_copy);
-// 	if (!map)
-// 		return (NULL);
-// 	while (file_copy[i] != NULL)
-// 	{
-// 		j = 0;
-// 		while (file_copy[i][j] != '\0')
-// 		{
-// 			if (file_copy[i][j] == ' ' || file_copy[i][j] == '\t')
-// 				map[i][j] = '1';
-// 			j++;
-// 		}
-// 		i++;
-// 	}
-// 	return (map);
-// }
+void create_rectagle(t_game *game)
+{
+	size_t k;
+	size_t j;
+	
+	j = 0;
+	
+	while (game->map[j])
+	{
+		k = 0;
+		while (k < game->longest) 
+		{
+			// if (game->map[j][k] == ' ' || game->map[j][k] == '\t')
+			// 	game->map[j][k] = '1';
+			if (game->map[j][k] != '1' && game->map[j][k] != '0'
+				&& game->map[j][k] != 'E' && game->map[j][k] != 'W'
+				&& game->map[j][k] != 'S' && game->map[j][k] != 'N')
+				game->map[j][k] = '1';
+			k++;
+		}
+		game->map[j][k] = '\0';
+		j++;
+	}
+}

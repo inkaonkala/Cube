@@ -15,14 +15,26 @@
 
 void clean_all_exit(t_game *game, char *message)
 {
-	// if (game->file_content)
-    //     free_grid(game->file_content);
-    // if (game->map)
-    //     free_grid(game->map);
-    //need to add more paramerters in struct
-	ft_putendl_fd("not important error info need to delete", 2);
-	ft_putendl_fd(game->ceiling_color, 2);
-
+	if (game->file_content)
+        free_grid(game->file_content);
+    if (game->map)
+        free_grid(game->map);
+    if (game->no_texture_path)
+        free(game->no_texture_path);
+    if (game->so_texture_path)
+        free(game->so_texture_path);
+    if (game->ea_texture_path)
+        free(game->ea_texture_path);
+    if (game->we_texture_path)
+        free(game->we_texture_path);
+    if (game->floor_color)
+        free(game->floor_color);
+    if (game->ceiling_color)
+        free(game->ceiling_color);
+    if(game->c_split)
+        free_grid(game->c_split);
+    if(game->f_split)
+        free_grid(game->f_split);
     if (message != NULL)
     {
 		ft_putendl_fd("Error: ", 2);

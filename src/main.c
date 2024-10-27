@@ -32,7 +32,6 @@ int main (int argc, char *argv[])
 
 	
 	//parse map
-	
 	init_game(game, argv[1]);
 	//initializing the MLX library
 	//Window Creation

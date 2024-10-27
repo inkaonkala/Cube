@@ -12,7 +12,7 @@
 
 #include "../include/cub3D.h"
 
-int only_valid_char(char **map)
+static int only_valid_char(char **map)
 {
 	int i;
 	int j;
@@ -36,7 +36,7 @@ int only_valid_char(char **map)
 	return (0);
 }
 
-int eswn_once(char **map)
+static int eswn_once(char **map)
 {
 	int i;
 	int j;
@@ -49,9 +49,12 @@ int eswn_once(char **map)
 		j = 0;
 		while(map[i][j])
 		{
-			if (map[i][j] == 'N' && map[i][j] == 'S' 
-				&& map[i][j] == 'E' && map[i][j] == 'W')
+			if (map[i][j] == 'N' || map[i][j] == 'S' 
+				|| map[i][j] == 'E' || map[i][j] == 'W')
+			{
 				count++;
+			}
+				
 			
 			j++;
 		}
@@ -61,18 +64,111 @@ int eswn_once(char **map)
 	return (count);
 }
 
+char **copy_grid(t_game *game, char **map)
+{
+	int i;
+	int j;
+	char **result;
+
+	i = 0;
+	j = 0;
+	result = (char **)(malloc((count_mapline(map) + 1) * sizeof(char *)));
+	if (result == NULL)
+		return (NULL);
+	while(map[i])
+	{
+		result[j] = (char *) malloc (game->longest * sizeof(char));
+		if (result[j] == NULL)
+			return (NULL);
+		copy_string( result[j], map[i]);
+		i++;
+		j++;
+	}
+	return (result);
+}
+
+static int flood_fill(char **tmp, int i, int j)// open return 1
+{
+	if (i < 0 || j < 0 || !tmp[i] || !tmp[i][j])
+		return (1);
+	if (tmp[i][j] == '1')
+		return (0);
+	tmp[i][j] = '1';
+	if (flood_fill(tmp, i + 1, j) != 0)
+		return (1);
+	if (flood_fill(tmp, i - 1, j) != 0)
+		return (1);
+	if (flood_fill(tmp, i, j + 1) != 0)
+		return (1);
+	if (flood_fill(tmp, i, j - 1) != 0)
+		return (1);
+	return (0);
+}
+
+static int if_map_closed(char **tmp)// open return 1
+{
+	int i;
+	int j;
+
+	i = 0;
+	while (tmp[i] != (void *)'\0')
+	{
+		j = 0;
+		while(tmp[i][j] != '\0')
+		{
+			if ((tmp[i][j] == 'S' || tmp[i][j] == 'E'
+				|| tmp[i][j] == 'W' || tmp[i][j] == 'N' || tmp[i][j] == '0') && flood_fill(tmp, i, j) == 1)
+			{
+				//if (flood_fill(tmp, i, j) == 1)
+					return (1);
+			}
+			j++;
+		}
+		i++;
+	}
+	return (0);
+}
+
+
+static int check_map_closed(t_game *game, char **map)
+{
+	char **tmp;
+	
+	tmp = copy_grid(game, map);
+
+
+
+	if (!tmp)
+		clean_all_exit(game, "The map copy failed.");
+	if (if_map_closed( tmp) == 1)
+	{
+		free(tmp);
+		return (1);//the map is open
+	}
+
+	free(tmp);
+	return (0);
+}
 
 void map_validate(t_game *game)
 {
+	
 	//map validation: check map size too big too small, empty , invalid char, has NSEW once, if map is closed
 	if (game->height > 500 || game->longest > 500)
 		clean_all_exit(game, "The map size is tooooo BIG.");
+	
 	if (game->height < 3)
 		clean_all_exit(game, "The map size is too small.");
-	if (only_valid_char(game->map) == 1)
-		clean_all_exit(game, "The map has unvalid char.");
-	if (eswn_once(game->map) != 1)
-		clean_all_exit(game, "EWSN can be used ONLY once.");
 	
+	if (only_valid_char(game->map) == 1)
+		clean_all_exit(game, "The map has invalid char.");
+	
+	if (eswn_once(game->map) != 1)
+		clean_all_exit(game, "EWSN can be used once and ONLY once.");
 	//check if map closed
+
+	if (check_map_closed(game, game->map) == 1)
+		clean_all_exit(game, "This map is not enclosed.");
+
+
 }

@@ -94,22 +94,51 @@ typedef struct s_game
 	
 }	t_game;
 
+//get_2d_array
+char **get_2d_array( char *mapfile);
+char *readfile(char *mapfile);
+
+//check_elements
+int check_elements_info(t_game *game,char **file_content, t_flag *flags);
+int empty_line(char * file);
+
+//create_map
+int create_map(t_game * game, char **file_content);
+void create_rectagle(t_game *game);
+void copy_string( char *s1, char *s2);
+int count_mapline(char **file_content);
+
+//flags
+int set_flags(char *file_line, t_flag *flags);
+void init_flags(t_flag *flags);
+
+//map validation
+void map_validate(t_game *game);
+char **copy_grid(t_game *game, char **map);
+
+//position extention
 int check_file_extesion(char *filename);
+int check_texture_extension(t_game *game);
+void check_player_position(t_game *game, char ** map);
+
+//save color 
+int save_colors(t_game *game, char **file_content);
+
+//set color
+void find_color(char **c_split, char **f_split, t_game *game);
+void set_color(t_game *game);
+
 //init_game
 void init_game(t_game *game, char *mapfile);
 int empty_line(char * file);
 
+//error
 void 	err_message_exit(char * message);
 void err_message(char * message);
 void free_grid(char **grid);
 void clean_all_exit(t_game *game, char *message);
 
-char	**split_newline(char const *s, char c);
-
-//create_map
-int create_map(t_game * game, char **file_content);
-//char	**create_map(char **file_copy);
 
 
-void map_validate(t_game *game);
+
 #endif
