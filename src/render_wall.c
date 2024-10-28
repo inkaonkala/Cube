@@ -6,15 +6,16 @@
 /*   By: iniska <iniska@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/18 12:06:33 by iniska            #+#    #+#             */
-/*   Updated: 2024/10/25 14:02:03 by iniska           ###   ########.fr       */
+/*   Updated: 2024/10/28 11:15:28 by iniska           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/cub3D.h"
 
+
 static void	floor_n_ceiling(t_game *game, int ray, double bot_pxl, double top_pxl)
 {
-	int	i;
+	double	i;
 
 	i = bot_pxl;
 	while (i < WINDOW_HEIGHT)
@@ -23,6 +24,7 @@ static void	floor_n_ceiling(t_game *game, int ray, double bot_pxl, double top_px
 	while (i  < top_pxl)
 		set_pixels(game, ray, i++, 0x2694ab); // ceiling
 }
+
 
 
 void	set_walls(t_game *game, int ray)

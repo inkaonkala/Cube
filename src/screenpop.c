@@ -6,7 +6,7 @@
 /*   By: iniska <iniska@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/16 10:04:39 by iniska            #+#    #+#             */
-/*   Updated: 2024/10/27 20:43:49 by iniska           ###   ########.fr       */
+/*   Updated: 2024/10/28 11:33:28 by iniska           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,32 +29,6 @@ static void test_canvas(void	*data)
 }
 */
 
-/*
-// MOVE THIS TO KEYS.c !
-
-static void	release_key(mlx_key_data_t key_data, t_game *game)
-{
-	if (key_data.key == MLX_KEY_LEFT && key_data.key == MLX_RELEASE)
-		game->rotation = 0;
-	if (key_data.key == MLX_KEY_RIGHT && key_data.key == MLX_RELEASE)
-		game->rotation = 0;
-}
-
-static void	keys(mlx_key_data_t key_data, void *data)
-{
-	t_game *game;
-
-	game = data;
-	if (key_data.key == MLX_KEY_LEFT && key_data.action == MLX_PRESS)
-		game->rotation = -1;
-	else if (key_data.key == MLX_KEY_RIGHT && key_data.action == MLX_PRESS)
-		game->rotation = -1;
-	release_key(key_data, game);
-}
-	
-
-/// UNTILL HERE
-*/
 
 void	screenpop(t_game *game)
 {
@@ -72,8 +46,10 @@ void	screenpop(t_game *game)
 
 
 	mlx_loop_hook(game->mlx, move_and_beam, game);
-//	mlx_key_hook(game->mlx, &keys, &game->mlx); //void mlx_key_hook(mlx_t* mlx, mlx_keyfunc func, void* param);
-	
+	mlx_key_hook(game->mlx, &keys, &game->mlx); //void mlx_key_hook(mlx_t* mlx, mlx_keyfunc func, void* param);
+	mlx_cursor_hook(game->mlx, mouse_move, game);
+	mlx_mouse_hook(game->mlx, mouse_press, game);
+
 	mlx_loop(game->mlx);
-//	mlx_terminate(game->mlx);
+	mlx_terminate(game->mlx);
 }
