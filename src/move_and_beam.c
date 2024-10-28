@@ -6,12 +6,21 @@
 /*   By: iniska <iniska@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/17 09:41:09 by iniska            #+#    #+#             */
-/*   Updated: 2024/10/28 11:11:19 by iniska           ###   ########.fr       */
+/*   Updated: 2024/10/28 15:49:11 by iniska           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/cub3D.h"
 
+static void	move_player(t_game *game)
+{
+	int	grid_y;
+	int	grid_x;
+	int	nex_y;
+	int nex_x;
+
+	
+}
 
 static void	rotate(t_game *game, int i)
 {
@@ -31,11 +40,11 @@ static void	rotate(t_game *game, int i)
 
 static void	move_hook(t_game *game)
 {
+	move_palyer(game);
 	if (game->rotation == 1)
 		rotate(game, 1);
 	if (game->rotation == -1)
 		rotate(game, 0);
-	// move_player(); ALL THE MOVEMENT SHOULD BE HERE!s
 }	
 
 
@@ -45,7 +54,10 @@ void	move_and_beam(void	*data)
 
 	game = (t_game *) data;
 	if (mlx_is_key_down(game->mlx, MLX_KEY_ESCAPE))
+	{
 		mlx_close_window(game->mlx);
+		printf("Bye bye!\n");
+	}
 	move_hook(game);
 	raycast(game);
 }

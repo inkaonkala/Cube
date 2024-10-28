@@ -6,7 +6,7 @@
 /*   By: iniska <iniska@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/15 20:39:06 by iniska            #+#    #+#             */
-/*   Updated: 2024/10/28 11:10:50 by iniska           ###   ########.fr       */
+/*   Updated: 2024/10/28 12:45:45 by iniska           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ static int	wall(t_game *game, float x, float y)
 }
 */
 
-static int wall(t_game *game, float x, float y)
+static int	wall(t_game *game, float x, float y)
 {
     size_t map_x;
     size_t map_y;
@@ -49,7 +49,7 @@ static int wall(t_game *game, float x, float y)
     map_y = floor(y / TILE);
 
     // Check if the coordinates are outside the bounds of the map
-    if (map_y >= game->height || map_x >= game->width)
+    if (game->height <= map_y || game->width <= map_x)
         return (1);
 
     // Check if the string for map_y exists and map_x is within the length of the map row
@@ -130,8 +130,10 @@ static float	get_wall_height(t_game *game, float angl)
 	if (angl == 0)
 		angl = 0.00001;
 
-	y_step = TILE;
-	x_step = TILE / tan(angl);
+	y_step = TILE * tan(angl);
+	x_step = TILE;
+
+
 	x = floor(game->player_x / TILE) * TILE;
 	ray_move = move_ray(angl, &y, &x, 1);
 	y = game->player_y + (x - game->player_x) * tan(angl);
@@ -152,7 +154,7 @@ static float	get_wall_height(t_game *game, float angl)
 
 static float	update_rayangl(float angl)
 {
-	if (angl <- 0)
+	if (angl <= 0)
 	{
 		angl += 2 * PI;
 		return (angl);

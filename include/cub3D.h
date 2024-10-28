@@ -6,7 +6,7 @@
 /*   By: iniska <iniska@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/15 12:55:19 by yhsu              #+#    #+#             */
-/*   Updated: 2024/10/28 11:36:21 by iniska           ###   ########.fr       */
+/*   Updated: 2024/10/28 15:40:57 by iniska           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,8 +24,8 @@
 #include <string.h>
 
 
-# define WINDOW_WIDTH 1300
-# define WINDOW_HEIGHT 1000
+# define WINDOW_WIDTH 1700
+# define WINDOW_HEIGHT 1200
 # define TILE 30 // should it be 60 or 64?
 
 # define ROTATIO_SPEED 0.045
@@ -90,8 +90,13 @@ typedef struct s_game
 	
 	int 			index;
 	int 			last_item;
-	int				rotation;
 	bool			mouse_on;
+	bool			horizon;
+
+	//it got moves
+	int				rotation;
+	int				up_down;
+	int				left_right;
 
 	t_flag 			*flags;
 	size_t 			height;

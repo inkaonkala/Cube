@@ -6,7 +6,7 @@
 /*   By: iniska <iniska@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/28 10:54:19 by iniska            #+#    #+#             */
-/*   Updated: 2024/10/28 11:36:47 by iniska           ###   ########.fr       */
+/*   Updated: 2024/10/28 15:45:32 by iniska           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,17 @@
 
 static void	release_key(mlx_key_data_t key_data, t_game *game)
 {
+	if (key_data.key == MLX_KEY_W && key_data.key == MLX_RELEASE)
+		game->up_down = 0;
+	if (key_data.key == MLX_KEY_A && key_data.key == MLX_RELEASE)
+		game->left_right = 0;
+	if (key_data.key == MLX_KEY_S && key_data.key == MLX_RELEASE)
+		game->up_down = 0;
+	if (key_data.key == MLX_KEY_D && key_data.key == MLX_RELEASE)
+		game->left_right = 0;
 	if (key_data.key == MLX_KEY_LEFT && key_data.key == MLX_RELEASE)
 		game->rotation = 0;
-	if (key_data.key == MLX_KEY_RIGHT && key_data.key == MLX_RELEASE)
+	else if (key_data.key == MLX_KEY_RIGHT && key_data.key == MLX_RELEASE)
 		game->rotation = 0;
 }
 
@@ -25,7 +33,15 @@ void	keys(mlx_key_data_t key_data, void *data)
 	t_game *game;
 
 	game = data;
-	if (key_data.key == MLX_KEY_LEFT && key_data.action == MLX_PRESS)
+	if (key_data.key == MLX_KEY_W && key_data.action == MLX_PRESS)
+		game->up_down = 1;
+	else if (key_data.key == MLX_KEY_A && key_data.action == MLX_PRESS)
+		game->left_right = -1;
+	else if (key_data.key == MLX_KEY_S && key_data.action == MLX_PRESS)
+		game->up_down = -1;
+	else if (key_data.key == MLX_KEY_D && key_data.action == MLX_PRESS)
+		game->left_right = 1;
+	else if (key_data.key == MLX_KEY_LEFT && key_data.action == MLX_PRESS)
 		game->rotation = -1;
 	else if (key_data.key == MLX_KEY_RIGHT && key_data.action == MLX_PRESS)
 		game->rotation = -1;
@@ -42,7 +58,7 @@ void	mouse_move(double x, double y, void *data)
 		return ;
 		
 	double center_x = WINDOW_WIDTH / 2.0;
-    double sensitivity = 0.003; // Adjust for desired rotation speed
+    double sensitivity = ROTATIO_SPEED; // Adjust for desired rotation speed
 
     // Calculate rotation based on horizontal mouse movement
 	printf("%f", y);

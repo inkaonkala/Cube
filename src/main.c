@@ -6,7 +6,7 @@
 /*   By: iniska <iniska@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/15 12:54:09 by yhsu              #+#    #+#             */
-/*   Updated: 2024/10/28 11:03:12 by iniska           ###   ########.fr       */
+/*   Updated: 2024/10/28 12:31:25 by iniska           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,11 +20,10 @@ int main (int argc, char *argv[])
 	
 	if (argc != 2 && argv)
 		err_message_exit("Invalid input.");
-	//	SEGFAULT!
+
 	if (check_file_extesion(argv[1]) == 0)
 		err_message_exit("please provide a '.cub' file");
 
-	printf("HELLO!\n");
 	t_game *game;
 
 	game = (t_game *)ft_calloc(1, sizeof(t_game));
@@ -39,6 +38,7 @@ int main (int argc, char *argv[])
 	game->rays = malloc(sizeof(t_rays));
 	if(!game->rays)
 		err_message_exit("Failed to malloc for the BEAM\n");
+
 	count_values(game);
 	screenpop(game); // opens a window 
 	free(game);
