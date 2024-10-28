@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3D.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: iniska <iniska@student.hive.fi>            +#+  +:+       +#+        */
+/*   By: yhsu <yhsu@student.hive.fi>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/15 12:55:19 by yhsu              #+#    #+#             */
-/*   Updated: 2024/10/28 11:36:21 by iniska           ###   ########.fr       */
+/*   Updated: 2024/10/28 11:50:28 by yhsu             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,7 @@ typedef struct s_flag
 typedef struct s_game
 {
 	char			**file_content;
-	char			**file_content_newline;
+	//char			**file_content_newline;
 	char 			**map;
 	char 			*no_texture_path;//./maps/photo.png
 	char 			*so_texture_path;
@@ -88,7 +88,7 @@ typedef struct s_game
 	uint32_t		ceiling_g;
 	uint32_t		ceiling_b;
 	
-	int 			index;
+	size_t 			longest;
 	int 			last_item;
 	int				rotation;
 	bool			mouse_on;
@@ -113,8 +113,45 @@ typedef struct s_game
 	
 }	t_game;
 
-//void	init_game(void);
+//get_2d_array
+char **get_2d_array( char *mapfile);
+char *readfile(char *mapfile);
 
+//check_elements
+int check_elements_info(t_game *game,char **file_content, t_flag *flags);
+int empty_line(char * file);
+
+//create_map
+int create_map(t_game * game, char **file_content);
+void create_rectagle(t_game *game);
+void copy_string( char *s1, char *s2);
+int count_mapline(char **file_content);
+
+//flags
+int set_flags(char *file_line, t_flag *flags);
+void init_flags(t_flag *flags);
+
+//map validation
+void map_validate(t_game *game);
+char **copy_grid(t_game *game, char **map);
+
+//position extention
+int check_file_extesion(char *filename);
+int check_texture_extension(t_game *game);
+void check_player_position(t_game *game, char ** map);
+
+//save color 
+int save_colors(t_game *game, char **file_content);
+
+//set color
+void find_color(char **c_split, char **f_split, t_game *game);
+void set_color(t_game *game);
+
+//init_game
+void init_game(t_game *game, char *mapfile);
+int empty_line(char * file);
+
+//error
 void 	err_message_exit(char * message);
 
 void	screenpop(t_game *game);
@@ -139,7 +176,7 @@ void 	err_message(char * message);
 void 	free_grid(char **grid);
 void 	clean_all_exit(t_game *game, char *message);
 
-char	**split_newline(char const *s, char c);
+
 
 void	draw_wall(t_game *game, int ray, double bot_pixl, double top_pixl);
 
