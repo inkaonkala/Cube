@@ -168,6 +168,8 @@ void init_game(t_game *game, char *mapfile)
 	dprintf(2, "game->ceiling_g: %d\n", game->ceiling_g);
 	dprintf(2, "game->ceiling_b: %d\n", game->ceiling_b);
 
+	
+
 }
 
 
