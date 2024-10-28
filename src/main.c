@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yhsu <yhsu@student.hive.fi>                +#+  +:+       +#+        */
+/*   By: iniska <iniska@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/15 12:54:09 by yhsu              #+#    #+#             */
-/*   Updated: 2024/10/24 14:07:52 by yhsu             ###   ########.fr       */
+/*   Updated: 2024/10/28 11:03:12 by iniska           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,12 +18,13 @@ int main (int argc, char *argv[])
 	//printf("%s", argv[0]);
 	//printf("this is here for compile %s", argv[0]); 
 	
-	if (argc != 2)
+	if (argc != 2 && argv)
 		err_message_exit("Invalid input.");
 	//	SEGFAULT!
 	if (check_file_extesion(argv[1]) == 0)
 		err_message_exit("please provide a '.cub' file");
 
+	printf("HELLO!\n");
 	t_game *game;
 
 	game = (t_game *)ft_calloc(1, sizeof(t_game));

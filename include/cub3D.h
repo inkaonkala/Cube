@@ -6,7 +6,7 @@
 /*   By: iniska <iniska@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/15 12:55:19 by yhsu              #+#    #+#             */
-/*   Updated: 2024/10/25 13:58:57 by iniska           ###   ########.fr       */
+/*   Updated: 2024/10/28 11:36:21 by iniska           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,9 +24,12 @@
 #include <string.h>
 
 
-# define WINDOW_WIDTH 1000
+# define WINDOW_WIDTH 1300
 # define WINDOW_HEIGHT 1000
 # define TILE 30 // should it be 60 or 64?
+
+# define ROTATIO_SPEED 0.045
+# define SPEED 4
 
 # define FOW 60 // fieald of view
 # define PI 3.14159
@@ -87,6 +90,9 @@ typedef struct s_game
 	
 	int 			index;
 	int 			last_item;
+	int				rotation;
+	bool			mouse_on;
+
 	t_flag 			*flags;
 	size_t 			height;
 	size_t 			width;
@@ -123,7 +129,7 @@ float	beam_angl(float angl);
 void	count_values(t_game *sgame);
 float	distance(t_game *game, float x, float y);
 
-void	set_pixels(t_game *game, int x, int y, int colour);
+void	set_pixels(t_game *game, double x, double y, int colour);
 
 int 	check_file_extesion(char *filename);
 void 	init_game(t_game *game, char *mapfile);
@@ -136,5 +142,9 @@ void 	clean_all_exit(t_game *game, char *message);
 char	**split_newline(char const *s, char c);
 
 void	draw_wall(t_game *game, int ray, double bot_pixl, double top_pixl);
+
+void	keys(mlx_key_data_t key_data, void *data);
+void	mouse_move(double x, double y, void *data);
+void 	mouse_press(mouse_key_t button, action_t action, modifier_key_t mods, void *data);
 
 #endif

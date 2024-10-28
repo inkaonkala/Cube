@@ -6,13 +6,13 @@
 /*   By: iniska <iniska@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/18 13:16:18 by iniska            #+#    #+#             */
-/*   Updated: 2024/10/25 13:44:17 by iniska           ###   ########.fr       */
+/*   Updated: 2024/10/28 11:15:19 by iniska           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/cub3D.h"
 
-void	set_pixels(t_game *game, int x, int y, int colour)
+void	set_pixels(t_game *game, double x, double y, int colour)
 {
 	if (x < 0)
 		return ;
