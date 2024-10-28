@@ -6,7 +6,7 @@
 /*   By: yhsu <yhsu@student.hive.fi>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/15 12:54:09 by yhsu              #+#    #+#             */
-/*   Updated: 2024/10/24 15:20:59 by yhsu             ###   ########.fr       */
+/*   Updated: 2024/10/28 11:39:17 by yhsu             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ int main (int argc, char *argv[])
 	//initializing the MLX library
 	//Window Creation
 
-
+	//need to free the game pointer	
 	
 	return (0);
 }

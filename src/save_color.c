@@ -5,8 +5,8 @@
 
 static int set_t_path(char **map_t_path, char * t_path)
 {
-	//if (*map_t_path)
-		//free(*map_t_path);
+	if (*map_t_path)
+		free(*map_t_path);
 	*map_t_path = ft_strtrim(t_path, " ");
 	if (!*map_t_path)
 	{

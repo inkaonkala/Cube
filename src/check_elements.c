@@ -49,7 +49,7 @@ static int check_all_elements(char **file, t_flag *flags)
 			i++;
 			count++;
 		}
-	
+
 	}
 	
 	return (i);// i = last item

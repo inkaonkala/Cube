@@ -6,7 +6,7 @@
 /*   By: yhsu <yhsu@student.hive.fi>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/15 14:02:51 by yhsu              #+#    #+#             */
-/*   Updated: 2024/10/25 17:53:10 by yhsu             ###   ########.fr       */
+/*   Updated: 2024/10/28 11:16:14 by yhsu             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,7 @@ static int check_empty_line(t_game *game, char *mapfile)
 	//dprintf(2, "game->last_item: %d\n",game->last_item);
 	while(j < game->last_item + 2 || new_line[0] == '\n' || new_line == NULL)//
 	{
+		free(new_line);
 		new_line = get_next_line(fd);
 		j++;
 	}		
@@ -127,18 +128,19 @@ void init_game(t_game *game, char *mapfile)
 	parse_file(game, mapfile);
 	
 
-	// dprintf(2, "game->no_texture_path: %s\n", game->no_texture_path);
-	// dprintf(2, "game->ea_texture_path: %s\n", game->ea_texture_path);
-	// dprintf(2, "game->so_texture_path: %s\n", game->so_texture_path);
-	// dprintf(2, "game->we_texture_path: %s\n", game->we_texture_path);
+	dprintf(2, "game->no_texture_path: %s\n", game->no_texture_path);
+	dprintf(2, "game->ea_texture_path: %s\n", game->ea_texture_path);
+	dprintf(2, "game->so_texture_path: %s\n", game->so_texture_path);
+	dprintf(2, "game->we_texture_path: %s\n", game->we_texture_path);
 	
 	//check map
-	// int l = 0;
-	// while (game->map[l])
-	// {
-	// 	dprintf(2, "game->map[%d]: %s\n",l, game->map[l]);
-	// 	l++;
-	// }
+	
+	int l = 0;
+	while (game->map[l])
+	{
+		dprintf(2, "game->map[%d]: %s\n",l, game->map[l]);
+		l++;
+	}
 
 	map_validate(game);	
 	//create ractagle map
@@ -146,25 +148,25 @@ void init_game(t_game *game, char *mapfile)
 	//get position 
 	check_player_position(game, game->map);
 
-	// dprintf(2, "player position: x:%zu y: %zu\n", game->player_x, game->player_y);
+	dprintf(2, "player position: x:%zu y: %zu\n", game->player_x, game->player_y);
 	
-	// l = 0;
-	// while (game->map[l])
-	// {
-	// 	dprintf(2, "game->map[%d]: %s\n",l, game->map[l]);
-	// 	l++;
-	// }
+	l = 0;
+	while (game->map[l])
+	{
+		dprintf(2, "game->map[%d]: %s\n",l, game->map[l]);
+		l++;
+	}
 
 
-	// dprintf(2, "game->ceiling_color: %s\n", game->ceiling_color);
-	// dprintf(2, "game->floor_color: %s\n", game->floor_color);
+	dprintf(2, "game->ceiling_color: %s\n", game->ceiling_color);
+	dprintf(2, "game->floor_color: %s\n", game->floor_color);
 
-	// dprintf(2, "game->floor_r: %d\n", game->floor_r);
-	// dprintf(2, "game->floor_g: %d\n", game->floor_g);
-	// dprintf(2, "game->floor_b: %d\n", game->floor_b);
-	// dprintf(2, "game->ceiling_r: %d\n", game->ceiling_r);
-	// dprintf(2, "game->ceiling_g: %d\n", game->ceiling_g);
-	// dprintf(2, "game->ceiling_b: %d\n", game->ceiling_b);
+	dprintf(2, "game->floor_r: %d\n", game->floor_r);
+	dprintf(2, "game->floor_g: %d\n", game->floor_g);
+	dprintf(2, "game->floor_b: %d\n", game->floor_b);
+	dprintf(2, "game->ceiling_r: %d\n", game->ceiling_r);
+	dprintf(2, "game->ceiling_g: %d\n", game->ceiling_g);
+	dprintf(2, "game->ceiling_b: %d\n", game->ceiling_b);
 
 }
 

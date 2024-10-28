@@ -27,6 +27,8 @@ static int set_flag(char *file_line, t_flag *flags, int *flag, char **texture_pa
 	*flag = 1;
 	flags->all_flags++;
 	
+	if (*texture_path)
+		free(*texture_path);
 	if (file_line != NULL)
 		*texture_path = ft_strtrim(file_line + 3, " ");
 		//*texture_path = (file_line + 3);
