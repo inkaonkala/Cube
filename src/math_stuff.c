@@ -6,7 +6,7 @@
 /*   By: iniska <iniska@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/17 10:24:06 by iniska            #+#    #+#             */
-/*   Updated: 2024/10/28 11:25:39 by iniska           ###   ########.fr       */
+/*   Updated: 2024/10/29 10:44:14 by iniska           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,8 +32,11 @@ void	count_values(t_game *game)
 		game->player_angl += 2 * PI; // this needs to be counted according to player y and x, divided by PI, BUT EAST is 0 so let's use it
 	
 	// FOR TESTING ENDS
+	
 	game->mouse_on = false;
 	game->rotation = 0;
+	game->left_right = 0;
+	game->up_down = 0;
 	game->fow = (FOW * PI / 180);
 	game->rays->ray_angl = game->player_angl - (game->fow / 2);
 }
