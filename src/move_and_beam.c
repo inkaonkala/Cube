@@ -6,7 +6,7 @@
 /*   By: iniska <iniska@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/17 09:41:09 by iniska            #+#    #+#             */
-/*   Updated: 2024/10/29 12:57:37 by iniska           ###   ########.fr       */
+/*   Updated: 2024/10/29 13:06:21 by iniska           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,7 @@ static void	move_hook(t_game *game, double move_x, double move_y)
 	{
 		move_x = sin(game->player_angl) * SPEED;
 		move_y = -cos(game->player_angl) * SPEED;
-			game->left_right = 0;
+		game->left_right = 0;
 	}
 	if (game->up_down == -1) // S
 	{
