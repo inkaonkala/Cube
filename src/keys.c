@@ -6,12 +6,13 @@
 /*   By: iniska <iniska@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/28 10:54:19 by iniska            #+#    #+#             */
-/*   Updated: 2024/10/28 15:45:32 by iniska           ###   ########.fr       */
+/*   Updated: 2024/10/29 12:57:10 by iniska           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/cub3D.h"
 
+/*
 static void	release_key(mlx_key_data_t key_data, t_game *game)
 {
 	if (key_data.key == MLX_KEY_W && key_data.key == MLX_RELEASE)
@@ -27,25 +28,27 @@ static void	release_key(mlx_key_data_t key_data, t_game *game)
 	else if (key_data.key == MLX_KEY_RIGHT && key_data.key == MLX_RELEASE)
 		game->rotation = 0;
 }
+*/
 
-void	keys(mlx_key_data_t key_data, void *data)
+
+void	keys(t_game *game)
 {
-	t_game *game;
 
-	game = data;
-	if (key_data.key == MLX_KEY_W && key_data.action == MLX_PRESS)
-		game->up_down = 1;
-	else if (key_data.key == MLX_KEY_A && key_data.action == MLX_PRESS)
-		game->left_right = -1;
-	else if (key_data.key == MLX_KEY_S && key_data.action == MLX_PRESS)
-		game->up_down = -1;
-	else if (key_data.key == MLX_KEY_D && key_data.action == MLX_PRESS)
-		game->left_right = 1;
-	else if (key_data.key == MLX_KEY_LEFT && key_data.action == MLX_PRESS)
-		game->rotation = -1;
-	else if (key_data.key == MLX_KEY_RIGHT && key_data.action == MLX_PRESS)
-		game->rotation = -1;
-	release_key(key_data, game);
+    if (mlx_is_key_down(game->mlx, MLX_KEY_W))
+        game->up_down = 1;
+    else if (mlx_is_key_down(game->mlx, MLX_KEY_S))
+        game->up_down = -1;
+
+    if (mlx_is_key_down(game->mlx, MLX_KEY_A))
+        game->left_right = 1;
+    else if (mlx_is_key_down(game->mlx, MLX_KEY_D))
+        game->left_right = -1;
+
+    if (mlx_is_key_down(game->mlx, MLX_KEY_LEFT))
+        game->rotation = -1;
+    else if (mlx_is_key_down(game->mlx, MLX_KEY_RIGHT))
+		game->rotation = 1;
+	
 }
 
 void	mouse_move(double x, double y, void *data)
