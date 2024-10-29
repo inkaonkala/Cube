@@ -6,7 +6,7 @@
 /*   By: iniska <iniska@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/17 09:41:09 by iniska            #+#    #+#             */
-/*   Updated: 2024/10/29 10:31:32 by iniska           ###   ########.fr       */
+/*   Updated: 2024/10/29 13:06:21 by iniska           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,33 +54,34 @@ static void	rotate(t_game *game, int i)
 
 static void	move_hook(t_game *game, double move_x, double move_y)
 {
-	printf("HERE HERE HERE\n");
-
 	if (game->rotation == 1)
 		rotate(game, 1);
 	if (game->rotation == -1)
 		rotate(game, 0);
 
-
 	if (game->left_right == -1) // D
 	{
 		move_x = -sin(game->player_angl) * SPEED;
 		move_y = cos(game->player_angl) * SPEED;
+		game->left_right = 0;
 	}
 	if (game->left_right == 1) // A
 	{
 		move_x = sin(game->player_angl) * SPEED;
 		move_y = -cos(game->player_angl) * SPEED;
+		game->left_right = 0;
 	}
 	if (game->up_down == -1) // S
 	{
 		move_x = -cos(game->player_angl) * SPEED;
 		move_y = -sin(game->player_angl) * SPEED;
+		game->up_down = 0;
  	}
 	if (game->up_down == 1) // W
 	{
 		move_x = cos(game->player_angl) * SPEED;
 		move_y = sin(game->player_angl) * SPEED;
+		game->up_down = 0;
 	}
 	move_player(game, move_x, move_y);		
 }	
@@ -96,6 +97,7 @@ void	move_and_beam(void	*data)
 		mlx_close_window(game->mlx);
 		printf("Bye bye!\n");
 	}
+	keys(game);
 	move_hook(game, 0, 0);
 	raycast(game);
 }
