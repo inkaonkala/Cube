@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yhsu <yhsu@student.hive.fi>                +#+  +:+       +#+        */
+/*   By: iniska <iniska@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/15 12:54:09 by yhsu              #+#    #+#             */
-/*   Updated: 2024/10/28 12:31:25 by iniska           ###   ########.fr       */
+/*   Updated: 2024/10/30 13:00:51 by iniska           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,7 @@ int main (int argc, char *argv[])
 	if(!game->rays)
 		err_message_exit("Failed to malloc for the BEAM\n");
 
+	
 	count_values(game);
 	screenpop(game); // opens a window 
 	free(game);

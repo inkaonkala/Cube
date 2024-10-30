@@ -6,7 +6,7 @@
 /*   By: iniska <iniska@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/15 20:39:06 by iniska            #+#    #+#             */
-/*   Updated: 2024/10/29 13:30:12 by iniska           ###   ########.fr       */
+/*   Updated: 2024/10/30 15:23:02 by iniska           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ static int		move_ray(float angl, float *inter, float *step, int is_vert)
 	}
 	else
 	{
-		if (!(angl > PI / 2 && angl < 3 * PI / 2))
+		if (!(angl >= PI / 2 && angl <= 3 * PI / 2))
 		{
 			*inter += TILE;
 			return (-1);
@@ -68,9 +68,9 @@ static float	get_horizon(t_game *game, float angl)
 	y_step = TILE;
 	x_step = TILE / tan(angl);
 
-	y = floor(game->player_y / TILE) * TILE;
+	y = floor(game->rays->int_y / TILE) * TILE;
 	ray_move = move_ray(angl, &y, &y_step, 0);
-	x = game->player_x + (y - game->player_y) / tan(angl);
+	x = game->rays->int_x + (y - game->rays->int_y) / tan(angl);
 
 	if (angl > PI / 2 && angl < 3 * PI / 2)
 		x_step = -fabs(x_step);
@@ -102,9 +102,9 @@ static float	get_wall_height(t_game *game, float angl)
 	x_step = TILE;
 
 
-	x = floor(game->player_x / TILE) * TILE;
+	x = floor(game->rays->int_x / TILE) * TILE;
 	ray_move = move_ray(angl, &x, &x_step, 1);
-	y = game->player_y + (x - game->player_x) * tan(angl);
+	y = game->rays->int_y + (x - game->rays->int_x) * tan(angl);
 	if (angl > 0 && angl < PI)
 		y_step = fabs(y_step);
 	else

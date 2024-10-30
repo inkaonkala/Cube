@@ -6,7 +6,7 @@
 /*   By: iniska <iniska@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/17 09:41:09 by iniska            #+#    #+#             */
-/*   Updated: 2024/10/29 13:06:21 by iniska           ###   ########.fr       */
+/*   Updated: 2024/10/30 15:26:50 by iniska           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,11 @@ static void	move_player(t_game *game, double move_x, double move_y)
 	{
 		game->player_x = new_x;
 		game->player_y = new_y;
+
+//		if (fmod(game->player_x, TILE) < 1.0)
+//			game->player_x += 0.1;
+//		if (fmod(game->player_y, TILE) < 1.0)
+//			game->player_y += 0.1;
 		if (game->player_x % TILE == 0)
 			game->player_x += 1;
 		if (game->player_y % TILE == 0)
@@ -56,33 +61,37 @@ static void	move_hook(t_game *game, double move_x, double move_y)
 {
 	if (game->rotation == 1)
 		rotate(game, 1);
-	if (game->rotation == -1)
+	else if (game->rotation == -1)
 		rotate(game, 0);
 
 	if (game->left_right == -1) // D
 	{
 		move_x = -sin(game->player_angl) * SPEED;
 		move_y = cos(game->player_angl) * SPEED;
-		game->left_right = 0;
 	}
-	if (game->left_right == 1) // A
+	else if (game->left_right == 1) // A
 	{
 		move_x = sin(game->player_angl) * SPEED;
 		move_y = -cos(game->player_angl) * SPEED;
-		game->left_right = 0;
 	}
 	if (game->up_down == -1) // S
 	{
 		move_x = -cos(game->player_angl) * SPEED;
 		move_y = -sin(game->player_angl) * SPEED;
-		game->up_down = 0;
  	}
-	if (game->up_down == 1) // W
+	else if (game->up_down == 1) // W
 	{
 		move_x = cos(game->player_angl) * SPEED;
 		move_y = sin(game->player_angl) * SPEED;
-		game->up_down = 0;
 	}
+//	if (game->left_right != 0 && game->up_down != 0)
+//	{
+//		move_x *= 0.7071;
+//		move_y *= 0.7071;
+//	}
+	game->left_right = 0;
+	game->up_down = 0;
+	game->rotation = 0;
 	move_player(game, move_x, move_y);		
 }	
 
@@ -98,6 +107,7 @@ void	move_and_beam(void	*data)
 		printf("Bye bye!\n");
 	}
 	keys(game);
+//	raycast(game);
 	move_hook(game, 0, 0);
 	raycast(game);
 }
