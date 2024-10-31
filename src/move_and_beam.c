@@ -6,7 +6,7 @@
 /*   By: iniska <iniska@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/17 09:41:09 by iniska            #+#    #+#             */
-/*   Updated: 2024/10/29 13:06:21 by iniska           ###   ########.fr       */
+/*   Updated: 2024/10/31 11:19:02 by iniska           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,20 +19,20 @@ static void	move_player(t_game *game, double move_x, double move_y)
 	double	new_y;
 	double	new_x;
 
-	new_x = game->player_x + move_x;
-	new_y = game->player_y + move_y;
+	new_x = game->rays->p_x + move_x;
+	new_y = game->rays->p_y + move_y;
 	map_x = new_x / TILE;
 	map_y = new_y / TILE;
 	if (game->map[map_y][map_x] != '1' 
-		&& game->map[map_y][game->player_x / TILE] != '1' 
-		&& game->map[game->player_y / TILE][map_x] != '1')
+		&& game->map[map_y][game->rays->p_x / TILE] != '1' 
+		&& game->map[game->rays->p_y / TILE][map_x] != '1')
 	{
-		game->player_x = new_x;
-		game->player_y = new_y;
-		if (game->player_x % TILE == 0)
-			game->player_x += 1;
-		if (game->player_y % TILE == 0)
-			game->player_y += 1;
+		game->rays->p_x = new_x;
+		game->rays->p_y = new_y;
+		if (game->rays->p_x % TILE == 0)
+			game->rays->p_x += 1;
+		if (game->rays->p_y % TILE == 0)
+			game->rays->p_y += 1;
 	}
 }
 
@@ -83,6 +83,9 @@ static void	move_hook(t_game *game, double move_x, double move_y)
 		move_y = sin(game->player_angl) * SPEED;
 		game->up_down = 0;
 	}
+	game->up_down = 0;
+	game->left_right = 0;
+	game->rotation = 0;
 	move_player(game, move_x, move_y);		
 }	
 

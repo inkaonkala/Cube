@@ -6,7 +6,7 @@
 /*   By: iniska <iniska@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/15 12:55:19 by yhsu              #+#    #+#             */
-/*   Updated: 2024/10/29 12:57:29 by iniska           ###   ########.fr       */
+/*   Updated: 2024/10/31 10:23:05 by iniska           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,9 @@ typedef struct s_rays
 	float	horizon_inter_y;
 	float	vertical_inter_x;
 	float	vertical_inter_y;
+
+	int		p_x;
+	int		p_y;
 	
 }	t_rays;
 
