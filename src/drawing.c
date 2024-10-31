@@ -6,7 +6,7 @@
 /*   By: iniska <iniska@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/18 13:16:18 by iniska            #+#    #+#             */
-/*   Updated: 2024/10/28 15:24:18 by iniska           ###   ########.fr       */
+/*   Updated: 2024/10/31 11:11:21 by iniska           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ void	set_pixels(t_game *game, double x, double y, int colour)
 /*
 static void	get_pics_for_wall(t_game *game)
 {
-	if (game->horizon)
+	if (game->rays->wall_flag)
 	{
 		if (game->rays->ray_angl > 0 && game->rays->ray_angl < PI)
 			return (game->so_texture);

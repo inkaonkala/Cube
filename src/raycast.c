@@ -6,7 +6,7 @@
 /*   By: iniska <iniska@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/15 20:39:06 by iniska            #+#    #+#             */
-/*   Updated: 2024/10/29 13:30:12 by iniska           ###   ########.fr       */
+/*   Updated: 2024/10/31 11:18:38 by iniska           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,9 +68,9 @@ static float	get_horizon(t_game *game, float angl)
 	y_step = TILE;
 	x_step = TILE / tan(angl);
 
-	y = floor(game->player_y / TILE) * TILE;
+	y = floor(game->rays->p_y / TILE) * TILE;
 	ray_move = move_ray(angl, &y, &y_step, 0);
-	x = game->player_x + (y - game->player_y) / tan(angl);
+	x = game->rays->p_x + (y - game->rays->p_y) / tan(angl);
 
 	if (angl > PI / 2 && angl < 3 * PI / 2)
 		x_step = -fabs(x_step);
@@ -102,9 +102,9 @@ static float	get_wall_height(t_game *game, float angl)
 	x_step = TILE;
 
 
-	x = floor(game->player_x / TILE) * TILE;
+	x = floor(game->rays->p_x / TILE) * TILE;
 	ray_move = move_ray(angl, &x, &x_step, 1);
-	y = game->player_y + (x - game->player_x) * tan(angl);
+	y = game->rays->p_y + (x - game->rays->p_x) * tan(angl);
 	if (angl > 0 && angl < PI)
 		y_step = fabs(y_step);
 	else
@@ -142,6 +142,7 @@ void raycast(t_game *game)
 	int		ray;
 
 	ray = 0;
+	game->rays->ray_angl = game->player_angl - (game->fow / 2);
 	while (ray < WINDOW_WIDTH)
 	{
 		game->rays->ray_angl = update_rayangl(game->rays->ray_angl);
@@ -153,7 +154,7 @@ void raycast(t_game *game)
 		else
 		{
 			game->rays->distance = horizon_line;
-			game->rays->ray_angl = true;
+			game->rays->wall_flag = true;
 		}
 		set_walls(game, ray);
 		ray++;
