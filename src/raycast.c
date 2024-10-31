@@ -6,7 +6,7 @@
 /*   By: iniska <iniska@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/15 20:39:06 by iniska            #+#    #+#             */
-/*   Updated: 2024/10/31 11:18:38 by iniska           ###   ########.fr       */
+/*   Updated: 2024/10/31 13:18:28 by iniska           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ static int	wall(t_game *game, float x, float y)
     map_y = floor(y / TILE);
 	if (game->height <= map_y || game->width <= map_x)
 		return (1);
-	if (game->map[map_y] && map_x < ft_strlen(game->map[map_y])) // check this
+	if (game->map[map_y] && map_x <= ft_strlen(game->map[map_y])) // check this
 	{
 		if (game->map[map_y][map_x] == '1')
 			return (1);
