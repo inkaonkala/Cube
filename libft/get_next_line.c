@@ -3,14 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yhsu <yhsu@student.hive.fi>                +#+  +:+       +#+        */
+/*   By: yhsu <yhsu@hive.student.fi>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/24 12:06:41 by yhsu              #+#    #+#             */
-/*   Updated: 2024/10/22 17:46:39 by yhsu             ###   ########.fr       */
+/*   Updated: 2024/03/07 15:12:49 by yhsu             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
+// #include <stdio.h>
 
 int	rest_char(t_list **list)
 {
