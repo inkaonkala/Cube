@@ -6,7 +6,7 @@
 /*   By: iniska <iniska@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/17 10:24:06 by iniska            #+#    #+#             */
-/*   Updated: 2024/10/28 11:25:39 by iniska           ###   ########.fr       */
+/*   Updated: 2024/10/31 09:32:14 by iniska           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,23 +25,39 @@ float	beam_angl(float angl)
 void	count_values(t_game *game)
 {
 	// FOR TESTING
-	game->player_x = 20;
-	game->player_y = 20;
-	game->player_angl =  atan2(game->player_y, game->player_x);
-	if (game->player_angl < 0)
-		game->player_angl += 2 * PI; // this needs to be counted according to player y and x, divided by PI, BUT EAST is 0 so let's use it
+	printf("PLAYER X: %zu \n", game->player_x);
+	printf("PLAYER Y: %zu \n", game->player_y);
 	
-	// FOR TESTING ENDS
+	if (game->map[game->player_y][game->player_x] == 'N')
+		game->player_angl = 3 * PI / 2;
+	else if (game->map[game->player_y][game->player_x] == 'E')
+		game->player_angl = 0;
+	else if (game->map[game->player_y][game->player_x] == 'S')
+		game->player_angl = PI / 2;
+	else if (game->map[game->player_y][game->player_x] == 'W')
+		game->player_angl = PI;
+	else
+		printf("Player not found\n");
+	
+	game->fow = (FOW * PI / 180);
 	game->mouse_on = false;
 	game->rotation = 0;
-	game->fow = (FOW * PI / 180);
-	game->rays->ray_angl = game->player_angl - (game->fow / 2);
+	game->left_right = 0;
+	game->up_down = 0;
+
+	game->rays->p_x = (game->player_x * TILE) + TILE / 2;
+	game->rays->p_y = (game->player_y * TILE) + TILE / 2;
 }
 
 float	distance(t_game *game, float x, float y)
 {
 	float	distance;
+	float	new_x;
+	float	new_y;
 
-	distance = sqrt(pow(x - game->player_x, 2) + (pow(y - game->player_y, 2)));
+	new_x = x - game->rays->p_x;
+	new_y = y - game->rays->p_y;
+
+	distance = sqrt(pow(new_x, 2) + (pow(new_y, 2)));
 	return (distance);
 }

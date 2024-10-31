@@ -6,7 +6,7 @@
 /*   By: yhsu <yhsu@student.hive.fi>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/15 12:55:19 by yhsu              #+#    #+#             */
-/*   Updated: 2024/10/28 11:50:28 by yhsu             ###   ########.fr       */
+/*   Updated: 2024/10/31 13:53:02 by yhsu             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,15 +24,15 @@
 #include <string.h>
 
 
-# define WINDOW_WIDTH 1300
-# define WINDOW_HEIGHT 1000
-# define TILE 30 // should it be 60 or 64?
+# define WINDOW_WIDTH 1700
+# define WINDOW_HEIGHT 1200
+# define TILE 64 // should it be 60 or 64?
 
 # define ROTATIO_SPEED 0.045
-# define SPEED 4
+# define SPEED 3
 
 # define FOW 60 // fieald of view
-# define PI 3.14159
+# define PI 3.14159265
 
 //for mini map
 
@@ -70,6 +70,9 @@ typedef struct s_rays
 	float	horizon_inter_y;
 	float	vertical_inter_x;
 	float	vertical_inter_y;
+
+	int		p_x;
+	int		p_y;
 	
 }	t_rays;
 
@@ -109,8 +112,13 @@ typedef struct s_game
 	
 	size_t 			longest;
 	int 			last_item;
-	int				rotation;
 	bool			mouse_on;
+	bool			horizon;
+
+	//it got moves
+	int				rotation;
+	int				up_down;
+	int				left_right;
 
 	t_flag 			*flags;
 	size_t 			height;
@@ -206,7 +214,8 @@ int  minimap(t_game *game, t_minimap *mini);
 
 void	draw_wall(t_game *game, int ray, double bot_pixl, double top_pixl);
 
-void	keys(mlx_key_data_t key_data, void *data);
+
+void	keys(t_game *game);
 void	mouse_move(double x, double y, void *data);
 void 	mouse_press(mouse_key_t button, action_t action, modifier_key_t mods, void *data);
 

@@ -6,7 +6,7 @@
 /*   By: yhsu <yhsu@student.hive.fi>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/15 12:54:09 by yhsu              #+#    #+#             */
-/*   Updated: 2024/10/28 11:47:46 by yhsu             ###   ########.fr       */
+/*   Updated: 2024/10/28 12:31:25 by iniska           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,8 +30,6 @@ int main (int argc, char *argv[])
 	if(!game)
 		err_message_exit("Malloc failed");
 	
-
-	
 	//parse map
 	init_game(game, argv[1]);
 
@@ -54,6 +52,7 @@ int main (int argc, char *argv[])
 	game->rays = malloc(sizeof(t_rays));
 	if(!game->rays)
 		err_message_exit("Failed to malloc for the BEAM\n");
+
 	count_values(game);
 	screenpop(game); // opens a window 
 	free(game);

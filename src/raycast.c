@@ -6,60 +6,28 @@
 /*   By: iniska <iniska@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/15 20:39:06 by iniska            #+#    #+#             */
-/*   Updated: 2024/10/28 11:10:50 by iniska           ###   ########.fr       */
+/*   Updated: 2024/10/31 13:18:28 by iniska           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/cub3D.h"
 
-/*
-//looks the specific spot "map_x/y" where the ray hits
 static int	wall(t_game *game, float x, float y)
-{
-	size_t	map_x;
-	size_t	map_y;
-
-	if (x < 0 || y < 0)
-		return (1);
-	map_x = floor(x/TILE);
-	map_y = floor(y/TILE);
-	//edges of the map
-	if(map_y >= game->height || map_x >= game->width)
-		return (1);
-	// "1" on the map
-	if (map_y >= game->height || map_x >= game->width)
-	if (game->map[map_y] && game->map[map_x] <= ft_strlen(game->map[map_y]))
-	{
-		if(game->map[map_y][map_x] == '1' )
-			return (1);
-	}
-	return (0);
-}
-*/
-
-static int wall(t_game *game, float x, float y)
 {
     size_t map_x;
     size_t map_y;
 
     if (x < 0 || y < 0)
         return (1);
-
     map_x = floor(x / TILE);
     map_y = floor(y / TILE);
-
-    // Check if the coordinates are outside the bounds of the map
-    if (map_y >= game->height || map_x >= game->width)
-        return (1);
-
-    // Check if the string for map_y exists and map_x is within the length of the map row
-    if (game->map[map_y] && map_x < ft_strlen(game->map[map_y]))
-    {
-        // If there's a '1' at the map location, it's a wall
-        if (game->map[map_y][map_x] == '1')
-            return (1);
-    }
-
+	if (game->height <= map_y || game->width <= map_x)
+		return (1);
+	if (game->map[map_y] && map_x <= ft_strlen(game->map[map_y])) // check this
+	{
+		if (game->map[map_y][map_x] == '1')
+			return (1);
+	}
     return (0);
 }
 
@@ -100,9 +68,9 @@ static float	get_horizon(t_game *game, float angl)
 	y_step = TILE;
 	x_step = TILE / tan(angl);
 
-	y = floor(game->player_y / TILE) * TILE;
+	y = floor(game->rays->p_y / TILE) * TILE;
 	ray_move = move_ray(angl, &y, &y_step, 0);
-	x = game->player_x + (y - game->player_y) / tan(angl);
+	x = game->rays->p_x + (y - game->rays->p_y) / tan(angl);
 
 	if (angl > PI / 2 && angl < 3 * PI / 2)
 		x_step = -fabs(x_step);
@@ -130,11 +98,13 @@ static float	get_wall_height(t_game *game, float angl)
 	if (angl == 0)
 		angl = 0.00001;
 
-	y_step = TILE;
-	x_step = TILE / tan(angl);
-	x = floor(game->player_x / TILE) * TILE;
-	ray_move = move_ray(angl, &y, &x, 1);
-	y = game->player_y + (x - game->player_x) * tan(angl);
+	y_step = TILE * tan(angl);
+	x_step = TILE;
+
+
+	x = floor(game->rays->p_x / TILE) * TILE;
+	ray_move = move_ray(angl, &x, &x_step, 1);
+	y = game->rays->p_y + (x - game->rays->p_x) * tan(angl);
 	if (angl > 0 && angl < PI)
 		y_step = fabs(y_step);
 	else
@@ -152,7 +122,7 @@ static float	get_wall_height(t_game *game, float angl)
 
 static float	update_rayangl(float angl)
 {
-	if (angl <- 0)
+	if (angl <= 0)
 	{
 		angl += 2 * PI;
 		return (angl);
@@ -173,7 +143,6 @@ void raycast(t_game *game)
 
 	ray = 0;
 	game->rays->ray_angl = game->player_angl - (game->fow / 2);
-
 	while (ray < WINDOW_WIDTH)
 	{
 		game->rays->ray_angl = update_rayangl(game->rays->ray_angl);
@@ -185,7 +154,7 @@ void raycast(t_game *game)
 		else
 		{
 			game->rays->distance = horizon_line;
-			game->rays->ray_angl = true;
+			game->rays->wall_flag = true;
 		}
 		set_walls(game, ray);
 		ray++;
