@@ -6,7 +6,7 @@
 /*   By: iniska <iniska@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/18 12:06:33 by iniska            #+#    #+#             */
-/*   Updated: 2024/10/31 10:25:11 by iniska           ###   ########.fr       */
+/*   Updated: 2024/10/31 12:19:13 by iniska           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,11 +34,6 @@ void	set_walls(t_game *game, int ray)
 	double	bot_pixl;
 
 	wall_hi = 0;
-
-//	printf("player: %f, ray: %f\n", game->player_angl, game->rays->ray_angl);
-
-	if (fabs(game->rays->distance) < 0.0001)
-		game->rays->distance = 0.0001;
 
 	game->rays->distance *= cos((game->player_angl - game->rays->ray_angl));
 

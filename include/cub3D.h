@@ -6,7 +6,7 @@
 /*   By: iniska <iniska@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/15 12:55:19 by yhsu              #+#    #+#             */
-/*   Updated: 2024/10/31 10:23:05 by iniska           ###   ########.fr       */
+/*   Updated: 2024/10/31 13:24:38 by iniska           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,13 +26,13 @@
 
 # define WINDOW_WIDTH 1700
 # define WINDOW_HEIGHT 1200
-# define TILE 30 // should it be 60 or 64?
+# define TILE 64 // should it be 60 or 64?
 
 # define ROTATIO_SPEED 0.045
-# define SPEED 4
+# define SPEED 3
 
 # define FOW 60 // fieald of view
-# define PI 3.14159
+# define PI 3.14159265
 
 
 // Forward declaration of t_game

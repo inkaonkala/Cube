@@ -6,7 +6,7 @@
 /*   By: iniska <iniska@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/28 10:54:19 by iniska            #+#    #+#             */
-/*   Updated: 2024/10/31 08:58:27 by iniska           ###   ########.fr       */
+/*   Updated: 2024/10/31 12:28:59 by iniska           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ void	mouse_move(double x, double y, void *data)
     else if (game->player_angl < 0)
 		game->player_angl += 2 * PI;
 	mlx_set_mouse_pos(game->mlx, center_x, WINDOW_HEIGHT / 2.0);
-	if (y > 1000)
+	if (y > 100000)
 		ft_printf("This is here just to compile\n");
 }
 
@@ -59,6 +59,6 @@ void mouse_press(mouse_key_t button, action_t action, modifier_key_t mods, void 
 		else if (action == MLX_RELEASE)
 			game->mouse_on = false;
     }
-	if (mods > 1000)
+	if (mods > 1000000)
 		ft_printf("This is here for compile\n");
 }

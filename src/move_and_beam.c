@@ -6,7 +6,7 @@
 /*   By: iniska <iniska@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/17 09:41:09 by iniska            #+#    #+#             */
-/*   Updated: 2024/10/31 11:19:02 by iniska           ###   ########.fr       */
+/*   Updated: 2024/10/31 13:21:21 by iniska           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,10 @@ static void	move_player(t_game *game, double move_x, double move_y)
 			game->rays->p_x += 1;
 		if (game->rays->p_y % TILE == 0)
 			game->rays->p_y += 1;
+//		if (fmod(game->player_x, TILE) < 0.5)
+//			game->player_x += 0.1;
+//		if (fmod(game->player_y, TILE) < 0.5)
+//			game->player_y += 0.1;
 	}
 }
 
@@ -83,6 +87,15 @@ static void	move_hook(t_game *game, double move_x, double move_y)
 		move_y = sin(game->player_angl) * SPEED;
 		game->up_down = 0;
 	}
+	
+	//THIS IS HERE TO MAKE IT SLOWER
+	if (game->left_right != 0 && game->up_down != 0)
+	{
+		move_x *= 0.7071;
+		move_y *= 0.7071;
+	}
+	// END TEST
+
 	game->up_down = 0;
 	game->left_right = 0;
 	game->rotation = 0;
