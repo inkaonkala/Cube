@@ -6,7 +6,7 @@
 /*   By: yhsu <yhsu@student.hive.fi>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/15 12:55:19 by yhsu              #+#    #+#             */
-/*   Updated: 2024/10/31 13:53:02 by yhsu             ###   ########.fr       */
+/*   Updated: 2024/10/31 20:50:08 by yhsu             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,8 +24,8 @@
 #include <string.h>
 
 
-# define WINDOW_WIDTH 1700
-# define WINDOW_HEIGHT 1200
+# define WINDOW_WIDTH 1000
+# define WINDOW_HEIGHT 1000
 # define TILE 64 // should it be 60 or 64?
 
 # define ROTATIO_SPEED 0.045
@@ -35,16 +35,20 @@
 # define PI 3.14159265
 
 //for mini map
-
 # define RED        0xBB4211
-# define MINIMAP_SIDE 220
-# define MINIMAP_COVERAGE 10
 #define BACKGROUND_COLOR 0xFFE5E4E4
+# define MINIMAP_SIDE 200//小地圖的寬度和高度
+# define MINIMAP_COVERAGE 10
+# define MINIMAP_PADDING 28// 決定小地圖在視窗中的位置
 
 
 
 // Forward declaration of t_game
 typedef struct s_game t_game;
+
+
+
+
 
 typedef struct s_minimap
 {
@@ -90,6 +94,10 @@ typedef struct s_flag
 
 }	t_flag;
 
+
+
+
+
 typedef struct s_game
 {
 	char			**file_content;
@@ -130,10 +138,8 @@ typedef struct s_game
 	float			fow; // field of view for the player
 	
 	mlx_t			*mlx;
-	mlx_image_t		*minifloor;
-	mlx_image_t		*miniwall;
-	mlx_image_t		*miniplayer;
 	mlx_image_t		*canvas;
+	mlx_image_t	    *minimap;
 	mlx_texture_t	*no_texture;
 	mlx_texture_t	*so_texture;
 	mlx_texture_t	*we_texture;
@@ -154,7 +160,7 @@ int empty_line(char * file);
 //create_map
 int create_map(t_game * game, char **file_content);
 void create_rectagle(t_game *game);
-void copy_string( char *s1, char *s2);
+void copy_string( t_game *ame, char *s1, char *s2);
 int count_mapline(char **file_content);
 
 //flags
@@ -207,8 +213,8 @@ void 	free_grid(char **grid);
 void 	clean_all_exit(t_game *game, char *message);
 
 //mini_map
-int  minimap(t_game *game, t_minimap *mini);
 
+void create_minimap(t_game *game);
 
 
 

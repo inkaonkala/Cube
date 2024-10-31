@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   map_validation_check.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: iniska <iniska@student.hive.fi>            +#+  +:+       +#+        */
+/*   By: yhsu <yhsu@student.hive.fi>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/24 19:16:05 by yhsu              #+#    #+#             */
-/*   Updated: 2024/10/29 11:03:14 by iniska           ###   ########.fr       */
+/*   Updated: 2024/10/31 18:27:49 by yhsu             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,18 +72,20 @@ char **copy_grid(t_game *game, char **map)
 
 	i = 0;
 	j = 0;
+	
 	result = (char **)(malloc((count_mapline(map) + 1) * sizeof(char *)));
 	if (result == NULL)
 		return (NULL);
 	while(map[i])
 	{
-		result[j] = (char *) malloc (game->longest * sizeof(char));
+		result[j] = (char *) calloc ((game->longest + 1), sizeof(char));
 		if (result[j] == NULL)
 			return (NULL);
-		copy_string( result[j], map[i]);
+		copy_string( game, result[j], map[i]);
 		i++;
 		j++;
 	}
+	map[i] = NULL;
 	return (result);
 }
 
@@ -105,13 +107,14 @@ static int flood_fill(char **tmp, int i, int j)// open return 1
 	return (0);
 }
 
-static int if_map_closed(char **tmp)// open return 1
+static int if_map_closed(t_game *game, char **tmp)// open return 1
 {
 	int i;
 	int j;
 
 	i = 0;
-	while (tmp[i] != (void *)'\0')
+	//while (tmp[i] != (void *)'\0')
+	while (i < (int)game->height)
 	{
 		j = 0;
 		while(tmp[i][j] != '\0')
@@ -119,7 +122,7 @@ static int if_map_closed(char **tmp)// open return 1
 			if ((tmp[i][j] == 'S' || tmp[i][j] == 'E'
 				|| tmp[i][j] == 'W' || tmp[i][j] == 'N' || tmp[i][j] == '0') && flood_fill(tmp, i, j) == 1)
 			{
-				//if (flood_fill(tmp, i, j) == 1)
+				if (flood_fill(tmp, i, j) == 1)
 					return (1);
 			}
 			j++;
@@ -138,7 +141,7 @@ static int check_map_closed(t_game *game, char **map)
 
 	if (!tmp)
 		clean_all_exit(game, "The map copy failed.");
-	if (if_map_closed( tmp) == 1)
+	if (if_map_closed(game, tmp) == 1)
 	{
 		free_grid(tmp);
 		return (1);//the map is open

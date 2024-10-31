@@ -6,7 +6,7 @@
 /*   By: yhsu <yhsu@student.hive.fi>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/24 14:40:04 by yhsu              #+#    #+#             */
-/*   Updated: 2024/10/25 17:57:48 by yhsu             ###   ########.fr       */
+/*   Updated: 2024/10/31 18:25:58 by yhsu             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,14 +23,14 @@ int count_mapline(char **file_content)
 	return (i);
 }
 
-void copy_string( char *s1, char *s2)// s1 map, s2 file content
+void copy_string( t_game *game, char *s1, char *s2)// s1 map, s2 file content
 {
 	size_t i;
 
 	i = 0;
 	
-	//while(i < game->longest)
-	while (s2[i])
+	while(i < game->longest)
+	//while (s2[i])
 	{
 		if (s2[i])
 		{
@@ -87,10 +87,11 @@ int create_map(t_game * game, char **file_content)
 		&& file_content[i][0] != 'S' && file_content[i][0] != 'E' 
 		&& file_content[i][0] != 'C'&& file_content[i][0] != 'F')
 	{
-		game->map[j] = (char *) malloc (game->longest * sizeof(char));
+		//game->map[j] = (char *) malloc ((game->longest + 1) * sizeof(char));
+		game->map[j] = (char *) calloc ((game->longest + 1), sizeof(char));
 		if (game->map[j] == NULL)
 			return (1);
-		copy_string(game->map[j], file_content[i]);
+		copy_string(game, game->map[j], file_content[i]);
 		i++;
 		j++;
 	}
@@ -113,10 +114,15 @@ void create_rectagle(t_game *game)
 		{
 			// if (game->map[j][k] == ' ' || game->map[j][k] == '\t')
 			// 	game->map[j][k] = '1';
+
+			
 			if (game->map[j][k] != '1' && game->map[j][k] != '0'
 				&& game->map[j][k] != 'E' && game->map[j][k] != 'W'
 				&& game->map[j][k] != 'S' && game->map[j][k] != 'N')
 				game->map[j][k] = '1';
+
+			// if (game->map[j][k] == 'k')
+			// 	game->map[j][k] = '1';
 			k++;
 		}
 		game->map[j][k] = '\0';

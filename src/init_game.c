@@ -6,7 +6,7 @@
 /*   By: yhsu <yhsu@student.hive.fi>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/15 14:02:51 by yhsu              #+#    #+#             */
-/*   Updated: 2024/10/28 12:00:05 by yhsu             ###   ########.fr       */
+/*   Updated: 2024/10/31 17:47:40 by yhsu             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -148,19 +148,23 @@ void init_game(t_game *game, char *mapfile)
 	// }
 
 	map_validate(game);	
+
+	
 	//create ractagle map
 	create_rectagle(game);//create rectangle amd fill space with 1
 	//get position 
+	
+	
 	check_player_position(game, game->map);
 
-	// dprintf(2, "player position: x:%zu y: %zu\n", game->player_x, game->player_y);
+	dprintf(2, "player position: x:%zu y: %zu\n", game->player_x, game->player_y);
 	
-	// l = 0;
-	// while (game->map[l])
-	// {
-	// 	dprintf(2, "game->map[%d]: %s\n",l, game->map[l]);
-	// 	l++;
-	// }
+	int l = 0;
+	while (game->map[l])
+	{
+		dprintf(2, "game->map[%d]: %s\n",l, game->map[l]);
+		l++;
+	}
 
 
 	// dprintf(2, "game->ceiling_color: %s\n", game->ceiling_color);

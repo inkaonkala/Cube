@@ -6,7 +6,7 @@
 /*   By: yhsu <yhsu@student.hive.fi>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/15 12:54:09 by yhsu              #+#    #+#             */
-/*   Updated: 2024/10/28 12:31:25 by iniska           ###   ########.fr       */
+/*   Updated: 2024/10/31 17:14:43 by yhsu             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,15 +34,7 @@ int main (int argc, char *argv[])
 	init_game(game, argv[1]);
 
 
-	t_minimap *mini;
-	mini = ft_calloc(1, sizeof(t_minimap));
-	if(!mini)
-		err_message_exit("Malloc failed");
-	//mini->mlx = mlx_init(800, 600, "Mini map", false);
-    //if (!mini->mlx)
-    //    return (1);
-	//if (minimap(game, mini) == 1)
-		//err_message_exit("minimap failed");
+	
 	//initializing the MLX library
 	//Window Creation
 
@@ -57,7 +49,6 @@ int main (int argc, char *argv[])
 	screenpop(game); // opens a window 
 	free(game);
 	// 清理並結束
-    mlx_delete_image(mini->mlx, mini->background);
-    mlx_terminate(mini->mlx);
+   
 	return (0);
 }
