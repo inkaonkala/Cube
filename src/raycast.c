@@ -6,7 +6,7 @@
 /*   By: iniska <iniska@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/15 20:39:06 by iniska            #+#    #+#             */
-/*   Updated: 2024/10/31 13:18:28 by iniska           ###   ########.fr       */
+/*   Updated: 2024/11/04 10:56:24 by iniska           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -118,7 +118,6 @@ static float	get_wall_height(t_game *game, float angl)
 	game->rays->vertical_inter_y = y;
 	return (distance(game, x, y));
 }
-
 
 static float	update_rayangl(float angl)
 {
