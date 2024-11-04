@@ -6,7 +6,7 @@
 /*   By: iniska <iniska@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/16 10:04:39 by iniska            #+#    #+#             */
-/*   Updated: 2024/11/04 10:03:40 by iniska           ###   ########.fr       */
+/*   Updated: 2024/11/04 14:33:09 by iniska           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,8 @@ void	screenpop(t_game *game)
 	mlx_loop_hook(game->mlx, move_and_beam, game);
 	mlx_cursor_hook(game->mlx, mouse_move, game);
 	mlx_mouse_hook(game->mlx, mouse_press, game);
+
+	
 
 	mlx_loop(game->mlx);
 	mlx_terminate(game->mlx);
