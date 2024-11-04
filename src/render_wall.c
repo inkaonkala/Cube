@@ -6,7 +6,7 @@
 /*   By: iniska <iniska@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/18 12:06:33 by iniska            #+#    #+#             */
-/*   Updated: 2024/11/04 11:04:50 by iniska           ###   ########.fr       */
+/*   Updated: 2024/11/04 13:31:26 by iniska           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,6 @@ void	set_walls(t_game *game, int ray)
 	game->rays->i = ray;
 
 	draw_wall(game, bot_pixl, top_pixl, wall_hi);
-	
 	floor_n_ceiling(game, ray, bot_pixl, top_pixl);
 
 }
