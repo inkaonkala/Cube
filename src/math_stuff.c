@@ -6,7 +6,7 @@
 /*   By: iniska <iniska@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/17 10:24:06 by iniska            #+#    #+#             */
-/*   Updated: 2024/11/04 11:03:13 by iniska           ###   ########.fr       */
+/*   Updated: 2024/11/04 14:05:33 by iniska           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,14 @@ float	beam_angl(float angl)
 	if (angl > (2 * PI))
 		angl -= (2 * PI);
 	return (angl);
+}
+
+void	save_images_to_struct(t_game *game)
+{
+	game->no_texture = mlx_load_png(game->no_texture_path);
+	game->so_texture = mlx_load_png(game->so_texture_path);
+	game->we_texture = mlx_load_png(game->we_texture_path);
+	game->ea_texture = mlx_load_png(game->ea_texture_path);
 }
 
 // count the game->player_angl, game->rays->ray_angl, game->fow
@@ -48,6 +56,8 @@ void	count_values(t_game *game)
 
 	game->rays->p_x = (game->player_x * TILE) + TILE / 2;
 	game->rays->p_y = (game->player_y * TILE) + TILE / 2;
+
+	save_images_to_struct(game);
 }
 
 float	distance(t_game *game, float x, float y)
