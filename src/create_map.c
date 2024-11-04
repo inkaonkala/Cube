@@ -78,6 +78,7 @@ int create_map(t_game * game, char **file_content)
 	j = 0;
 	game->longest = check_longest(file_content);
 	game->height = count_mapline(file_content);
+	
 	game->map = (char **)malloc((game->height + 1) * sizeof(char *)); 
 	if (game->map == NULL)
 		return (1);

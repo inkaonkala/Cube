@@ -1,6 +1,11 @@
 
-
 #include "../include/cub3D.h"
+
+
+
+
+
+
 
 int	color(int r, int g, int b, int a)
 {
@@ -25,70 +30,34 @@ int	color(int r, int g, int b, int a)
 }
 
 
-
-// int is_wall(t_game *game, int x, int y)
-// {
-//     // 將小地圖的 (x, y) 坐標轉換為遊戲地圖的實際座標
-//     int map_x;
-//     int map_y;
-// 	map_x = game->rays->p_x - 0.5 - MINIMAP_COVERAGE / 2 + (x + (MINIMAP_SIDE / (2 * MINIMAP_COVERAGE)))
-// 		/ (MINIMAP_SIDE / MINIMAP_COVERAGE);
-// 	map_y = game->rays->p_y - 0.5 - MINIMAP_COVERAGE / 2 + (y + (MINIMAP_SIDE / (2 * MINIMAP_COVERAGE)))
-// 		/ (MINIMAP_SIDE / MINIMAP_COVERAGE);
-//     // 檢查是否超出地圖邊界
-//     if (map_x < 0 || map_x >= (int)game->longest ||
-//         map_y < 0 || map_y >= (int)game->height)
-//     {
-//         return 0; // 超出邊界，視為沒有牆壁
-//     }
-
-//     // 檢查地圖上的實際位置是否為牆
-//     return game->map[map_y][map_x] == '1' ? 1 : 0;
-// }
-
-// int is_wall(t_game *game, int x, int y)
-// {
-//     // 計算縮放比例
-//     float scale = (float)MINIMAP_COVERAGE / MINIMAP_SIDE;
-
-//     // 將小地圖上的 (x, y) 轉換為遊戲地圖的 (map_x, map_y)
-//     int map_x = x - MINIMAP_COVERAGE / 2 + x * scale;
-//     int map_y = y - MINIMAP_COVERAGE / 2 + y * scale;
-
-//     // 檢查是否超出地圖邊界
-//     if (map_x < 0 || map_x >= (int)game->longest || map_y < 0 || map_y >= (int)game->height)
-//     {
-//         return 0; // 超出邊界，視為沒有牆壁
-//     }
-
-// 	if(game->map[map_y][map_x] == '1')
-// 		return (1);
-	
-//     // 檢查地圖上的實際位置是否為牆
-//     return (0);
-// }
-
-
 int is_wall(t_game *game, int x, int y)
 {
-    //int x_minimap_to_loc;
-    //int y_minimap_to_loc;
+    float x_minimap_to_loc;
+    float y_minimap_to_loc;
+    //float scale = MINIMAP_SIDE / (float)MINIMAP_COVERAGE;
+    // 計算小地圖上的 (x, y) 坐標轉換為遊戲地圖的實際座標
+     x_minimap_to_loc = x - 0.5 - MINIMAP_COVERAGE / 2
+         + (x + (MINIMAP_SIDE / (2 * MINIMAP_COVERAGE))) / (MINIMAP_SIDE / MINIMAP_COVERAGE);
+     y_minimap_to_loc = y - 0.5 - MINIMAP_COVERAGE / 2
+         + (y + (MINIMAP_SIDE / (2 * MINIMAP_COVERAGE))) / (MINIMAP_SIDE / MINIMAP_COVERAGE);
 
-    // // 計算小地圖上的 (x, y) 坐標轉換為遊戲地圖的實際座標
-    // x_minimap_to_loc = x - 0.5 - MINIMAP_COVERAGE / 2
-    //     + (x + (MINIMAP_SIDE / (2 * MINIMAP_COVERAGE))) / (MINIMAP_SIDE / MINIMAP_COVERAGE);
-    // y_minimap_to_loc = y - 0.5 - MINIMAP_COVERAGE / 2
-    //     + (y + (MINIMAP_SIDE / (2 * MINIMAP_COVERAGE))) / (MINIMAP_SIDE / MINIMAP_COVERAGE);
+    // 小地圖的 (minimap_x, minimap_y) 轉換為遊戲地圖座標 (game_x, game_y)
+    //x_minimap_to_loc = (x - MINIMAP_PADDING) / scale + game->rays->p_x - MINIMAP_COVERAGE / 2;
+   // y_minimap_to_loc = (y - MINIMAP_PADDING) / scale + game->rays->p_y - MINIMAP_COVERAGE / 2;
 
-    // // 檢查是否超出地圖邊界
-    // if (x_minimap_to_loc < 0 || x_minimap_to_loc >= (int)game->longest ||
-    //     y_minimap_to_loc < 0 || y_minimap_to_loc >= (int)game->height)
-    // {
-    //     return (0); // 超出邊界，視為沒有牆壁
-    // }
+
+    //x_minimap_to_loc = x * MINIMAP_COVERAGE;
+    //y_minimap_to_loc = y * MINIMAP_COVERAGE;
+    dprintf(2, "x_minimap_to_loc: %f,y_minimap: %f\n",x_minimap_to_loc,y_minimap_to_loc);
+    // 檢查是否超出地圖邊界
+    if (x_minimap_to_loc < 0 || x_minimap_to_loc >= (int)game->longest ||
+        y_minimap_to_loc < 0 || y_minimap_to_loc >= (int)game->height)
+    {
+        return (0); // 超出邊界，視為沒有牆壁
+    }
 
     // 檢查是否為牆
-    if (game->map[x][y] == 1)
+    if (game->map[(int)x_minimap_to_loc][(int)y_minimap_to_loc] == '1')
     {
         return (1); // 該位置為牆壁
     }
@@ -98,8 +67,8 @@ int is_wall(t_game *game, int x, int y)
 
 void create_minimap(t_game *game)
 {
-	int minifloor_color;
-	int miniwall_color;
+	int minifloor_color;// 白色，半透明
+	int miniwall_color;// 黑色，不透明
 
 	int i;
 	int j;
@@ -107,10 +76,11 @@ void create_minimap(t_game *game)
     //int scaled_y;
 
 	i = 0;
-	minifloor_color = color(0, 0, 0, 255); // 黑色，不透明
-	miniwall_color = color(255, 255, 255, 150);// 白色，半透明
+	minifloor_color = color(255, 255, 255, 150);
+	miniwall_color = color(0, 0, 0, 255);
 	
 	game->minimap = mlx_new_image(game->mlx, MINIMAP_SIDE, MINIMAP_SIDE);
+    //game->minimap = mlx_new_image(game->mlx, game->longest/MINIMAP_COVERAGE, game->height/MINIMAP_COVERAGE);
 	if (!game->minimap) 
 	{
         mlx_terminate(game->mlx);
@@ -118,20 +88,25 @@ void create_minimap(t_game *game)
     }
 	
 	    // 遍歷地圖數據並繪製小地圖
-    for (i = 0; i < MINIMAP_SIDE; i++)
+    while (i < MINIMAP_SIDE)
+    //while (i < (int)game->height/MINIMAP_COVERAGE)
     {
-        for (j = 0; j < MINIMAP_SIDE; j++)
+        j = 0;
+        while (j < MINIMAP_SIDE)
+        //while(j < (int)game->longest/MINIMAP_COVERAGE)
         {
             //將小地圖像素坐標轉換為遊戲地圖的坐標
-            int map_x = (i * MINIMAP_COVERAGE / MINIMAP_SIDE) + game->rays->p_x - MINIMAP_COVERAGE / 2;
-            int map_y = (j * MINIMAP_COVERAGE / MINIMAP_SIDE) + game->rays->p_y - MINIMAP_COVERAGE / 2;
+            //int map_x = (i * MINIMAP_COVERAGE / MINIMAP_SIDE) + game->rays->p_x - MINIMAP_COVERAGE / 2;
+            //int map_y = (j * MINIMAP_COVERAGE / MINIMAP_SIDE) + game->rays->p_y - MINIMAP_COVERAGE / 2;
 
             // 檢查是否為牆壁
-            if (is_wall(game, map_x, map_y) == 1)
+            if (is_wall(game, i, j) == 1)
                 mlx_put_pixel(game->minimap, i, j, miniwall_color);
             else
                 mlx_put_pixel(game->minimap, i, j, minifloor_color);
+            j++;    
         }
+        i++;
     }
 	mlx_image_to_window(game->mlx, game->minimap, MINIMAP_PADDING, MINIMAP_PADDING);
 	game->minimap->instances[0].z = 1;// 設置z層，確保渲染順序

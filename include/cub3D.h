@@ -35,18 +35,29 @@
 # define PI 3.14159265
 
 //for mini map
+
+# define SAND       0xF7E9DB
 # define RED        0xBB4211
+# define RUSSIANRED 0xde300b
+# define BROWN      0x54310F
+# define CHOCO      0x351C04
 #define BACKGROUND_COLOR 0xFFE5E4E4
-# define MINIMAP_SIDE 200//小地圖的寬度和高度
-# define MINIMAP_COVERAGE 10
-# define MINIMAP_PADDING 28// 決定小地圖在視窗中的位置
+# define MINIMAP_SIDE 200//小地圖中每個方格的邊長
+# define MINIMAP_COVERAGE 10// 小地圖的比例或縮放比例
+# define MINIMAP_PADDING 0// 小地圖與視窗邊緣的間距為16像素
 
 
 
 // Forward declaration of t_game
 typedef struct s_game t_game;
 
-
+typedef struct s_shape
+{
+	int	x;
+	int	y;
+	int	width;
+	int	height;
+}	t_shape;
 
 
 
@@ -118,7 +129,7 @@ typedef struct s_game
 	uint32_t		ceiling_g;
 	uint32_t		ceiling_b;
 	
-	size_t 			longest;
+	size_t 			longest;//width
 	int 			last_item;
 	bool			mouse_on;
 	bool			horizon;
@@ -130,7 +141,7 @@ typedef struct s_game
 
 	t_flag 			*flags;
 	size_t 			height;
-	size_t 			width;
+	
 	size_t			player_x;
 	size_t			player_y;
 

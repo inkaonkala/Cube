@@ -21,7 +21,7 @@ static int	wall(t_game *game, float x, float y)
         return (1);
     map_x = floor(x / TILE);
     map_y = floor(y / TILE);
-	if (game->height <= map_y || game->width <= map_x)
+	if (game->height <= map_y || game->longest <= map_x)
 		return (1);
 	if (game->map[map_y] && map_x <= ft_strlen(game->map[map_y])) // check this
 	{

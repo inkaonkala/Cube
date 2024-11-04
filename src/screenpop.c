@@ -25,6 +25,7 @@ void	screenpop(t_game *game)
 	
 	
 	create_minimap(game);
+
 	mlx_loop_hook(game->mlx, move_and_beam, game);
 	mlx_cursor_hook(game->mlx, mouse_move, game);
 	mlx_mouse_hook(game->mlx, mouse_press, game);
