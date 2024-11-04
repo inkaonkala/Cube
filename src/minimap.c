@@ -57,10 +57,10 @@ int is_wall(t_game *game, int x, int y)
     }
 
     // 檢查是否為牆
-    if (game->map[(int)x_minimap_to_loc][(int)y_minimap_to_loc] == '1')
-    {
-        return (1); // 該位置為牆壁
-    }
+    // if (game->map[(int)x_minimap_to_loc][(int)y_minimap_to_loc] == '1')
+    // {
+    //     return (1); // 該位置為牆壁
+    // }
 
     return (0); // 該位置不是牆壁
 }

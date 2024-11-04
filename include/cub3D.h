@@ -6,7 +6,7 @@
 /*   By: yhsu <yhsu@student.hive.fi>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/15 12:55:19 by yhsu              #+#    #+#             */
-/*   Updated: 2024/10/31 20:50:08 by yhsu             ###   ########.fr       */
+/*   Updated: 2024/11/04 13:30:01 by yhsu             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,7 +107,7 @@ typedef struct s_flag
 
 
 
-
+//game->map[game->rays->p_x][game->rays->p_y]
 
 typedef struct s_game
 {
