@@ -6,7 +6,7 @@
 /*   By: iniska <iniska@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/17 09:41:09 by iniska            #+#    #+#             */
-/*   Updated: 2024/11/04 10:03:39 by iniska           ###   ########.fr       */
+/*   Updated: 2024/11/04 14:33:18 by iniska           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -116,4 +116,5 @@ void	move_and_beam(void	*data)
 	keys(game);
 	move_hook(game, 0, 0);
 	raycast(game);
+	// PUT MINIMAP HERE!!!
 }
