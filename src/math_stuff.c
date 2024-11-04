@@ -6,7 +6,7 @@
 /*   By: iniska <iniska@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/17 10:24:06 by iniska            #+#    #+#             */
-/*   Updated: 2024/10/31 09:32:14 by iniska           ###   ########.fr       */
+/*   Updated: 2024/11/04 11:03:13 by iniska           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,7 @@ void	count_values(t_game *game)
 	game->rotation = 0;
 	game->left_right = 0;
 	game->up_down = 0;
+	game->width = game->longest;
 
 	game->rays->p_x = (game->player_x * TILE) + TILE / 2;
 	game->rays->p_y = (game->player_y * TILE) + TILE / 2;
