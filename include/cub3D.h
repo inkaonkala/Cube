@@ -6,7 +6,7 @@
 /*   By: yhsu <yhsu@student.hive.fi>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/15 12:55:19 by yhsu              #+#    #+#             */
-/*   Updated: 2024/11/04 14:53:01 by yhsu             ###   ########.fr       */
+/*   Updated: 2024/11/04 14:58:14 by yhsu             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -142,7 +142,7 @@ typedef struct s_game
 
 	t_flag 			*flags;
 	size_t 			height;
-	
+	size_t			width;
 	size_t			player_x;
 	size_t			player_y;
 
