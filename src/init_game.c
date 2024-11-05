@@ -157,7 +157,7 @@ void init_game(t_game *game, char *mapfile)
 	
 	check_player_position(game, game->map);
 
-	dprintf(2, "player position: x:%zu y: %zu\n", game->player_x, game->player_y);
+	// dprintf(2, "player position: x:%zu y: %zu\n", game->player_x, game->player_y);
 	
 	int l = 0;
 	while (game->map[l])

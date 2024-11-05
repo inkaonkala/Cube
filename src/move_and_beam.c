@@ -116,6 +116,8 @@ void	move_and_beam(void	*data)
 	keys(game);
 	move_hook(game, 0, 0);
 	raycast(game);
-
-	//draw_mini_map(game);
+	//dprintf(2, "in move and beam\n");
+	dprintf(2, "in move and beam player position: x:%zu y: %zu\n", game->player_x, game->player_y);
+	dprintf(2, "in rays position: x:%d y: %d\n", game->rays->p_x, game->rays->p_y);
+	draw_mini_map(game);
 }

@@ -41,10 +41,11 @@
 # define RUSSIANRED 0xde300b
 # define BROWN      0x54310F
 # define CHOCO      0x351C04
-#define BACKGROUND_COLOR 0xFFE5E4E4
-# define MINIMAP_SIDE 200//小地圖中每個方格的邊長
-# define MINIMAP_COVERAGE 10// 小地圖的比例或縮放比例
-# define MINIMAP_PADDING 0// 小地圖與視窗邊緣的間距為16像素
+# define BACKGROUND_COLOR 0xFFE5E4E4
+# define MINIMAP_SIDE 176//小地圖中每個方格的邊長
+# define MINIMAP_TILE_COUNT 11
+# define MINIMAP_IMAGE_SIDE 16
+
 
 
 
@@ -128,7 +129,7 @@ typedef struct s_game
 	uint32_t		ceiling_r;
 	uint32_t		ceiling_g;
 	uint32_t		ceiling_b;
-	
+	size_t          width;
 	size_t 			longest;//width
 	int 			last_item;
 	bool			mouse_on;
@@ -150,6 +151,7 @@ typedef struct s_game
 	
 	mlx_t			*mlx;
 	mlx_image_t		*canvas;
+	mlx_image_t 	*mini_player;
 	mlx_image_t	    *minimap;
 	mlx_texture_t	*no_texture;
 	mlx_texture_t	*so_texture;
@@ -225,12 +227,12 @@ void 	clean_all_exit(t_game *game, char *message);
 
 //mini_map
 
-void create_minimap(t_game *game);
+//void create_minimap(t_game *game);
+void draw_mini_map(t_game *game);
 
 
-
-void	draw_wall(t_game *game, int ray, double bot_pixl, double top_pixl);
-
+//void	draw_wall(t_game *game, int ray, double bot_pixl, double top_pixl);
+void	draw_wall(t_game *game, double bot_pixl, double top_pixl, double wall_hi);
 
 void	keys(t_game *game);
 void	mouse_move(double x, double y, void *data);

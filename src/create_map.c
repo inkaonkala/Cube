@@ -88,10 +88,15 @@ int create_map(t_game * game, char **file_content)
 		&& file_content[i][0] != 'S' && file_content[i][0] != 'E' 
 		&& file_content[i][0] != 'C'&& file_content[i][0] != 'F')
 	{
-		//game->map[j] = (char *) malloc ((game->longest + 1) * sizeof(char));
-		game->map[j] = (char *) calloc ((game->longest + 1), sizeof(char));
+		game->map[j] = (char *) malloc ((game->longest + 1) * sizeof(char));
+		//game->map[j] = (char *) calloc ((game->longest + 1), sizeof(char));
 		if (game->map[j] == NULL)
+		{
+			dprintf(2, "Row %d is NULL\n", j);// for test
+
 			return (1);
+		}
+			
 		copy_string(game, game->map[j], file_content[i]);
 		i++;
 		j++;

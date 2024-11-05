@@ -24,12 +24,13 @@ void	screenpop(t_game *game)
 		err_message_exit("Canvas not working\n");
 	
 	
-	create_minimap(game);
-
+	//create_minimap(game);
+	//draw_mini_map(game);
 	mlx_loop_hook(game->mlx, move_and_beam, game);
 	mlx_cursor_hook(game->mlx, mouse_move, game);
 	mlx_mouse_hook(game->mlx, mouse_press, game);
-
+	
+	//draw_mini_map(game);
 	mlx_loop(game->mlx);
 	mlx_terminate(game->mlx);
 }
