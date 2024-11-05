@@ -6,7 +6,7 @@
 /*   By: iniska <iniska@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/15 12:55:19 by yhsu              #+#    #+#             */
-/*   Updated: 2024/11/04 11:04:22 by iniska           ###   ########.fr       */
+/*   Updated: 2024/11/05 12:18:36 by iniska           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,9 +34,32 @@
 # define FOW 60 // fieald of view
 # define PI 3.14159265
 
+# define ENEMYP "./textures/ghosty.png"
+
 
 // Forward declaration of t_game
 typedef struct s_game t_game;
+
+typedef struct s_enemy
+{
+	char			*ghost_pic;
+	mlx_texture_t	*ghost_sheet;
+	mlx_image_t 	*ghosty;
+	size_t			g_x;
+	size_t			g_y;
+	int				height;
+	int				len;
+	uint32_t		color;
+
+	int				row;
+	int				col;
+
+
+	double			x_offset;
+	double			y_offset;
+
+}	t_enemy;
+
 
 typedef struct s_rays
 {	
@@ -118,6 +141,7 @@ typedef struct s_game
 	mlx_texture_t	*ea_texture;
 	
 	t_rays 			*rays;
+	t_enemy			*enemy;
 	
 }	t_game;
 
@@ -190,5 +214,8 @@ void	draw_wall(t_game *game, double bot_pixl, double top_pixl, double wall_hi);
 void	keys(t_game *game);
 void	mouse_move(double x, double y, void *data);
 void 	mouse_press(mouse_key_t button, action_t action, modifier_key_t mods, void *data);
+
+// enemystuff
+void	ghostie(t_game *game);
 
 #endif
