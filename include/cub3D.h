@@ -42,8 +42,8 @@
 # define BROWN      0x54310F
 # define CHOCO      0x351C04
 # define BACKGROUND_COLOR 0xFFE5E4E4
-# define MINIMAP_SIDE 176//小地圖中每個方格的邊長
-# define MINIMAP_TILE_COUNT 11
+# define MINIMAP_SIDE 208//小地圖中每個方格的邊長
+# define MINIMAP_TILE_COUNT 13
 # define MINIMAP_IMAGE_SIDE 16
 
 

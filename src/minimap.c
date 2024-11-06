@@ -34,8 +34,9 @@ int find_minimap_color(t_game *game, int map_x, int map_y)
         return (get_rgba(10, 10, 10, 255));
 
     if (game->map[map_y][map_x] == '1')
-        return (get_rgba(137, 81, 41, 255)); // brown
-    else if (game->map[map_y][map_x] == '0')
+        return (get_rgba(40, 26, 13, 255));
+       // return (get_rgba(137, 81, 41, 255)); // brown
+    else //if (game->map[map_y][map_x] == '0')
         return (get_rgba(230, 224, 193, 255)); // beige
 
     return (get_rgba(10, 10, 10, 255));
