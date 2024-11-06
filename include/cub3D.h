@@ -6,7 +6,7 @@
 /*   By: yhsu <yhsu@student.hive.fi>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/15 12:55:19 by yhsu              #+#    #+#             */
-/*   Updated: 2024/11/04 14:58:14 by yhsu             ###   ########.fr       */
+/*   Updated: 2024/11/06 10:34:52 by yhsu             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -129,7 +129,6 @@ typedef struct s_game
 	uint32_t		ceiling_r;
 	uint32_t		ceiling_g;
 	uint32_t		ceiling_b;
-	size_t          width;
 	size_t 			longest;//width
 	int 			last_item;
 	bool			mouse_on;
