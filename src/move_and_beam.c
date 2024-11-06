@@ -6,7 +6,7 @@
 /*   By: iniska <iniska@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/17 09:41:09 by iniska            #+#    #+#             */
-/*   Updated: 2024/10/30 15:26:50 by iniska           ###   ########.fr       */
+/*   Updated: 2024/11/05 12:30:22 by iniska           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,25 +19,24 @@ static void	move_player(t_game *game, double move_x, double move_y)
 	double	new_y;
 	double	new_x;
 
-	new_x = game->player_x + move_x;
-	new_y = game->player_y + move_y;
+	new_x = game->rays->p_x + move_x;
+	new_y = game->rays->p_y + move_y;
 	map_x = new_x / TILE;
 	map_y = new_y / TILE;
 	if (game->map[map_y][map_x] != '1' 
-		&& game->map[map_y][game->player_x / TILE] != '1' 
-		&& game->map[game->player_y / TILE][map_x] != '1')
+		&& game->map[map_y][game->rays->p_x / TILE] != '1' 
+		&& game->map[game->rays->p_y / TILE][map_x] != '1')
 	{
-		game->player_x = new_x;
-		game->player_y = new_y;
-
-//		if (fmod(game->player_x, TILE) < 1.0)
+		game->rays->p_x = new_x;
+		game->rays->p_y = new_y;
+		if (game->rays->p_x % TILE == 0)
+			game->rays->p_x += 1;
+		if (game->rays->p_y % TILE == 0)
+			game->rays->p_y += 1;
+//		if (fmod(game->player_x, TILE) < 0.5)
 //			game->player_x += 0.1;
-//		if (fmod(game->player_y, TILE) < 1.0)
+//		if (fmod(game->player_y, TILE) < 0.5)
 //			game->player_y += 0.1;
-		if (game->player_x % TILE == 0)
-			game->player_x += 1;
-		if (game->player_y % TILE == 0)
-			game->player_y += 1;
 	}
 }
 
@@ -61,36 +60,44 @@ static void	move_hook(t_game *game, double move_x, double move_y)
 {
 	if (game->rotation == 1)
 		rotate(game, 1);
-	else if (game->rotation == -1)
+	if (game->rotation == -1)
 		rotate(game, 0);
 
 	if (game->left_right == -1) // D
 	{
 		move_x = -sin(game->player_angl) * SPEED;
 		move_y = cos(game->player_angl) * SPEED;
+		game->left_right = 0;
 	}
-	else if (game->left_right == 1) // A
+	if (game->left_right == 1) // A
 	{
 		move_x = sin(game->player_angl) * SPEED;
 		move_y = -cos(game->player_angl) * SPEED;
+		game->left_right = 0;
 	}
 	if (game->up_down == -1) // S
 	{
 		move_x = -cos(game->player_angl) * SPEED;
 		move_y = -sin(game->player_angl) * SPEED;
+		game->up_down = 0;
  	}
-	else if (game->up_down == 1) // W
+	if (game->up_down == 1) // W
 	{
 		move_x = cos(game->player_angl) * SPEED;
 		move_y = sin(game->player_angl) * SPEED;
+		game->up_down = 0;
 	}
+	
+	//THIS IS HERE TO MAKE IT SLOWER
 //	if (game->left_right != 0 && game->up_down != 0)
 //	{
 //		move_x *= 0.7071;
 //		move_y *= 0.7071;
 //	}
-	game->left_right = 0;
+	// END TEST
+
 	game->up_down = 0;
+	game->left_right = 0;
 	game->rotation = 0;
 	move_player(game, move_x, move_y);		
 }	
@@ -107,7 +114,10 @@ void	move_and_beam(void	*data)
 		printf("Bye bye!\n");
 	}
 	keys(game);
-//	raycast(game);
 	move_hook(game, 0, 0);
 	raycast(game);
+	// PUT MINIMAP HERE!!!
+
+	//if MAKE_BONUS
+	ghostie(game);
 }

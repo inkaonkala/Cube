@@ -6,7 +6,7 @@
 /*   By: iniska <iniska@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/17 10:24:06 by iniska            #+#    #+#             */
-/*   Updated: 2024/10/30 15:15:09 by iniska           ###   ########.fr       */
+/*   Updated: 2024/11/05 09:25:16 by iniska           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,14 @@ float	beam_angl(float angl)
 	if (angl > (2 * PI))
 		angl -= (2 * PI);
 	return (angl);
+}
+
+void	save_images_to_struct(t_game *game)
+{
+	game->no_texture = mlx_load_png(game->no_texture_path);
+	game->so_texture = mlx_load_png(game->so_texture_path);
+	game->we_texture = mlx_load_png(game->we_texture_path);
+	game->ea_texture = mlx_load_png(game->ea_texture_path);
 }
 
 // count the game->player_angl, game->rays->ray_angl, game->fow
@@ -44,15 +52,23 @@ void	count_values(t_game *game)
 	game->rotation = 0;
 	game->left_right = 0;
 	game->up_down = 0;
+	game->width = game->longest;
 
-	game->rays->int_x = (game->player_x * TILE) + TILE / 2;
-	game->rays->int_y = (game->player_y * TILE) + TILE / 2;
+	game->rays->p_x = (game->player_x * TILE) + TILE / 2;
+	game->rays->p_y = (game->player_y * TILE) + TILE / 2;
+
+	save_images_to_struct(game);
 }
 
 float	distance(t_game *game, float x, float y)
 {
 	float	distance;
+	float	new_x;
+	float	new_y;
 
-	distance = sqrt(pow(x - game->player_x, 2) + (pow(y - game->player_y, 2)));
+	new_x = x - game->rays->p_x;
+	new_y = y - game->rays->p_y;
+
+	distance = sqrt(pow(new_x, 2) + (pow(new_y, 2)));
 	return (distance);
 }

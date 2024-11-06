@@ -6,7 +6,7 @@
 /*   By: iniska <iniska@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/15 20:39:06 by iniska            #+#    #+#             */
-/*   Updated: 2024/10/30 15:23:02 by iniska           ###   ########.fr       */
+/*   Updated: 2024/11/04 10:56:24 by iniska           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ static int	wall(t_game *game, float x, float y)
     map_y = floor(y / TILE);
 	if (game->height <= map_y || game->width <= map_x)
 		return (1);
-	if (game->map[map_y] && map_x < ft_strlen(game->map[map_y])) // check this
+	if (game->map[map_y] && map_x <= ft_strlen(game->map[map_y])) // check this
 	{
 		if (game->map[map_y][map_x] == '1')
 			return (1);
@@ -44,7 +44,7 @@ static int		move_ray(float angl, float *inter, float *step, int is_vert)
 	}
 	else
 	{
-		if (!(angl >= PI / 2 && angl <= 3 * PI / 2))
+		if (!(angl > PI / 2 && angl < 3 * PI / 2))
 		{
 			*inter += TILE;
 			return (-1);
@@ -68,9 +68,9 @@ static float	get_horizon(t_game *game, float angl)
 	y_step = TILE;
 	x_step = TILE / tan(angl);
 
-	y = floor(game->rays->int_y / TILE) * TILE;
+	y = floor(game->rays->p_y / TILE) * TILE;
 	ray_move = move_ray(angl, &y, &y_step, 0);
-	x = game->rays->int_x + (y - game->rays->int_y) / tan(angl);
+	x = game->rays->p_x + (y - game->rays->p_y) / tan(angl);
 
 	if (angl > PI / 2 && angl < 3 * PI / 2)
 		x_step = -fabs(x_step);
@@ -102,9 +102,9 @@ static float	get_wall_height(t_game *game, float angl)
 	x_step = TILE;
 
 
-	x = floor(game->rays->int_x / TILE) * TILE;
+	x = floor(game->rays->p_x / TILE) * TILE;
 	ray_move = move_ray(angl, &x, &x_step, 1);
-	y = game->rays->int_y + (x - game->rays->int_x) * tan(angl);
+	y = game->rays->p_y + (x - game->rays->p_x) * tan(angl);
 	if (angl > 0 && angl < PI)
 		y_step = fabs(y_step);
 	else
@@ -118,7 +118,6 @@ static float	get_wall_height(t_game *game, float angl)
 	game->rays->vertical_inter_y = y;
 	return (distance(game, x, y));
 }
-
 
 static float	update_rayangl(float angl)
 {
@@ -142,6 +141,7 @@ void raycast(t_game *game)
 	int		ray;
 
 	ray = 0;
+	game->rays->ray_angl = game->player_angl - (game->fow / 2);
 	while (ray < WINDOW_WIDTH)
 	{
 		game->rays->ray_angl = update_rayangl(game->rays->ray_angl);
@@ -153,7 +153,7 @@ void raycast(t_game *game)
 		else
 		{
 			game->rays->distance = horizon_line;
-			game->rays->ray_angl = true;
+			game->rays->wall_flag = true;
 		}
 		set_walls(game, ray);
 		ray++;

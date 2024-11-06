@@ -6,7 +6,7 @@
 /*   By: iniska <iniska@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/15 12:55:19 by yhsu              #+#    #+#             */
-/*   Updated: 2024/10/29 12:57:29 by iniska           ###   ########.fr       */
+/*   Updated: 2024/11/05 21:19:01 by iniska           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 #define CUB3D_H
 
 # include "../libft/libft.h"
-# include"../libft/ft_printf.h"
+//# include"../libft/ft_printf.h"
 # include "../MLX42/include/MLX42/MLX42.h"
 
 
@@ -22,21 +22,47 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include <string.h>
+#include <fcntl.h>
 
 
 # define WINDOW_WIDTH 1700
 # define WINDOW_HEIGHT 1200
-# define TILE 30 // should it be 60 or 64?
+# define TILE 64 // should it be 60 or 64?
 
 # define ROTATIO_SPEED 0.045
-# define SPEED 4
+# define SPEED 3
 
 # define FOW 60 // fieald of view
-# define PI 3.14159
+# define PI 3.14159265
+
+# define ENEMYP "./textures/ghosty.png"
 
 
 // Forward declaration of t_game
 typedef struct s_game t_game;
+
+typedef struct s_enemy
+{
+	char			*ghost_pic;
+	mlx_texture_t	*ghost_sheet;
+	mlx_image_t 	*ghosty;
+	size_t			g_x;
+	size_t			g_y;
+	size_t			distance;
+	int				height;
+	int				len;
+	uint32_t		color;
+
+	int				row;
+	int				col;
+
+	double			x_offset;
+	double			y_offset;
+	double			angl;
+	double			angl_to_p;
+
+}	t_enemy;
+
 
 typedef struct s_rays
 {	
@@ -51,6 +77,9 @@ typedef struct s_rays
 	float	horizon_inter_y;
 	float	vertical_inter_x;
 	float	vertical_inter_y;
+
+	int		p_x;
+	int		p_y;
 	
 }	t_rays;
 
@@ -115,6 +144,7 @@ typedef struct s_game
 	mlx_texture_t	*ea_texture;
 	
 	t_rays 			*rays;
+	t_enemy			*enemy;
 	
 }	t_game;
 
@@ -181,11 +211,14 @@ void 	err_message(char * message);
 void 	free_grid(char **grid);
 void 	clean_all_exit(t_game *game, char *message);
 
-void	draw_wall(t_game *game, int ray, double bot_pixl, double top_pixl);
-
+//void	draw_wall(t_game *game, int ray, double bot_pixl, double top_pixl);
+void	draw_wall(t_game *game, double bot_pixl, double top_pixl, double wall_hi);
 
 void	keys(t_game *game);
 void	mouse_move(double x, double y, void *data);
 void 	mouse_press(mouse_key_t button, action_t action, modifier_key_t mods, void *data);
+
+// enemystuff
+void	ghostie(t_game *game);
 
 #endif

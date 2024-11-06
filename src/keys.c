@@ -6,7 +6,7 @@
 /*   By: iniska <iniska@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/28 10:54:19 by iniska            #+#    #+#             */
-/*   Updated: 2024/10/30 12:34:23 by iniska           ###   ########.fr       */
+/*   Updated: 2024/10/31 12:28:59 by iniska           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,18 +35,17 @@ void	mouse_move(double x, double y, void *data)
 
 	game = data;
 	if (!game->mouse_on)
-		return ;		
+		return ;
 	double center_x = WINDOW_WIDTH / 2.0;
     double sensitivity = ROTATIO_SPEED / 2; // Adjust for desired rotation speed
-	if(y > 1000)
-		printf("This is here just to compile\n");	
     game->player_angl += (x - center_x) * sensitivity;
     if (game->player_angl > 2 * PI)
 		game->player_angl -= 2 * PI;
     else if (game->player_angl < 0)
 		game->player_angl += 2 * PI;
-
 	mlx_set_mouse_pos(game->mlx, center_x, WINDOW_HEIGHT / 2.0);
+	if (y > 100000)
+		ft_printf("This is here just to compile\n");
 }
 
 void mouse_press(mouse_key_t button, action_t action, modifier_key_t mods, void *data)
@@ -60,6 +59,6 @@ void mouse_press(mouse_key_t button, action_t action, modifier_key_t mods, void 
 		else if (action == MLX_RELEASE)
 			game->mouse_on = false;
     }
-	if (mods > 1000)
-		printf("This is here only for compiling\n");
+	if (mods > 1000000)
+		ft_printf("This is here for compile\n");
 }
