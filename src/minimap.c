@@ -1,22 +1,75 @@
 
 #include "../include/cub3D.h"
 
-void draw_player(t_game *game)
+int find_direction(t_game *game)
 {
-    long height;
+     dprintf(2, "direction: %f\n", game->rays->ray_angl);
+     dprintf(2, "player angled: %f\n", game->player_angl);
+    if (game->rays->ray_angl >337.15 || game->player_angl <= 22.5)
+        return (0);
+    else if (game->rays->ray_angl > 22.5 || game->player_angl <= 67.5)
+        return (1);
+    else if (game->rays->ray_angl > 67.5 || game->player_angl <= 112.5)
+        return (2);
+    else if (game->rays->ray_angl > 112.5 || game->player_angl <= 157.5)
+        return (3);
+    else if (game->rays->ray_angl > 157.5 || game->player_angl <= 202.5)
+        return (4);
+    else if (game->rays->ray_angl > 202.5 || game->player_angl <= 247.5)
+        return (5);
+    else if (game->rays->ray_angl > 247.5 || game->player_angl <= 292.5)
+        return (6);
+    else if (game->rays->ray_angl > 292.5 || game->player_angl <= 337.5)
+        return (7);
+    else 
+        return (-1);
+}
+
+void find_texture( t_game * game, float direction)
+{
     mlx_texture_t	*player_text;
-    player_text = mlx_load_png("./textures/minimap_player_0.png");
-    game->mini_player =mlx_texture_to_image(game->mlx, player_text);
-    height = MINIMAP_SIDE / 2;
-    mlx_image_to_window(game->mlx, game->mini_player, (MINIMAP_SIDE / 2) - 8, height - 8);
    
-	if (!game->mini_player)
+    if (direction == 0)
+       player_text = mlx_load_png("./textures/minimap_player_0.png");
+    if (direction == 1)
+       player_text =  mlx_load_png("./textures/minimap_player_1.png");
+    if (direction == 2)
+        player_text = mlx_load_png("./textures/minimap_player_2.png");
+    if (direction == 3)
+       player_text =  mlx_load_png("./textures/minimap_player_3.png");
+    if (direction == 4)
+       player_text = mlx_load_png("./textures/minimap_player_4.png");
+    if (direction == 5)
+        player_text = mlx_load_png("./textures/minimap_player_5.png");
+    if (direction == 6)
+        player_text = mlx_load_png("./textures/minimap_player_6.png");
+    if (direction == 7)
+        player_text = mlx_load_png("./textures/minimap_player_7.png");
+
+    game->mini_player = mlx_texture_to_image(game->mlx, player_text);
+    if (!game->mini_player)
     {
         mlx_strerror(mlx_errno);
 		clean_all_exit(game, "mlx_errno");
     }
+    mlx_delete_texture(player_text);
+}
+
+void draw_player(t_game *game)
+{
+    long height;
+    float direction;
+    
+
+    direction = find_direction(game);
+    find_texture( game, direction);
+    
+    height = MINIMAP_SIDE / 2;
+    mlx_image_to_window(game->mlx, game->mini_player, (MINIMAP_SIDE / 2) - 8, height - 8);
+   
+	
     game->mini_player->instances[0].z = 1;// 設置z層，確保渲染順序
-     mlx_delete_texture(player_text);
+    
 }
 
 int	get_rgba(int r, int g, int b, int a)
