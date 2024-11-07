@@ -6,7 +6,7 @@
 /*   By: yhsu <yhsu@student.hive.fi>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/15 14:02:51 by yhsu              #+#    #+#             */
-/*   Updated: 2024/10/28 12:00:05 by yhsu             ###   ########.fr       */
+/*   Updated: 2024/11/04 13:34:10 by yhsu             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -124,6 +124,11 @@ static void parse_file(t_game *game, char *mapfile)
 
 void init_game(t_game *game, char *mapfile)
 {
+	//init_minimap(game);
+	//render_minimap(game);
+	//mlx_key_hook(game->mlx, move_hook, game);
+	//mlx_loop(game->mlx);
+	dprintf(2, "in init_game 0\n");
 	//parse file : create sd array map,  parse element
 	parse_file(game, mapfile);
 	
@@ -143,19 +148,23 @@ void init_game(t_game *game, char *mapfile)
 	// }
 
 	map_validate(game);	
+
+	
 	//create ractagle map
 	create_rectagle(game);//create rectangle amd fill space with 1
 	//get position 
+	
+	
 	check_player_position(game, game->map);
 
 	// dprintf(2, "player position: x:%zu y: %zu\n", game->player_x, game->player_y);
 	
-	// l = 0;
-	// while (game->map[l])
-	// {
-	// 	dprintf(2, "game->map[%d]: %s\n",l, game->map[l]);
-	// 	l++;
-	// }
+	int l = 0;
+	while (game->map[l])
+	{
+		dprintf(2, "game->map[%d]: %s\n",l, game->map[l]);
+		l++;
+	}
 
 
 	// dprintf(2, "game->ceiling_color: %s\n", game->ceiling_color);
@@ -167,6 +176,8 @@ void init_game(t_game *game, char *mapfile)
 	// dprintf(2, "game->ceiling_r: %d\n", game->ceiling_r);
 	// dprintf(2, "game->ceiling_g: %d\n", game->ceiling_g);
 	// dprintf(2, "game->ceiling_b: %d\n", game->ceiling_b);
+
+	
 
 }
 

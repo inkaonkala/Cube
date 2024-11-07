@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3D.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: iniska <iniska@student.hive.fi>            +#+  +:+       +#+        */
+/*   By: yhsu <yhsu@student.hive.fi>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/15 12:55:19 by yhsu              #+#    #+#             */
-/*   Updated: 2024/11/07 11:38:16 by iniska           ###   ########.fr       */
+/*   Updated: 2024/11/06 10:34:52 by yhsu             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,8 +24,8 @@
 #include <string.h>
 
 
-# define WINDOW_WIDTH 1700
-# define WINDOW_HEIGHT 1200
+# define WINDOW_WIDTH 1000
+# define WINDOW_HEIGHT 1000
 # define TILE 64 // should it be 60 or 64?
 
 # define ROTATIO_SPEED 0.045
@@ -34,11 +34,42 @@
 # define FOW 60 // fieald of view
 # define PI 3.14159265
 
-# define ENEMYP "./textures/ghosty.png"
+//for mini map
 
+# define SAND       0xF7E9DB
+# define RED        0xBB4211
+# define RUSSIANRED 0xde300b
+# define BROWN      0x54310F
+# define CHOCO      0x351C04
+# define BACKGROUND_COLOR 0xFFE5E4E4
+# define MINIMAP_SIDE 208//小地圖中每個方格的邊長
+# define MINIMAP_TILE_COUNT 13
+# define MINIMAP_IMAGE_SIDE 16
+
+# define ENEMYP "./textures/ghosty.png"
 
 // Forward declaration of t_game
 typedef struct s_game t_game;
+
+
+typedef struct s_shape
+{
+	int	x;
+	int	y;
+	int	width;
+	int	height;
+}	t_shape;
+
+typedef struct s_minimap
+{
+	mlx_image_t* background;
+	t_game *game;
+	mlx_t	*mlx;
+	mlx_image_t* image;
+	size_t			px;
+	size_t			py;
+
+}	t_minimap;
 
 typedef struct s_enemy
 {
@@ -63,7 +94,6 @@ typedef struct s_enemy
 
 
 }	t_enemy;
-
 
 typedef struct s_rays
 {	
@@ -98,6 +128,10 @@ typedef struct s_flag
 
 }	t_flag;
 
+
+
+//game->map[game->rays->p_x][game->rays->p_y]
+
 typedef struct s_game
 {
 	char			**file_content;
@@ -117,8 +151,7 @@ typedef struct s_game
 	uint32_t		ceiling_r;
 	uint32_t		ceiling_g;
 	uint32_t		ceiling_b;
-	
-	size_t 			longest;
+	size_t 			longest;//width
 	int 			last_item;
 	bool			mouse_on;
 	bool			horizon;
@@ -130,7 +163,7 @@ typedef struct s_game
 
 	t_flag 			*flags;
 	size_t 			height;
-	size_t 			width;
+	size_t			width;
 	size_t			player_x;
 	size_t			player_y;
 
@@ -139,6 +172,8 @@ typedef struct s_game
 	
 	mlx_t			*mlx;
 	mlx_image_t		*canvas;
+	mlx_image_t 	*mini_player;
+	mlx_image_t	    *minimap;
 	mlx_texture_t	*no_texture;
 	mlx_texture_t	*so_texture;
 	mlx_texture_t	*we_texture;
@@ -160,7 +195,7 @@ int empty_line(char * file);
 //create_map
 int create_map(t_game * game, char **file_content);
 void create_rectagle(t_game *game);
-void copy_string( char *s1, char *s2);
+void copy_string( t_game *ame, char *s1, char *s2);
 int count_mapline(char **file_content);
 
 //flags
@@ -212,6 +247,12 @@ void 	err_message_exit(char * message);
 void 	err_message(char * message);
 void 	free_grid(char **grid);
 void 	clean_all_exit(t_game *game, char *message);
+
+//mini_map
+
+//void create_minimap(t_game *game);
+void draw_mini_map(t_game *game);
+
 
 //void	draw_wall(t_game *game, int ray, double bot_pixl, double top_pixl);
 void	draw_wall(t_game *game, double bot_pixl, double top_pixl, double wall_hi);
