@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   math_stuff.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yhsu <yhsu@student.hive.fi>                +#+  +:+       +#+        */
+/*   By: iniska <iniska@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/17 10:24:06 by iniska            #+#    #+#             */
-/*   Updated: 2024/11/04 14:58:27 by yhsu             ###   ########.fr       */
+/*   Updated: 2024/11/07 13:21:38 by iniska           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ void	count_values(t_game *game)
 		game->player_angl = PI;
 	else
 		printf("Player not found\n");
-	
+
 	game->fow = (FOW * PI / 180);
 	game->mouse_on = false;
 	game->rotation = 0;
