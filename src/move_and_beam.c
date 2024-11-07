@@ -6,7 +6,7 @@
 /*   By: yhsu <yhsu@student.hive.fi>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/17 09:41:09 by iniska            #+#    #+#             */
-/*   Updated: 2024/11/06 10:40:23 by yhsu             ###   ########.fr       */
+/*   Updated: 2024/11/07 12:40:35 by yhsu             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -117,7 +117,7 @@ void	move_and_beam(void	*data)
 	move_hook(game, 0, 0);
 	raycast(game);
 	//dprintf(2, "in move and beam\n");
-	dprintf(2, "in move and beam player position: x:%zu y: %zu\n", game->player_x, game->player_y);
-	dprintf(2, "in rays position: x:%d y: %d\n", game->rays->p_x, game->rays->p_y);
+	//	and beam player position: x:%zu y: %zu\n", game->player_x, game->player_y);
+	//dprintf(2, "in rays position: x:%d y: %d\n", game->rays->p_x, game->rays->p_y);
 	draw_mini_map(game);
 }
