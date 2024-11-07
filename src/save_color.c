@@ -1,7 +1,49 @@
-
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   save_color.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: iniska <iniska@student.hive.fi>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/11/07 11:17:58 by iniska            #+#    #+#             */
+/*   Updated: 2024/11/07 11:53:39 by iniska           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #include "../include/cub3D.h"
 
+static uint32_t invert_rgb(uint32_t color)
+{
+	uint8_t r;
+	uint8_t g;
+	uint8_t b;
+	uint8_t a;
+
+	r = 255 - ((color >> 24) & 0XFF);
+	g = 255 - ((color >> 16) & 0XFF);
+	b = 255 - ((color >> 8) & 0XFF);
+	a = color & 0XFF;
+
+	return ((r << 24) | (g << 16) | (b << 8) | a);
+}
+
+// All the colours seem to be upside down so they eed to be flipped by bytes
+void	colour_flip(uint32_t *pixels, int width, int height)
+{
+	int			total_pixels;
+	int			i;
+	uint32_t	*pixl;
+
+	i = 0;
+	total_pixels = width * height;
+	while (i < total_pixels)
+	{
+			pixl = (uint32_t *)pixels;
+			pixl[i] = invert_rgb(pixels[i]);
+			i++;
+	}
+
+}
 
 static int set_t_path(char **map_t_path, char * t_path)
 {

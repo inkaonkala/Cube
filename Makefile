@@ -65,7 +65,8 @@ re: fclean all
 .PHONY: all clean fclean re makelibft makemlx
 
 
-################################### for mac
+############ for mac
+
 
 # NAME = cub3D
 

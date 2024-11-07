@@ -1,7 +1,7 @@
-NO   textures/wall.png
-SO textures/wall.png
-WE textures/wall.png
-EA textures/wall.png
+NO   textures/shroom.png
+SO textures/koivu2.png
+WE textures/manty.png
+EA textures/koivu.png
 F 2,20,20
 C 200,200,180
 

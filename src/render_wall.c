@@ -6,7 +6,7 @@
 /*   By: iniska <iniska@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/18 12:06:33 by iniska            #+#    #+#             */
-/*   Updated: 2024/11/04 11:04:50 by iniska           ###   ########.fr       */
+/*   Updated: 2024/11/07 09:11:38 by iniska           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 
 static void	floor_n_ceiling(t_game *game, int ray, double bot_pxl, double top_pxl)
 {
+	// GET THE TIGHT COlOUrS!!!
 	double	i;
 
 	i = bot_pxl;
@@ -52,7 +53,6 @@ void	set_walls(t_game *game, int ray)
 	game->rays->i = ray;
 
 	draw_wall(game, bot_pixl, top_pixl, wall_hi);
-	
 	floor_n_ceiling(game, ray, bot_pixl, top_pixl);
 
 }

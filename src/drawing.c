@@ -6,7 +6,7 @@
 /*   By: iniska <iniska@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/18 13:16:18 by iniska            #+#    #+#             */
-/*   Updated: 2024/11/04 11:05:28 by iniska           ###   ########.fr       */
+/*   Updated: 2024/11/07 09:10:28 by iniska           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,7 +99,6 @@ static mlx_texture_t	*get_pics_for_wall(t_game *game)
 	return (tex);
 }
 
-//void	draw_wall(t_game *game, int ray, double bot_pixl, double top_pixl)
 void	draw_wall(t_game *game, double bot_pixl, double top_pixl, double wall_hi)
 {
 

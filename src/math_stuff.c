@@ -21,6 +21,18 @@ float	beam_angl(float angl)
 	return (angl);
 }
 
+void	save_images_to_struct(t_game *game)
+{
+	game->no_texture = mlx_load_png(game->no_texture_path);
+	colour_flip((uint32_t *)game->no_texture->pixels, game->no_texture->width, game->no_texture->height);
+	game->so_texture = mlx_load_png(game->so_texture_path);
+	colour_flip((uint32_t *)game->so_texture->pixels, game->so_texture->width, game->so_texture->height);
+	game->we_texture = mlx_load_png(game->we_texture_path);
+	colour_flip((uint32_t *)game->we_texture->pixels, game->we_texture->width, game->we_texture->height);
+	game->ea_texture = mlx_load_png(game->ea_texture_path);
+	colour_flip((uint32_t *)game->ea_texture->pixels, game->ea_texture->width, game->ea_texture->height);
+}
+
 // count the game->player_angl, game->rays->ray_angl, game->fow
 void	count_values(t_game *game)
 {
@@ -48,6 +60,8 @@ void	count_values(t_game *game)
 
 	game->rays->p_x = (game->player_x * TILE) + TILE / 2;
 	game->rays->p_y = (game->player_y * TILE) + TILE / 2;
+
+	save_images_to_struct(game);
 }
 
 float	distance(t_game *game, float x, float y)

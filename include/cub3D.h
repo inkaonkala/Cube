@@ -46,11 +46,11 @@
 # define MINIMAP_TILE_COUNT 13
 # define MINIMAP_IMAGE_SIDE 16
 
-
-
+# define ENEMYP "./textures/ghosty.png"
 
 // Forward declaration of t_game
 typedef struct s_game t_game;
+
 
 typedef struct s_shape
 {
@@ -59,8 +59,6 @@ typedef struct s_shape
 	int	width;
 	int	height;
 }	t_shape;
-
-
 
 typedef struct s_minimap
 {
@@ -72,6 +70,30 @@ typedef struct s_minimap
 	size_t			py;
 
 }	t_minimap;
+
+typedef struct s_enemy
+{
+	char			*ghost_pic;
+	mlx_texture_t	*ghost_sheet;
+	mlx_image_t 	*ghosty;
+	size_t			g_x;
+	size_t			g_y;
+	int				height;
+	int				len;
+	uint32_t		color;
+
+	int				row;
+	int				col;
+
+	double			x_offset;
+	double			y_offset;
+	
+	float			angl;
+	float			distance;
+	float			angl_to_p;
+
+
+}	t_enemy;
 
 typedef struct s_rays
 {	
@@ -158,6 +180,7 @@ typedef struct s_game
 	mlx_texture_t	*ea_texture;
 	
 	t_rays 			*rays;
+	t_enemy			*enemy;
 	
 }	t_game;
 
@@ -188,7 +211,8 @@ int check_file_extesion(char *filename);
 int check_texture_extension(t_game *game);
 void check_player_position(t_game *game, char ** map);
 
-//save color 
+//save color
+void	colour_flip(uint32_t *pixels, int width, int height);
 int save_colors(t_game *game, char **file_content);
 
 //set color
@@ -236,5 +260,8 @@ void	draw_wall(t_game *game, double bot_pixl, double top_pixl, double wall_hi);
 void	keys(t_game *game);
 void	mouse_move(double x, double y, void *data);
 void 	mouse_press(mouse_key_t button, action_t action, modifier_key_t mods, void *data);
+
+// enemystuff
+void	ghostie(t_game *game);
 
 #endif
