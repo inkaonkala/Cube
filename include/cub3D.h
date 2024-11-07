@@ -6,7 +6,7 @@
 /*   By: iniska <iniska@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/15 12:55:19 by yhsu              #+#    #+#             */
-/*   Updated: 2024/11/05 12:18:36 by iniska           ###   ########.fr       */
+/*   Updated: 2024/11/07 11:38:16 by iniska           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,9 +54,13 @@ typedef struct s_enemy
 	int				row;
 	int				col;
 
-
 	double			x_offset;
 	double			y_offset;
+	
+	float			angl;
+	float			distance;
+	float			angl_to_p;
+
 
 }	t_enemy;
 
@@ -172,7 +176,8 @@ int check_file_extesion(char *filename);
 int check_texture_extension(t_game *game);
 void check_player_position(t_game *game, char ** map);
 
-//save color 
+//save color
+void	colour_flip(uint32_t *pixels, int width, int height);
 int save_colors(t_game *game, char **file_content);
 
 //set color
