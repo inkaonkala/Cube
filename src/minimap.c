@@ -5,8 +5,12 @@ int find_direction(t_game *game)
 {
     if(game->s == 'N')
         return (0);
-    else
-        return (4);
+    else if (game->s == 'S')
+		return (4);
+	else if (game->s == 'E')
+		return (2);
+	else if (game->s == 'W')
+		return (6);
     /*
      dprintf(2, "direction: %f\n", game->rays->ray_angl);
      dprintf(2, "player angled: %f\n", game->player_angl);
@@ -29,6 +33,7 @@ int find_direction(t_game *game)
     else 
         return (-1);
         */
+	return (-1);
 }
 
 void find_texture( t_game * game, float direction)
@@ -37,20 +42,20 @@ void find_texture( t_game * game, float direction)
    
     if (direction == 0)
        player_text = mlx_load_png("./textures/minimap_player_0.png");
-    if (direction == 1)
-       player_text =  mlx_load_png("./textures/minimap_player_1.png");
+    // if (direction == 1)
+    //    player_text =  mlx_load_png("./textures/minimap_player_1.png");
     if (direction == 2)
         player_text = mlx_load_png("./textures/minimap_player_2.png");
-    if (direction == 3)
-       player_text =  mlx_load_png("./textures/minimap_player_3.png");
+    // if (direction == 3)
+    //    player_text =  mlx_load_png("./textures/minimap_player_3.png");
     if (direction == 4)
        player_text = mlx_load_png("./textures/minimap_player_4.png");
-    if (direction == 5)
-        player_text = mlx_load_png("./textures/minimap_player_5.png");
+    // if (direction == 5)
+    //     player_text = mlx_load_png("./textures/minimap_player_5.png");
     if (direction == 6)
         player_text = mlx_load_png("./textures/minimap_player_6.png");
-    if (direction == 7)
-        player_text = mlx_load_png("./textures/minimap_player_7.png");
+    // if (direction == 7)
+    //     player_text = mlx_load_png("./textures/minimap_player_7.png");
 
     game->mini_player = mlx_texture_to_image(game->mlx, player_text);
     if (!game->mini_player)
@@ -118,6 +123,25 @@ int get_minimap_color(t_game *game, int count_x, int count_y)
     return (find_minimap_color(game, map_x, map_y));
 }
 
+void loop_map(t_game *game, long mini_x, long mini_y, int color)
+{
+	int px = 0;
+	int py = 0;
+
+	px = 0;
+	py = 0;
+	while ( px < MINIMAP_IMAGE_SIDE) 
+	{
+		while (py < MINIMAP_IMAGE_SIDE) 
+		{
+			mlx_put_pixel(game->canvas, mini_x + px, mini_y + py, color);
+			py++;
+		}
+		px++;
+	}
+}
+
+
 void draw_mini_map(t_game *game)
 {
 
@@ -138,15 +162,16 @@ void draw_mini_map(t_game *game)
         {
             mini_x = MINIMAP_IMAGE_SIDE * count_x;
             mini_y = MINIMAP_IMAGE_SIDE * minimap_line_count;
-            color = get_minimap_color(game, count_x, count_y);
+            
+			color = get_minimap_color(game, count_x, count_y);
 
-            for (int px = 0; px < MINIMAP_IMAGE_SIDE; px++) 
-            {
-                for (int py = 0; py < MINIMAP_IMAGE_SIDE; py++) 
-                {
-                    mlx_put_pixel(game->canvas, mini_x + px, mini_y + py, color);
-                }
-            }
+            // for (int px = 0; px < MINIMAP_IMAGE_SIDE; px++) 
+            // {
+            //     for (int py = 0; py < MINIMAP_IMAGE_SIDE; py++) 
+            //     {
+            //         mlx_put_pixel(game->canvas, mini_x + px, mini_y + py, color);
+            //     }
+            // }
             count_x++;
         }
         count_y++;

@@ -28,12 +28,12 @@ int check_file_extesion(char *filename)
 	len = ft_strlen(filename);
 	if (len <= 4 || ft_strncmp(filename + (len - 4), ".cub", 4) != 0)
 	{
-		dprintf(2, "len\n");
+		//dprintf(2, "len\n");
 		return (0); 
 	}
 	if (filename[len - 1] == '/')//file name with /
 	{
-		dprintf(2, "len2\n");
+		//dprintf(2, "len2\n");
 		return (0); 
 	}
 	return (1); //filename with .cub

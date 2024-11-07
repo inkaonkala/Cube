@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3D.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: iniska <iniska@student.hive.fi>            +#+  +:+       +#+        */
+/*   By: yhsu <yhsu@student.hive.fi>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/15 12:55:19 by yhsu              #+#    #+#             */
-/*   Updated: 2024/11/07 13:16:44 by iniska           ###   ########.fr       */
+/*   Updated: 2024/11/07 17:20:59 by yhsu             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -188,7 +188,8 @@ typedef struct s_game
 }	t_game;
 
 //get_2d_array
-char **get_2d_array( char *mapfile);
+//char **get_2d_array( char *mapfile);
+char **get_2d_array( t_game *game, char *mapfile);
 char *readfile(char *mapfile);
 
 //check_elements
@@ -198,7 +199,8 @@ int empty_line(char * file);
 //create_map
 int create_map(t_game * game, char **file_content);
 void create_rectagle(t_game *game);
-void copy_string( t_game *ame, char *s1, char *s2);
+//void copy_string( t_game *ame, char *s1, char *s2);
+void copy_string( char *s1, char *s2);
 int count_mapline(char **file_content);
 
 //flags
@@ -267,4 +269,7 @@ void 	mouse_press(mouse_key_t button, action_t action, modifier_key_t mods, void
 // enemystuff
 void	ghostie(t_game *game);
 
+
+
+char	**ft_3d_split(t_game *game, char const *s, char c);
 #endif

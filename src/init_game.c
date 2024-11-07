@@ -6,7 +6,7 @@
 /*   By: yhsu <yhsu@student.hive.fi>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/15 14:02:51 by yhsu              #+#    #+#             */
-/*   Updated: 2024/11/04 13:34:10 by yhsu             ###   ########.fr       */
+/*   Updated: 2024/11/07 17:15:02 by yhsu             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,14 +63,15 @@ static int check_empty_line(t_game *game, char *mapfile)
 }
 
 
-//int parse_element(t_game *game, char *mapfile, t_flag *flags)
+
 static int parse_element(t_game *game, t_flag *flags, char *mapfile)
+//static int parse_element(t_game *game, char *mapfile)
 {
 	//check walls f  info 確認牆天地資訊有沒有齊
 	if (check_elements_info(game, game->file_content, flags) == 1)
 	{    
 		free(game->flags);
-		clean_all_exit(game, "invalid elements");
+		clean_all_exit(game, "invalid Elementssss");
 	} // return 1 means wrong
 	free(game->flags);	
 	
@@ -103,8 +104,8 @@ static void parse_file(t_game *game, char *mapfile)
 	if (game->flags == NULL)
 		clean_all_exit(game, "malloc failed");
 	
-	game->file_content = get_2d_array(mapfile);
-	//game->file_content_newline = twod_array(mapfile); 
+	game->file_content = get_2d_array(game, mapfile);
+	
 	if (game->file_content == NULL)
 	{
 		free(game->flags);
@@ -113,9 +114,13 @@ static void parse_file(t_game *game, char *mapfile)
 		
 	if (game->file_content[0] == NULL)
 		clean_all_exit(game, "The file is empty!");
-	//parse_element(game, mapfile, game->flags);
-	parse_element(game, game->flags, mapfile);
+	
+	
+	
 
+	
+	//parse_element(game, mapfile);
+	parse_element(game, game->flags, mapfile);		
 
 	//free_grid(game->file_content);
 	//game->file_content = NULL;
@@ -140,12 +145,12 @@ void init_game(t_game *game, char *mapfile)
 	
 	//check map
 	
-	// int l = 0;
-	// while (game->map[l])
-	// {
-	// 	dprintf(2, "game->map[%d]: %s\n",l, game->map[l]);
-	// 	l++;
-	// }
+	int l = 0;
+	while (game->map[l])
+	{
+		dprintf(2, "game->map[%d]: %s\n",l, game->map[l]);
+		l++;
+	}
 
 	map_validate(game);	
 
@@ -159,7 +164,7 @@ void init_game(t_game *game, char *mapfile)
 
 	// dprintf(2, "player position: x:%zu y: %zu\n", game->player_x, game->player_y);
 	
-	int l = 0;
+	 l = 0;
 	while (game->map[l])
 	{
 		dprintf(2, "game->map[%d]: %s\n",l, game->map[l]);

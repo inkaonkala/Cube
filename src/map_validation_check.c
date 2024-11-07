@@ -6,7 +6,7 @@
 /*   By: yhsu <yhsu@student.hive.fi>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/24 19:16:05 by yhsu              #+#    #+#             */
-/*   Updated: 2024/10/31 18:27:49 by yhsu             ###   ########.fr       */
+/*   Updated: 2024/11/07 17:21:59 by yhsu             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,7 +81,7 @@ char **copy_grid(t_game *game, char **map)
 		result[j] = (char *) calloc ((game->longest + 1), sizeof(char));
 		if (result[j] == NULL)
 			return (NULL);
-		copy_string( game, result[j], map[i]);
+		copy_string(result[j], map[i]);
 		i++;
 		j++;
 	}
