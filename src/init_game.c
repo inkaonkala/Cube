@@ -138,19 +138,19 @@ void init_game(t_game *game, char *mapfile)
 	parse_file(game, mapfile);
 	
 
-	// dprintf(2, "game->no_texture_path: %s\n", game->no_texture_path);
-	// dprintf(2, "game->ea_texture_path: %s\n", game->ea_texture_path);
-	// dprintf(2, "game->so_texture_path: %s\n", game->so_texture_path);
-	// dprintf(2, "game->we_texture_path: %s\n", game->we_texture_path);
+	dprintf(2, "game->no_texture_path: %s\n", game->no_texture_path);
+	dprintf(2, "game->ea_texture_path: %s\n", game->ea_texture_path);
+	dprintf(2, "game->so_texture_path: %s\n", game->so_texture_path);
+	dprintf(2, "game->we_texture_path: %s\n", game->we_texture_path);
 	
 	//check map
 	
-	int l = 0;
-	while (game->map[l])
-	{
-		dprintf(2, "game->map[%d]: %s\n",l, game->map[l]);
-		l++;
-	}
+	// int l = 0;
+	// while (game->map[l])
+	// {
+	// 	dprintf(2, "game->map[%d]: %s\n",l, game->map[l]);
+	// 	l++;
+	// }
 
 	map_validate(game);	
 
@@ -164,12 +164,12 @@ void init_game(t_game *game, char *mapfile)
 
 	// dprintf(2, "player position: x:%zu y: %zu\n", game->player_x, game->player_y);
 	
-	 l = 0;
-	while (game->map[l])
-	{
-		dprintf(2, "game->map[%d]: %s\n",l, game->map[l]);
-		l++;
-	}
+	//  l = 0;
+	// while (game->map[l])
+	// {
+	// 	dprintf(2, "game->map[%d]: %s\n",l, game->map[l]);
+	// 	l++;
+	// }
 
 
 	// dprintf(2, "game->ceiling_color: %s\n", game->ceiling_color);
