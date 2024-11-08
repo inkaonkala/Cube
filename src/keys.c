@@ -6,7 +6,7 @@
 /*   By: iniska <iniska@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/28 10:54:19 by iniska            #+#    #+#             */
-/*   Updated: 2024/11/07 13:21:45 by iniska           ###   ########.fr       */
+/*   Updated: 2024/11/07 13:25:30 by iniska           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,13 +38,9 @@ void	keys(t_game *game)
 		game->s = 'E';
 	}
     if (mlx_is_key_down(game->mlx, MLX_KEY_LEFT))
-	{
 		game->rotation = -1;
-	}
     else if (mlx_is_key_down(game->mlx, MLX_KEY_RIGHT))
-	{
 		game->rotation = 1;
-	}
 }
 
 void	mouse_move(double x, double y, void *data)
