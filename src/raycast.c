@@ -6,7 +6,7 @@
 /*   By: iniska <iniska@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/15 20:39:06 by iniska            #+#    #+#             */
-/*   Updated: 2024/11/08 10:22:10 by iniska           ###   ########.fr       */
+/*   Updated: 2024/11/08 10:52:43 by iniska           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -154,7 +154,7 @@ void raycast(t_game *game)
 		horizon_line = get_horizon(game, game->rays->ray_angl, &ghosty);
 		vertical_line = get_wall_height(game, game->rays->ray_angl, &ghosty);
 		if (ghosty) // && bonus
-			draw_enemy(game, game->enemy->len, game->enemy->height);
+			update_enemy(game);
 		if(vertical_line <= horizon_line)
 			game->rays->distance = vertical_line;
 		else
@@ -166,5 +166,4 @@ void raycast(t_game *game)
 		ray++;
 		game->rays->ray_angl += (game->fow / WINDOW_WIDTH);
 	}
-
 }

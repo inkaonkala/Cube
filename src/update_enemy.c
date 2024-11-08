@@ -1,16 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   drawing.c                                          :+:      :+:    :+:   */
+/*   update_enemy.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: iniska <iniska@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/10/18 13:16:18 by iniska            #+#    #+#             */
-/*   Updated: 2024/11/08 10:52:56 by iniska           ###   ########.fr       */
+/*   Created: 2024/11/08 10:49:10 by iniska            #+#    #+#             */
+/*   Updated: 2024/11/08 10:59:34 by iniska           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/cub3D.h"
+
+
 
 static mlx_texture_t	*backup_box()
 {
@@ -99,7 +101,7 @@ static mlx_texture_t	*get_pics_for_wall(t_game *game)
 	return (tex);
 }
 
-void	draw_wall(t_game *game, double bot_pixl, double top_pixl, double wall_hi)
+void	draw_enemy2(t_game *game, double bot_pixl, double top_pixl, double wall_hi)
 {
 
 	mlx_texture_t	*pic;
@@ -131,4 +133,10 @@ void	draw_wall(t_game *game, double bot_pixl, double top_pixl, double wall_hi)
 		y += (double)pic->height / wall_hi;
 		top_pixl++;
 	}
+}
+
+void	update_enemy(t_game *game)
+{
+	draw_enemy(game, game->enemy->len, game->enemy->height);
+	//update_enemy(game);
 }

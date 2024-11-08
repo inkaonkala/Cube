@@ -6,7 +6,7 @@
 /*   By: iniska <iniska@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/07 11:17:58 by iniska            #+#    #+#             */
-/*   Updated: 2024/11/08 09:55:36 by iniska           ###   ########.fr       */
+/*   Updated: 2024/11/08 11:45:44 by iniska           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@ static uint32_t invert_rgb(uint32_t color)
 	a = color & 0XFF; // 255
 
 	return ((r << 24) | (g << 16) | (b << 8) | a);
+	//color = (pixel[0] << 24) | (pixel[1] << 16) | (pixel[2] << 8) | 255;
 }
 
 // All the colours seem to be upside down so they eed to be flipped by bytes
