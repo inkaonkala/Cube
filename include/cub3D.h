@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3D.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yhsu <yhsu@student.hive.fi>                +#+  +:+       +#+        */
+/*   By: iniska <iniska@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/15 12:55:19 by yhsu              #+#    #+#             */
-/*   Updated: 2024/11/06 10:34:52 by yhsu             ###   ########.fr       */
+/*   Updated: 2024/11/07 13:16:44 by iniska           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,6 +68,7 @@ typedef struct s_minimap
 	mlx_image_t* image;
 	size_t			px;
 	size_t			py;
+
 
 }	t_minimap;
 
@@ -181,6 +182,8 @@ typedef struct s_game
 	
 	t_rays 			*rays;
 	t_enemy			*enemy;
+
+	char			s;
 	
 }	t_game;
 

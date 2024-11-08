@@ -3,7 +3,12 @@
 
 int find_direction(t_game *game)
 {
-    
+
+    if(game->s == 'N')
+        return (0);
+    else
+        return (4);
+/*
      dprintf(2, "direction: %f\n", game->rays->ray_angl);
      dprintf(2, "player angled: %f\n", game->player_angl);
     if (game->rays->ray_angl >337.15 || game->player_angl <= 22.5)
@@ -24,7 +29,8 @@ int find_direction(t_game *game)
         return (7);
     else 
         return (-1);
-     
+   */
+
 }
 
 void find_texture( t_game * game, float direction)
