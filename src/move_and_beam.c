@@ -6,7 +6,7 @@
 /*   By: iniska <iniska@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/17 09:41:09 by iniska            #+#    #+#             */
-/*   Updated: 2024/11/07 13:34:15 by iniska           ###   ########.fr       */
+/*   Updated: 2024/11/08 09:29:15 by iniska           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,6 +112,8 @@ void	move_and_beam(void	*data)
 		mlx_close_window(game->mlx);
 		printf("Bye bye!\n");
 	}
+	//if (BONUS)
+	ghostie(game);
 	keys(game);
 	move_hook(game, 0, 0);
 	raycast(game);
@@ -122,5 +124,5 @@ void	move_and_beam(void	*data)
 	draw_mini_map(game);
 
 	//if MAKE_BONUS
-	ghostie(game);
+//	ghostie(game);
 }

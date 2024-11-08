@@ -6,13 +6,13 @@
 /*   By: iniska <iniska@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/05 08:49:31 by iniska            #+#    #+#             */
-/*   Updated: 2024/11/07 11:43:25 by iniska           ###   ########.fr       */
+/*   Updated: 2024/11/08 10:26:54 by iniska           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/cub3D.h"
 
-static	void	draw_enemy(t_game *game, int frame_w, int frame_l)
+void	draw_enemy(t_game *game, int frame_w, int frame_l)
 {
 	uint32_t 	*pixels;
 	int			x;
@@ -37,9 +37,7 @@ static	void	draw_enemy(t_game *game, int frame_w, int frame_l)
 		}
 		y++;
 	}
-
 }
-
 
 static void	animate(t_game *game)
 {
@@ -57,15 +55,14 @@ static void	animate(t_game *game)
 		
 }
 
-
 //places the right image from ghost_sheet to game->ghosty
 static void	set_ghost(t_game *game)
 {
 	size_t		dis_x;
 	size_t		dis_y;
 
-	dis_x = game->enemy->g_x - game->player_x;
-	dis_y = game->enemy->g_y - game->player_y;
+	dis_x = game->enemy->g_x - game->rays->p_x;
+	dis_y = game->enemy->g_y - game->rays->p_y;
 
 	// to find one picture from the whole map (432px * 432px)
 	animate(game);
@@ -75,11 +72,11 @@ static void	set_ghost(t_game *game)
 		printf("No ghosty\n");
 		return ;
 	}
-	game->enemy->distance = sqrt(dis_x * dis_x + dis_y * dis_y);
+	game->enemy->distance = sqrt(dis_x * game->enemy->g_x + dis_y * game->enemy->g_y);
 	game->enemy->angl_to_p = atan2(dis_y, dis_x);
 	game->enemy->angl = game->enemy->angl_to_p - game->player_angl;
 
-	draw_enemy(game, game->enemy->len, game->enemy->height);
+//	draw_enemy(game, game->enemy->len, game->enemy->height);
 }
 
 static bool	init_enemy(t_game *game)
@@ -130,17 +127,15 @@ static bool	check_position(t_game *game)
 		if (y >= game->longest || y >= ft_strlen(game->map[x]))
 			return (false);
 	}
-	if (game->map[x][y] == '0')
+	if (game->map[x][y] == '0' || game->map[x][y] == 'G')
 	{
+		game->map[x][y] = 'G';
 		game->enemy->g_x = x;
 		game->enemy->g_y = y;
 		return (true);
 	}
 	else
-	{
-		printf("No room for the enemy\n");
 		return (false);
-	}
 }
 
 // set's the ghost to the map (on the row 3)

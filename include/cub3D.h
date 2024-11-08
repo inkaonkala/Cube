@@ -6,7 +6,7 @@
 /*   By: iniska <iniska@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/15 12:55:19 by yhsu              #+#    #+#             */
-/*   Updated: 2024/11/07 13:16:44 by iniska           ###   ########.fr       */
+/*   Updated: 2024/11/08 09:53:52 by iniska           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -265,6 +265,8 @@ void	mouse_move(double x, double y, void *data);
 void 	mouse_press(mouse_key_t button, action_t action, modifier_key_t mods, void *data);
 
 // enemystuff
+void	draw_enemy(t_game *game, int frame_w, int frame_l);
 void	ghostie(t_game *game);
 
 #endif
+//	draw_enemy(game, game->enemy->len, game->enemy->height);
