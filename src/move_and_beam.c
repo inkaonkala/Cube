@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   move_and_beam.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yhsu <yhsu@student.hive.fi>                +#+  +:+       +#+        */
+/*   By: iniska <iniska@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/17 09:41:09 by iniska            #+#    #+#             */
-/*   Updated: 2024/11/07 12:40:35 by yhsu             ###   ########.fr       */
+/*   Updated: 2024/11/07 13:34:15 by iniska           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,7 +101,6 @@ static void	move_hook(t_game *game, double move_x, double move_y)
 	game->rotation = 0;
 	move_player(game, move_x, move_y);		
 }	
-
 
 void	move_and_beam(void	*data)
 {
