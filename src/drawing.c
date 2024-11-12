@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   drawing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: iniska <iniska@student.hive.fi>            +#+  +:+       +#+        */
+/*   By: yhsu <yhsu@student.hive.fi>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/18 13:16:18 by iniska            #+#    #+#             */
-/*   Updated: 2024/11/07 09:10:28 by iniska           ###   ########.fr       */
+/*   Updated: 2024/11/12 15:37:12 by yhsu             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,18 +112,13 @@ void	draw_wall(t_game *game, double bot_pixl, double top_pixl, double wall_hi)
 	if (!pic || wall_hi <= 0)
 		return ;
 	pixels = (uint32_t *)pic->pixels;
-
 	x = get_setof_x(game, pic);
 	if (x < 0 || x >- pic->width)
-	{
-		ft_printf("X out of bounds in draw walls\n");
 		return ;
-	}
 
 	y = (top_pixl - (WINDOW_HEIGHT / 2) + (wall_hi / 2)) * (double)pic->height / wall_hi;
 	if (y < 0)
 		y = 0;
-
 	while (top_pixl < bot_pixl)
 	{
 		pos = (int)y * pic->width + (int)x;
@@ -132,7 +127,6 @@ void	draw_wall(t_game *game, double bot_pixl, double top_pixl, double wall_hi)
 		mlx_put_pixel(game->canvas, game->rays->i, top_pixl, pixels[pos]);
 		y += (double)pic->height / wall_hi;
 		top_pixl++;
-
 	}
 }
 

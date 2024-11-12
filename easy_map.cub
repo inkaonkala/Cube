@@ -1,8 +1,8 @@
 
-NO   textures/alice.png
-SO textures/yunchia.png
-WE textures/lempi.png
-EA textures/miyuki.png
+NO   ./textures/ovi1.png
+SO ./textures/ovi2.png
+WE ./textures/ovi3.png
+EA ./textures/ovi4.png
 F 2,20,20
 C 200,200,180
 
