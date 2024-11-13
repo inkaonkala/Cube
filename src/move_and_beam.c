@@ -112,11 +112,13 @@ void	move_and_beam(void	*data)
 		mlx_close_window(game->mlx);
 		printf("Bye bye!\n");
 	}
+	//if (BONUS)
+	ghostie(game);
 	keys(game);
 	move_hook(game, 0, 0);
 	game->mini_angle= game->player_angl;
 	raycast(game);
 	draw_mini_map(game);
 	//if MAKE_BONUS
-	ghostie(game);
+//	ghostie(game);
 }
