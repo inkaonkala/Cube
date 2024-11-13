@@ -42,6 +42,7 @@ static mlx_texture_t	*backup_box()
 	return (blakkis);
 }
 
+/*
 void	set_pixels(t_game *game, double x, double y, int colour)
 {
 	if (x < 0)
@@ -55,6 +56,7 @@ void	set_pixels(t_game *game, double x, double y, int colour)
 
 	mlx_put_pixel(game->canvas, x, y, colour);
 }
+*/
 
 static double	get_setof_x(t_game *game, mlx_texture_t *pic)
 {
