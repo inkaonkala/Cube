@@ -145,12 +145,12 @@ void init_game(t_game *game, char *mapfile)
 	
 	//check map
 	
-	// int l = 0;
-	// while (game->map[l])
-	// {
-	// 	dprintf(2, "game->map[%d]: %s\n",l, game->map[l]);
-	// 	l++;
-	// }
+	int l = 0;
+	while (game->map[l])
+	{
+		dprintf(2, "game->map[%d]: %s\n",l, game->map[l]);
+		l++;
+	}
 
 	map_validate(game);	
 

@@ -167,7 +167,7 @@ typedef struct s_game
 	size_t			width;
 	size_t			player_x;
 	size_t			player_y;
-
+	float			mini_angle;
 	float			player_angl; //Where is player facing
 	float			fow; // field of view for the player
 	
@@ -267,9 +267,10 @@ void	mouse_move(double x, double y, void *data);
 void 	mouse_press(mouse_key_t button, action_t action, modifier_key_t mods, void *data);
 
 // enemystuff
+void	draw_enemy(t_game *game, int frame_w, int frame_l);
 void	ghostie(t_game *game);
 
+void	update_enemy(t_game *game);
 
-
-char	**ft_3d_split(t_game *game, char const *s, char c);
 #endif
+//	draw_enemy(game, game->enemy->len, game->enemy->height);
