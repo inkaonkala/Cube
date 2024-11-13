@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   move_and_beam.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: iniska <iniska@student.hive.fi>            +#+  +:+       +#+        */
+/*   By: yhsu <yhsu@student.hive.fi>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/17 09:41:09 by iniska            #+#    #+#             */
-/*   Updated: 2024/11/08 10:36:12 by iniska           ###   ########.fr       */
+/*   Updated: 2024/11/12 15:41:18 by yhsu             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -116,13 +116,9 @@ void	move_and_beam(void	*data)
 	ghostie(game);
 	keys(game);
 	move_hook(game, 0, 0);
+	game->mini_angle= game->player_angl;
 	raycast(game);
-
-	//dprintf(2, "in move and beam\n");
-	//	and beam player position: x:%zu y: %zu\n", game->player_x, game->player_y);
-	//dprintf(2, "in rays position: x:%d y: %d\n", game->rays->p_x, game->rays->p_y);
 	draw_mini_map(game);
-
 	//if MAKE_BONUS
 //	ghostie(game);
 }
