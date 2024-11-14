@@ -21,19 +21,35 @@ int check_texture_extension(t_game *game)
 	return (1); //filename with .png
 }
 
+int get_name(char*filename, int len)
+{
+	int i = len - 1;
+	while (i > 0)
+	{
+		if (filename[i] == '/')
+			return (i);
+		i--;
+	}
+	return (i);
+}
+	
+
+
 int check_file_extesion(char *filename)
 {
-	int len;
+	int len; 
+	int nb;
 	
+	len = ft_strlen(filename);
+	nb = get_name(filename, len);
+	filename = filename + nb + 1;
 	len = ft_strlen(filename);
 	if (len <= 4 || ft_strncmp(filename + (len - 4), ".cub", 4) != 0)
 	{
-		//dprintf(2, "len\n");
 		return (0); 
 	}
 	if (filename[len - 1] == '/')//file name with /
 	{
-		//dprintf(2, "len2\n");
 		return (0); 
 	}
 	return (1); //filename with .cub

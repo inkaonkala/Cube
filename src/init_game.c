@@ -6,7 +6,7 @@
 /*   By: yhsu <yhsu@student.hive.fi>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/15 14:02:51 by yhsu              #+#    #+#             */
-/*   Updated: 2024/11/07 17:15:02 by yhsu             ###   ########.fr       */
+/*   Updated: 2024/11/14 10:59:31 by yhsu             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -129,12 +129,6 @@ static void parse_file(t_game *game, char *mapfile)
 
 void init_game(t_game *game, char *mapfile)
 {
-	//init_minimap(game);
-	//render_minimap(game);
-	//mlx_key_hook(game->mlx, move_hook, game);
-	//mlx_loop(game->mlx);
-	dprintf(2, "in init_game 0\n");
-	//parse file : create sd array map,  parse element
 	parse_file(game, mapfile);
 	
 

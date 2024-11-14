@@ -6,7 +6,7 @@
 /*   By: yhsu <yhsu@student.hive.fi>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/15 12:54:09 by yhsu              #+#    #+#             */
-/*   Updated: 2024/10/31 17:14:43 by yhsu             ###   ########.fr       */
+/*   Updated: 2024/11/14 11:58:18 by yhsu             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ int main (int argc, char *argv[])
 		err_message_exit("Invalid input.");
 	
 	if (check_file_extesion(argv[1]) == 0)
-		err_message_exit( "please provide a '.cub' file");
+		err_message_exit( "please provide a correct '.cub' file");
 	
 	t_game *game;
 

@@ -6,7 +6,7 @@
 /*   By: yhsu <yhsu@student.hive.fi>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/15 12:55:19 by yhsu              #+#    #+#             */
-/*   Updated: 2024/11/07 17:20:59 by yhsu             ###   ########.fr       */
+/*   Updated: 2024/11/14 10:28:45 by yhsu             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -265,9 +265,8 @@ void 	free_grid(char **grid);
 void 	clean_all_exit(t_game *game, char *message);
 
 //mini_map
-
-//void create_minimap(t_game *game);
 void draw_mini_map(t_game *game);
+void draw_player(t_game *game);
 
 
 //void	draw_wall(t_game *game, int ray, double bot_pixl, double top_pixl);

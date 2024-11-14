@@ -6,7 +6,7 @@
 /*   By: yhsu <yhsu@student.hive.fi>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/24 19:16:05 by yhsu              #+#    #+#             */
-/*   Updated: 2024/11/07 17:21:59 by yhsu             ###   ########.fr       */
+/*   Updated: 2024/11/14 11:30:28 by yhsu             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,20 +72,24 @@ char **copy_grid(t_game *game, char **map)
 
 	i = 0;
 	j = 0;
-	
-	result = (char **)(malloc((count_mapline(map) + 1) * sizeof(char *)));
+	result = (char **)(malloc((game->height + 1) * sizeof(char *)));
 	if (result == NULL)
 		return (NULL);
 	while(map[i])
 	{
 		result[j] = (char *) calloc ((game->longest + 1), sizeof(char));
 		if (result[j] == NULL)
+		{
+			while(j > 0)
+				free(result[--j]);
+			free(result);
 			return (NULL);
+		}
 		copy_string(result[j], map[i]);
 		i++;
 		j++;
 	}
-	map[i] = NULL;
+	result[j] = NULL;
 	return (result);
 }
 
@@ -120,7 +124,7 @@ static int if_map_closed(t_game *game, char **tmp)// open return 1
 		while(tmp[i][j] != '\0')
 		{
 			if ((tmp[i][j] == 'S' || tmp[i][j] == 'E'
-				|| tmp[i][j] == 'W' || tmp[i][j] == 'N' || tmp[i][j] == '0') && flood_fill(tmp, i, j) == 1)
+				|| tmp[i][j] == 'W' || tmp[i][j] == 'N' || tmp[i][j] == '0'))
 			{
 				if (flood_fill(tmp, i, j) == 1)
 					return (1);
@@ -143,6 +147,7 @@ static int check_map_closed(t_game *game, char **map)
 		clean_all_exit(game, "The map copy failed.");
 	if (if_map_closed(game, tmp) == 1)
 	{
+		dprintf(2, "map not closed\n");
 		free_grid(tmp);
 		return (1);//the map is open
 	}

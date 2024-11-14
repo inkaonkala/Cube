@@ -6,7 +6,7 @@
 /*   By: yhsu <yhsu@student.hive.fi>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/15 17:58:39 by yhsu              #+#    #+#             */
-/*   Updated: 2024/10/28 11:45:55 by yhsu             ###   ########.fr       */
+/*   Updated: 2024/11/14 10:46:07 by yhsu             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,11 +47,19 @@ void free_grid(char **grid)
 {
     size_t i;
 
+    if (!grid)
+        return;
+
     i = 0;
     while (grid[i])
     {
-        free(grid[i]);
+        if (grid[i])  // 檢查 grid[i] 是否有效
+        {
+            free(grid[i]);
+            grid[i] = NULL;  // 防止重複釋放
+        }
         i++;
     }
     free(grid);
+    grid = NULL;
 }
