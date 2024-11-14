@@ -6,7 +6,7 @@
 /*   By: yhsu <yhsu@student.hive.fi>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/15 12:54:09 by yhsu              #+#    #+#             */
-/*   Updated: 2024/10/28 12:31:25 by iniska           ###   ########.fr       */
+/*   Updated: 2024/10/31 17:14:43 by yhsu             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,10 +28,13 @@ int main (int argc, char *argv[])
 
 	game = calloc(1, sizeof(t_game));
 	if(!game)
-		err_message_exit("Malloc fail");
+		err_message_exit("Malloc failed");
 	
 	//parse map
 	init_game(game, argv[1]);
+
+
+	
 	//initializing the MLX library
 	//Window Creation
 
@@ -45,6 +48,7 @@ int main (int argc, char *argv[])
 	count_values(game);
 	screenpop(game); // opens a window 
 	free(game);
-
+	// 清理並結束
+   
 	return (0);
 }

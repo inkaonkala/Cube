@@ -1,12 +1,12 @@
-NO   textures/sei.png
-SO textures/sei.png
-WE textures/sei.png
-EA textures/sei.png
-F 2,20,20
-C 200,200,180
+NO   textures/ovi1.png
+SO textures/ovi2.png
+WE textures/ovi3.png
+EA textures/ovi4.png
+F 00,00,00
+C 00,00,00
 
 111111111111111111
-100000000000011101
+111000000000011101
 100000000010000001
 11100N000000100001
 111111111111111111

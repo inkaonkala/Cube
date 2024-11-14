@@ -6,7 +6,7 @@
 /*   By: iniska <iniska@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/18 13:16:18 by iniska            #+#    #+#             */
-/*   Updated: 2024/11/04 14:06:16 by iniska           ###   ########.fr       */
+/*   Updated: 2024/11/14 10:24:56 by iniska           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,10 +56,6 @@ void	set_pixels(t_game *game, double x, double y, int colour)
 
 static double	get_setof_x(t_game *game, mlx_texture_t *pic)
 {
-	
-	//	fmodf finds the remainder of the division, 
-	//	so we are returning the spot where the wall need to be
-	
 	double	x;
 
 	x = 0;
@@ -112,18 +108,15 @@ void	draw_wall(t_game *game, double bot_pixl, double top_pixl, double wall_hi)
 	if (!pic || wall_hi <= 0)
 		return ;
 	pixels = (uint32_t *)pic->pixels;
-
 	x = get_setof_x(game, pic);
 	if (x < 0 || x >- pic->width)
 	{
-		ft_printf("X out of bounds in draw walls\n");
+		ft_printf("x out of bounds in draw walls\n");
 		return ;
 	}
-
 	y = (top_pixl - (WINDOW_HEIGHT / 2) + (wall_hi / 2)) * (double)pic->height / wall_hi;
 	if (y < 0)
 		y = 0;
-
 	while (top_pixl < bot_pixl)
 	{
 		pos = (int)y * pic->width + (int)x;
@@ -132,36 +125,5 @@ void	draw_wall(t_game *game, double bot_pixl, double top_pixl, double wall_hi)
 		mlx_put_pixel(game->canvas, game->rays->i, top_pixl, pixels[pos]);
 		y += (double)pic->height / wall_hi;
 		top_pixl++;
-
 	}
 }
-
-/*
-void	set_pixels(t_game *game, double x, double y, int colour)
-{
-	if (x < 0)
-		return ;
-	else if (x >= WINDOW_WIDTH)
-		return ;
-	if (y < 0)
-		return ;
-	if (y >= WINDOW_HEIGHT)
-		return ;
-
-	mlx_put_pixel(game->canvas, x, y, colour);
-}
-
-
-void	draw_wall(t_game *game, int ray, double bot_pixl, double top_pixl)
-{
-	// to test
-	int	color;
-
-	color = 0xf6a192;
-
-	while (top_pixl < bot_pixl)
-		set_pixels(game, ray, top_pixl++, color);
-
-}
-
-*/

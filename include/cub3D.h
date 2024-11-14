@@ -6,7 +6,7 @@
 /*   By: iniska <iniska@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/15 12:55:19 by yhsu              #+#    #+#             */
-/*   Updated: 2024/11/05 21:19:01 by iniska           ###   ########.fr       */
+/*   Updated: 2024/11/14 11:22:11 by iniska           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 #define CUB3D_H
 
 # include "../libft/libft.h"
-//# include"../libft/ft_printf.h"
+# include"../libft/ft_printf.h"
 # include "../MLX42/include/MLX42/MLX42.h"
 
 
@@ -22,12 +22,11 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include <string.h>
-#include <fcntl.h>
 
 
-# define WINDOW_WIDTH 1700
-# define WINDOW_HEIGHT 1200
-# define TILE 64 // should it be 60 or 64?
+# define WINDOW_WIDTH 1000
+# define WINDOW_HEIGHT 1000
+# define TILE 64
 
 # define ROTATIO_SPEED 0.045
 # define SPEED 3
@@ -35,11 +34,47 @@
 # define FOW 60 // fieald of view
 # define PI 3.14159265
 
-# define ENEMYP "./textures/ghosty.png"
+//for mini map
 
+# define SAND       0xF7E9DB
+# define RED        0xBB4211
+# define RUSSIANRED 0xde300b
+# define BROWN      0x54310F
+# define CHOCO      0x351C04
+# define BACKGROUND_COLOR 0xFFE5E4E4
+# define MINIMAP_SIDE 208//小地圖中每個方格的邊長
+# define MINIMAP_TILE_COUNT 13
+# define MINIMAP_IMAGE_SIDE 16
+
+//for enemy
+
+# define BONUS false
+# define ENEMYP "./textures/ghosty.png"
+# define MAX_VIEW_DIS 1000 * TILE
 
 // Forward declaration of t_game
 typedef struct s_game t_game;
+
+
+typedef struct s_shape
+{
+	int	x;
+	int	y;
+	int	width;
+	int	height;
+}	t_shape;
+
+typedef struct s_minimap
+{
+	mlx_image_t* background;
+	t_game *game;
+	mlx_t	*mlx;
+	mlx_image_t* image;
+	size_t			px;
+	size_t			py;
+
+
+}	t_minimap;
 
 typedef struct s_enemy
 {
@@ -48,7 +83,6 @@ typedef struct s_enemy
 	mlx_image_t 	*ghosty;
 	size_t			g_x;
 	size_t			g_y;
-	size_t			distance;
 	int				height;
 	int				len;
 	uint32_t		color;
@@ -58,11 +92,12 @@ typedef struct s_enemy
 
 	double			x_offset;
 	double			y_offset;
-	double			angl;
-	double			angl_to_p;
+	
+	float			angl;
+	float			distance;
+	float			angl_to_p;
 
 }	t_enemy;
-
 
 typedef struct s_rays
 {	
@@ -97,6 +132,10 @@ typedef struct s_flag
 
 }	t_flag;
 
+
+
+//game->map[game->rays->p_x][game->rays->p_y]
+
 typedef struct s_game
 {
 	char			**file_content;
@@ -116,8 +155,7 @@ typedef struct s_game
 	uint32_t		ceiling_r;
 	uint32_t		ceiling_g;
 	uint32_t		ceiling_b;
-	
-	size_t 			longest;
+	size_t 			longest;//width
 	int 			last_item;
 	bool			mouse_on;
 	bool			horizon;
@@ -129,15 +167,17 @@ typedef struct s_game
 
 	t_flag 			*flags;
 	size_t 			height;
-	size_t 			width;
+	size_t			width;
 	size_t			player_x;
 	size_t			player_y;
-
+	float			mini_angle;
 	float			player_angl; //Where is player facing
 	float			fow; // field of view for the player
 	
 	mlx_t			*mlx;
 	mlx_image_t		*canvas;
+	mlx_image_t 	*mini_player;
+	mlx_image_t	    *minimap;
 	mlx_texture_t	*no_texture;
 	mlx_texture_t	*so_texture;
 	mlx_texture_t	*we_texture;
@@ -145,46 +185,49 @@ typedef struct s_game
 	
 	t_rays 			*rays;
 	t_enemy			*enemy;
+
+	char			s;
 	
 }	t_game;
 
 //get_2d_array
-char **get_2d_array( char *mapfile);
-char *readfile(char *mapfile);
+char	**get_2d_array( char *mapfile);
+char	*readfile(char *mapfile);
 
 //check_elements
-int check_elements_info(t_game *game,char **file_content, t_flag *flags);
-int empty_line(char * file);
+int		check_elements_info(t_game *game,char **file_content, t_flag *flags);
+int		empty_line(char * file);
 
 //create_map
-int create_map(t_game * game, char **file_content);
-void create_rectagle(t_game *game);
-void copy_string( char *s1, char *s2);
-int count_mapline(char **file_content);
+int		create_map(t_game * game, char **file_content);
+void	create_rectagle(t_game *game);
+void	copy_string( t_game *ame, char *s1, char *s2);
+int		count_mapline(char **file_content);
 
 //flags
-int set_flags(char *file_line, t_flag *flags);
-void init_flags(t_flag *flags);
+int		set_flags(char *file_line, t_flag *flags);
+void	init_flags(t_flag *flags);
 
 //map validation
-void map_validate(t_game *game);
-char **copy_grid(t_game *game, char **map);
+void	map_validate(t_game *game);
+char	**copy_grid(t_game *game, char **map);
 
 //position extention
-int check_file_extesion(char *filename);
-int check_texture_extension(t_game *game);
-void check_player_position(t_game *game, char ** map);
+int		check_file_extesion(char *filename);
+int		check_texture_extension(t_game *game);
+void	check_player_position(t_game *game, char ** map);
 
-//save color 
-int save_colors(t_game *game, char **file_content);
+//save color
+void	colour_flip(uint32_t *pixels, int width, int height);
+int		save_colors(t_game *game, char **file_content);
 
 //set color
-void find_color(char **c_split, char **f_split, t_game *game);
-void set_color(t_game *game);
+void	find_color(char **c_split, char **f_split, t_game *game);
+void	set_color(t_game *game);
 
 //init_game
-void init_game(t_game *game, char *mapfile);
-int empty_line(char * file);
+void	init_game(t_game *game, char *mapfile);
+int		empty_line(char * file);
 
 //error
 void 	err_message_exit(char * message);
@@ -211,6 +254,12 @@ void 	err_message(char * message);
 void 	free_grid(char **grid);
 void 	clean_all_exit(t_game *game, char *message);
 
+//mini_map
+
+//void create_minimap(t_game *game);
+void	draw_mini_map(t_game *game);
+
+
 //void	draw_wall(t_game *game, int ray, double bot_pixl, double top_pixl);
 void	draw_wall(t_game *game, double bot_pixl, double top_pixl, double wall_hi);
 
@@ -219,6 +268,13 @@ void	mouse_move(double x, double y, void *data);
 void 	mouse_press(mouse_key_t button, action_t action, modifier_key_t mods, void *data);
 
 // enemystuff
+void	draw_enemy(t_game *game, int frame_w, int frame_l);
 void	ghostie(t_game *game);
 
+//void update_enemy(t_game *game, double bot_pixl, double top_pixl, double ghostie_hi);
+void	update_enemy(t_game *game); //, int ray);
+void	animate(t_game *game);
+void	set_ghost(t_game *game);
+
 #endif
+//	draw_enemy(game, game->enemy->len, game->enemy->height);
