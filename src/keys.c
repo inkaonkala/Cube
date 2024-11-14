@@ -6,7 +6,7 @@
 /*   By: yhsu <yhsu@student.hive.fi>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/28 10:54:19 by iniska            #+#    #+#             */
-/*   Updated: 2024/11/12 12:03:49 by yhsu             ###   ########.fr       */
+/*   Updated: 2024/11/14 12:42:01 by yhsu             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,25 +14,23 @@
 
 void	keys(t_game *game)
 {
-	char s;
-
-	s = '\0';
-    if (mlx_is_key_down(game->mlx, MLX_KEY_UP) || mlx_is_key_down(game->mlx, MLX_KEY_W) )
+	
+    if (mlx_is_key_down(game->mlx, MLX_KEY_W) )
 	{
 		game->up_down = 1;
 		game->s = 'N';
 	}
-    else if (mlx_is_key_down(game->mlx, MLX_KEY_DOWN) || mlx_is_key_down(game->mlx, MLX_KEY_S) )
+    else if ( mlx_is_key_down(game->mlx, MLX_KEY_S) )
 	{
 		game->up_down = -1;
 		game->s = 'S';
 	}
-    if (mlx_is_key_down(game->mlx, MLX_KEY_LEFT) || mlx_is_key_down(game->mlx, MLX_KEY_A) )
+    if ( mlx_is_key_down(game->mlx, MLX_KEY_A) )
 	{
 		game->left_right = 1;
 		game->s = 'W';
 	}
-    else if (mlx_is_key_down(game->mlx, MLX_KEY_RIGHT) || mlx_is_key_down(game->mlx, MLX_KEY_D) )
+    else if ( mlx_is_key_down(game->mlx, MLX_KEY_D) )
 	{
 		game->left_right = -1;
 		game->s = 'E';
