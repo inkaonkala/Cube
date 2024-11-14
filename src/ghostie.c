@@ -76,7 +76,7 @@ static void	set_ghost(t_game *game)
 	game->enemy->angl_to_p = atan2(dis_y, dis_x);
 	game->enemy->angl = game->enemy->angl_to_p - game->player_angl;
 
-//	draw_enemy(game, game->enemy->len, game->enemy->height);
+	draw_enemy(game, game->enemy->len, game->enemy->height);
 }
 
 static bool	init_enemy(t_game *game)

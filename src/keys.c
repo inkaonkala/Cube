@@ -14,9 +14,7 @@
 
 void	keys(t_game *game)
 {
-	char s;
-
-	s = '\0';
+	
     if (mlx_is_key_down(game->mlx, MLX_KEY_UP) || mlx_is_key_down(game->mlx, MLX_KEY_W) )
 	{
 		game->up_down = 1;

@@ -102,6 +102,7 @@ static void	move_hook(t_game *game, double move_x, double move_y)
 	move_player(game, move_x, move_y);		
 }	
 
+
 void	move_and_beam(void	*data)
 {
 	t_game *game;
@@ -112,7 +113,9 @@ void	move_and_beam(void	*data)
 		mlx_close_window(game->mlx);
 		printf("Bye bye!\n");
 	}
+
 	//if (BONUS)
+	check_door(game);
 	ghostie(game);
 	keys(game);
 	move_hook(game, 0, 0);

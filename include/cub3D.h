@@ -47,6 +47,8 @@
 # define MINIMAP_IMAGE_SIDE 16
 
 # define ENEMYP "./textures/ghosty.png"
+# define DOOR_PATH_CLOSE "./textures/door_closed_0.png"
+# define DOOR_PATH_OPEN "./textures/door_opening_1.png"
 
 // Forward declaration of t_game
 typedef struct s_game t_game;
@@ -184,6 +186,15 @@ typedef struct s_game
 	t_enemy			*enemy;
 
 	char			s;
+
+
+	bool           door_open;
+	size_t			door_x;
+	size_t			door_y;
+	mlx_texture_t	*door_open_texture;
+	mlx_texture_t	*door_close_texture;
+	mlx_image_t 	*door;
+	
 	
 }	t_game;
 
@@ -271,6 +282,6 @@ void	draw_enemy(t_game *game, int frame_w, int frame_l);
 void	ghostie(t_game *game);
 
 void	update_enemy(t_game *game);
-
+void check_door(t_game *game);
 #endif
 //	draw_enemy(game, game->enemy->len, game->enemy->height);

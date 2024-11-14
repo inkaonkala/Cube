@@ -156,7 +156,8 @@ void create_rectagle(t_game *game)
 			
 			if (game->map[j][k] != '1' && game->map[j][k] != '0'
 				&& game->map[j][k] != 'E' && game->map[j][k] != 'W'
-				&& game->map[j][k] != 'S' && game->map[j][k] != 'N')
+				&& game->map[j][k] != 'S' && game->map[j][k] != 'N' 
+				&& game->map[j][k] != 'D')
 				game->map[j][k] = '1';
 
 			// if (game->map[j][k] == '\0')

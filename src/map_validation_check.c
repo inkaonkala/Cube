@@ -21,11 +21,11 @@ static int only_valid_char(char **map)
 	while(map[i])
 	{
 		j = 0;
-		while(map[i][j])
+		while(map[i][j])// mendatory need to remove D
 		{
 			if (map[i][j] != '1' && map[i][j] != '0' && map[i][j] != '\t' 
 				&& map[i][j] != ' ' && map[i][j] != 'N' && map[i][j] != 'S' 
-				&& map[i][j] != 'E' && map[i][j] != 'W')
+				&& map[i][j] != 'E' && map[i][j] != 'W' && map[i][j] != 'D')
 				return (1);
 			
 			j++;
