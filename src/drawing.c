@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   drawing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yhsu <yhsu@student.hive.fi>                +#+  +:+       +#+        */
+/*   By: iniska <iniska@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/18 13:16:18 by iniska            #+#    #+#             */
-/*   Updated: 2024/11/12 15:37:12 by yhsu             ###   ########.fr       */
+/*   Updated: 2024/11/14 10:24:56 by iniska           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,10 +56,6 @@ void	set_pixels(t_game *game, double x, double y, int colour)
 
 static double	get_setof_x(t_game *game, mlx_texture_t *pic)
 {
-	
-	//	fmodf finds the remainder of the division, 
-	//	so we are returning the spot where the wall need to be
-	
 	double	x;
 
 	x = 0;

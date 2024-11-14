@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3D.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yhsu <yhsu@student.hive.fi>                +#+  +:+       +#+        */
+/*   By: iniska <iniska@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/15 12:55:19 by yhsu              #+#    #+#             */
-/*   Updated: 2024/11/12 12:32:53 by yhsu             ###   ########.fr       */
+/*   Updated: 2024/11/14 11:22:11 by iniska           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@
 
 # define WINDOW_WIDTH 1000
 # define WINDOW_HEIGHT 1000
-# define TILE 64 // should it be 60 or 64?
+# define TILE 64
 
 # define ROTATIO_SPEED 0.045
 # define SPEED 3
@@ -46,7 +46,11 @@
 # define MINIMAP_TILE_COUNT 13
 # define MINIMAP_IMAGE_SIDE 16
 
+//for enemy
+
+# define BONUS false
 # define ENEMYP "./textures/ghosty.png"
+# define MAX_VIEW_DIS 1000 * TILE
 
 // Forward declaration of t_game
 typedef struct s_game t_game;
@@ -92,7 +96,6 @@ typedef struct s_enemy
 	float			angl;
 	float			distance;
 	float			angl_to_p;
-
 
 }	t_enemy;
 
@@ -188,43 +191,43 @@ typedef struct s_game
 }	t_game;
 
 //get_2d_array
-char **get_2d_array( char *mapfile);
-char *readfile(char *mapfile);
+char	**get_2d_array( char *mapfile);
+char	*readfile(char *mapfile);
 
 //check_elements
-int check_elements_info(t_game *game,char **file_content, t_flag *flags);
-int empty_line(char * file);
+int		check_elements_info(t_game *game,char **file_content, t_flag *flags);
+int		empty_line(char * file);
 
 //create_map
-int create_map(t_game * game, char **file_content);
-void create_rectagle(t_game *game);
-void copy_string( t_game *ame, char *s1, char *s2);
-int count_mapline(char **file_content);
+int		create_map(t_game * game, char **file_content);
+void	create_rectagle(t_game *game);
+void	copy_string( t_game *ame, char *s1, char *s2);
+int		count_mapline(char **file_content);
 
 //flags
-int set_flags(char *file_line, t_flag *flags);
-void init_flags(t_flag *flags);
+int		set_flags(char *file_line, t_flag *flags);
+void	init_flags(t_flag *flags);
 
 //map validation
-void map_validate(t_game *game);
-char **copy_grid(t_game *game, char **map);
+void	map_validate(t_game *game);
+char	**copy_grid(t_game *game, char **map);
 
 //position extention
-int check_file_extesion(char *filename);
-int check_texture_extension(t_game *game);
-void check_player_position(t_game *game, char ** map);
+int		check_file_extesion(char *filename);
+int		check_texture_extension(t_game *game);
+void	check_player_position(t_game *game, char ** map);
 
 //save color
 void	colour_flip(uint32_t *pixels, int width, int height);
-int save_colors(t_game *game, char **file_content);
+int		save_colors(t_game *game, char **file_content);
 
 //set color
-void find_color(char **c_split, char **f_split, t_game *game);
-void set_color(t_game *game);
+void	find_color(char **c_split, char **f_split, t_game *game);
+void	set_color(t_game *game);
 
 //init_game
-void init_game(t_game *game, char *mapfile);
-int empty_line(char * file);
+void	init_game(t_game *game, char *mapfile);
+int		empty_line(char * file);
 
 //error
 void 	err_message_exit(char * message);
@@ -254,7 +257,7 @@ void 	clean_all_exit(t_game *game, char *message);
 //mini_map
 
 //void create_minimap(t_game *game);
-void draw_mini_map(t_game *game);
+void	draw_mini_map(t_game *game);
 
 
 //void	draw_wall(t_game *game, int ray, double bot_pixl, double top_pixl);
@@ -268,7 +271,10 @@ void 	mouse_press(mouse_key_t button, action_t action, modifier_key_t mods, void
 void	draw_enemy(t_game *game, int frame_w, int frame_l);
 void	ghostie(t_game *game);
 
-void	update_enemy(t_game *game);
+//void update_enemy(t_game *game, double bot_pixl, double top_pixl, double ghostie_hi);
+void	update_enemy(t_game *game); //, int ray);
+void	animate(t_game *game);
+void	set_ghost(t_game *game);
 
 #endif
 //	draw_enemy(game, game->enemy->len, game->enemy->height);

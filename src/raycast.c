@@ -6,7 +6,7 @@
 /*   By: iniska <iniska@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/15 20:39:06 by iniska            #+#    #+#             */
-/*   Updated: 2024/11/08 10:52:43 by iniska           ###   ########.fr       */
+/*   Updated: 2024/11/14 10:03:33 by iniska           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -122,6 +122,8 @@ static float	get_wall_height(t_game *game, float angl, bool *ghosty)
 	return (distance(game, x, y));
 }
 
+
+/*
 static float	update_rayangl(float angl)
 {
 	if (angl <= 0)
@@ -136,6 +138,13 @@ static float	update_rayangl(float angl)
 	}
 	return (angl);
 }
+*/
+static float	update_rayangl(float angl)
+{
+    while (angl < 0) angl += 2 * PI;
+    while (angl > 2 * PI) angl -= 2 * PI;
+    return angl;
+}
 
 void raycast(t_game *game)
 {
@@ -144,11 +153,11 @@ void raycast(t_game *game)
 	bool	ghosty;
 	int		ray;
 
-	ghosty = false;
 	ray = 0;
 	game->rays->ray_angl = game->player_angl - (game->fow / 2);
 	while (ray < WINDOW_WIDTH)
 	{
+		ghosty = false;
 		game->rays->ray_angl = update_rayangl(game->rays->ray_angl);
 		game->rays->wall_flag = false;
 		horizon_line = get_horizon(game, game->rays->ray_angl, &ghosty);
