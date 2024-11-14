@@ -6,66 +6,61 @@
 /*   By: iniska <iniska@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/05 08:49:31 by iniska            #+#    #+#             */
-/*   Updated: 2024/11/07 11:43:25 by iniska           ###   ########.fr       */
+/*   Updated: 2024/11/14 11:05:37 by iniska           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/cub3D.h"
 
-static	void	draw_enemy(t_game *game, int frame_w, int frame_l)
+void	animate(t_game *game)
 {
-	uint32_t 	*pixels;
-	int			x;
-	int			y;
-	int			dest_x = 0;
-	int			dest_y = 0;
-	int			src_pos;
+	static int	frame_counter = 0;
+	static int	delay = 0;
+	int			delay_f;
 
-	pixels = (uint32_t *)game->enemy->ghost_sheet->pixels;
-	game->enemy->x_offset = game->enemy->col * frame_w;
-	game->enemy->y_offset = game->enemy->row * frame_l;
-	y = 0;
-	while(y < frame_l)
+	delay_f = 7;
+	game->enemy->height = 423 / 8; // or 53
+	game->enemy->len = 432 / 12;
+
+	if (delay >= delay_f)
 	{
-		x = 0;
-		while (x < frame_w)
-		{
-			src_pos = (game->enemy->y_offset + y) * game->enemy->ghost_sheet->width + (game->enemy->x_offset + x);
-			game->enemy->color = pixels[src_pos];
-			mlx_put_pixel(game->enemy->ghosty, dest_x + x, dest_y + y, game->enemy->color);
-			x++;
-		}
-		y++;
+		game->enemy->row = frame_counter / 12;
+		game->enemy->col = frame_counter % 12;
+		frame_counter++;
+		if(frame_counter >= 96)
+			frame_counter = 0;
+		delay = 0;
 	}
-
+	else
+		delay++;
 }
 
 
-static void	animate(t_game *game)
+/*
+void	animate(t_game *game)
 {
-	static int frame_counter = 0;
+	static int	frame_counter = 0;
 
 	game->enemy->height = 423 / 8;
 	game->enemy->len = 432 / 12;
 
 	game->enemy->row = frame_counter / 12;
 	game->enemy->col = frame_counter % 12;
-
 	frame_counter++;
 	if(frame_counter >= 96)
 		frame_counter = 0;
-		
-}
 
+}
+*/
 
 //places the right image from ghost_sheet to game->ghosty
-static void	set_ghost(t_game *game)
+void	set_ghost(t_game *game)
 {
 	size_t		dis_x;
 	size_t		dis_y;
 
-	dis_x = game->enemy->g_x - game->player_x;
-	dis_y = game->enemy->g_y - game->player_y;
+	dis_x = game->enemy->g_x - game->rays->p_x;
+	dis_y = game->enemy->g_y - game->rays->p_y;
 
 	// to find one picture from the whole map (432px * 432px)
 	animate(game);
@@ -77,9 +72,8 @@ static void	set_ghost(t_game *game)
 	}
 	game->enemy->distance = sqrt(dis_x * dis_x + dis_y * dis_y);
 	game->enemy->angl_to_p = atan2(dis_y, dis_x);
-	game->enemy->angl = game->enemy->angl_to_p - game->player_angl;
+	game->enemy->angl = fmod(game->enemy->angl_to_p - game->player_angl + PI, 2 * PI) - PI;
 
-	draw_enemy(game, game->enemy->len, game->enemy->height);
 }
 
 static bool	init_enemy(t_game *game)
@@ -111,8 +105,36 @@ static bool	check_position(t_game *game)
 	size_t	x;
 	size_t	y;
 
-	x = 3;
-	y = 2;
+	x = 2;
+	y = 3;
+	while (x < game->height)
+	{
+		while (y < game->longest && y < ft_strlen(game->map[x]))
+		{
+			if (game->map[x][y] == '0' || game->map[x][y] == 'G')
+			{
+				game->map[x][y] = 'G';
+				game->enemy->g_x = x;
+				game->enemy->g_y = y;
+				return (true);
+			}
+			y++;
+		}
+		y = 0;
+		x++;
+	}
+	ft_printf("Enemy does not fit in here!\n");
+	return (false);
+}
+
+/*
+static bool	check_position(t_game *game)
+{
+	size_t	x;
+	size_t	y;
+
+	x = 2;
+	y = 3;
 	game->enemy->g_x = x;
 	game->enemy->g_y = y;
 
@@ -130,20 +152,18 @@ static bool	check_position(t_game *game)
 		if (y >= game->longest || y >= ft_strlen(game->map[x]))
 			return (false);
 	}
-	if (game->map[x][y] == '0')
+	if (game->map[x][y] == '0' || game->map[x][y] == 'G')
 	{
+		game->map[x][y] = 'G';
 		game->enemy->g_x = x;
 		game->enemy->g_y = y;
 		return (true);
 	}
 	else
-	{
-		printf("No room for the enemy\n");
 		return (false);
-	}
-}
+}*/
 
-// set's the ghost to the map (on the row 3)
+// set's the ghost to the map (on the row 2)
 void	ghostie(t_game *game)
 {
 	int screen_x;
@@ -155,6 +175,5 @@ void	ghostie(t_game *game)
 		return ;
 	set_ghost(game);
 	screen_x = (game->enemy->angl / (FOW / 2)) * (WINDOW_WIDTH / 2) + (WINDOW_WIDTH / 2);
-	size = TILE / game->enemy->distance;
-	mlx_image_to_window(game->mlx, game->enemy->ghosty, screen_x, WINDOW_HEIGHT / 2 - size / 2);
+	size = game->enemy->distance; // CHECK THE SIZE HERE!!!
 }
