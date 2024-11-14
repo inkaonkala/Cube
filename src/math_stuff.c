@@ -6,7 +6,7 @@
 /*   By: iniska <iniska@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/17 10:24:06 by iniska            #+#    #+#             */
-/*   Updated: 2024/11/08 09:54:34 by iniska           ###   ########.fr       */
+/*   Updated: 2024/11/14 08:45:32 by iniska           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,14 +33,9 @@ void	save_images_to_struct(t_game *game)
 	colour_flip((uint32_t *)game->ea_texture->pixels, game->ea_texture->width, game->ea_texture->height);
 }
 
-// count the game->player_angl, game->rays->ray_angl, game->fow
 void	count_values(t_game *game)
 {
-	// FOR TESTING
-	printf("PLAYER X: %zu \n", game->player_x);
-	printf("PLAYER Y: %zu \n", game->player_y);
-	
-	if (game->map[game->player_y][game->player_x] == 'N')
+		if (game->map[game->player_y][game->player_x] == 'N')
 		game->player_angl = 3 * PI / 2;
 	else if (game->map[game->player_y][game->player_x] == 'E')
 		game->player_angl = 0;
@@ -50,17 +45,14 @@ void	count_values(t_game *game)
 		game->player_angl = PI;
 	else
 		printf("Player not found\n");
-
 	game->fow = (FOW * PI / 180);
 	game->mouse_on = false;
 	game->rotation = 0;
 	game->left_right = 0;
 	game->up_down = 0;
 	game->width = game->longest;
-
 	game->rays->p_x = (game->player_x * TILE) + TILE / 2;
 	game->rays->p_y = (game->player_y * TILE) + TILE / 2;
-
 	save_images_to_struct(game);
 }
 

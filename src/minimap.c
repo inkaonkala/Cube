@@ -143,7 +143,7 @@ void draw_mini_map(t_game *game)
             mini_y = MINIMAP_IMAGE_SIDE * minimap_line_count;
             
 			color = get_minimap_color(game, count_x, count_y);
-			draw_mini_tile();
+//			draw_mini_tile();
             for (int px = 0; px < MINIMAP_IMAGE_SIDE; px++) 
             {
                 for (int py = 0; py < MINIMAP_IMAGE_SIDE; py++) 
