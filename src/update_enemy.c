@@ -93,6 +93,7 @@ void	draw_enemy(t_game *game, int frame_w, int frame_l)
 	}
 }
 
+
 void	update_enemy(t_game *game)
 {
 	double	enemy_hi;
@@ -242,7 +243,8 @@ void	draw_enemy(t_game *game, int frame_w, int frame_l)
 		y++;
 	}
 }
-
+*/
+/*
 static double	get_setof_x(t_game *game, mlx_texture_t *pic)
 {
 	double	x;
@@ -316,4 +318,9 @@ void update_enemy(t_game *game)
     draw_enemy2(game, bot_pixl, top_pixl, wall_hi);
 }
 
+void	update_enemy(t_game *game)
+{
+	draw_enemy(game, game->enemy->len, game->enemy->height);
+	//update_enemy(game);
+}
 */
