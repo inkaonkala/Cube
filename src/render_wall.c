@@ -6,17 +6,25 @@
 /*   By: iniska <iniska@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/18 12:06:33 by iniska            #+#    #+#             */
-/*   Updated: 2024/11/14 11:39:19 by iniska           ###   ########.fr       */
+/*   Updated: 2024/11/14 11:58:56 by iniska           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/cub3D.h"
 
+static uint32_t hexax(uint32_t r, uint32_t g, uint32_t b)
+{
+	return (r << 16) | (g << 8) | b;
+}
 
 static void	floor_n_ceiling(t_game *game, int ray, double bot_pxl, double top_pxl)
 {
-	// GET THE TIGHT COlOUrS!!!
 	double	i;
+	uint32_t floor;
+	uint32_t ceil;
+
+	floor = hexax(game->floor_r, game->floor_g, game->floor_b);
+	ceil = hexax(game->ceiling_r, game->ceiling_g, game->ceiling_b);
 
 	i = bot_pxl;
 	while (i < WINDOW_HEIGHT)
