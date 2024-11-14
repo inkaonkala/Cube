@@ -6,59 +6,46 @@
 /*   By: iniska <iniska@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/07 11:17:58 by iniska            #+#    #+#             */
-/*   Updated: 2024/11/08 11:45:44 by iniska           ###   ########.fr       */
+/*   Updated: 2024/11/14 08:03:42 by iniska           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/cub3D.h"
 
-static uint32_t invert_rgb(uint32_t color)
+static uint32_t	swap_rgb_bgr(uint32_t color)
 {
-	uint8_t r;
-	uint8_t g;
-	uint8_t b;
-	uint8_t a;
+	uint8_t r = (color >> 24) & 0xFF;
+	uint8_t g = (color >> 16) & 0xFF;
+	uint8_t b = (color >> 8) & 0xFF;
+	uint8_t a = color & 0xFF;
 
-	r = ((color >> 24) & 0XFF);
-	g = ((color >> 16) & 0XFF);
-	b = ((color >> 8) & 0XFF);
-	a = color & 0XFF; // 255
-
-	return ((r << 24) | (g << 16) | (b << 8) | a);
-	//color = (pixel[0] << 24) | (pixel[1] << 16) | (pixel[2] << 8) | 255;
+	return ((a << 24) | (b << 16) | (g << 8) | r);
 }
 
-// All the colours seem to be upside down so they eed to be flipped by bytes
 void	colour_flip(uint32_t *pixels, int width, int height)
 {
-	int			total_pixels;
-	int			i;
-	uint32_t	*pixl;
+	int	i;
 
 	i = 0;
-	total_pixels = width * height;
+	int total_pixels = width * height;
 	while (i < total_pixels)
 	{
-			pixl = (uint32_t *)pixels;
-			pixl[i] = invert_rgb(pixels[i]);
-			i++;
+		pixels[i] = swap_rgb_bgr(pixels[i]);
+		i++;
 	}
-
 }
-
-static int set_t_path(char **map_t_path, char * t_path)
+static int set_t_path(char **map_path, char * t_path)
 {
-	if (*map_t_path)
-		free(*map_t_path);
-	*map_t_path = ft_strtrim(t_path, " ");
-	if (!*map_t_path)
+	if (*map_path)
+		free(*map_path);
+	*map_path = ft_strtrim(t_path, " ");
+	if (!*map_path)
 	{
-		err_message("ft_strtrim() failed in set_t_path");
+		ft_printf("ft_strtrim() failed in set_t_path\n");
 		return (1);
 	}
 	return (0);
 }
-
 
 //int save_colors(t_game *game, char **file_content, t_flag *flags)
 int save_colors(t_game *game, char **file_content)
