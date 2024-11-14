@@ -6,7 +6,7 @@
 /*   By: yhsu <yhsu@student.hive.fi>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/15 12:54:09 by yhsu              #+#    #+#             */
-/*   Updated: 2024/11/14 11:58:18 by yhsu             ###   ########.fr       */
+/*   Updated: 2024/11/14 16:00:33 by yhsu             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,8 +47,7 @@ int main (int argc, char *argv[])
 
 	count_values(game);
 	screenpop(game); // opens a window 
-	free(game);
-	// 清理並結束
-   
+	
+   clean_all(game);
 	return (0);
 }

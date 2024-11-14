@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   raycast.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: iniska <iniska@student.hive.fi>            +#+  +:+       +#+        */
+/*   By: yhsu <yhsu@student.hive.fi>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/15 20:39:06 by iniska            #+#    #+#             */
-/*   Updated: 2024/11/14 10:03:33 by iniska           ###   ########.fr       */
+/*   Updated: 2024/11/14 16:28:41 by yhsu             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,10 @@ static int	wall(t_game *game, float x, float y, bool *ghosty)
 			*ghosty = true;
 		if (game->map[map_y][map_x] == '1')
 			return (1);
+
+		//door
+		if (game->map[map_y][map_x] == 'D')
+			init_door(game);
 	}
 	ghosty = false;
     return (0);
@@ -112,7 +116,8 @@ static float	get_wall_height(t_game *game, float angl, bool *ghosty)
 		y_step = fabs(y_step);
 	else
 		y_step = -fabs(y_step);
-	while (!wall(game, x - ray_move, y, ghosty))
+	//door	
+	while (!wall(game, x - ray_move, y, ghosty))// 
 	{
 		x += x_step;
 		y += y_step;

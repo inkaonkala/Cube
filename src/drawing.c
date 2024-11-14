@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   drawing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: iniska <iniska@student.hive.fi>            +#+  +:+       +#+        */
+/*   By: yhsu <yhsu@student.hive.fi>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/18 13:16:18 by iniska            #+#    #+#             */
-/*   Updated: 2024/11/14 10:24:56 by iniska           ###   ########.fr       */
+/*   Updated: 2024/11/14 14:54:42 by yhsu             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,6 +76,13 @@ static mlx_texture_t	*get_pics_for_wall(t_game *game)
 	mlx_texture_t *tex;
 
 	tex = NULL;
+
+	//door
+	if (game->hit_door == true)
+		return game->door_close_texture;
+
+
+	
 	if (game->rays->wall_flag == true)//THIS
 	{
 		if (game->rays->ray_angl > 0 && game->rays->ray_angl < PI)
@@ -109,6 +116,13 @@ void	draw_wall(t_game *game, double bot_pixl, double top_pixl, double wall_hi)
 		return ;
 	pixels = (uint32_t *)pic->pixels;
 	x = get_setof_x(game, pic);
+
+	//door
+	
+
+
+
+	
 	if (x < 0 || x >- pic->width)
 	{
 		ft_printf("x out of bounds in draw walls\n");

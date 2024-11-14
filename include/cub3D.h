@@ -6,7 +6,7 @@
 /*   By: yhsu <yhsu@student.hive.fi>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/15 12:55:19 by yhsu              #+#    #+#             */
-/*   Updated: 2024/11/14 12:49:33 by yhsu             ###   ########.fr       */
+/*   Updated: 2024/11/14 16:29:33 by yhsu             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -191,12 +191,15 @@ typedef struct s_game
 	char			s;
 
 
-	bool           door_open;
+	bool           hit_door;
+	bool			door_state;//1  true = open    0  false = close
 	size_t			door_x;
 	size_t			door_y;
 	mlx_texture_t	*door_open_texture;
 	mlx_texture_t	*door_close_texture;
 	mlx_image_t 	*door;
+
+	bool  door_open;//need  to delete=
 	
 	
 }	t_game;
@@ -266,6 +269,7 @@ void 	err_message_exit(char * message);
 void 	err_message(char * message);
 void 	free_grid(char **grid);
 void 	clean_all_exit(t_game *game, char *message);
+void clean_all(t_game *game);
 
 //mini_map
 void draw_mini_map(t_game *game);
@@ -287,6 +291,10 @@ void	ghostie(t_game *game);
 void	update_enemy(t_game *game); //, int ray);
 void	animate(t_game *game);
 void	set_ghost(t_game *game);
+
+//door 
+void check_door(t_game *game);
+void init_door(t_game *game);
 
 #endif
 //	draw_enemy(game, game->enemy->len, game->enemy->height);

@@ -74,7 +74,7 @@ void check_door(t_game *game)
     static double last_press;
     double current_time;
 
-    init_door(game);
+    //init_door(game);i put it in wall function 
     // 檢查玩家是否在門附近並處理互動
     dx = game->rays->p_x - game->door_x;
     dy = game->rays->p_y - game->door_y;

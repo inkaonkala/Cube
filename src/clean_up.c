@@ -6,20 +6,15 @@
 /*   By: yhsu <yhsu@student.hive.fi>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/15 17:58:39 by yhsu              #+#    #+#             */
-/*   Updated: 2024/11/14 10:46:07 by yhsu             ###   ########.fr       */
+/*   Updated: 2024/11/14 16:19:27 by yhsu             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/cub3D.h"
 
-
-void clean_all_exit(t_game *game, char *message)
+void free_texture(t_game *game)
 {
-	if (game->file_content)
-        free_grid(game->file_content);
-    if (game->map)
-        free_grid(game->map);
-    if (game->no_texture_path)
+	 if (game->no_texture_path)
         free(game->no_texture_path);
     if (game->so_texture_path)
         free(game->so_texture_path);
@@ -27,14 +22,79 @@ void clean_all_exit(t_game *game, char *message)
         free(game->ea_texture_path);
     if (game->we_texture_path)
         free(game->we_texture_path);
+}
+
+void clean_all(t_game *game)
+{
+	// if (game->file_content)
+    //     free_grid(game->file_content);
+    if (game->map)
+	{
+        free_grid(game->map);
+	}
+	
+	free_texture(game);
+    
+	if (game->floor_color)
+        free(game->floor_color);
+    if (game->ceiling_color)
+        free(game->ceiling_color);
+    if (game->c_split)
+        free_grid(game->c_split);
+    if (game->f_split)
+	{
+		
+    	free_grid(game->f_split);
+	}
+	if (game->canvas)
+	{
+		mlx_delete_image(game->mlx, game->canvas);
+	}
+		
+	if (game->mlx)
+		mlx_terminate(game->mlx);
+	if (game)
+		free(game);
+}
+
+void clean_all_exit(t_game *game, char *message)
+{
+	if (game->file_content)
+	{
+		
+        free_grid(game->file_content);
+	}
+    if (game->map)
+	{
+		
+        free_grid(game->map);
+	}
+	free_texture(game);
+	if (game->mlx)
+		mlx_terminate(game->mlx);
+		
     if (game->floor_color)
         free(game->floor_color);
     if (game->ceiling_color)
         free(game->ceiling_color);
-    if(game->c_split)
+		
+    if (game->c_split)
+	{
+		
         free_grid(game->c_split);
-    if(game->f_split)
+	}
+		
+    if (game->f_split)
+	{
+		
         free_grid(game->f_split);
+	}
+	
+	if (game->canvas)
+		mlx_delete_image(game->mlx, game->canvas);
+		
+	if (game != NULL)
+		free(game);
     if (message != NULL)
     {
 		ft_putendl_fd("Error: ", 2);
