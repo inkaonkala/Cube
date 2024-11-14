@@ -6,7 +6,7 @@
 /*   By: iniska <iniska@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/17 10:24:06 by iniska            #+#    #+#             */
-/*   Updated: 2024/11/14 08:45:32 by iniska           ###   ########.fr       */
+/*   Updated: 2024/11/14 11:40:50 by iniska           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,6 @@ float	distance(t_game *game, float x, float y)
 
 	new_x = x - game->rays->p_x;
 	new_y = y - game->rays->p_y;
-
 	distance = sqrt(pow(new_x, 2) + (pow(new_y, 2)));
 	return (distance);
 }

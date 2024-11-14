@@ -6,7 +6,7 @@
 /*   By: iniska <iniska@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/05 08:49:31 by iniska            #+#    #+#             */
-/*   Updated: 2024/11/14 11:05:37 by iniska           ###   ########.fr       */
+/*   Updated: 2024/11/14 11:45:42 by iniska           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,24 +34,6 @@ void	animate(t_game *game)
 	else
 		delay++;
 }
-
-
-/*
-void	animate(t_game *game)
-{
-	static int	frame_counter = 0;
-
-	game->enemy->height = 423 / 8;
-	game->enemy->len = 432 / 12;
-
-	game->enemy->row = frame_counter / 12;
-	game->enemy->col = frame_counter % 12;
-	frame_counter++;
-	if(frame_counter >= 96)
-		frame_counter = 0;
-
-}
-*/
 
 //places the right image from ghost_sheet to game->ghosty
 void	set_ghost(t_game *game)
@@ -98,8 +80,6 @@ static bool	init_enemy(t_game *game)
 	return (true);
 }
 
-// Check that ghosty is not on the 1 or player
-
 static bool	check_position(t_game *game)
 {
 	size_t	x;
@@ -127,43 +107,6 @@ static bool	check_position(t_game *game)
 	return (false);
 }
 
-/*
-static bool	check_position(t_game *game)
-{
-	size_t	x;
-	size_t	y;
-
-	x = 2;
-	y = 3;
-	game->enemy->g_x = x;
-	game->enemy->g_y = y;
-
-	if (x >= game->height || y >= game->longest)
-	{
-		printf("Enemy is out of bounds\n");
-		return (false);
-	}
-	while (y < game->longest && game->map[x][y] != '\0' && 
-			(game->map[x][y] == '1' || game->map[x][y] == 'W' ||
-			game->map[x][y] == 'E'|| game->map[x][y] == 'S' ||
-			game->map[x][y] == 'N' ))
-	{
-		y++;
-		if (y >= game->longest || y >= ft_strlen(game->map[x]))
-			return (false);
-	}
-	if (game->map[x][y] == '0' || game->map[x][y] == 'G')
-	{
-		game->map[x][y] = 'G';
-		game->enemy->g_x = x;
-		game->enemy->g_y = y;
-		return (true);
-	}
-	else
-		return (false);
-}*/
-
-// set's the ghost to the map (on the row 2)
 void	ghostie(t_game *game)
 {
 	int screen_x;
@@ -177,3 +120,20 @@ void	ghostie(t_game *game)
 	screen_x = (game->enemy->angl / (FOW / 2)) * (WINDOW_WIDTH / 2) + (WINDOW_WIDTH / 2);
 	size = game->enemy->distance; // CHECK THE SIZE HERE!!!
 }
+
+/*
+void	animate(t_game *game)
+{
+	static int	frame_counter = 0;
+
+	game->enemy->height = 423 / 8;
+	game->enemy->len = 432 / 12;
+
+	game->enemy->row = frame_counter / 12;
+	game->enemy->col = frame_counter % 12;
+	frame_counter++;
+	if(frame_counter >= 96)
+		frame_counter = 0;
+
+}
+*/
