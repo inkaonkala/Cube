@@ -6,7 +6,7 @@
 /*   By: iniska <iniska@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/17 10:24:06 by iniska            #+#    #+#             */
-/*   Updated: 2024/11/15 07:54:55 by iniska           ###   ########.fr       */
+/*   Updated: 2024/11/15 09:32:06 by iniska           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ void	save_images_to_struct(t_game *game)
 
 void	count_values(t_game *game)
 {
-		if (game->map[game->player_y][game->player_x] == 'N')
+	if (game->map[game->player_y][game->player_x] == 'N')
 		game->player_angl = 3 * PI / 2;
 	else if (game->map[game->player_y][game->player_x] == 'E')
 		game->player_angl = 0;

@@ -6,7 +6,7 @@
 /*   By: iniska <iniska@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/17 09:41:09 by iniska            #+#    #+#             */
-/*   Updated: 2024/11/14 11:36:44 by iniska           ###   ########.fr       */
+/*   Updated: 2024/11/15 10:58:45 by iniska           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,11 @@ static void	move_player(t_game *game, double move_x, double move_y)
 			game->rays->p_x += 1;
 		if (game->rays->p_y % TILE == 0)
 			game->rays->p_y += 1;
+	}
+	if (BONUS)
+	{
+		if (game->map[game->rays->p_x][game->rays->p_y] == 'G')
+			game->death = true;
 	}
 }
 
@@ -112,4 +117,11 @@ void	move_and_beam(void	*data)
 	game->mini_angle= game->player_angl;
 	raycast(game);
 	draw_mini_map(game);
+	if (game->death == true)
+	{
+		ft_printf("DEATH!\n");
+		game_over_image(game);
+		//this segfaults cause no cleaning!
+	}
+
 }
