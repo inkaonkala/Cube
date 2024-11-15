@@ -6,7 +6,7 @@
 /*   By: iniska <iniska@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/05 08:49:31 by iniska            #+#    #+#             */
-/*   Updated: 2024/11/14 11:45:42 by iniska           ###   ########.fr       */
+/*   Updated: 2024/11/15 07:55:55 by iniska           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,10 +18,9 @@ void	animate(t_game *game)
 	static int	delay = 0;
 	int			delay_f;
 
-	delay_f = 7;
+	delay_f = 9;
 	game->enemy->height = 423 / 8; // or 53
 	game->enemy->len = 432 / 12;
-
 	if (delay >= delay_f)
 	{
 		game->enemy->row = frame_counter / 12;
