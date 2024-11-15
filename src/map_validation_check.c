@@ -6,7 +6,7 @@
 /*   By: yhsu <yhsu@student.hive.fi>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/24 19:16:05 by yhsu              #+#    #+#             */
-/*   Updated: 2024/11/15 14:35:16 by yhsu             ###   ########.fr       */
+/*   Updated: 2024/11/15 19:51:32 by yhsu             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,7 +97,7 @@ static int flood_fill(char **tmp, int i, int j)// open return 1
 {
 	if (i < 0 || j < 0 || !tmp[i] || !tmp[i][j])
 		return (1);
-	if (tmp[i][j] == '1')
+	if (tmp[i][j] == '1' || tmp[i][j] == 'D')
 		return (0);
 	tmp[i][j] = '1';
 	if (flood_fill(tmp, i + 1, j) != 0)
@@ -147,7 +147,7 @@ static int check_map_closed(t_game *game, char **map)
 		clean_all_exit(game, "The map copy failed.");
 	if (if_map_closed(game, tmp) == 1)
 	{
-		dprintf(2, "map not closed\n");
+		dprintf(2, "map not closed\n");//change to error message 
 		free_grid(tmp);
 		return (1);//the map is open
 	}
