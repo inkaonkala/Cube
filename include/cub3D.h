@@ -6,7 +6,7 @@
 /*   By: iniska <iniska@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/15 12:55:19 by yhsu              #+#    #+#             */
-/*   Updated: 2024/11/14 11:22:11 by iniska           ###   ########.fr       */
+/*   Updated: 2024/11/15 08:01:26 by iniska           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@
 
 //for enemy
 
-# define BONUS false
+# define BONUS true
 # define ENEMYP "./textures/ghosty.png"
 # define MAX_VIEW_DIS 1000 * TILE
 
