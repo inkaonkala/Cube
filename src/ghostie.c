@@ -6,7 +6,7 @@
 /*   By: iniska <iniska@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/05 08:49:31 by iniska            #+#    #+#             */
-/*   Updated: 2024/11/15 07:55:55 by iniska           ###   ########.fr       */
+/*   Updated: 2024/11/15 10:56:01 by iniska           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ void	animate(t_game *game)
 	int			delay_f;
 
 	delay_f = 9;
-	game->enemy->height = 423 / 8; // or 53
+	game->enemy->height = 423 / 8;
 	game->enemy->len = 432 / 12;
 	if (delay >= delay_f)
 	{
@@ -42,8 +42,6 @@ void	set_ghost(t_game *game)
 
 	dis_x = game->enemy->g_x - game->rays->p_x;
 	dis_y = game->enemy->g_y - game->rays->p_y;
-
-	// to find one picture from the whole map (432px * 432px)
 	animate(game);
 	game->enemy->ghosty = mlx_new_image(game->mlx, game->enemy->len, game->enemy->height);	
 	if (!game->enemy->ghosty)
@@ -108,31 +106,12 @@ static bool	check_position(t_game *game)
 
 void	ghostie(t_game *game)
 {
-	int screen_x;
-	int size;
+//	int screen_x;
 	
 	if(!init_enemy(game))
 		return ;
 	if(!check_position(game))
 		return ;
 	set_ghost(game);
-	screen_x = (game->enemy->angl / (FOW / 2)) * (WINDOW_WIDTH / 2) + (WINDOW_WIDTH / 2);
-	size = game->enemy->distance; // CHECK THE SIZE HERE!!!
+//	screen_x = (game->enemy->angl / (FOW / 2)) * (WINDOW_WIDTH / 2) + (WINDOW_WIDTH / 2);
 }
-
-/*
-void	animate(t_game *game)
-{
-	static int	frame_counter = 0;
-
-	game->enemy->height = 423 / 8;
-	game->enemy->len = 432 / 12;
-
-	game->enemy->row = frame_counter / 12;
-	game->enemy->col = frame_counter % 12;
-	frame_counter++;
-	if(frame_counter >= 96)
-		frame_counter = 0;
-
-}
-*/
