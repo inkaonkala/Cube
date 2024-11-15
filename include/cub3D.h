@@ -6,7 +6,7 @@
 /*   By: yhsu <yhsu@student.hive.fi>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/15 12:55:19 by yhsu              #+#    #+#             */
-/*   Updated: 2024/11/15 14:33:21 by yhsu             ###   ########.fr       */
+/*   Updated: 2024/11/15 19:18:44 by yhsu             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -193,6 +193,7 @@ typedef struct s_game
 	char			s;
 
 
+	bool           isdoor;
 	bool           hit_door;
 	bool			door_open;//1  true = open    0  false = close
 	size_t			door_x;
@@ -201,7 +202,7 @@ typedef struct s_game
 	mlx_texture_t	*door_close_texture;
 	mlx_image_t 	*door;
 
-	bool  door_open;//need  to delete=
+	
 	
 	
 }	t_game;

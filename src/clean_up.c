@@ -6,7 +6,7 @@
 /*   By: yhsu <yhsu@student.hive.fi>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/15 17:58:39 by yhsu              #+#    #+#             */
-/*   Updated: 2024/11/14 16:19:27 by yhsu             ###   ########.fr       */
+/*   Updated: 2024/11/15 17:28:57 by yhsu             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,6 @@ void clean_all(t_game *game)
         free_grid(game->c_split);
     if (game->f_split)
 	{
-		
     	free_grid(game->f_split);
 	}
 	if (game->canvas)
@@ -61,12 +60,10 @@ void clean_all_exit(t_game *game, char *message)
 {
 	if (game->file_content)
 	{
-		
         free_grid(game->file_content);
 	}
     if (game->map)
 	{
-		
         free_grid(game->map);
 	}
 	free_texture(game);
@@ -80,13 +77,11 @@ void clean_all_exit(t_game *game, char *message)
 		
     if (game->c_split)
 	{
-		
         free_grid(game->c_split);
 	}
 		
     if (game->f_split)
 	{
-		
         free_grid(game->f_split);
 	}
 	

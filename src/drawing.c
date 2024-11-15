@@ -6,7 +6,7 @@
 /*   By: yhsu <yhsu@student.hive.fi>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/18 13:16:18 by iniska            #+#    #+#             */
-/*   Updated: 2024/11/15 14:34:27 by yhsu             ###   ########.fr       */
+/*   Updated: 2024/11/15 19:43:41 by yhsu             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,14 +76,20 @@ static mlx_texture_t	*get_pics_for_wall(t_game *game)
 	tex = NULL;
 
 	//door
-	if (game->hit_door == true)
-		return game->door_close_texture;
-	else
-		return game->door_open_texture;
-
-	
-
-	if (game->rays->wall_flag == true)
+	if (game->isdoor == true)  
+	{
+		if (game->door_open == false)	
+		{
+			game->isdoor = false;
+			return game->door_close_texture;
+		}	
+		else
+		{
+			game->isdoor = false;
+			return game->door_open_texture;
+		}
+	}
+	else if (game->rays->wall_flag == true)
 	{
 		if (game->rays->ray_angl > 0 && game->rays->ray_angl < PI)
 			tex = game->no_texture;
@@ -111,18 +117,37 @@ void	draw_wall(t_game *game, double bot_pixl, double top_pixl, double wall_hi)
 	double			y;
 	int				pos;
 
-	pic = get_pics_for_wall(game);
-	if (!pic || wall_hi <= 0)
-		return ;
-	pixels = (uint32_t *)pic->pixels;
-	x = get_setof_x(game, pic);
+	pic = get_pics_for_wall(game);  // 獲取適當的牆壁紋理
+	if (!pic || wall_hi <= 0)       // 檢查紋理是否有效
+    	return;
+	pixels = (uint32_t *)pic->pixels;  // 獲取紋理像素數據
+	x = get_setof_x(game, pic);        // 計算紋理的 X 座標
 
-	//door
+	// //door
+	// // 如果是門，根據門的狀態調整繪製
+    // if (game->hit_door)
+    // {
+    //     // 取得此門的狀態
+    //     int door_index = get_door_index(game, game->door_x, game->door_y);
+    //     float door_state = game->door_state[door_index];
+
+    //     // 根據門的開啟狀態調整繪製
+    //     if (door_state > 0.0)
+    //     {
+    //         // 計算門移動的偏移量
+    //         double offset = door_state * TILE;
+    //         x = (x + offset) % pic->width;
+            
+    //         // 可以添加更多視覺效果
+    //         // 例如：門打開時的透明度變化
+    //         // 或者特殊的動畫效果
+    //     }
+    // }
+
 	
+   
 
 
-
-	
 	if (x < 0 || x >- pic->width)
 	{
 		ft_printf("x out of bounds in draw walls\n");
