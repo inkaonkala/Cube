@@ -6,7 +6,7 @@
 /*   By: yhsu <yhsu@student.hive.fi>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/17 09:41:09 by iniska            #+#    #+#             */
-/*   Updated: 2024/11/14 14:31:31 by yhsu             ###   ########.fr       */
+/*   Updated: 2024/11/15 14:35:32 by yhsu             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,11 @@ static void	move_player(t_game *game, double move_x, double move_y)
 		if (game->rays->p_y % TILE == 0)
 			game->rays->p_y += 1;
 	}
+	if (BONUS)
+	{
+		if (game->map[game->rays->p_x][game->rays->p_y] == 'G')
+			game->death = true;
+	}
 }
 
 static void	rotate(t_game *game, int i)
@@ -52,37 +57,43 @@ static void	rotate(t_game *game, int i)
 	}
 }
 
+static void	wasd(t_game *game, double *move_x, double *move_y)
+{
+	if (game->left_right == -1) // D
+	{
+		*move_x = -sin(game->player_angl) * SPEED;
+		*move_y = cos(game->player_angl) * SPEED;
+		game->left_right = 0;
+	}
+	if (game->left_right == 1) // A
+	{
+		*move_x = sin(game->player_angl) * SPEED;
+		*move_y = -cos(game->player_angl) * SPEED;
+		game->left_right = 0;
+	}
+	if (game->up_down == -1) // S
+	{
+		*move_x = -cos(game->player_angl) * SPEED;
+		*move_y = -sin(game->player_angl) * SPEED;
+		game->up_down = 0;
+ 	}
+	if (game->up_down == 1) // W
+	{
+		*move_x = cos(game->player_angl) * SPEED;
+		*move_y = sin(game->player_angl) * SPEED;
+		game->up_down = 0;
+	}
+}
+
 static void	move_hook(t_game *game, double move_x, double move_y)
 {
+	wasd(game, &move_x, &move_y);
+
 	if (game->rotation == 1)
 		rotate(game, 1);
 	if (game->rotation == -1)
 		rotate(game, 0);
 
-	if (game->left_right == -1) // D
-	{
-		move_x = -sin(game->player_angl) * SPEED;
-		move_y = cos(game->player_angl) * SPEED;
-		game->left_right = 0;
-	}
-	if (game->left_right == 1) // A
-	{
-		move_x = sin(game->player_angl) * SPEED;
-		move_y = -cos(game->player_angl) * SPEED;
-		game->left_right = 0;
-	}
-	if (game->up_down == -1) // S
-	{
-		move_x = -cos(game->player_angl) * SPEED;
-		move_y = -sin(game->player_angl) * SPEED;
-		game->up_down = 0;
- 	}
-	if (game->up_down == 1) // W
-	{
-		move_x = cos(game->player_angl) * SPEED;
-		move_y = sin(game->player_angl) * SPEED;
-		game->up_down = 0;
-	}
 	game->up_down = 0;
 	game->left_right = 0;
 	game->rotation = 0;
@@ -110,4 +121,11 @@ void	move_and_beam(void	*data)
 	raycast(game);
 	//check_door(game);
 	draw_mini_map(game);
+	if (game->death == true)
+	{
+		ft_printf("DEATH!\n");
+		game_over_image(game);
+		//this segfaults cause no cleaning!
+	}
+
 }

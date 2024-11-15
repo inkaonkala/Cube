@@ -6,7 +6,7 @@
 /*   By: yhsu <yhsu@student.hive.fi>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/18 13:16:18 by iniska            #+#    #+#             */
-/*   Updated: 2024/11/14 14:54:42 by yhsu             ###   ########.fr       */
+/*   Updated: 2024/11/15 14:34:27 by yhsu             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,12 +14,10 @@
 
 static mlx_texture_t	*backup_box()
 {
-	
 	static mlx_texture_t	*blakkis;
 	int						wid;
 	int						hei;
 
-	
 	wid = 64;
 	hei = 64;
 	if(!blakkis)
@@ -64,7 +62,7 @@ static double	get_setof_x(t_game *game, mlx_texture_t *pic)
 		printf("No Picture\n");
     	return (x);
 	}
-	if (game->rays->wall_flag == true)//THIS
+	if (game->rays->wall_flag == true)
 		x = (int)fmodf((game->rays->horizon_inter_x * (pic->width / TILE)), pic->width);
 	else
 		x = (int)fmodf((game->rays->vertical_inter_y * (pic->width / TILE)), pic->width);
@@ -84,7 +82,8 @@ static mlx_texture_t	*get_pics_for_wall(t_game *game)
 		return game->door_open_texture;
 
 	
-	if (game->rays->wall_flag == true)//THIS
+
+	if (game->rays->wall_flag == true)
 	{
 		if (game->rays->ray_angl > 0 && game->rays->ray_angl < PI)
 			tex = game->no_texture;

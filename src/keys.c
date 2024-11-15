@@ -6,15 +6,14 @@
 /*   By: yhsu <yhsu@student.hive.fi>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/28 10:54:19 by iniska            #+#    #+#             */
-/*   Updated: 2024/11/14 12:50:05 by yhsu             ###   ########.fr       */
+/*   Updated: 2024/11/15 14:35:02 by yhsu             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/cub3D.h"
 
 void	keys(t_game *game)
-{
-	
+{	
     if (mlx_is_key_down(game->mlx, MLX_KEY_W) )
 	{
 		game->up_down = 1;

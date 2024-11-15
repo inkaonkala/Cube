@@ -6,7 +6,7 @@
 /*   By: yhsu <yhsu@student.hive.fi>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/15 12:55:19 by yhsu              #+#    #+#             */
-/*   Updated: 2024/11/14 16:29:33 by yhsu             ###   ########.fr       */
+/*   Updated: 2024/11/15 14:33:21 by yhsu             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,7 @@
 # define ENEMYP "./textures/ghosty.png"
 # define DOOR_PATH_CLOSE "./textures/door_closed_0.png"
 # define DOOR_PATH_OPEN "./textures/door_opening_1.png"
+# define GAMEOVERI "./textures/gameover.png"
 # define MAX_VIEW_DIS 1000 * TILE
 
 // Forward declaration of t_game
@@ -161,6 +162,7 @@ typedef struct s_game
 	int 			last_item;
 	bool			mouse_on;
 	bool			horizon;
+	bool			death;
 
 	//it got moves
 	int				rotation;
@@ -284,13 +286,15 @@ void	mouse_move(double x, double y, void *data);
 void 	mouse_press(mouse_key_t button, action_t action, modifier_key_t mods, void *data);
 
 // enemystuff
-void	draw_enemy(t_game *game, int frame_w, int frame_l);
+//void	draw_enemy(t_game *game, int frame_w, int frame_l);
 void	ghostie(t_game *game);
+bool	death_check(t_game *game);
 
 //void update_enemy(t_game *game, double bot_pixl, double top_pixl, double ghostie_hi);
 void	update_enemy(t_game *game); //, int ray);
 void	animate(t_game *game);
 void	set_ghost(t_game *game);
+void	game_over_image(t_game *game);
 
 //door 
 void check_door(t_game *game);
