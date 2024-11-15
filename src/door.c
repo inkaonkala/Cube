@@ -36,15 +36,11 @@ void check_door_position(t_game *game, char ** map)
 
 void render_door(t_game *game, char *path)
 {
-    mlx_texture_t *door_text;
+  
 
     door_text = NULL;
-    door_text = mlx_load_png(path);
-    if (!door_text)
-    {
-        mlx_strerror(mlx_errno);
-		clean_all_exit(game, "mlx_png_err");
-    }
+    
+    
    
     game->door = mlx_texture_to_image(game->mlx, door_text);
     if (!game->door)
@@ -53,7 +49,7 @@ void render_door(t_game *game, char *path)
 		clean_all_exit(game, "mlx_door_mlx_err");
     }
 
-    mlx_delete_texture(door_text);
+    
     dprintf(2, "door x: %zu, door y : %zu\n", game->door_x, game->door_y);
     mlx_image_to_window(game->mlx, game->door, game->door_x , game->door_x );
     game->door->instances[0].z = 1;
@@ -63,7 +59,21 @@ void render_door(t_game *game, char *path)
 void init_door(t_game *game)
 {
     game->door_open = false;
+    game->hit_door = false;
     check_door_position(game, game->map);
+    game->door_open_texture = mlx_load_png(DOOR_PATH_OPEN);
+    
+    if (!game->door_open_texture)
+    {
+        mlx_strerror(mlx_errno);
+		clean_all_exit(game, "mlx_png_err");
+    }
+    game->door_close_texture = mlx_load_png(DOOR_PATH_CLOSE);
+    if (!game->door_close_texture)
+    {
+        mlx_strerror(mlx_errno);
+		clean_all_exit(game, "mlx_png_err");
+    }
 }
 
 void check_door(t_game *game)

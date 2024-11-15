@@ -166,14 +166,14 @@ static bool	check_position(t_game *game)
 // set's the ghost to the map (on the row 2)
 void	ghostie(t_game *game)
 {
-	int screen_x;
-	int size;
+	//int screen_x;
+	//int size;
 	
 	if(!init_enemy(game))
 		return ;
 	if(!check_position(game))
 		return ;
 	set_ghost(game);
-	screen_x = (game->enemy->angl / (FOW / 2)) * (WINDOW_WIDTH / 2) + (WINDOW_WIDTH / 2);
-	size = game->enemy->distance; // CHECK THE SIZE HERE!!!
+	//screen_x = (game->enemy->angl / (FOW / 2)) * (WINDOW_WIDTH / 2) + (WINDOW_WIDTH / 2);
+	//size = game->enemy->distance; // CHECK THE SIZE HERE!!!
 }

@@ -50,7 +50,7 @@ void	set_walls(t_game *game, int ray)
 		bot_pixl = WINDOW_HEIGHT;
 	if (top_pixl < 0)
 		top_pixl = 0;
-	game->rays->i = ray;
+	game->rays->i = ray;     
 
 	draw_wall(game, bot_pixl, top_pixl, wall_hi);
 	floor_n_ceiling(game, ray, bot_pixl, top_pixl);

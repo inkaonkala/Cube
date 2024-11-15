@@ -192,7 +192,7 @@ typedef struct s_game
 
 
 	bool           hit_door;
-	bool			door_state;//1  true = open    0  false = close
+	bool			door_open;//1  true = open    0  false = close
 	size_t			door_x;
 	size_t			door_y;
 	mlx_texture_t	*door_open_texture;
