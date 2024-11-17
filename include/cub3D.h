@@ -194,6 +194,7 @@ typedef struct s_game
 
 
 	bool           isdoor;
+	bool			door_state;
 	bool           hit_door;
 	bool			door_open;//1  true = open    0  false = close
 	size_t			door_x;

@@ -35,6 +35,7 @@ static int	wall(t_game *game, float x, float y, bool *ghosty)
 		{
 			
 			init_door(game);
+			game->hit_door = true;
 			return (2);
 		}
 	}

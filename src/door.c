@@ -57,10 +57,11 @@ void check_door_position(t_game *game, char ** map)
 
 void init_door(t_game *game)
 {
-    game->isdoor = true;
-	game->door_open = false;
+    
+	game->door_state = false;
     game->hit_door = false;
     check_door_position(game, game->map);
+
     game->door_open_texture = mlx_load_png(DOOR_PATH_OPEN);
     
     if (!game->door_open_texture)

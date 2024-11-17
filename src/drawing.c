@@ -80,14 +80,15 @@ static mlx_texture_t	*get_pics_for_wall(t_game *game)
 	{
 		if (game->door_open == false)	
 		{
-			game->isdoor = false;
+			
 			return game->door_close_texture;
 		}	
 		else
 		{
-			game->isdoor = false;
+			
 			return game->door_open_texture;
 		}
+		game->isdoor = false;
 	}
 	else if (game->rays->wall_flag == true)
 	{

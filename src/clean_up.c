@@ -22,6 +22,12 @@ void free_texture(t_game *game)
         free(game->ea_texture_path);
     if (game->we_texture_path)
         free(game->we_texture_path);
+
+     // door bonus
+    if (game->door_close_texture)
+        free(game->door_close_texture);
+     if (game->door_open_texture)
+        free(game->door_open_texture);
 }
 
 void clean_all(t_game *game)
