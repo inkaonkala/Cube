@@ -20,15 +20,20 @@ static int	get_rgba(int r, int g, int b, int a)
 
 static int find_minimap_color(t_game *game, int map_x, int map_y)
 {
+   
+   
     if (map_x < 0 || map_y < 0 || map_x >= (int)game->longest || map_y >= (int)game->height)
-        return (get_rgba(10, 10, 10, 255));
+        return (get_rgba(0, 0, 0, 100));//gray
 
     if (!game->map || !game->map[map_y]) 
         return (get_rgba(10, 10, 10, 255));
 
     if (game->map[map_y][map_x] == '1')
         return (get_rgba(40, 26, 13, 255));
-    else 
+    else if (game->map[map_y][map_x] == 'D')
+        return (get_rgba(0, 255, 0, 255));
+       // return (get_rgba(137, 81, 41, 255)); // brown
+    else
         return (get_rgba(230, 224, 193, 255)); // beige
 
     return (get_rgba(10, 10, 10, 255));
@@ -39,10 +44,10 @@ static int get_minimap_color(t_game *game, int count_x, int count_y)
     int start_pos = MINIMAP_TILE_COUNT / 2;
     int map_x = ((int)game->rays->p_x / TILE) - (start_pos - count_x);
     int map_y = ((int)game->rays->p_y / TILE) - (start_pos - count_y);
-    if (map_x < 0) map_x = 0;
-    if (map_y < 0) map_y = 0;
-    if (map_x >= (int)game->longest) map_x = game->longest - 1;
-    if (map_y >= (int)game->height) map_y = game->height - 1;
+   // if (map_x < 0) map_x = 0;
+   // if (map_y < 0) map_y = 0;
+   // if (map_x >= (int)game->longest) map_x = game->longest - 1;
+    //if (map_y >= (int)game->height) map_y = game->height - 1;
 
     return (find_minimap_color(game, map_x, map_y));
 }

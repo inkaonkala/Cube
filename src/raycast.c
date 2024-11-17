@@ -34,7 +34,7 @@ static int	wall(t_game *game, float x, float y, bool *ghosty)
 		if (game->map[map_y][map_x] == 'D')
 		{
 			
-			init_door(game);
+			//init_door(game);
 			game->hit_door = true;
 			return (2);
 		}

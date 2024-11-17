@@ -119,7 +119,9 @@ void	move_and_beam(void	*data)
 	move_hook(game, 0, 0);
 	game->mini_angle= game->player_angl;
 	raycast(game);
-	//check_door(game);
+	
+	//bonus
+	init_door(game);
 	draw_mini_map(game);
 	if (game->death == true)
 	{

@@ -34,6 +34,11 @@ void	keys(t_game *game)
 		game->left_right = -1;
 		game->s = 'E';
 	}
+	else if ( mlx_is_key_down(game->mlx, MLX_KEY_E) )
+	{
+		
+		game->d = 'D';
+	}
     if (mlx_is_key_down(game->mlx, MLX_KEY_LEFT))
 		game->rotation = -1;
     else if (mlx_is_key_down(game->mlx, MLX_KEY_RIGHT))

@@ -76,19 +76,14 @@ static mlx_texture_t	*get_pics_for_wall(t_game *game)
 	tex = NULL;
 
 	//door
-	if (game->isdoor == true)  
+	if (game->hit_door == true)  
 	{
-		if (game->door_open == false)	
-		{
-			
-			return game->door_close_texture;
-		}	
+		check_door(game);
+		if (game->door_state == true)	
+			tex = game->door_open_texture;
 		else
-		{
-			
-			return game->door_open_texture;
-		}
-		game->isdoor = false;
+			tex = game->door_close_texture;
+		game->hit_door = false;
 	}
 	else if (game->rays->wall_flag == true)
 	{
@@ -124,8 +119,8 @@ void	draw_wall(t_game *game, double bot_pixl, double top_pixl, double wall_hi)
 	pixels = (uint32_t *)pic->pixels;  // 獲取紋理像素數據
 	x = get_setof_x(game, pic);        // 計算紋理的 X 座標
 
-	// //door
-	// // 如果是門，根據門的狀態調整繪製
+	//door
+	// 如果是門，根據門的狀態調整繪製
     // if (game->hit_door)
     // {
     //     // 取得此門的狀態

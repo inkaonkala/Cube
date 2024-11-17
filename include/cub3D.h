@@ -193,10 +193,9 @@ typedef struct s_game
 	char			s;
 
 
-	bool           isdoor;
-	bool			door_state;
+	char 			d;
+	bool			door_state;//1  true = open    0  false = close
 	bool           hit_door;
-	bool			door_open;//1  true = open    0  false = close
 	size_t			door_x;
 	size_t			door_y;
 	mlx_texture_t	*door_open_texture;
@@ -301,6 +300,7 @@ void	game_over_image(t_game *game);
 //door 
 void check_door(t_game *game);
 void init_door(t_game *game);
+void check_door_position(t_game *game, char ** map);
 
 #endif
 //	draw_enemy(game, game->enemy->len, game->enemy->height);
