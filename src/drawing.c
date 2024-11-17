@@ -119,31 +119,6 @@ void	draw_wall(t_game *game, double bot_pixl, double top_pixl, double wall_hi)
 	pixels = (uint32_t *)pic->pixels;  // 獲取紋理像素數據
 	x = get_setof_x(game, pic);        // 計算紋理的 X 座標
 
-	//door
-	// 如果是門，根據門的狀態調整繪製
-    // if (game->hit_door)
-    // {
-    //     // 取得此門的狀態
-    //     int door_index = get_door_index(game, game->door_x, game->door_y);
-    //     float door_state = game->door_state[door_index];
-
-    //     // 根據門的開啟狀態調整繪製
-    //     if (door_state > 0.0)
-    //     {
-    //         // 計算門移動的偏移量
-    //         double offset = door_state * TILE;
-    //         x = (x + offset) % pic->width;
-            
-    //         // 可以添加更多視覺效果
-    //         // 例如：門打開時的透明度變化
-    //         // 或者特殊的動畫效果
-    //     }
-    // }
-
-	
-   
-
-
 	if (x < 0 || x >- pic->width)
 	{
 		ft_printf("x out of bounds in draw walls\n");

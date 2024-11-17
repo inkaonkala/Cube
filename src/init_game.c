@@ -129,6 +129,8 @@ static void parse_file(t_game *game, char *mapfile)
 
 void init_game(t_game *game, char *mapfile)
 {
+	game->death = false;
+	game->win = false;
 	parse_file(game, mapfile);
 	
 

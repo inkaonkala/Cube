@@ -163,7 +163,7 @@ typedef struct s_game
 	bool			mouse_on;
 	bool			horizon;
 	bool			death;
-
+	bool			win;
 	//it got moves
 	int				rotation;
 	int				up_down;
@@ -202,7 +202,7 @@ typedef struct s_game
 	mlx_texture_t	*door_close_texture;
 	mlx_image_t 	*door;
 
-	
+	mlx_image_t *gameover_image; 
 	
 	
 }	t_game;

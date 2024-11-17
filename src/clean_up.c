@@ -51,6 +51,10 @@ void clean_all(t_game *game)
 	{
     	free_grid(game->f_split);
 	}
+    if (game->gameover_image)
+        mlx_delete_image(game->mlx, game->gameover_image);
+    if (game->door)
+        mlx_delete_image(game->mlx, game->door);
 	if (game->canvas)
 	{
 		mlx_delete_image(game->mlx, game->canvas);
@@ -85,12 +89,15 @@ void clean_all_exit(t_game *game, char *message)
 	{
         free_grid(game->c_split);
 	}
-		
+	
     if (game->f_split)
 	{
         free_grid(game->f_split);
 	}
-	
+	if (game->gameover_image)
+        mlx_delete_image(game->mlx, game->gameover_image);
+    if (game->door)
+        mlx_delete_image(game->mlx, game->door);
 	if (game->canvas)
 		mlx_delete_image(game->mlx, game->canvas);
 		

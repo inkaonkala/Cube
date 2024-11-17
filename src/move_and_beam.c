@@ -38,6 +38,8 @@ static void	move_player(t_game *game, double move_x, double move_y)
 	{
 		if (game->map[game->rays->p_x][game->rays->p_y] == 'G')
 			game->death = true;
+		if (game->map[game->rays->p_x][game->rays->p_y] == 'D')
+			game->win = true;
 	}
 }
 
@@ -119,11 +121,18 @@ void	move_and_beam(void	*data)
 	move_hook(game, 0, 0);
 	game->mini_angle= game->player_angl;
 	raycast(game);
-	
+
 	//bonus
 	init_door(game);
 	draw_mini_map(game);
 	if (game->death == true)
+	{
+		ft_printf("DEATH!\n");
+		game_over_image(game);
+		//this segfaults cause no cleaning!
+	}
+
+	if (game->win == true)
 	{
 		ft_printf("DEATH!\n");
 		game_over_image(game);
