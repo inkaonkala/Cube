@@ -3,14 +3,42 @@
 /*                                                        :::      ::::::::   */
 /*   keys.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yhsu <yhsu@student.hive.fi>                +#+  +:+       +#+        */
+/*   By: iniska <iniska@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/28 10:54:19 by iniska            #+#    #+#             */
-/*   Updated: 2024/11/15 14:35:02 by yhsu             ###   ########.fr       */
+/*   Updated: 2024/11/18 14:36:42 by iniska           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/cub3D.h"
+
+void	wasd(t_game *game, double *move_x, double *move_y)
+{
+	if (game->left_right == -1) // D
+	{
+		*move_x = -sin(game->player_angl) * SPEED;
+		*move_y = cos(game->player_angl) * SPEED;
+		game->left_right = 0;
+	}
+	if (game->left_right == 1) // A
+	{
+		*move_x = sin(game->player_angl) * SPEED;
+		*move_y = -cos(game->player_angl) * SPEED;
+		game->left_right = 0;
+	}
+	if (game->up_down == -1) // S
+	{
+		*move_x = -cos(game->player_angl) * SPEED;
+		*move_y = -sin(game->player_angl) * SPEED;
+		game->up_down = 0;
+ 	}
+	if (game->up_down == 1) // W
+	{
+		*move_x = cos(game->player_angl) * SPEED;
+		*move_y = sin(game->player_angl) * SPEED;
+		game->up_down = 0;
+	}
+}
 
 void	keys(t_game *game)
 {	
@@ -36,8 +64,8 @@ void	keys(t_game *game)
 	}
 	else if ( mlx_is_key_down(game->mlx, MLX_KEY_E) )
 	{
-		
 		game->d = 'D';
+		game->win = true;
 	}
     if (mlx_is_key_down(game->mlx, MLX_KEY_LEFT))
 		game->rotation = -1;

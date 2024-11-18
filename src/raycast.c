@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   raycast.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yhsu <yhsu@student.hive.fi>                +#+  +:+       +#+        */
+/*   By: iniska <iniska@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/15 20:39:06 by iniska            #+#    #+#             */
-/*   Updated: 2024/11/15 19:15:14 by yhsu             ###   ########.fr       */
+/*   Updated: 2024/11/18 14:50:52 by iniska           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,17 +27,16 @@ static int	wall(t_game *game, float x, float y, bool *ghosty)
 	{
 		if (game->map[map_y][map_x] == 'G')
 			*ghosty = true;
-		if (game->map[map_y][map_x] == '1')
-			return (1);
-
-		//door
 		if (game->map[map_y][map_x] == 'D')
 		{
 			
 			//init_door(game);
 			game->hit_door = true;
+			ghosty = false;
 			return (2);
 		}
+		else if (game->map[map_y][map_x] == '1')
+			return (1);
 	}
 	ghosty = false;
     return (0);
@@ -113,7 +112,6 @@ static float	get_wall_height(t_game *game, float angl, bool *ghosty)// 計算光
 	y_step = TILE * tan(angl);
 	x_step = TILE;
 
-
 	x = floor(game->rays->p_x / TILE) * TILE;
 	ray_move = move_ray(angl, &x, &x_step, 1);
 	y = game->rays->p_y + (x - game->rays->p_x) * tan(angl);
@@ -133,23 +131,6 @@ static float	get_wall_height(t_game *game, float angl, bool *ghosty)// 計算光
 	return (distance(game, x, y));
 }
 
-
-/*
-static float	update_rayangl(float angl)
-{
-	if (angl <= 0)
-	{
-		angl += 2 * PI;
-		return (angl);
-	}
-	if (angl > 2 * PI)
-	{
-		angl -= 2 * PI;
-		return (angl);
-	}
-	return (angl);
-}
-*/
 static float	update_rayangl(float angl)
 {
     while (angl < 0) angl += 2 * PI;

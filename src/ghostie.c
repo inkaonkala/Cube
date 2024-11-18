@@ -52,6 +52,10 @@ void	set_ghost(t_game *game)
 	game->enemy->distance = sqrt(dis_x * dis_x + dis_y * dis_y);
 	game->enemy->angl_to_p = atan2(dis_y, dis_x);
 	game->enemy->angl = fmod(game->enemy->angl_to_p - game->player_angl + PI, 2 * PI) - PI;
+	game->enemy->pic = game->enemy->ghost_sheet;
+    game->enemy->pixels = (uint32_t *)game->enemy->pic->pixels;
+//	game->enemy->frame_x = game->enemy->col * game->enemy->len;
+//	game->enemy->frame_y = game->enemy->row * game->enemy->height;
 
 }
 
@@ -106,14 +110,10 @@ static bool	check_position(t_game *game)
 
 void	ghostie(t_game *game)
 {
-	//int screen_x;
-	//int size;
-	
 	if(!init_enemy(game))
 		return ;
 	if(!check_position(game))
 		return ;
 	set_ghost(game);
-	//screen_x = (game->enemy->angl / (FOW / 2)) * (WINDOW_WIDTH / 2) + (WINDOW_WIDTH / 2);
-	//size = game->enemy->distance; // CHECK THE SIZE HERE!!!
+
 }

@@ -6,7 +6,7 @@
 /*   By: iniska <iniska@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/17 10:24:06 by iniska            #+#    #+#             */
-/*   Updated: 2024/11/15 09:32:06 by iniska           ###   ########.fr       */
+/*   Updated: 2024/11/18 12:50:42 by iniska           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,7 @@ void	count_values(t_game *game)
 	game->left_right = 0;
 	game->up_down = 0;
 	game->width = game->longest;
+	game->win = false;
 	game->rays->p_x = (game->player_x * TILE) + TILE / 2;
 	game->rays->p_y = (game->player_y * TILE) + TILE / 2;
 	save_images_to_struct(game);
