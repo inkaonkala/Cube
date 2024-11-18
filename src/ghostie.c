@@ -6,7 +6,7 @@
 /*   By: iniska <iniska@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/05 08:49:31 by iniska            #+#    #+#             */
-/*   Updated: 2024/11/18 10:47:17 by iniska           ###   ########.fr       */
+/*   Updated: 2024/11/18 13:49:22 by iniska           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -110,12 +110,9 @@ static bool	check_position(t_game *game)
 
 void	ghostie(t_game *game)
 {
-//	int screen_x;
-	
 	if(!init_enemy(game))
 		return ;
 	if(!check_position(game))
 		return ;
 	set_ghost(game);
-//	screen_x = (game->enemy->angl / (FOW / 2)) * (WINDOW_WIDTH / 2) + (WINDOW_WIDTH / 2);
 }

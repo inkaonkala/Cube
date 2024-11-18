@@ -6,7 +6,7 @@
 /*   By: iniska <iniska@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/15 12:55:19 by yhsu              #+#    #+#             */
-/*   Updated: 2024/11/18 10:43:04 by iniska           ###   ########.fr       */
+/*   Updated: 2024/11/18 14:03:07 by iniska           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,7 @@
 
 # define BONUS true
 # define ENEMYP "./textures/ghosty.png"
+# define WINIMA	"./textures/winningimage.png"
 # define GAMEOVERI "./textures/gameover.png"
 # define MAX_VIEW_DIS 1000 * TILE
 
@@ -166,6 +167,7 @@ typedef struct s_game
 	bool			mouse_on;
 	bool			horizon;
 	bool			death;
+	bool			win;
 
 	//it got moves
 	int				rotation;
@@ -261,6 +263,10 @@ void 	err_message(char * message);
 void 	free_grid(char **grid);
 void 	clean_all_exit(t_game *game, char *message);
 
+//keys
+void	wasd(t_game *game, double *move_x, double *move_y);
+
+
 //mini_map
 
 //void create_minimap(t_game *game);
@@ -284,6 +290,7 @@ void	update_enemy(t_game *game); //, int ray);
 void	animate(t_game *game);
 void	set_ghost(t_game *game);
 void	game_over_image(t_game *game);
+void	winning_image(t_game *game);
 
 #endif
 //	draw_enemy(game, game->enemy->len, game->enemy->height);

@@ -6,7 +6,7 @@
 /*   By: iniska <iniska@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/18 12:06:33 by iniska            #+#    #+#             */
-/*   Updated: 2024/11/14 11:58:56 by iniska           ###   ########.fr       */
+/*   Updated: 2024/11/18 12:51:09 by iniska           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,8 +33,6 @@ static void	floor_n_ceiling(t_game *game, int ray, double bot_pxl, double top_px
 	while (i  < top_pxl)
 		set_pixels(game, ray, i++, 0x2694ab); // ceiling
 }
-
-
 
 void	set_walls(t_game *game, int ray)
 {

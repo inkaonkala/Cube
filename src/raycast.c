@@ -6,7 +6,7 @@
 /*   By: iniska <iniska@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/15 20:39:06 by iniska            #+#    #+#             */
-/*   Updated: 2024/11/14 11:41:55 by iniska           ###   ########.fr       */
+/*   Updated: 2024/11/18 12:33:07 by iniska           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,7 +104,6 @@ static float	get_wall_height(t_game *game, float angl, bool *ghosty)
 	y_step = TILE * tan(angl);
 	x_step = TILE;
 
-
 	x = floor(game->rays->p_x / TILE) * TILE;
 	ray_move = move_ray(angl, &x, &x_step, 1);
 	y = game->rays->p_y + (x - game->rays->p_x) * tan(angl);
@@ -122,23 +121,6 @@ static float	get_wall_height(t_game *game, float angl, bool *ghosty)
 	return (distance(game, x, y));
 }
 
-
-/*
-static float	update_rayangl(float angl)
-{
-	if (angl <= 0)
-	{
-		angl += 2 * PI;
-		return (angl);
-	}
-	if (angl > 2 * PI)
-	{
-		angl -= 2 * PI;
-		return (angl);
-	}
-	return (angl);
-}
-*/
 static float	update_rayangl(float angl)
 {
     while (angl < 0) angl += 2 * PI;
