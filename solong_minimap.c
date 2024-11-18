@@ -20,7 +20,7 @@ dprintf(2, "in fill_background 0\n");
 		}
 		y++;
 	}
-    dprintf(2, "in fill_background 2\n");
+    //dprintf(2, "in fill_background 2\n");
 }
 
 void init_minimap(t_game *game)

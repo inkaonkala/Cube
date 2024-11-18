@@ -6,7 +6,7 @@
 /*   By: yhsu <yhsu@student.hive.fi>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/15 14:02:51 by yhsu              #+#    #+#             */
-/*   Updated: 2024/11/07 17:15:02 by yhsu             ###   ########.fr       */
+/*   Updated: 2024/11/14 10:59:31 by yhsu             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,7 +104,7 @@ static void parse_file(t_game *game, char *mapfile)
 	if (game->flags == NULL)
 		clean_all_exit(game, "malloc failed");
 	
-	game->file_content = get_2d_array( mapfile);
+	game->file_content = get_2d_array(game, mapfile);
 	
 	if (game->file_content == NULL)
 	{
@@ -129,19 +129,15 @@ static void parse_file(t_game *game, char *mapfile)
 
 void init_game(t_game *game, char *mapfile)
 {
-	//init_minimap(game);
-	//render_minimap(game);
-	//mlx_key_hook(game->mlx, move_hook, game);
-	//mlx_loop(game->mlx);
-	dprintf(2, "in init_game 0\n");
-	//parse file : create sd array map,  parse element
+	game->death = false;
+	game->win = false;
 	parse_file(game, mapfile);
 	
 
-	// dprintf(2, "game->no_texture_path: %s\n", game->no_texture_path);
-	// dprintf(2, "game->ea_texture_path: %s\n", game->ea_texture_path);
-	// dprintf(2, "game->so_texture_path: %s\n", game->so_texture_path);
-	// dprintf(2, "game->we_texture_path: %s\n", game->we_texture_path);
+	dprintf(2, "game->no_texture_path: %s\n", game->no_texture_path);
+	dprintf(2, "game->ea_texture_path: %s\n", game->ea_texture_path);
+	dprintf(2, "game->so_texture_path: %s\n", game->so_texture_path);
+	dprintf(2, "game->we_texture_path: %s\n", game->we_texture_path);
 	
 	//check map
 	
@@ -164,12 +160,12 @@ void init_game(t_game *game, char *mapfile)
 
 	// dprintf(2, "player position: x:%zu y: %zu\n", game->player_x, game->player_y);
 	
-	 l = 0;
-	while (game->map[l])
-	{
-		dprintf(2, "game->map[%d]: %s\n",l, game->map[l]);
-		l++;
-	}
+	//  l = 0;
+	// while (game->map[l])
+	// {
+	// 	dprintf(2, "game->map[%d]: %s\n",l, game->map[l]);
+	// 	l++;
+	// }
 
 
 	// dprintf(2, "game->ceiling_color: %s\n", game->ceiling_color);

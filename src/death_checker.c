@@ -15,7 +15,7 @@
 void	game_over_image(t_game *game)
 {
 	mlx_texture_t	*pic;
-	mlx_image_t		*pixels;
+	//mlx_image_t		*pixels;
 	int				offsex;
 	int				offsey;
 
@@ -24,13 +24,14 @@ void	game_over_image(t_game *game)
 		return ;
 	offsex = (WINDOW_WIDTH - pic->width) / 2;
 	offsey = (WINDOW_HEIGHT - pic->height) / 2;
-	pixels = mlx_texture_to_image(game->mlx, pic);
-	if (!pixels)
+	//pixels = mlx_texture_to_image(game->mlx, pic);
+	game->gameover_image = mlx_texture_to_image(game->mlx, pic);
+	if (!game->gameover_image)
 	{
 		mlx_delete_texture(pic);
 		return ;
 	}
-	mlx_image_to_window(game->mlx, pixels, offsex, offsey);
+	mlx_image_to_window(game->mlx, game->gameover_image, offsex, offsey);
 	mlx_delete_texture(pic);
 }
 
