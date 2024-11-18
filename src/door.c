@@ -6,15 +6,9 @@ void check_door_position(t_game *game, char ** map)
 {
 	int i;
 	int j;
+	int count;
 
-//  int l = 0;
-// 	while (game->map[l])
-// 	{
-// 		dprintf(2, "map[%d]: %s\n",l, game->map[l]);
-// 		l++;
-// 	}
-
-
+	count = 0;
 	i = 0;
 	while (map[i])
 	{
@@ -23,6 +17,7 @@ void check_door_position(t_game *game, char ** map)
 		{
 			if (map[i][j] == 'D')
 			{
+				count++;
 				game->door_x = j;
 				game->door_y = i;
 			}
@@ -30,29 +25,10 @@ void check_door_position(t_game *game, char ** map)
 		}
 		i++;
 	}
+	if (count > 1)
+		clean_all_exit(game, "only ONE door is allowed.");
      //dprintf(2, "in position check door x: %zu, door y : %zu\n", game->door_x, game->door_y);
 }
-
-
-// void render_door(t_game *game, char *path)
-// {
-  
-
-   
-    
-   
-//     game->door = mlx_texture_to_image(game->mlx, door_text);
-//     if (!game->door)
-//     {
-//         mlx_strerror(mlx_errno);
-// 		clean_all_exit(game, "mlx_door_mlx_err");
-//     }
-
-    
-//     dprintf(2, "door x: %zu, door y : %zu\n", game->door_x, game->door_y);
-//     mlx_image_to_window(game->mlx, game->door, game->door_x , game->door_x );
-//     game->door->instances[0].z = 1;
-// }
 
 
 void init_door(t_game *game)
@@ -65,13 +41,19 @@ void init_door(t_game *game)
     check_door_position(game, game->map);
 
     game->door_open_texture = mlx_load_png(DOOR_PATH_OPEN);
-    
+    if (game->door_open_texture)
+		colour_flip((uint32_t *)game->door_open_texture->pixels, game->door_open_texture->width, game->door_open_texture->height);
+
+	
     if (!game->door_open_texture)
     {
         mlx_strerror(mlx_errno);
 		clean_all_exit(game, "mlx_png_err");
     }
     game->door_close_texture = mlx_load_png(DOOR_PATH_CLOSE);
+	 if (game->door_close_texture)
+		colour_flip((uint32_t *)game->door_close_texture->pixels, game->door_close_texture->width, game->door_close_texture->height);
+
     if (!game->door_close_texture)
     {
         mlx_strerror(mlx_errno);
@@ -82,15 +64,19 @@ void init_door(t_game *game)
 void check_door(t_game *game)
 {
     float distance;
-    float dx;
-    float dy;
+    int dx;
+    int dy;
     
-    dx = game->rays->p_x - game->door_x;
-    dy = game->rays->p_y - game->door_y;
+    dx = (game->rays->p_x / TILE)- game->door_x;
+    dy = (game->rays->p_y / TILE)- game->door_y;
     distance = sqrt((dx * dx) + (dy * dy));
-	dprintf(2, "distance: %f\n", distance);
-  
-   if (distance < 270 && game->d == 'D')
+	//dprintf(2, "px:%d, py:%d dx:%zu, dy:%zu\n", (game->rays->p_x / TILE),(game->rays->p_y / TILE),game->door_x,game->door_y);
+	//dprintf(2, "distance: %f\n", distance);
+ 	 if (distance < 1.43 && game->d == 'D')
+    {
+	}
+   
+   if (distance < 1.43 && game->d == 'D')
     {
        
 		if (game->door_state == false)
@@ -98,9 +84,7 @@ void check_door(t_game *game)
 		//dprintf(2, "game->d: %c \n", game->d);
 			game->door_state = true;
 		}
-		
-
     }
-	else if (distance > 270)
+	else if (distance > 1.5)
 		game->door_state = false;       
 }

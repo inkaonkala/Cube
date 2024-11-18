@@ -6,7 +6,7 @@
 /*   By: yhsu <yhsu@student.hive.fi>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/15 17:58:39 by yhsu              #+#    #+#             */
-/*   Updated: 2024/11/15 17:28:57 by yhsu             ###   ########.fr       */
+/*   Updated: 2024/11/18 11:19:20 by yhsu             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,10 @@ void clean_all(t_game *game)
     if (game->gameover_image)
         mlx_delete_image(game->mlx, game->gameover_image);
     if (game->door)
-        mlx_delete_image(game->mlx, game->door);
+    {
+		mlx_delete_image(game->mlx, game->door);
+	}    
+	
 	if (game->canvas)
 	{
 		mlx_delete_image(game->mlx, game->canvas);
@@ -97,7 +100,9 @@ void clean_all_exit(t_game *game, char *message)
 	if (game->gameover_image)
         mlx_delete_image(game->mlx, game->gameover_image);
     if (game->door)
+	{
         mlx_delete_image(game->mlx, game->door);
+	}
 	if (game->canvas)
 		mlx_delete_image(game->mlx, game->canvas);
 		
