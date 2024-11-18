@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   drawing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: iniska <iniska@student.hive.fi>            +#+  +:+       +#+        */
+/*   By: yhsu <yhsu@student.hive.fi>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/18 13:16:18 by iniska            #+#    #+#             */
-/*   Updated: 2024/11/14 11:28:16 by iniska           ###   ########.fr       */
+/*   Updated: 2024/11/15 19:43:41 by yhsu             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,18 @@ static mlx_texture_t	*get_pics_for_wall(t_game *game)
 	mlx_texture_t *tex;
 
 	tex = NULL;
-	if (game->rays->wall_flag == true)
+
+	//door
+	if (game->hit_door == true)  
+	{
+		check_door(game);
+		if (game->door_state == true)	
+			tex = game->door_open_texture;
+		else
+			tex = game->door_close_texture;
+		game->hit_door = false;
+	}
+	else if (game->rays->wall_flag == true)
 	{
 		if (game->rays->ray_angl > 0 && game->rays->ray_angl < PI)
 			tex = game->no_texture;
@@ -102,11 +113,12 @@ void	draw_wall(t_game *game, double bot_pixl, double top_pixl, double wall_hi)
 	double			y;
 	int				pos;
 
-	pic = get_pics_for_wall(game);
-	if (!pic || wall_hi <= 0)
-		return ;
-	pixels = (uint32_t *)pic->pixels;
-	x = get_setof_x(game, pic);
+	pic = get_pics_for_wall(game);  // 獲取適當的牆壁紋理
+	if (!pic || wall_hi <= 0)       // 檢查紋理是否有效
+    	return;
+	pixels = (uint32_t *)pic->pixels;  // 獲取紋理像素數據
+	x = get_setof_x(game, pic);        // 計算紋理的 X 座標
+
 	if (x < 0 || x >- pic->width)
 	{
 		ft_printf("x out of bounds in draw walls\n");

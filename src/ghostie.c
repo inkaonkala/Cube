@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ghostie.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: iniska <iniska@student.hive.fi>            +#+  +:+       +#+        */
+/*   By: yhsu <yhsu@student.hive.fi>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/05 08:49:31 by iniska            #+#    #+#             */
-/*   Updated: 2024/11/15 10:56:01 by iniska           ###   ########.fr       */
+/*   Updated: 2024/11/15 14:34:52 by yhsu             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,12 +106,14 @@ static bool	check_position(t_game *game)
 
 void	ghostie(t_game *game)
 {
-//	int screen_x;
+	//int screen_x;
+	//int size;
 	
 	if(!init_enemy(game))
 		return ;
 	if(!check_position(game))
 		return ;
 	set_ghost(game);
-//	screen_x = (game->enemy->angl / (FOW / 2)) * (WINDOW_WIDTH / 2) + (WINDOW_WIDTH / 2);
+	//screen_x = (game->enemy->angl / (FOW / 2)) * (WINDOW_WIDTH / 2) + (WINDOW_WIDTH / 2);
+	//size = game->enemy->distance; // CHECK THE SIZE HERE!!!
 }

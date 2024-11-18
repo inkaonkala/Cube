@@ -31,10 +31,14 @@ char *readfile(char *mapfile)
 }
 
 
-char **get_2d_array( char *mapfile)
+
+char **get_2d_array( t_game *game, char *mapfile)
 {
 	char	*file_str;
 	char	**result;
+	
+
+	dprintf(2, "game->longest:%zu\n", game->longest);
 	
 	file_str = readfile(mapfile);
 	if (file_str == NULL)
@@ -42,11 +46,11 @@ char **get_2d_array( char *mapfile)
 		perror("Cannot read the map!");
 		return (NULL);
 	}
-	result = ft_split(file_str, '\n');
+	result = ft_split( file_str, '\n');
 	free(file_str);
 	if (result == NULL)
 	{
-		perror(" Spit failed.");
+		perror("Spit failed.");
 		return (NULL);
 	}
 	return (result);

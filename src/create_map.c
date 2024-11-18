@@ -6,7 +6,7 @@
 /*   By: yhsu <yhsu@student.hive.fi>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/24 14:40:04 by yhsu              #+#    #+#             */
-/*   Updated: 2024/10/31 18:25:58 by yhsu             ###   ########.fr       */
+/*   Updated: 2024/11/07 17:21:29 by yhsu             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,24 +23,56 @@ int count_mapline(char **file_content)
 	return (i);
 }
 
-void copy_string( t_game *game, char *s1, char *s2)// s1 map, s2 file content
+void copy_rectagle_string( t_game *game, char *s1, char *s2)// s1 map, s2 file content
 {
 	size_t i;
 
 	i = 0;
-	
+	//dprintf(2, "s2[%zu]: %c\n",i, s2[i]);
 	while(i < game->longest)
 	//while (s2[i])
 	{
-		if (s2[i])
+		if (!s2[i])
+			dprintf(2, "s2[%zu]: is NULL\n", i);
+		if (!s2[i])
+			s1[i] = '\0';
+		else if (s2[i])
 		{
 			if (s2[i] == ' ' || s2[i] == '\t')
 				s1[i] = '0';
 			else
 				s1[i] = s2[i];
 		}
-		else
-			s1[i] = '\0';
+		// else 
+		// 	s1[i] = '\0';
+		i++;	
+	}
+	s1[i] = '\0';
+}
+
+void copy_string( char *s1, char *s2)// s1 map, s2 file content
+{
+	size_t i;
+
+	i = 0;
+	//dprintf(2, "s2[%zu]: %c\n",i, s2[i]);
+	//dprintf(2, "longest: %zu\n",game->longest);
+	//while(i < game->longest)
+	while(s2[i])
+	{
+		
+		if (s2 != NULL && s2[i] == '\0') 
+    		s1[i] = '\0';
+
+		else if (s2[i])
+		{
+			if (s2[i] == ' ' || s2[i] == '\t')
+				s1[i] = '0';
+			else
+				s1[i] = s2[i];
+		}
+		// else 
+		// 	s1[i] = '\0';
 		i++;	
 	}
 	s1[i] = '\0';
@@ -88,8 +120,8 @@ int create_map(t_game * game, char **file_content)
 		&& file_content[i][0] != 'S' && file_content[i][0] != 'E' 
 		&& file_content[i][0] != 'C'&& file_content[i][0] != 'F')
 	{
-		game->map[j] = (char *) malloc ((game->longest + 1) * sizeof(char));
-		//game->map[j] = (char *) calloc ((game->longest + 1), sizeof(char));
+		//game->map[j] = (char *) malloc ((game->longest + 1) * sizeof(char));
+		game->map[j] = (char *) calloc ((game->longest + 1), sizeof(char));
 		if (game->map[j] == NULL)
 		{
 			dprintf(2, "Row %d is NULL\n", j);// for test
@@ -97,7 +129,7 @@ int create_map(t_game * game, char **file_content)
 			return (1);
 		}
 			
-		copy_string(game, game->map[j], file_content[i]);
+		copy_string(game->map[j], file_content[i]);
 		i++;
 		j++;
 	}
@@ -124,11 +156,12 @@ void create_rectagle(t_game *game)
 			
 			if (game->map[j][k] != '1' && game->map[j][k] != '0'
 				&& game->map[j][k] != 'E' && game->map[j][k] != 'W'
-				&& game->map[j][k] != 'S' && game->map[j][k] != 'N')
+				&& game->map[j][k] != 'S' && game->map[j][k] != 'N' 
+				&& game->map[j][k] != 'D')
 				game->map[j][k] = '1';
 
-			// if (game->map[j][k] == 'k')
-			// 	game->map[j][k] = '1';
+			// if (game->map[j][k] == '\0')
+			//  	game->map[j][k] = '1';
 			k++;
 		}
 		game->map[j][k] = '\0';

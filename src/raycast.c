@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   raycast.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: iniska <iniska@student.hive.fi>            +#+  +:+       +#+        */
+/*   By: yhsu <yhsu@student.hive.fi>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/15 20:39:06 by iniska            #+#    #+#             */
-/*   Updated: 2024/11/14 11:41:55 by iniska           ###   ########.fr       */
+/*   Updated: 2024/11/15 19:15:14 by yhsu             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,15 @@ static int	wall(t_game *game, float x, float y, bool *ghosty)
 			*ghosty = true;
 		if (game->map[map_y][map_x] == '1')
 			return (1);
+
+		//door
+		if (game->map[map_y][map_x] == 'D')
+		{
+			
+			//init_door(game);
+			game->hit_door = true;
+			return (2);
+		}
 	}
 	ghosty = false;
     return (0);
@@ -57,7 +66,7 @@ static int		move_ray(float angl, float *inter, float *step, int is_vert)
 	return (1);
 }
 
-static float	get_horizon(t_game *game, float angl, bool *ghosty)
+static float	get_horizon(t_game *game, float angl, bool *ghosty)//計算光線與水平牆的交點距離。
 {
 	float	x_step;
 	float	y_step;
@@ -90,7 +99,7 @@ static float	get_horizon(t_game *game, float angl, bool *ghosty)
 	return (distance(game, x, y));
 }
 
-static float	get_wall_height(t_game *game, float angl, bool *ghosty)
+static float	get_wall_height(t_game *game, float angl, bool *ghosty)// 計算光線與垂直牆的交點距離。
 {
 	float	x_step;
 	float	y_step;
@@ -112,7 +121,9 @@ static float	get_wall_height(t_game *game, float angl, bool *ghosty)
 		y_step = fabs(y_step);
 	else
 		y_step = -fabs(y_step);
-	while (!wall(game, x - ray_move, y, ghosty))
+		
+	//door	
+	while (!wall(game, x - ray_move, y, ghosty))// 1 is wall 2 iss door
 	{
 		x += x_step;
 		y += y_step;
@@ -146,7 +157,7 @@ static float	update_rayangl(float angl)
     return angl;
 }
 
-void raycast(t_game *game)
+void raycast(t_game *game)//  對玩家視角內的所有光線進行投射，並記錄每條光線的最終距離和交點位置。
 {
 	double	horizon_line;
 	double	vertical_line;
@@ -160,9 +171,9 @@ void raycast(t_game *game)
 		ghosty = false;
 		game->rays->ray_angl = update_rayangl(game->rays->ray_angl);
 		game->rays->wall_flag = false;
-		horizon_line = get_horizon(game, game->rays->ray_angl, &ghosty);
-		vertical_line = get_wall_height(game, game->rays->ray_angl, &ghosty);
-		if(vertical_line <= horizon_line)
+		horizon_line = get_horizon(game, game->rays->ray_angl, &ghosty);//計算光線與水平牆的交點距離。
+		vertical_line = get_wall_height(game, game->rays->ray_angl, &ghosty);//計算光線與垂直牆的交點距離。
+		if(vertical_line <= horizon_line)//比較水平與垂直距離，選擇較短的距離作為最終光線的距離，並標記光線是否碰到垂直牆。
 			game->rays->distance = vertical_line;
 		else
 		{

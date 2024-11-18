@@ -1,0 +1,12 @@
+NO ./textures/ovi4.png
+SO ./textures/ovi3.png
+WE ./textures/ovi2.png
+EA ./textures/ovi1.png
+
+F 220,100,0
+C 225,226,0
+
+111111111111
+100000000001
+10000N000001
+111111111111
