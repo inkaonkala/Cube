@@ -28,7 +28,6 @@ static int check_all_elements(char **file, t_flag *flags)
 
 	i = 0;
 	count = 0; 
-	dprintf(2, "check_all_elements\n");
 	while(file[i] && count < 6)
 	{
 		

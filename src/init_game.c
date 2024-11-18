@@ -6,7 +6,7 @@
 /*   By: yhsu <yhsu@student.hive.fi>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/15 14:02:51 by yhsu              #+#    #+#             */
-/*   Updated: 2024/11/14 10:59:31 by yhsu             ###   ########.fr       */
+/*   Updated: 2024/11/18 18:51:07 by yhsu             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,7 +104,7 @@ static void parse_file(t_game *game, char *mapfile)
 	if (game->flags == NULL)
 		clean_all_exit(game, "malloc failed");
 	
-	game->file_content = get_2d_array(game, mapfile);
+	game->file_content = get_2d_array(mapfile);
 	
 	if (game->file_content == NULL)
 	{
@@ -134,19 +134,19 @@ void init_game(t_game *game, char *mapfile)
 	parse_file(game, mapfile);
 	
 
-	dprintf(2, "game->no_texture_path: %s\n", game->no_texture_path);
-	dprintf(2, "game->ea_texture_path: %s\n", game->ea_texture_path);
-	dprintf(2, "game->so_texture_path: %s\n", game->so_texture_path);
-	dprintf(2, "game->we_texture_path: %s\n", game->we_texture_path);
+	// dprintf(2, "game->no_texture_path: %s\n", game->no_texture_path);
+	// dprintf(2, "game->ea_texture_path: %s\n", game->ea_texture_path);
+	// dprintf(2, "game->so_texture_path: %s\n", game->so_texture_path);
+	// dprintf(2, "game->we_texture_path: %s\n", game->we_texture_path);
 	
 	//check map
 	
-	int l = 0;
-	while (game->map[l])
-	{
-		dprintf(2, "game->map[%d]: %s\n",l, game->map[l]);
-		l++;
-	}
+	// int l = 0;
+	// while (game->map[l])
+	// {
+	// 	dprintf(2, "game->map[%d]: %s\n",l, game->map[l]);
+	// 	l++;
+	// }
 
 	map_validate(game);	
 

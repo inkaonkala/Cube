@@ -6,7 +6,7 @@
 /*   By: yhsu <yhsu@student.hive.fi>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/05 08:49:31 by iniska            #+#    #+#             */
-/*   Updated: 2024/11/15 14:34:52 by yhsu             ###   ########.fr       */
+/*   Updated: 2024/11/18 18:43:59 by yhsu             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,17 +63,22 @@ static bool	init_enemy(t_game *game)
 {
 	if (!game->enemy)
 	{
-		game->enemy = malloc(sizeof(t_enemy));
+		game->enemy = calloc(sizeof(t_enemy), 1);//Conditional jump or move depends on uninitialised value(s)
+
 		if(!game->enemy)
 		{
-			ft_printf("Allocation failed in ghostie\n");
+			ft_putendl_fd("Allocation failed in ghostie\n", 2);
 			return (false);
 		}
 	}
+	//for memory leaks
+	if ( game->enemy->ghost_sheet)
+		mlx_delete_texture(game->enemy->ghost_sheet);
+		
 	game->enemy->ghost_sheet = mlx_load_png(ENEMYP);
 	if(!game->enemy->ghost_sheet)
 	{
-		ft_printf("No ghost\n");
+		ft_putendl_fd("No ghost\n", 2);
 		return (false);
 	}
 	colour_flip((uint32_t *)game->enemy->ghost_sheet->pixels, 

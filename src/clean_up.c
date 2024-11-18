@@ -6,7 +6,7 @@
 /*   By: yhsu <yhsu@student.hive.fi>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/15 17:58:39 by yhsu              #+#    #+#             */
-/*   Updated: 2024/11/18 11:19:20 by yhsu             ###   ########.fr       */
+/*   Updated: 2024/11/18 18:57:14 by yhsu             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 
 void free_texture(t_game *game)
 {
+	
 	 if (game->no_texture_path)
         free(game->no_texture_path);
     if (game->so_texture_path)
@@ -21,53 +22,118 @@ void free_texture(t_game *game)
     if (game->ea_texture_path)
         free(game->ea_texture_path);
     if (game->we_texture_path)
+	{
+		
         free(game->we_texture_path);
-
+	}
+	
+	if (game->no_texture)
+		mlx_delete_texture(game->no_texture);
+	if (game->so_texture)
+		mlx_delete_texture(game->so_texture);
+	if (game->we_texture)
+		mlx_delete_texture(game->we_texture);
+	if (game->ea_texture)
+		mlx_delete_texture(game->ea_texture);
+	
+	if (game->enemy->ghost_sheet)
+	{
+		mlx_delete_texture(game->enemy->ghost_sheet);
+	}
+	//if (game->enemy->pic)
+		//mlx_delete_texture(game->enemy->pic);
      // door bonus
     if (game->door_close_texture)
-        free(game->door_close_texture);
-     if (game->door_open_texture)
-        free(game->door_open_texture);
+        mlx_delete_texture(game->door_close_texture);
+    if (game->door_open_texture)
+        mlx_delete_texture(game->door_open_texture);
 }
 
-void clean_all(t_game *game)
+
+void delete_image(t_game *game)
 {
-	// if (game->file_content)
-    //     free_grid(game->file_content);
-    if (game->map)
+	if (game->gameover_image)
 	{
-        free_grid(game->map);
+		
+        mlx_delete_image(game->mlx, game->gameover_image);
 	}
 	
-	free_texture(game);
-    
-	if (game->floor_color)
-        free(game->floor_color);
-    if (game->ceiling_color)
-        free(game->ceiling_color);
-    if (game->c_split)
-        free_grid(game->c_split);
-    if (game->f_split)
-	{
-    	free_grid(game->f_split);
-	}
-    if (game->gameover_image)
-        mlx_delete_image(game->mlx, game->gameover_image);
-    if (game->door)
+	
+	if (game->door)
     {
 		mlx_delete_image(game->mlx, game->door);
-	}    
-	
+	} 
+	  
+	if (game->mini_player)
+    {
+		mlx_delete_image(game->mlx, game->mini_player);
+	}   
+
+	if (game->minimap)
+    {
+		mlx_delete_image(game->mlx, game->minimap);
+	} 
+	   
 	if (game->canvas)
 	{
 		mlx_delete_image(game->mlx, game->canvas);
 	}
+}
+
+
+void clean_all(t_game *game)
+{
+	if (game->file_content)
+        free_grid(game->file_content);
 		
+	
+    if (game->map)
+	{
+		free_grid(game->map);
+	}
+	
+	
+	free_texture(game);
+	
+	if (game->floor_color)
+        free(game->floor_color);
+		
+	
+
+    if (game->ceiling_color)
+	{
+		
+        free(game->ceiling_color);
+	}
+		
+	
+    if (game->c_split)
+	{
+		
+        free_grid(game->c_split);
+	}
+		
+	
+    if (game->f_split)
+	{
+    	free_grid(game->f_split);
+	}
+	
+		
+	delete_image(game);
+    
+	if (game->rays)
+		free(game->rays);
+
+	if (game->enemy)
+		free(game->enemy);
 	if (game->mlx)
 		mlx_terminate(game->mlx);
-	if (game)
+		
+	if (game != NULL)
 		free(game);
 }
+
 
 void clean_all_exit(t_game *game, char *message)
 {

@@ -6,7 +6,7 @@
 /*   By: yhsu <yhsu@student.hive.fi>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/18 13:16:18 by iniska            #+#    #+#             */
-/*   Updated: 2024/11/15 19:43:41 by yhsu             ###   ########.fr       */
+/*   Updated: 2024/11/18 17:42:35 by yhsu             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -121,7 +121,7 @@ void	draw_wall(t_game *game, double bot_pixl, double top_pixl, double wall_hi)
 
 	if (x < 0 || x >- pic->width)
 	{
-		ft_printf("x out of bounds in draw walls\n");
+		ft_putendl_fd("x out of bounds in draw walls\n", 2);
 		return ;
 	}
 	y = (top_pixl - (WINDOW_HEIGHT / 2) + (wall_hi / 2)) * (double)pic->height / wall_hi;

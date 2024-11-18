@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   math_stuff.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: iniska <iniska@student.hive.fi>            +#+  +:+       +#+        */
+/*   By: yhsu <yhsu@student.hive.fi>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/17 10:24:06 by iniska            #+#    #+#             */
-/*   Updated: 2024/11/18 12:50:42 by iniska           ###   ########.fr       */
+/*   Updated: 2024/11/18 16:38:01 by yhsu             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,7 @@ void	save_images_to_struct(t_game *game)
 	game->ea_texture = mlx_load_png(game->ea_texture_path);
 	if (game->ea_texture)
 		colour_flip((uint32_t *)game->ea_texture->pixels, game->ea_texture->width, game->ea_texture->height);
+	
 }
 
 void	count_values(t_game *game)

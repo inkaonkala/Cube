@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   screenpop.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: iniska <iniska@student.hive.fi>            +#+  +:+       +#+        */
+/*   By: yhsu <yhsu@student.hive.fi>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/16 10:04:39 by iniska            #+#    #+#             */
-/*   Updated: 2024/11/18 14:56:03 by iniska           ###   ########.fr       */
+/*   Updated: 2024/11/18 17:54:08 by yhsu             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,13 +24,12 @@ void	screenpop(t_game *game)
 		err_message_exit("Canvas not working\n");
 	
 	
-	//create_minimap(game);
-	//draw_mini_map(game);
 	mlx_loop_hook(game->mlx, move_and_beam, game);
 	mlx_cursor_hook(game->mlx, mouse_move, game);
 	mlx_mouse_hook(game->mlx, mouse_press, game);
 	
-	//draw_mini_map(game);
+	
 	mlx_loop(game->mlx);
-	mlx_terminate(game->mlx);
+	
+	//mlx_terminate(game->mlx);
 }

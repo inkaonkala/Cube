@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3D.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: iniska <iniska@student.hive.fi>            +#+  +:+       +#+        */
+/*   By: yhsu <yhsu@student.hive.fi>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/15 12:55:19 by yhsu              #+#    #+#             */
-/*   Updated: 2024/11/18 14:40:18 by iniska           ###   ########.fr       */
+/*   Updated: 2024/11/18 18:50:48 by yhsu             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -149,7 +149,6 @@ typedef struct s_flag
 typedef struct s_game
 {
 	char			**file_content;
-	//char			**file_content_newline;
 	char 			**map;
 	char 			*no_texture_path;//./maps/photo.png
 	char 			*so_texture_path;
@@ -215,8 +214,7 @@ typedef struct s_game
 }	t_game;
 
 //get_2d_array
-//char **get_2d_array( char *mapfile);
-char **get_2d_array( t_game *game, char *mapfile);
+char **get_2d_array( char *mapfile);
 char *readfile(char *mapfile);
 
 //check_elements
