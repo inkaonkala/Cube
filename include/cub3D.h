@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3D.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yhsu <yhsu@student.hive.fi>                +#+  +:+       +#+        */
+/*   By: iniska <iniska@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/15 12:55:19 by yhsu              #+#    #+#             */
-/*   Updated: 2024/11/18 14:03:07 by iniska           ###   ########.fr       */
+/*   Updated: 2024/11/18 14:40:18 by iniska           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@
 # define BONUS true
 # define ENEMYP "./textures/ghosty.png"
 
-# define WINIMA	"./textures/winningimage.png"
+# define WINIMA	"./textures/winning.png"
 # define DOOR_PATH_CLOSE "./textures/door_closed_0.png"
 # define DOOR_PATH_OPEN "./textures/door_opening_1.png"
 # define GAMEOVERI "./textures/gameover.png"
@@ -307,7 +307,7 @@ void	update_enemy(t_game *game); //, int ray);
 void	animate(t_game *game);
 void	set_ghost(t_game *game);
 void	game_over_image(t_game *game);
-void	winning_image(t_game *game);
+//void	winning_image(t_game *game);
 
 //door 
 void check_door(t_game *game);

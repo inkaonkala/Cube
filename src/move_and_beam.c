@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   move_and_beam.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yhsu <yhsu@student.hive.fi>                +#+  +:+       +#+        */
+/*   By: iniska <iniska@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/17 09:41:09 by iniska            #+#    #+#             */
-/*   Updated: 2024/11/15 14:35:32 by yhsu             ###   ########.fr       */
+/*   Updated: 2024/11/18 14:56:59 by iniska           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,12 +65,13 @@ static void	rotate(t_game *game, int i)
 static void	move_hook(t_game *game, double move_x, double move_y)
 {
 	wasd(game, &move_x, &move_y);
-
-	if (game->rotation == 1)
-		rotate(game, 1);
-	if (game->rotation == -1)
-		rotate(game, 0);
-
+	if (!game->death && !game->win)
+	{
+		if (game->rotation == 1)
+			rotate(game, 1);
+		if (game->rotation == -1)
+			rotate(game, 0);
+	}
 	game->up_down = 0;
 	game->left_right = 0;
 	game->rotation = 0;
@@ -104,13 +105,5 @@ void	move_and_beam(void	*data)
 	if (game->death == true)
 		game_over_image(game);
 	if (game->win == true)
-		winning_image(game);
-
-	if (game->win == true)
-	{
-		ft_printf("DEATH!\n");
 		game_over_image(game);
-		//this segfaults cause no cleaning!
-	}
-
 }

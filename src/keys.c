@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   keys.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yhsu <yhsu@student.hive.fi>                +#+  +:+       +#+        */
+/*   By: iniska <iniska@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/28 10:54:19 by iniska            #+#    #+#             */
-/*   Updated: 2024/11/15 14:35:02 by yhsu             ###   ########.fr       */
+/*   Updated: 2024/11/18 14:36:42 by iniska           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,8 +64,8 @@ void	keys(t_game *game)
 	}
 	else if ( mlx_is_key_down(game->mlx, MLX_KEY_E) )
 	{
-		
 		game->d = 'D';
+		game->win = true;
 	}
     if (mlx_is_key_down(game->mlx, MLX_KEY_LEFT))
 		game->rotation = -1;
