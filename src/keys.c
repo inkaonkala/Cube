@@ -12,6 +12,34 @@
 
 #include "../include/cub3D.h"
 
+void	wasd(t_game *game, double *move_x, double *move_y)
+{
+	if (game->left_right == -1) // D
+	{
+		*move_x = -sin(game->player_angl) * SPEED;
+		*move_y = cos(game->player_angl) * SPEED;
+		game->left_right = 0;
+	}
+	if (game->left_right == 1) // A
+	{
+		*move_x = sin(game->player_angl) * SPEED;
+		*move_y = -cos(game->player_angl) * SPEED;
+		game->left_right = 0;
+	}
+	if (game->up_down == -1) // S
+	{
+		*move_x = -cos(game->player_angl) * SPEED;
+		*move_y = -sin(game->player_angl) * SPEED;
+		game->up_down = 0;
+ 	}
+	if (game->up_down == 1) // W
+	{
+		*move_x = cos(game->player_angl) * SPEED;
+		*move_y = sin(game->player_angl) * SPEED;
+		game->up_down = 0;
+	}
+}
+
 void	keys(t_game *game)
 {	
     if (mlx_is_key_down(game->mlx, MLX_KEY_W) )

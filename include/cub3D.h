@@ -6,7 +6,7 @@
 /*   By: yhsu <yhsu@student.hive.fi>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/15 12:55:19 by yhsu              #+#    #+#             */
-/*   Updated: 2024/11/15 19:18:44 by yhsu             ###   ########.fr       */
+/*   Updated: 2024/11/18 14:03:07 by iniska           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,8 +48,10 @@
 
 //for enemy
 
-# define BONUS false
+# define BONUS true
 # define ENEMYP "./textures/ghosty.png"
+
+# define WINIMA	"./textures/winningimage.png"
 # define DOOR_PATH_CLOSE "./textures/door_closed_0.png"
 # define DOOR_PATH_OPEN "./textures/door_opening_1.png"
 # define GAMEOVERI "./textures/gameover.png"
@@ -99,6 +101,11 @@ typedef struct s_enemy
 	float			angl;
 	float			distance;
 	float			angl_to_p;
+
+	mlx_texture_t	*pic;
+	uint32_t		*pixels;
+	int				frame_x;
+	int				frame_y;
 
 }	t_enemy;
 
@@ -274,6 +281,10 @@ void 	free_grid(char **grid);
 void 	clean_all_exit(t_game *game, char *message);
 void clean_all(t_game *game);
 
+//keys
+void	wasd(t_game *game, double *move_x, double *move_y);
+
+
 //mini_map
 void draw_mini_map(t_game *game);
 void draw_player(t_game *game);
@@ -296,6 +307,7 @@ void	update_enemy(t_game *game); //, int ray);
 void	animate(t_game *game);
 void	set_ghost(t_game *game);
 void	game_over_image(t_game *game);
+void	winning_image(t_game *game);
 
 //door 
 void check_door(t_game *game);

@@ -34,9 +34,7 @@ static void	floor_n_ceiling(t_game *game, int ray, double bot_pxl, double top_px
 		set_pixels(game, ray, i++, 0x2694ab); // ceiling
 }
 
-
-
-void	set_walls(t_game *game, int ray)//計算牆壁高度及位置，並調用其他函數繪製牆壁、地板和天花板。
+void	set_walls(t_game *game, int ray)
 {
 	double	wall_hi;
 	double	top_pixl;

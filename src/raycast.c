@@ -113,7 +113,6 @@ static float	get_wall_height(t_game *game, float angl, bool *ghosty)// 計算光
 	y_step = TILE * tan(angl);
 	x_step = TILE;
 
-
 	x = floor(game->rays->p_x / TILE) * TILE;
 	ray_move = move_ray(angl, &x, &x_step, 1);
 	y = game->rays->p_y + (x - game->rays->p_x) * tan(angl);
@@ -133,23 +132,6 @@ static float	get_wall_height(t_game *game, float angl, bool *ghosty)// 計算光
 	return (distance(game, x, y));
 }
 
-
-/*
-static float	update_rayangl(float angl)
-{
-	if (angl <= 0)
-	{
-		angl += 2 * PI;
-		return (angl);
-	}
-	if (angl > 2 * PI)
-	{
-		angl -= 2 * PI;
-		return (angl);
-	}
-	return (angl);
-}
-*/
 static float	update_rayangl(float angl)
 {
     while (angl < 0) angl += 2 * PI;
