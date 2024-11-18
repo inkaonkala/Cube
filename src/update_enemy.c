@@ -6,7 +6,7 @@
 /*   By: iniska <iniska@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/08 10:49:10 by iniska            #+#    #+#             */
-/*   Updated: 2024/11/15 11:41:32 by iniska           ###   ########.fr       */
+/*   Updated: 2024/11/18 09:25:11 by iniska           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,22 +22,10 @@ void update_enemy(t_game *game)
     mlx_texture_t *pic = game->enemy->ghost_sheet;
     uint32_t *pixels = (uint32_t *)pic->pixels;
     
-    // Calculate enemy height based on distance
     enemy_hi = fabs((TILE / game->enemy->distance) * (WINDOW_WIDTH) / tan(FOW));
-    
     bot_pixl = (WINDOW_HEIGHT / 2) + (enemy_hi / 2);  // Centered vertically
     top_pixl = (WINDOW_HEIGHT / 2) - (enemy_hi / 2);  // Adjust for half the height
-    
-	/*
-    // Clamp within window bounds
-    if (bot_pixl > WINDOW_HEIGHT)
-        bot_pixl = WINDOW_HEIGHT;
-    if (top_pixl < 0)
-        top_pixl = 0;
-	*/
-
-    // Horizontal screen position for the center of the enemy sprite
-    screen_x = (int)(WINDOW_WIDTH / 2 + (game->enemy->angl * WINDOW_WIDTH / game->fow)); // It's one TILE off
+    screen_x = (int)((WINDOW_WIDTH / 2) + (game->enemy->angl * WINDOW_WIDTH / game->fow)); // It's one TILE off
     y = (int)(top_pixl);
 
     // Get the current frame position in the sprite sheet

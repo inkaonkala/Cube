@@ -6,7 +6,7 @@
 /*   By: iniska <iniska@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/17 09:41:09 by iniska            #+#    #+#             */
-/*   Updated: 2024/11/15 10:58:45 by iniska           ###   ########.fr       */
+/*   Updated: 2024/11/18 08:38:13 by iniska           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,9 +23,8 @@ static void	move_player(t_game *game, double move_x, double move_y)
 	new_y = game->rays->p_y + move_y;
 	map_x = new_x / TILE;
 	map_y = new_y / TILE;
-	if (game->map[map_y][map_x] != '1' 
-		&& game->map[map_y][game->rays->p_x / TILE] != '1' 
-		&& game->map[game->rays->p_y / TILE][map_x] != '1')
+	if ((game->map[map_y][map_x] != '1' && game->map[map_y][game->rays->p_x / TILE] != '1' && game->map[game->rays->p_y / TILE][map_x] != '1' )
+		|| (game->map[map_y][map_x] != 'G' && game->map[map_y][game->rays->p_x / TILE] != 'G' && game->map[game->rays->p_y / TILE][map_x] != 'G'))
 	{
 		game->rays->p_x = new_x;
 		game->rays->p_y = new_y;
@@ -36,7 +35,7 @@ static void	move_player(t_game *game, double move_x, double move_y)
 	}
 	if (BONUS)
 	{
-		if (game->map[game->rays->p_x][game->rays->p_y] == 'G')
+		if (game->map[map_y][map_x] == 'G' && game->map[map_y][game->rays->p_x / TILE] == 'G' && game->map[game->rays->p_y / TILE][map_x] == 'G')
 			game->death = true;
 	}
 }
@@ -97,7 +96,8 @@ static void	move_hook(t_game *game, double move_x, double move_y)
 	game->up_down = 0;
 	game->left_right = 0;
 	game->rotation = 0;
-	move_player(game, move_x, move_y);		
+	if (!game->death)
+		move_player(game, move_x, move_y);		
 }	
 
 void	move_and_beam(void	*data)
