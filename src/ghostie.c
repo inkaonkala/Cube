@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ghostie.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: iniska <iniska@student.hive.fi>            +#+  +:+       +#+        */
+/*   By: yhsu <yhsu@student.hive.fi>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/05 08:49:31 by iniska            #+#    #+#             */
-/*   Updated: 2024/11/18 13:49:22 by iniska           ###   ########.fr       */
+/*   Updated: 2024/11/15 14:34:52 by yhsu             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -115,4 +115,5 @@ void	ghostie(t_game *game)
 	if(!check_position(game))
 		return ;
 	set_ghost(game);
+
 }

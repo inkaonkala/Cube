@@ -28,7 +28,7 @@ static int check_all_elements(char **file, t_flag *flags)
 
 	i = 0;
 	count = 0; 
-	
+	dprintf(2, "check_all_elements\n");
 	while(file[i] && count < 6)
 	{
 		
@@ -39,7 +39,6 @@ static int check_all_elements(char **file, t_flag *flags)
 		}
 		else if (set_flags(file[i], flags) == 1)
 		{
-			
 			return (-1);
 		}
 		//else if (set_flags(file[i], flags) == 0) // 有6個flags
@@ -51,7 +50,6 @@ static int check_all_elements(char **file, t_flag *flags)
 		}
 
 	}
-	
 	return (i);// i = last item
 }
 
@@ -79,12 +77,12 @@ int check_elements_info(t_game *game,char **file_content, t_flag *flags)//return
 	flags->game = game;//init flags->game point to t_game
 
 	last = check_all_elements(file_content, game->flags);
-	
+	//dprintf(2, "flag number:%d\n", flags->all_flags);
 	if (last == -1 || flags->all_flags != 6 )
 		return (1);	
 	
 	check_duplicate(file_content, game->flags, last);
-	
+	//dprintf(2, "duplicate::%d\n", flags->duplicate);
 	if (flags->duplicate == 1)
 	{
 		return (1);

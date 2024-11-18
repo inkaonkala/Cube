@@ -61,7 +61,7 @@ static int  check_rgb_range(t_game *game)
 void set_color(t_game *game)
 {
 	if (count_char(game->ceiling_color, ',')  != 2 || count_char(game->floor_color, ',')  != 2)// ,
-		clean_all_exit(game, "wrong color fomat, not with two ,");
+		clean_all_exit(game, "wrong color fomat, not with two ','");
 	//split 
 	game->c_split = ft_split(game->ceiling_color, ',');
 	if (!game->c_split)

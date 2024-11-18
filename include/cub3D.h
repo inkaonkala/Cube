@@ -3,7 +3,7 @@
 /*                                                        :::      ::::::::   */
 /*   cub3D.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: iniska <iniska@student.hive.fi>            +#+  +:+       +#+        */
+/*   By: yhsu <yhsu@student.hive.fi>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/15 12:55:19 by yhsu              #+#    #+#             */
 /*   Updated: 2024/11/18 14:03:07 by iniska           ###   ########.fr       */
@@ -50,7 +50,10 @@
 
 # define BONUS true
 # define ENEMYP "./textures/ghosty.png"
+
 # define WINIMA	"./textures/winningimage.png"
+# define DOOR_PATH_CLOSE "./textures/door_closed_0.png"
+# define DOOR_PATH_OPEN "./textures/door_opening_1.png"
 # define GAMEOVERI "./textures/gameover.png"
 # define MAX_VIEW_DIS 1000 * TILE
 
@@ -168,7 +171,6 @@ typedef struct s_game
 	bool			horizon;
 	bool			death;
 	bool			win;
-
 	//it got moves
 	int				rotation;
 	int				up_down;
@@ -196,22 +198,37 @@ typedef struct s_game
 	t_enemy			*enemy;
 
 	char			s;
+
+
+	char 			d;
+	bool			door_state;//1  true = open    0  false = close
+	bool           hit_door;
+	size_t			door_x;
+	size_t			door_y;
+	mlx_texture_t	*door_open_texture;
+	mlx_texture_t	*door_close_texture;
+	mlx_image_t 	*door;
+
+	mlx_image_t *gameover_image; 
+	
 	
 }	t_game;
 
 //get_2d_array
-char	**get_2d_array( char *mapfile);
-char	*readfile(char *mapfile);
+//char **get_2d_array( char *mapfile);
+char **get_2d_array( t_game *game, char *mapfile);
+char *readfile(char *mapfile);
 
 //check_elements
 int		check_elements_info(t_game *game,char **file_content, t_flag *flags);
 int		empty_line(char * file);
 
 //create_map
-int		create_map(t_game * game, char **file_content);
-void	create_rectagle(t_game *game);
-void	copy_string( t_game *ame, char *s1, char *s2);
-int		count_mapline(char **file_content);
+int create_map(t_game * game, char **file_content);
+void create_rectagle(t_game *game);
+//void copy_string( t_game *ame, char *s1, char *s2);
+void copy_string( char *s1, char *s2);
+int count_mapline(char **file_content);
 
 //flags
 int		set_flags(char *file_line, t_flag *flags);
@@ -262,15 +279,15 @@ void 	err_message_exit(char * message);
 void 	err_message(char * message);
 void 	free_grid(char **grid);
 void 	clean_all_exit(t_game *game, char *message);
+void clean_all(t_game *game);
 
 //keys
 void	wasd(t_game *game, double *move_x, double *move_y);
 
 
 //mini_map
-
-//void create_minimap(t_game *game);
-void	draw_mini_map(t_game *game);
+void draw_mini_map(t_game *game);
+void draw_player(t_game *game);
 
 
 //void	draw_wall(t_game *game, int ray, double bot_pixl, double top_pixl);
@@ -291,6 +308,11 @@ void	animate(t_game *game);
 void	set_ghost(t_game *game);
 void	game_over_image(t_game *game);
 void	winning_image(t_game *game);
+
+//door 
+void check_door(t_game *game);
+void init_door(t_game *game);
+void check_door_position(t_game *game, char ** map);
 
 #endif
 //	draw_enemy(game, game->enemy->len, game->enemy->height);

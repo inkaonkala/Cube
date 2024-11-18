@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   move_and_beam.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: iniska <iniska@student.hive.fi>            +#+  +:+       +#+        */
+/*   By: yhsu <yhsu@student.hive.fi>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/17 09:41:09 by iniska            #+#    #+#             */
-/*   Updated: 2024/11/18 14:03:21 by iniska           ###   ########.fr       */
+/*   Updated: 2024/11/15 14:35:32 by yhsu             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,8 @@ static void	move_player(t_game *game, double move_x, double move_y)
 			if (game->rays->p_y % TILE == 0)
 				game->rays->p_y += 1;
 		}
+//		if (game->map[game->rays->p_x][game->rays->p_y] == 'D')
+//			game->win = true;
 	}
 //	if (game->map[game->rays->p_x][game->rays->p_y] == 'D')
 //            game->win = true;
@@ -76,6 +78,7 @@ static void	move_hook(t_game *game, double move_x, double move_y)
 		move_player(game, move_x, move_y);		
 }	
 
+
 void	move_and_beam(void	*data)
 {
 	t_game *game;
@@ -86,16 +89,28 @@ void	move_and_beam(void	*data)
 		mlx_close_window(game->mlx);
 		printf("Bye bye!\n");
 	}
-	if (BONUS)
-		ghostie(game);
+
+	//if (BONUS)
+	
+	ghostie(game);
 	keys(game);
 	move_hook(game, 0, 0);
 	game->mini_angle= game->player_angl;
 	raycast(game);
+
+	//bonus
+	init_door(game);
 	draw_mini_map(game);
 	if (game->death == true)
 		game_over_image(game);
 	if (game->win == true)
 		winning_image(game);
+
+	if (game->win == true)
+	{
+		ft_printf("DEATH!\n");
+		game_over_image(game);
+		//this segfaults cause no cleaning!
+	}
 
 }

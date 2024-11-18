@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   map_validation_check.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: iniska <iniska@student.hive.fi>            +#+  +:+       +#+        */
+/*   By: yhsu <yhsu@student.hive.fi>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/24 19:16:05 by yhsu              #+#    #+#             */
-/*   Updated: 2024/11/14 11:41:46 by iniska           ###   ########.fr       */
+/*   Updated: 2024/11/15 19:51:32 by yhsu             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,11 +21,11 @@ static int only_valid_char(char **map)
 	while(map[i])
 	{
 		j = 0;
-		while(map[i][j])
+		while(map[i][j])// mendatory need to remove D
 		{
 			if (map[i][j] != '1' && map[i][j] != '0' && map[i][j] != '\t' 
 				&& map[i][j] != ' ' && map[i][j] != 'N' && map[i][j] != 'S' 
-				&& map[i][j] != 'E' && map[i][j] != 'W')
+				&& map[i][j] != 'E' && map[i][j] != 'W' && map[i][j] != 'D')
 				return (1);
 			
 			j++;
@@ -72,20 +72,24 @@ char **copy_grid(t_game *game, char **map)
 
 	i = 0;
 	j = 0;
-	
-	result = (char **)(malloc((count_mapline(map) + 1) * sizeof(char *)));
+	result = (char **)(malloc((game->height + 1) * sizeof(char *)));
 	if (result == NULL)
 		return (NULL);
 	while(map[i])
 	{
 		result[j] = (char *) calloc ((game->longest + 1), sizeof(char));
 		if (result[j] == NULL)
+		{
+			while(j > 0)
+				free(result[--j]);
+			free(result);
 			return (NULL);
-		copy_string( game, result[j], map[i]);
+		}
+		copy_string(result[j], map[i]);
 		i++;
 		j++;
 	}
-	map[i] = NULL;
+	result[j] = NULL;
 	return (result);
 }
 
@@ -93,7 +97,7 @@ static int flood_fill(char **tmp, int i, int j)// open return 1
 {
 	if (i < 0 || j < 0 || !tmp[i] || !tmp[i][j])
 		return (1);
-	if (tmp[i][j] == '1')
+	if (tmp[i][j] == '1' || tmp[i][j] == 'D')
 		return (0);
 	tmp[i][j] = '1';
 	if (flood_fill(tmp, i + 1, j) != 0)
@@ -120,7 +124,7 @@ static int if_map_closed(t_game *game, char **tmp)// open return 1
 		while(tmp[i][j] != '\0')
 		{
 			if ((tmp[i][j] == 'S' || tmp[i][j] == 'E'
-				|| tmp[i][j] == 'W' || tmp[i][j] == 'N' || tmp[i][j] == '0') && flood_fill(tmp, i, j) == 1)
+				|| tmp[i][j] == 'W' || tmp[i][j] == 'N' || tmp[i][j] == '0'))
 			{
 				if (flood_fill(tmp, i, j) == 1)
 					return (1);
@@ -143,6 +147,7 @@ static int check_map_closed(t_game *game, char **map)
 		clean_all_exit(game, "The map copy failed.");
 	if (if_map_closed(game, tmp) == 1)
 	{
+		dprintf(2, "map not closed\n");//change to error message 
 		free_grid(tmp);
 		return (1);//the map is open
 	}
