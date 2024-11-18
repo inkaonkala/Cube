@@ -6,7 +6,7 @@
 /*   By: iniska <iniska@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/15 12:55:19 by yhsu              #+#    #+#             */
-/*   Updated: 2024/11/15 12:01:35 by iniska           ###   ########.fr       */
+/*   Updated: 2024/11/18 10:43:04 by iniska           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,6 +97,11 @@ typedef struct s_enemy
 	float			angl;
 	float			distance;
 	float			angl_to_p;
+
+	mlx_texture_t	*pic;
+	uint32_t		*pixels;
+	int				frame_x;
+	int				frame_y;
 
 }	t_enemy;
 

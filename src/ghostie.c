@@ -6,7 +6,7 @@
 /*   By: iniska <iniska@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/05 08:49:31 by iniska            #+#    #+#             */
-/*   Updated: 2024/11/15 10:56:01 by iniska           ###   ########.fr       */
+/*   Updated: 2024/11/18 10:47:17 by iniska           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,10 @@ void	set_ghost(t_game *game)
 	game->enemy->distance = sqrt(dis_x * dis_x + dis_y * dis_y);
 	game->enemy->angl_to_p = atan2(dis_y, dis_x);
 	game->enemy->angl = fmod(game->enemy->angl_to_p - game->player_angl + PI, 2 * PI) - PI;
+	game->enemy->pic = game->enemy->ghost_sheet;
+    game->enemy->pixels = (uint32_t *)game->enemy->pic->pixels;
+//	game->enemy->frame_x = game->enemy->col * game->enemy->len;
+//	game->enemy->frame_y = game->enemy->row * game->enemy->height;
 
 }
 
