@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   clean_up.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yhsu <yhsu@student.hive.fi>                +#+  +:+       +#+        */
+/*   By: iniska <iniska@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/15 17:58:39 by yhsu              #+#    #+#             */
-/*   Updated: 2024/11/18 18:57:14 by yhsu             ###   ########.fr       */
+/*   Updated: 2024/11/19 14:45:22 by iniska           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,9 +36,9 @@ void free_texture(t_game *game)
 	if (game->ea_texture)
 		mlx_delete_texture(game->ea_texture);
 	
-	if (game->enemy->ghost_sheet)
+	if (game->g->ghost_sheet)
 	{
-		mlx_delete_texture(game->enemy->ghost_sheet);
+		mlx_delete_texture(game->g->ghost_sheet);
 	}
 	//if (game->enemy->pic)
 		//mlx_delete_texture(game->enemy->pic);
@@ -125,8 +125,8 @@ void clean_all(t_game *game)
 	if (game->rays)
 		free(game->rays);
 
-	if (game->enemy)
-		free(game->enemy);
+	if (game->g)
+		free(game->g);
 	if (game->mlx)
 		mlx_terminate(game->mlx);
 		

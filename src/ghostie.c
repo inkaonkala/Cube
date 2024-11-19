@@ -6,7 +6,7 @@
 /*   By: iniska <iniska@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/05 08:49:31 by iniska            #+#    #+#             */
-/*   Updated: 2024/11/19 14:11:04 by iniska           ###   ########.fr       */
+/*   Updated: 2024/11/19 14:51:06 by iniska           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,16 +60,16 @@ static bool	init_g(t_game *game)
 {
 	if (!game->g)
 	{
-		game->g = ft_calloc(sizeof(t_g)); //Do we need to use ft_calloc?
+		game->g = malloc(sizeof(t_g)); //Do we need to use ft_calloc?
 		if (!game->g)
 		{
 			ft_putendl_fd("Allocation failed in ghostie\n", 2);
 			return (false);
 		}
 	}
-	if ( game->enemy->ghost_sheet)
-		mlx_delete_texture(game->enemy->ghost_sheet);
-	game->g->ghost_sheet = mlx_load_png(gP); // or ENEMYP
+//	if ( game->g->ghost_sheet)
+//		mlx_delete_texture(game->g->ghost_sheet);
+	game->g->ghost_sheet = mlx_load_png(gP);
 	if (!game->g->ghost_sheet)
 	{
 		ft_putendl_fd("No ghost\n", 2);
