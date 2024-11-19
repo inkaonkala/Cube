@@ -6,7 +6,7 @@
 /*   By: iniska <iniska@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/15 20:39:06 by iniska            #+#    #+#             */
-/*   Updated: 2024/11/18 14:50:52 by iniska           ###   ########.fr       */
+/*   Updated: 2024/11/19 08:53:00 by iniska           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,8 +29,6 @@ static int	wall(t_game *game, float x, float y, bool *ghosty)
 			*ghosty = true;
 		if (game->map[map_y][map_x] == 'D')
 		{
-			
-			//init_door(game);
 			game->hit_door = true;
 			ghosty = false;
 			return (2);
@@ -78,11 +76,9 @@ static float	get_horizon(t_game *game, float angl, bool *ghosty)//計算光線�
 	
 	y_step = TILE;
 	x_step = TILE / tan(angl);
-
 	y = floor(game->rays->p_y / TILE) * TILE;
 	ray_move = move_ray(angl, &y, &y_step, 0);
 	x = game->rays->p_x + (y - game->rays->p_y) / tan(angl);
-
 	if (angl > PI / 2 && angl < 3 * PI / 2)
 		x_step = -fabs(x_step);
 	else
@@ -92,6 +88,8 @@ static float	get_horizon(t_game *game, float angl, bool *ghosty)//計算光線�
 	{
 		x += x_step;
 		y += y_step;
+		if (fabs(x - game->rays->p_x) < 0.001 && fabs(y - game->rays->p_y) < 0.001)
+    		break;
 	}
 	game->rays->horizon_inter_x = x;
 	game->rays->horizon_inter_y = y;
@@ -111,17 +109,14 @@ static float	get_wall_height(t_game *game, float angl, bool *ghosty)// 計算光
 
 	y_step = TILE * tan(angl);
 	x_step = TILE;
-
 	x = floor(game->rays->p_x / TILE) * TILE;
 	ray_move = move_ray(angl, &x, &x_step, 1);
 	y = game->rays->p_y + (x - game->rays->p_x) * tan(angl);
 	if (angl > 0 && angl < PI)
 		y_step = fabs(y_step);
 	else
-		y_step = -fabs(y_step);
-		
-	//door	
-	while (!wall(game, x - ray_move, y, ghosty))// 1 is wall 2 iss door
+		y_step = -fabs(y_step);	
+	while (!wall(game, x - ray_move, y, ghosty))
 	{
 		x += x_step;
 		y += y_step;
@@ -162,9 +157,9 @@ void raycast(t_game *game)//  對玩家視角內的所有光線進行投射，�
 			game->rays->wall_flag = true;
 		}
 		set_walls(game, ray);
-		if (ghosty) // && bonus
+		if (ghosty)
 			update_enemy(game);
-		ray++;
 		game->rays->ray_angl += (game->fow / WINDOW_WIDTH);
+		ray++;
 	}
 }

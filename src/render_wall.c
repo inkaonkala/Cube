@@ -3,19 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   render_wall.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yhsu <yhsu@student.hive.fi>                +#+  +:+       +#+        */
+/*   By: iniska <iniska@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/18 12:06:33 by iniska            #+#    #+#             */
-/*   Updated: 2024/11/15 19:04:49 by yhsu             ###   ########.fr       */
+/*   Updated: 2024/11/19 08:58:31 by iniska           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/cub3D.h"
-
-// static uint32_t hexax(uint32_t r, uint32_t g, uint32_t b)
-// {
-// 	return (r << 16) | (g << 8) | b;
-// }
 
 static void	floor_n_ceiling(t_game *game, int ray, double bot_pxl, double top_pxl)
 {
