@@ -6,7 +6,7 @@
 /*   By: iniska <iniska@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/08 10:49:10 by iniska            #+#    #+#             */
-/*   Updated: 2024/11/19 10:11:51 by iniska           ###   ########.fr       */
+/*   Updated: 2024/11/19 13:45:47 by iniska           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,9 +51,13 @@ static void update_distance(t_game *game)
 {
     size_t		dis_x;
 	size_t		dis_y;
-
+/*
 	dis_x = (game->g->g_x - game->rays->p_x);
 	dis_y = (game->g->g_y - game->rays->p_y);
+	game->g->distance = sqrt(dis_x * dis_x + dis_y * dis_y);
+	*/
+	dis_x = ((game->g->g_x * TILE) + TILE / 2) - game->rays->p_x;
+	dis_y = ((game->g->g_y * TILE) + TILE / 2) - game->rays->p_y;
 	game->g->distance = sqrt(dis_x * dis_x + dis_y * dis_y);
 }
 
@@ -70,6 +74,8 @@ void update_g(t_game *game)
 		return ;
 	bot_pixl = (WIN_HEI / 2) + (g_hi / 2);  // Centered vertically
 	top_pixl = (WIN_HEI / 2) - (g_hi / 2);  // Adjust for half the height
+//	screen_x = (int)((WIN_WIDTH / 2) + ((game->g->angl - game->player_angl) * (WIN_WIDTH / FOW)));
+
 	screen_x = (int)((WIN_WIDTH / 2) + (WIN_WIDTH) + (game->g->angl * WIN_WIDTH / FOW)); // It's one TILE off
 	game->g->frame_x = game->g->col * game->g->len;
 	game->g->frame_y = game->g->row * game->g->height;

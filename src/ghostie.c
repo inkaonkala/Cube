@@ -6,7 +6,7 @@
 /*   By: iniska <iniska@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/05 08:49:31 by iniska            #+#    #+#             */
-/*   Updated: 2024/11/19 11:04:04 by iniska           ###   ########.fr       */
+/*   Updated: 2024/11/19 13:49:08 by iniska           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,7 @@ void	set_ghost(t_game *game)
 
 	dis_x = game->g->g_x - game->rays->p_x;
 	dis_y = game->g->g_y - game->rays->p_y;
+	game->g->distance = sqrt(dis_x * dis_x + dis_y * dis_y);
 	animate(game);
 	game->g->ghosty = mlx_new_image(game->mlx, game->g->len, game->g->height);
 	if (!game->g->ghosty)
@@ -48,7 +49,7 @@ void	set_ghost(t_game *game)
 		printf("No ghosty\n");
 		return ;
 	}
-	game->g->distance = sqrt(dis_x * dis_x + dis_y * dis_y);
+//	game->g->distance = sqrt(dis_x * dis_x + dis_y * dis_y);
 	game->g->angl_to_p = atan2(dis_y, dis_x);
 	game->g->angl = fmod(game->g->angl_to_p - game->player_angl
 			+ PI, 2 * PI) - PI;
@@ -92,8 +93,8 @@ static bool	check_position(t_game *game)
 			if (game->map[x][y] == '0' || game->map[x][y] == 'G')
 			{
 				game->map[x][y] = 'G';
-				game->g->g_x = x;
-				game->g->g_y = y;
+				game->g->g_x = y;
+				game->g->g_y = x;
 				return (true);
 			}
 			y++;
