@@ -6,7 +6,7 @@
 /*   By: iniska <iniska@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/15 12:54:09 by yhsu              #+#    #+#             */
-/*   Updated: 2024/11/18 14:57:04 by iniska           ###   ########.fr       */
+/*   Updated: 2024/11/19 08:41:08 by iniska           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,18 +29,10 @@ int main (int argc, char *argv[])
 	game = calloc(1, sizeof(t_game));
 	if(!game)
 		err_message_exit("Malloc failed");
-	
-	//parse map
+		
 	init_game(game, argv[1]);
 
-
-	
-	//initializing the MLX library
-	//Window Creation
-
 	//need to free the game pointer	
-	
-	//initializing the MLX library
 	game->rays = malloc(sizeof(t_rays));
 	if(!game->rays)
 		err_message_exit("Failed to malloc for the BEAM\n");

@@ -6,7 +6,7 @@
 /*   By: iniska <iniska@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/15 12:55:19 by yhsu              #+#    #+#             */
-/*   Updated: 2024/11/18 14:40:18 by iniska           ###   ########.fr       */
+/*   Updated: 2024/11/19 09:02:29 by iniska           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,8 +24,8 @@
 #include <string.h>
 
 
-# define WINDOW_WIDTH 1000
-# define WINDOW_HEIGHT 1000
+# define WINDOW_WIDTH 960
+# define WINDOW_HEIGHT 960
 # define TILE 64
 
 # define ROTATIO_SPEED 0.045
@@ -55,11 +55,10 @@
 # define DOOR_PATH_CLOSE "./textures/door_closed_0.png"
 # define DOOR_PATH_OPEN "./textures/door_opening_1.png"
 # define GAMEOVERI "./textures/gameover.png"
-# define MAX_VIEW_DIS 1000 * TILE
+# define MAX_VIEW_DIS  3 * TILE
 
 // Forward declaration of t_game
 typedef struct s_game t_game;
-
 
 typedef struct s_shape
 {
