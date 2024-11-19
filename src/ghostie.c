@@ -60,17 +60,19 @@ static bool	init_g(t_game *game)
 {
 	if (!game->g)
 	{
-		game->g = malloc(sizeof(t_g));
+		game->g = ft_calloc(sizeof(t_g)); //Do we need to use ft_calloc?
 		if (!game->g)
 		{
-			ft_printf("Allocation failed in ghostie\n");
+			ft_putendl_fd("Allocation failed in ghostie\n", 2);
 			return (false);
 		}
 	}
-	game->g->ghost_sheet = mlx_load_png(gP);
+	if ( game->enemy->ghost_sheet)
+		mlx_delete_texture(game->enemy->ghost_sheet);
+	game->g->ghost_sheet = mlx_load_png(gP); // or ENEMYP
 	if (!game->g->ghost_sheet)
 	{
-		ft_printf("No ghost\n");
+		ft_putendl_fd("No ghost\n", 2);
 		return (false);
 	}
 	colour_flip((uint32_t *)game->g->ghost_sheet->pixels,

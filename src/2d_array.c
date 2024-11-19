@@ -16,7 +16,6 @@ char *readfile(char *mapfile)
 	if (map_str == NULL)
 		return NULL;
 	new_line = get_next_line(fd);
-	//dprintf(2, "newline:%s", new_line);
 	while (new_line)
 	{
 		//temp = new_line;
@@ -25,20 +24,16 @@ char *readfile(char *mapfile)
 		free(new_line);
 		new_line = get_next_line(fd);
 	}
-	
 	close (fd);
 	return (map_str);
 }
 
 
 
-char **get_2d_array( t_game *game, char *mapfile)
+char **get_2d_array( char *mapfile)
 {
 	char	*file_str;
 	char	**result;
-	
-
-	dprintf(2, "game->longest:%zu\n", game->longest);
 	
 	file_str = readfile(mapfile);
 	if (file_str == NULL)

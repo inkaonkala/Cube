@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   screenpop.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: iniska <iniska@student.hive.fi>            +#+  +:+       +#+        */
+/*   By: yhsu <yhsu@student.hive.fi>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/16 10:04:39 by iniska            #+#    #+#             */
-/*   Updated: 2024/11/19 10:11:51 by iniska           ###   ########.fr       */
+/*   Updated: 2024/11/18 17:54:08 by yhsu             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,5 +26,5 @@ void	screenpop(t_game *game)
 	mlx_cursor_hook(game->mlx, mouse_move, game);
 	mlx_mouse_hook(game->mlx, mouse_press, game);
 	mlx_loop(game->mlx);
-	mlx_terminate(game->mlx);
+	//mlx_terminate(game->mlx);
 }

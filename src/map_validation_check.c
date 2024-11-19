@@ -6,7 +6,7 @@
 /*   By: yhsu <yhsu@student.hive.fi>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/24 19:16:05 by yhsu              #+#    #+#             */
-/*   Updated: 2024/11/15 19:51:32 by yhsu             ###   ########.fr       */
+/*   Updated: 2024/11/18 18:49:21 by yhsu             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -147,7 +147,7 @@ static int check_map_closed(t_game *game, char **map)
 		clean_all_exit(game, "The map copy failed.");
 	if (if_map_closed(game, tmp) == 1)
 	{
-		dprintf(2, "map not closed\n");//change to error message 
+		ft_putendl_fd("map not closed\n", 2);//change to error message 
 		free_grid(tmp);
 		return (1);//the map is open
 	}

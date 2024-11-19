@@ -3,7 +3,7 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: iniska <iniska@student.hive.fi>            +#+  +:+       +#+        */
+/*   By: yhsu <yhsu@student.hive.fi>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/15 12:54:09 by yhsu              #+#    #+#             */
 /*   Updated: 2024/11/19 08:41:08 by iniska           ###   ########.fr       */
@@ -40,6 +40,6 @@ int main (int argc, char *argv[])
 	count_values(game);
 	screenpop(game); // opens a window 
 	
-//   clean_all(game);
+  clean_all(game);
 	return (0);
 }
