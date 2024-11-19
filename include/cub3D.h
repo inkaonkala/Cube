@@ -6,7 +6,7 @@
 /*   By: iniska <iniska@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/15 12:55:19 by yhsu              #+#    #+#             */
-/*   Updated: 2024/11/19 11:14:39 by iniska           ###   ########.fr       */
+/*   Updated: 2024/11/19 14:16:55 by iniska           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,8 +24,8 @@
 #include <string.h>
 
 
-# define WIN_WIDTH 960
-# define WIN_HEI 960
+# define WIN_WIDTH 1024
+# define WIN_HEI 1024
 # define TILE 64
 
 # define ROTATIO_SPEED 0.045
@@ -93,6 +93,7 @@ typedef struct s_g
 
 	int				row;
 	int				col;
+	int				screen_x;
 
 	double			x_offset;
 	double			y_offset;
