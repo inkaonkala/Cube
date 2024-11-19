@@ -6,7 +6,7 @@
 /*   By: iniska <iniska@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/05 08:49:31 by iniska            #+#    #+#             */
-/*   Updated: 2024/11/19 09:13:58 by iniska           ###   ########.fr       */
+/*   Updated: 2024/11/19 11:04:04 by iniska           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,12 +19,12 @@ void	animate(t_game *game)
 	int			delay_f;
 
 	delay_f = 9;
-	game->enemy->height = game->enemy->ghost_sheet->height / 8;
-	game->enemy->len = game->enemy->ghost_sheet->width / 12;
+	game->g->height = game->g->ghost_sheet->height / 8;
+	game->g->len = game->g->ghost_sheet->width / 12;
 	if (delay >= delay_f)
 	{
-		game->enemy->row = frame_counter / 12;
-		game->enemy->col = frame_counter % 12;
+		game->g->row = frame_counter / 12;
+		game->g->col = frame_counter % 12;
 		frame_counter++;
 		if (frame_counter >= 96)
 			frame_counter = 0;
@@ -39,44 +39,42 @@ void	set_ghost(t_game *game)
 	size_t		dis_x;
 	size_t		dis_y;
 
-	dis_x = game->enemy->g_x - game->rays->p_x;
-	dis_y = game->enemy->g_y - game->rays->p_y;
+	dis_x = game->g->g_x - game->rays->p_x;
+	dis_y = game->g->g_y - game->rays->p_y;
 	animate(game);
-	game->enemy->ghosty = mlx_new_image(game->mlx, game->enemy->len, game->enemy->height);
-	if (!game->enemy->ghosty)
+	game->g->ghosty = mlx_new_image(game->mlx, game->g->len, game->g->height);
+	if (!game->g->ghosty)
 	{
 		printf("No ghosty\n");
 		return ;
 	}
-	game->enemy->distance = sqrt(dis_x * dis_x + dis_y * dis_y);
-	game->enemy->angl_to_p = atan2(dis_y, dis_x);
-	game->enemy->angl = fmod(game->enemy->angl_to_p - game->player_angl
+	game->g->distance = sqrt(dis_x * dis_x + dis_y * dis_y);
+	game->g->angl_to_p = atan2(dis_y, dis_x);
+	game->g->angl = fmod(game->g->angl_to_p - game->player_angl
 			+ PI, 2 * PI) - PI;
-	game->enemy->pic = game->enemy->ghost_sheet;
-	game->enemy->pixels = (uint32_t *)game->enemy->pic->pixels;
-//	game->enemy->frame_x = game->enemy->col * game->enemy->len;
-//	game->enemy->frame_y = game->enemy->row * game->enemy->height;
+	game->g->pic = game->g->ghost_sheet;
+	game->g->pixels = (uint32_t *)game->g->pic->pixels;
 }
 
-static bool	init_enemy(t_game *game)
+static bool	init_g(t_game *game)
 {
-	if (!game->enemy)
+	if (!game->g)
 	{
-		game->enemy = malloc(sizeof(t_enemy));
-		if (!game->enemy)
+		game->g = malloc(sizeof(t_g));
+		if (!game->g)
 		{
 			ft_printf("Allocation failed in ghostie\n");
 			return (false);
 		}
 	}
-	game->enemy->ghost_sheet = mlx_load_png(ENEMYP);
-	if (!game->enemy->ghost_sheet)
+	game->g->ghost_sheet = mlx_load_png(gP);
+	if (!game->g->ghost_sheet)
 	{
 		ft_printf("No ghost\n");
 		return (false);
 	}
-	colour_flip((uint32_t *)game->enemy->ghost_sheet->pixels,
-		game->enemy->ghost_sheet->width, game->enemy->ghost_sheet->height);
+	colour_flip((uint32_t *)game->g->ghost_sheet->pixels,
+		game->g->ghost_sheet->width, game->g->ghost_sheet->height);
 	return (true);
 }
 
@@ -94,8 +92,8 @@ static bool	check_position(t_game *game)
 			if (game->map[x][y] == '0' || game->map[x][y] == 'G')
 			{
 				game->map[x][y] = 'G';
-				game->enemy->g_x = x;
-				game->enemy->g_y = y;
+				game->g->g_x = x;
+				game->g->g_y = y;
 				return (true);
 			}
 			y++;
@@ -103,13 +101,13 @@ static bool	check_position(t_game *game)
 		y = 0;
 		x++;
 	}
-	ft_printf("Enemy does not fit in here!\n");
+	ft_printf("g does not fit in here!\n");
 	return (false);
 }
 
 void	ghostie(t_game *game)
 {
-	if (!init_enemy(game))
+	if (!init_g(game))
 		return ;
 	if (!check_position(game))
 		return ;
