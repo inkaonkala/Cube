@@ -6,7 +6,7 @@
 /*   By: iniska <iniska@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/15 12:55:19 by yhsu              #+#    #+#             */
-/*   Updated: 2024/11/19 12:55:42 by iniska           ###   ########.fr       */
+/*   Updated: 2024/11/19 14:16:55 by iniska           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,6 +93,7 @@ typedef struct s_g
 
 	int				row;
 	int				col;
+	int				screen_x;
 
 	double			x_offset;
 	double			y_offset;
