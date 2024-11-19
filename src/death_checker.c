@@ -6,7 +6,7 @@
 /*   By: iniska <iniska@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/15 09:43:42 by iniska            #+#    #+#             */
-/*   Updated: 2024/11/18 14:39:27 by iniska           ###   ########.fr       */
+/*   Updated: 2024/11/19 10:11:51 by iniska           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,8 +22,8 @@ void winning_image(t_game *game)
 	pic = mlx_load_png(WINIMA);
 	if(!pic)
 		return ;
-	offsex = (WINDOW_WIDTH - pic->width) / 2;
-	offsey = (WINDOW_HEIGHT - pic->height) / 2;
+	offsex = (WIN_WIDTH - pic->width) / 2;
+	offsey = (WIN_HEI - pic->height) / 2;
 	pixels = mlx_texture_to_image(game->mlx, pic);
 	if (!pixels)
 	{
@@ -48,8 +48,8 @@ void	game_over_image(t_game *game)
 		pic = mlx_load_png(WINIMA);
 	if(!pic)
 		return ;
-	offsex = (WINDOW_WIDTH - pic->width) / 2;
-	offsey = (WINDOW_HEIGHT - pic->height) / 2;
+	offsex = (WIN_WIDTH - pic->width) / 2;
+	offsey = (WIN_HEI - pic->height) / 2;
 	//pixels = mlx_texture_to_image(game->mlx, pic);
 	game->gameover_image = mlx_texture_to_image(game->mlx, pic);
 	if (!game->gameover_image)

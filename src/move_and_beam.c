@@ -6,83 +6,15 @@
 /*   By: iniska <iniska@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/17 09:41:09 by iniska            #+#    #+#             */
-/*   Updated: 2024/11/18 14:56:59 by iniska           ###   ########.fr       */
+/*   Updated: 2024/11/19 10:50:15 by iniska           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/cub3D.h"
 
-static void	move_player(t_game *game, double move_x, double move_y)
-{
-	int		map_y;
-	int		map_x;
-	double	new_y;
-	double	new_x;
-
-	new_x = game->rays->p_x + move_x;
-	new_y = game->rays->p_y + move_y;
-	map_x = new_x / TILE;
-	map_y = new_y / TILE;
-	if ((game->map[map_y][map_x] != '1' && game->map[map_y][game->rays->p_x / TILE] != '1' && game->map[game->rays->p_y / TILE][map_x] != '1' )
-		|| (game->map[map_y][map_x] != 'G' && game->map[map_y][game->rays->p_x / TILE] != 'G' && game->map[game->rays->p_y / TILE][map_x] != 'G'))
-	{
-		if (game->map[map_y][map_x] == 'G' && game->map[map_y][game->rays->p_x / TILE] == 'G' && game->map[game->rays->p_y / TILE][map_x] == 'G')
-			game->death = true;
-		else if (game->map[map_y][map_x] == 'D' && game->map[map_y][game->rays->p_x / TILE] == 'G' && game->map[game->rays->p_y / TILE][map_x] == 'D')
-			game->win = true;
-		else if (game->map[map_y][map_x] != '1' && game->map[map_y][game->rays->p_x / TILE] != '1' && game->map[game->rays->p_y / TILE][map_x] != '1')
-		{
-			game->rays->p_x = new_x;
-			game->rays->p_y = new_y;
-			if (game->rays->p_x % TILE == 0)
-				game->rays->p_x += 1;
-			if (game->rays->p_y % TILE == 0)
-				game->rays->p_y += 1;
-		}
-//		if (game->map[game->rays->p_x][game->rays->p_y] == 'D')
-//			game->win = true;
-	}
-//	if (game->map[game->rays->p_x][game->rays->p_y] == 'D')
-//            game->win = true;
-}
-
-static void	rotate(t_game *game, int i)
-{
-	if (i == 1)
-	{
-		game->player_angl += ROTATIO_SPEED;
-		if (game->player_angl > 2 * PI)
-			game->player_angl -= 2 * PI;
-	}
-	else
-	{
-		game->player_angl -= ROTATIO_SPEED;
-		if (game->player_angl < 0)
-			game->player_angl += 2 * PI;
-	}
-}
-
-static void	move_hook(t_game *game, double move_x, double move_y)
-{
-	wasd(game, &move_x, &move_y);
-	if (!game->death && !game->win)
-	{
-		if (game->rotation == 1)
-			rotate(game, 1);
-		if (game->rotation == -1)
-			rotate(game, 0);
-	}
-	game->up_down = 0;
-	game->left_right = 0;
-	game->rotation = 0;
-	if (!game->death && !game->win)
-		move_player(game, move_x, move_y);		
-}	
-
-
 void	move_and_beam(void	*data)
 {
-	t_game *game;
+	t_game	*game;
 
 	game = (t_game *) data;
 	if (mlx_is_key_down(game->mlx, MLX_KEY_ESCAPE))
@@ -90,17 +22,14 @@ void	move_and_beam(void	*data)
 		mlx_close_window(game->mlx);
 		printf("Bye bye!\n");
 	}
-
-	//if (BONUS)
-	
-	ghostie(game);
+	if (BONUS)
+		ghostie(game);
 	keys(game);
 	move_hook(game, 0, 0);
-	game->mini_angle= game->player_angl;
+	game->mini_angle = game->player_angl;
 	raycast(game);
-
-	//bonus
-	init_door(game);
+	if (BONUS)
+		init_door(game);
 	draw_mini_map(game);
 	if (game->death == true)
 		game_over_image(game);

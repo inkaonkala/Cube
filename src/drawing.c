@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   drawing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yhsu <yhsu@student.hive.fi>                +#+  +:+       +#+        */
+/*   By: iniska <iniska@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/18 13:16:18 by iniska            #+#    #+#             */
-/*   Updated: 2024/11/15 19:43:41 by yhsu             ###   ########.fr       */
+/*   Updated: 2024/11/19 11:25:35 by iniska           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,44 +38,12 @@ static mlx_texture_t	*backup_box()
 	return (blakkis);
 }
 
-void	set_pixels(t_game *game, double x, double y, int colour)
-{
-	if (x < 0)
-		return ;
-	else if (x >= WINDOW_WIDTH)
-		return ;
-	if (y < 0)
-		return ;
-	if (y >= WINDOW_HEIGHT)
-		return ;
-
-	mlx_put_pixel(game->canvas, x, y, colour);
-}
-
-static double	get_setof_x(t_game *game, mlx_texture_t *pic)
-{
-	double	x;
-
-	x = 0;
-	if (!game || !game->rays || !pic || pic->width == 0)
-	{
-		printf("No Picture\n");
-    	return (x);
-	}
-	if (game->rays->wall_flag == true)
-		x = (int)fmodf((game->rays->horizon_inter_x * (pic->width / TILE)), pic->width);
-	else
-		x = (int)fmodf((game->rays->vertical_inter_y * (pic->width / TILE)), pic->width);
-	return (x);
-}
-
 static mlx_texture_t	*get_pics_for_wall(t_game *game)
 {
 	mlx_texture_t *tex;
 
 	tex = NULL;
 
-	//door
 	if (game->hit_door == true)  
 	{
 		check_door(game);
@@ -106,25 +74,21 @@ static mlx_texture_t	*get_pics_for_wall(t_game *game)
 
 void	draw_wall(t_game *game, double bot_pixl, double top_pixl, double wall_hi)
 {
-
 	mlx_texture_t	*pic;
 	uint32_t		*pixels;
 	double			x;
 	double			y;
 	int				pos;
 
-	pic = get_pics_for_wall(game);  // 獲取適當的牆壁紋理
-	if (!pic || wall_hi <= 0)       // 檢查紋理是否有效
-    	return;
-	pixels = (uint32_t *)pic->pixels;  // 獲取紋理像素數據
-	x = get_setof_x(game, pic);        // 計算紋理的 X 座標
-
-	if (x < 0 || x >- pic->width)
-	{
-		ft_printf("x out of bounds in draw walls\n");
+	pic = get_pics_for_wall(game);
+	if (!pic || wall_hi <= 0)
+		return;
+	pixels = (uint32_t *)pic->pixels;
+	x = get_setof_x(game, pic);
+	if (x < 0 || x >= pic->width)
 		return ;
-	}
-	y = (top_pixl - (WINDOW_HEIGHT / 2) + (wall_hi / 2)) * (double)pic->height / wall_hi;
+	y = (top_pixl - (WIN_HEI / 2) + (wall_hi / 2))
+			* (double)pic->height / wall_hi;
 	if (y < 0)
 		y = 0;
 	while (top_pixl < bot_pixl)
