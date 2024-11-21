@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3D.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: iniska <iniska@student.hive.fi>            +#+  +:+       +#+        */
+/*   By: yhsu <yhsu@student.hive.fi>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/15 12:55:19 by yhsu              #+#    #+#             */
-/*   Updated: 2024/11/21 09:28:22 by iniska           ###   ########.fr       */
+/*   Updated: 2024/11/21 17:05:09 by yhsu             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,12 +17,10 @@
 # include"../libft/ft_printf.h"
 # include "../MLX42/include/MLX42/MLX42.h"
 
-
 #include <math.h>
 #include <stdlib.h>
 #include <stdio.h>
 #include <string.h>
-
 
 # define WIN_WIDTH 1024
 # define WIN_HEI 1024
@@ -30,19 +28,15 @@
 
 # define ROTATIO_SPEED 0.045
 # define SPEED 3
-
-# define FOW 60 // fieald of view
+# define FOW 60
 # define PI 3.14159265
-
-//for mini map
-
 # define SAND       0xF7E9DB
 # define RED        0xBB4211
 # define RUSSIANRED 0xde300b
 # define BROWN      0x54310F
 # define CHOCO      0x351C04
 # define BACKGROUND_COLOR 0xFFE5E4E4
-# define MINIMAP_SIDE 208//小地圖中每個方格的邊長
+# define MINIMAP_SIDE 208
 # define MINIMAP_TILE_COUNT 13
 # define MINIMAP_IMAGE_SIDE 16
 
@@ -52,17 +46,13 @@
 # define BONUS 1
 # endif
 
-
-
 # define gP "./textures/ghosty.png"
-
 # define WINIMA	"./textures/winning.png"
 # define DOOR_PATH_CLOSE "./textures/door_closed_0.png"
 # define DOOR_PATH_OPEN "./textures/door_opening_1.png"
 # define GAMEOVERI "./textures/gameover.png"
 # define MAX_VIEW_DIS  3 * TILE
 
-// Forward declaration of t_game
 typedef struct s_game t_game;
 
 typedef struct s_shape
@@ -95,23 +85,18 @@ typedef struct s_g
 	int				height;
 	int				len;
 	uint32_t		color;
-
 	int				row;
 	int				col;
 	int				screen_x;
-
 	double			x_offset;
 	double			y_offset;
-	
 	float			angl;
 	float			distance;
 	float			angl_to_p;
-
 	mlx_texture_t	*pic;
 	uint32_t		*pixels;
 	int				frame_x;
 	int				frame_y;
-
 }	t_g;
 
 typedef struct s_rays
@@ -119,18 +104,14 @@ typedef struct s_rays
 	float	n_ray; // float can hold decimals ->fractional numbers
 	float	ray_angl;
 	bool	wall_flag;
-	
 	float	distance;
 	int		i;
-
 	float	horizon_inter_x;
 	float	horizon_inter_y;
 	float	vertical_inter_x;
 	float	vertical_inter_y;
-
 	int		p_x;
 	int		p_y;
-	
 }	t_rays;
 
 typedef struct s_flag
@@ -144,7 +125,6 @@ typedef struct s_flag
 	int duplicate;
 	int all_flags;
 	t_game *game;
-
 }	t_flag;
 
 
@@ -155,31 +135,29 @@ typedef struct s_game
 {
 	char			**file_content;
 	char 			**map;
-	char 			*no_texture_path;//./maps/photo.png
+	char 			*no_texture_path;
 	char 			*so_texture_path;
 	char 			*we_texture_path;
 	char 			*ea_texture_path;
 	char			*floor_color;
 	char			*ceiling_color;
-	char			**f_split;// save number without ,
+	char			**f_split;
 	char			**c_split;
-	uint32_t		floor_r;//save color rgb  eg.number 0
-	uint32_t		floor_g;//255
-	uint32_t		floor_b;//255
+	uint32_t		floor_r;
+	uint32_t		floor_g;
+	uint32_t		floor_b;
 	uint32_t		ceiling_r;
 	uint32_t		ceiling_g;
 	uint32_t		ceiling_b;
-	size_t 			longest;//width
+	size_t 			longest;
 	int 			last_item;
 	bool			mouse_on;
 	bool			horizon;
 	bool			death;
 	bool			win;
-	//it got moves
 	int				rotation;
 	int				up_down;
 	int				left_right;
-
 	t_flag 			*flags;
 	size_t 			height;
 	size_t			width;
@@ -188,34 +166,27 @@ typedef struct s_game
 	float			mini_angle;
 	float			player_angl;
 	float			fow;
-	
 	mlx_t			*mlx;
 	mlx_image_t		*canvas;
+	mlx_texture_t	*miniplayer_text;
 	mlx_image_t 	*mini_player;
 	mlx_image_t	    *minimap;
 	mlx_texture_t	*no_texture;
 	mlx_texture_t	*so_texture;
 	mlx_texture_t	*we_texture;
 	mlx_texture_t	*ea_texture;
-	
 	t_rays 			*rays;
-	t_g			*g;
-
+	t_g				*g;
 	char			s;
-
-
 	char 			d;
-	bool			door_state;//1  true = open    0  false = close
-	bool           hit_door;
+	bool			door_state;
+	bool			hit_door;
 	size_t			door_x;
 	size_t			door_y;
 	mlx_texture_t	*door_open_texture;
 	mlx_texture_t	*door_close_texture;
 	mlx_image_t 	*door;
-
-	mlx_image_t *gameover_image; 
-	
-	
+	mlx_image_t		*gameover_image; 
 }	t_game;
 
 //get_2d_array
@@ -241,6 +212,7 @@ void	init_flags(t_flag *flags);
 //map validation
 void	map_validate(t_game *game);
 char	**copy_grid(t_game *game, char **map);
+int	check_map_closed(t_game *game, char **map);
 
 //position extention
 int		check_file_extesion(char *filename);
@@ -258,6 +230,8 @@ void	set_color(t_game *game);
 //init_game
 void	init_game(t_game *game, char *mapfile);
 int		empty_line(char * file);
+int	check_empty_line(t_game *game, char *mapfile);
+int	check_empty_map(t_game *game);
 
 //error
 void 	err_message_exit(char * message);
@@ -268,9 +242,7 @@ void	move_and_beam(void *data);
 
 //move_hook
 void	move_hook(t_game *game, double move_x, double move_y);
-
 void 	raycast(t_game *game);
-
 void	set_walls(t_game *game, int ray);
 
 // math_stuff
@@ -284,8 +256,13 @@ void 	init_game(t_game *game, char *mapfile);
 void 	err_message_exit(char * message);
 void 	err_message(char * message);
 void 	free_grid(char **grid);
-void 	clean_all_exit(t_game *game, char *message);
+
+//clean up 
+void	clean_all_exit(t_game *game, char *message);
 void	clean_all(t_game *game);
+void	delete_image(t_game *game);
+void	free_texture(t_game *game);
+void	free_grid(char **grid);
 
 //ray_helpers
 int		wall(t_game *game, float x, float y, bool *ghosty);
@@ -313,7 +290,6 @@ void	draw_player(t_game *game);
 //void	draw_g(t_game *game, int frame_w, int frame_l);
 void	ghostie(t_game *game);
 bool	death_check(t_game *game);
-
 void	update_g(t_game *game); //, int ray);
 void	animate(t_game *game);
 void	set_ghost(t_game *game);
