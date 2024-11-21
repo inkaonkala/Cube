@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   math_stuff.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: iniska <iniska@student.hive.fi>            +#+  +:+       +#+        */
+/*   By: yhsu <yhsu@student.hive.fi>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/17 10:24:06 by iniska            #+#    #+#             */
-/*   Updated: 2024/11/18 12:50:42 by iniska           ###   ########.fr       */
+/*   Updated: 2024/11/18 16:38:01 by yhsu             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,16 +25,20 @@ void	save_images_to_struct(t_game *game)
 {
 	game->no_texture = mlx_load_png(game->no_texture_path);
 	if (game->no_texture)
-		colour_flip((uint32_t *)game->no_texture->pixels, game->no_texture->width, game->no_texture->height);
+		colour_flip((uint32_t *)game->no_texture->pixels,
+			game->no_texture->width, game->no_texture->height);
 	game->so_texture = mlx_load_png(game->so_texture_path);
 	if (game->so_texture)
-		colour_flip((uint32_t *)game->so_texture->pixels, game->so_texture->width, game->so_texture->height);
+		colour_flip((uint32_t *)game->so_texture->pixels,
+			game->so_texture->width, game->so_texture->height);
 	game->we_texture = mlx_load_png(game->we_texture_path);
 	if (game->we_texture)
-		colour_flip((uint32_t *)game->we_texture->pixels, game->we_texture->width, game->we_texture->height);
+		colour_flip((uint32_t *)game->we_texture->pixels,
+			game->we_texture->width, game->we_texture->height);
 	game->ea_texture = mlx_load_png(game->ea_texture_path);
 	if (game->ea_texture)
-		colour_flip((uint32_t *)game->ea_texture->pixels, game->ea_texture->width, game->ea_texture->height);
+		colour_flip((uint32_t *)game->ea_texture->pixels,
+			game->ea_texture->width, game->ea_texture->height);
 }
 
 void	count_values(t_game *game)

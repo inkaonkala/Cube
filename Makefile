@@ -1,9 +1,8 @@
 
-
 NAME = cub3D
 
 CC = cc    
-CFLAGS = -Wall -Wextra -Werror -g 
+CFLAGS = -Wall -Wextra -Werror # -g DO WE NEE THIS? 
 MLX_FLAGS = -L/opt/X11/lib -lX11 -lXext -lglfw -lm # Linux-specific flags
 
 # Library directories and files
@@ -25,10 +24,15 @@ OBJECTS = $(SOURCES:src/%.c=objs/%.o)
 # Rule to build everything
 all: makelibft makemlx $(NAME)
 
+
 # Build the executable
 $(NAME): ${OBJECTS} $(LIBFT) $(MLX42)
 	@echo "\033[0;32mCreating The Executable✅: ${NAME}\033[0m"
 	@$(CC) $(OBJECTS) $(LIBFT) $(MLX42) $(INCLUDES) $(MLX_FLAGS) -o $(NAME)
+
+# Bonus part
+bonus: CFLAGS += -DUSE_BONUS=1
+bonus: re
 	
 # Compile object files
 objs/%.o: src/%.c

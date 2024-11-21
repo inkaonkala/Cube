@@ -6,7 +6,7 @@
 /*   By: iniska <iniska@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/07 11:17:58 by iniska            #+#    #+#             */
-/*   Updated: 2024/11/14 08:03:42 by iniska           ###   ########.fr       */
+/*   Updated: 2024/11/21 09:19:40 by iniska           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,7 @@ void	colour_flip(uint32_t *pixels, int width, int height)
 		i++;
 	}
 }
+
 static int set_t_path(char **map_path, char * t_path)
 {
 	if (*map_path)
@@ -47,7 +48,6 @@ static int set_t_path(char **map_path, char * t_path)
 	return (0);
 }
 
-//int save_colors(t_game *game, char **file_content, t_flag *flags)
 int save_colors(t_game *game, char **file_content)
 {
 	int i;

@@ -6,7 +6,7 @@
 /*   By: yhsu <yhsu@student.hive.fi>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/24 14:40:04 by yhsu              #+#    #+#             */
-/*   Updated: 2024/11/07 17:21:29 by yhsu             ###   ########.fr       */
+/*   Updated: 2024/11/18 18:48:18 by yhsu             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -110,7 +110,6 @@ int create_map(t_game * game, char **file_content)
 	j = 0;
 	game->longest = check_longest(file_content);
 	game->height = count_mapline(file_content);
-	
 	game->map = (char **)malloc((game->height + 1) * sizeof(char *)); 
 	if (game->map == NULL)
 		return (1);
@@ -120,15 +119,9 @@ int create_map(t_game * game, char **file_content)
 		&& file_content[i][0] != 'S' && file_content[i][0] != 'E' 
 		&& file_content[i][0] != 'C'&& file_content[i][0] != 'F')
 	{
-		//game->map[j] = (char *) malloc ((game->longest + 1) * sizeof(char));
 		game->map[j] = (char *) calloc ((game->longest + 1), sizeof(char));
 		if (game->map[j] == NULL)
-		{
-			dprintf(2, "Row %d is NULL\n", j);// for test
-
 			return (1);
-		}
-			
 		copy_string(game->map[j], file_content[i]);
 		i++;
 		j++;
