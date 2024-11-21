@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yhsu <yhsu@student.hive.fi>                +#+  +:+       +#+        */
+/*   By: iniska <iniska@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/15 12:54:09 by yhsu              #+#    #+#             */
-/*   Updated: 2024/11/19 08:41:08 by iniska           ###   ########.fr       */
+/*   Updated: 2024/11/21 10:38:04 by iniska           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,32 +14,22 @@
 
 int main (int argc, char *argv[])
 {
-	//printf("%d", argc);
-	//printf("%s", argv[0]);
-	//printf("this is here for compile %s", argv[0]); 
-	
-	if (argc != 2)
-		err_message_exit("Invalid input.");
-	
-	if (check_file_extesion(argv[1]) == 0)
-		err_message_exit( "please provide a correct '.cub' file");
-	
 	t_game *game;
 
+	if (argc != 2)
+		err_message_exit("Invalid input.");
+	if (check_file_extesion(argv[1]) == 0)
+		err_message_exit( "please provide a correct '.cub' file");
 	game = calloc(1, sizeof(t_game));
 	if(!game)
 		err_message_exit("Malloc failed");
-		
 	init_game(game, argv[1]);
-
 	//need to free the game pointer	
 	game->rays = malloc(sizeof(t_rays));
 	if(!game->rays)
 		err_message_exit("Failed to malloc for the BEAM\n");
-
 	count_values(game);
-	screenpop(game); // opens a window 
-	
-  clean_all(game);
+	screenpop(game);	
+	clean_all(game);
 	return (0);
 }
