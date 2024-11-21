@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3D.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yhsu <yhsu@student.hive.fi>                +#+  +:+       +#+        */
+/*   By: iniska <iniska@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/15 12:55:19 by yhsu              #+#    #+#             */
-/*   Updated: 2024/11/19 14:16:55 by iniska           ###   ########.fr       */
+/*   Updated: 2024/11/21 09:28:22 by iniska           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,9 +46,14 @@
 # define MINIMAP_TILE_COUNT 13
 # define MINIMAP_IMAGE_SIDE 16
 
-//for g
+# ifndef USE_BONUS
+# define BONUS 0
+# else
+# define BONUS 1
+# endif
 
-# define BONUS true
+
+
 # define gP "./textures/ghosty.png"
 
 # define WINIMA	"./textures/winning.png"
@@ -70,10 +75,10 @@ typedef struct s_shape
 
 typedef struct s_minimap
 {
-	mlx_image_t* background;
-	t_game *game;
-	mlx_t	*mlx;
-	mlx_image_t* image;
+	mlx_image_t		*background;
+	t_game			*game;
+	mlx_t			*mlx;
+	mlx_image_t		*image;
 	size_t			px;
 	size_t			py;
 
@@ -181,8 +186,8 @@ typedef struct s_game
 	size_t			player_x;
 	size_t			player_y;
 	float			mini_angle;
-	float			player_angl; //Where is player facing
-	float			fow; // field of view for the player
+	float			player_angl;
+	float			fow;
 	
 	mlx_t			*mlx;
 	mlx_image_t		*canvas;
@@ -214,19 +219,20 @@ typedef struct s_game
 }	t_game;
 
 //get_2d_array
-char **get_2d_array( char *mapfile);
-char *readfile(char *mapfile);
+char	**get_2d_array( char *mapfile);
+char	*readfile(char *mapfile);
 
 //check_elements
 int		check_elements_info(t_game *game,char **file_content, t_flag *flags);
 int		empty_line(char * file);
 
 //create_map
-int create_map(t_game * game, char **file_content);
-void create_rectagle(t_game *game);
+int		create_map(t_game * game, char **file_content);
+void	create_rectagle(t_game *game);
+
 //void copy_string( t_game *ame, char *s1, char *s2);
-void copy_string( char *s1, char *s2);
-int count_mapline(char **file_content);
+void	copy_string( char *s1, char *s2);
+int		count_mapline(char **file_content);
 
 //flags
 int		set_flags(char *file_line, t_flag *flags);
@@ -255,9 +261,7 @@ int		empty_line(char * file);
 
 //error
 void 	err_message_exit(char * message);
-
 void	screenpop(t_game *game);
-
 
 //move_and_beam
 void	move_and_beam(void *data);
@@ -287,41 +291,37 @@ void	clean_all(t_game *game);
 int		wall(t_game *game, float x, float y, bool *ghosty);
 int		move_ray(float angl, float *inter, float *step, int is_vert);
 
-
-//keys
-void	wasd(t_game *game, double *move_x, double *move_y);
-
-//mini_map
-void draw_mini_map(t_game *game);
-void draw_player(t_game *game);
-
-
 //drawing_helpers
 double	get_setof_x(t_game *game, mlx_texture_t *pic);
 void	set_pixels(t_game *game, double x, double y, int colour);
 
+//render_wall
 void	draw_wall(t_game *game, double bot_pixl, double top_pixl, double wall_hi);
 
+//keys
+void	wasd(t_game *game, double *move_x, double *move_y);
 void	keys(t_game *game);
 void	mouse_move(double x, double y, void *data);
 void 	mouse_press(mouse_key_t button, action_t action, modifier_key_t mods, void *data);
+
+//BONUS
+//mini_map
+void	draw_mini_map(t_game *game);
+void	draw_player(t_game *game);
 
 // ghosty 
 //void	draw_g(t_game *game, int frame_w, int frame_l);
 void	ghostie(t_game *game);
 bool	death_check(t_game *game);
 
-//void update_g(t_game *game, double bot_pixl, double top_pixl, double ghostie_hi);
 void	update_g(t_game *game); //, int ray);
 void	animate(t_game *game);
 void	set_ghost(t_game *game);
 void	game_over_image(t_game *game);
-//void	winning_image(t_game *game);
 
 //door 
-void check_door(t_game *game);
-void init_door(t_game *game);
-void check_door_position(t_game *game, char ** map);
+void	check_door(t_game *game);
+void	init_door(t_game *game);
+void	check_door_position(t_game *game, char ** map);
 
 #endif
-//	draw_g(game, game->g->len, game->g->height);
