@@ -6,7 +6,7 @@
 /*   By: iniska <iniska@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/05 08:49:31 by iniska            #+#    #+#             */
-/*   Updated: 2024/11/21 10:24:39 by iniska           ###   ########.fr       */
+/*   Updated: 2024/11/22 11:29:08 by iniska           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,15 +60,15 @@ static bool	init_g(t_game *game)
 {
 	if (!game->g)
 	{
-		game->g = malloc(sizeof(t_g)); //Do we need to use ft_calloc?
+		game->g = ft_calloc(sizeof(t_g), 1);
 		if (!game->g)
 		{
 			ft_putendl_fd("Allocation failed in ghostie\n", 2);
 			return (false);
 		}
 	}
-//	if ( game->g->ghost_sheet)
-//		mlx_delete_texture(game->g->ghost_sheet);
+	if (game->g->ghost_sheet)
+		mlx_delete_texture(game->g->ghost_sheet);
 	game->g->ghost_sheet = mlx_load_png(gP);
 	if (!game->g->ghost_sheet)
 	{
@@ -109,9 +109,21 @@ static bool	check_position(t_game *game)
 
 void	ghostie(t_game *game)
 {
-	if (!init_g(game))
-		return ;
-	if (!check_position(game))
-		return ;
-	set_ghost(game);
+	static int	flag = 0;
+
+	if (flag < 2)
+	{
+		if (flag == 0)
+		{
+			flag = 1;
+			if (!init_g(game))
+				return ;
+		}
+		if (!check_position(game))
+		{
+			flag = 3;
+			return ;
+		}
+		set_ghost(game);
+	}
 }

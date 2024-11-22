@@ -6,7 +6,7 @@
 /*   By: iniska <iniska@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/15 20:39:06 by iniska            #+#    #+#             */
-/*   Updated: 2024/11/19 12:28:51 by iniska           ###   ########.fr       */
+/*   Updated: 2024/11/22 09:23:00 by iniska           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,7 +78,7 @@ static float	update_rayangl(float angl)
 	return (angl);
 }
 
-static void	shorter(t_game *game, double horizon_line)
+static void	it_is_a_wall(t_game *game, double horizon_line)
 {
 	game->rays->distance = horizon_line;
 	game->rays->wall_flag = true;
@@ -103,7 +103,7 @@ void	raycast(t_game *game)
 		if (vertical_line <= horizon_line)
 			game->rays->distance = vertical_line;
 		else
-			shorter(game, horizon_line);
+			it_is_a_wall(game, horizon_line);
 		set_walls(game, ray);
 		if (ghosty)
 			update_g(game);

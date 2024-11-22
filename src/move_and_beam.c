@@ -6,7 +6,7 @@
 /*   By: iniska <iniska@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/17 09:41:09 by iniska            #+#    #+#             */
-/*   Updated: 2024/11/21 10:36:24 by iniska           ###   ########.fr       */
+/*   Updated: 2024/11/22 08:22:51 by iniska           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,9 +32,9 @@ void	move_and_beam(void	*data)
 	{
 		init_door(game);
 		draw_mini_map(game);
+		if (game->death == true)
+			game_over_image(game);
+		if (game->win == true)
+			game_over_image(game);
 	}
-	if (game->death == true)
-		game_over_image(game);
-	if (game->win == true)
-		game_over_image(game);
 }

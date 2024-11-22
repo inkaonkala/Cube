@@ -6,7 +6,7 @@
 /*   By: iniska <iniska@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/19 11:13:20 by iniska            #+#    #+#             */
-/*   Updated: 2024/11/19 11:17:28 by iniska           ###   ########.fr       */
+/*   Updated: 2024/11/22 08:38:11 by iniska           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,10 +36,10 @@ double	get_setof_x(t_game *game, mlx_texture_t *pic)
 		return (x);
 	}
 	if (game->rays->wall_flag == true)
-		x = (int)fmodf((game->rays->horizon_inter_x
-					* (pic->width / TILE)), pic->width);
+		x = fmod(game->rays->horizon_inter_x, TILE) / TILE * pic->width;
 	else
-		x = (int)fmodf((game->rays->vertical_inter_y
-					* (pic->width / TILE)), pic->width);
+		x = fmod(game->rays->vertical_inter_y, TILE) / TILE * pic->width;
+	if (x < 0)
+		x += pic->width;
 	return (x);
 }
