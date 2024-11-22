@@ -6,7 +6,7 @@
 /*   By: yhsu <yhsu@student.hive.fi>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/15 17:58:39 by yhsu              #+#    #+#             */
-/*   Updated: 2024/11/21 16:58:28 by yhsu             ###   ########.fr       */
+/*   Updated: 2024/11/22 17:52:31 by yhsu             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,17 +14,22 @@
 
 static void	free_bonus_texture(t_game *game)
 {
-	if (game->g->ghost_sheet)
-	{
-		mlx_delete_texture(game->g->ghost_sheet);
-	}
+	dprintf (2, "free1\n");
+	
+	dprintf (2, "free2\n");
 	if (game->door_close_texture)
 	{
 		mlx_delete_texture(game->door_close_texture);
 	}
+	dprintf (2, "free3\n");
 	if (game->door_open_texture)
 	{
 		mlx_delete_texture(game->door_open_texture);
+	}
+	dprintf (2, "free4\n");
+	if (game->g->ghost_sheet)
+	{
+		mlx_delete_texture(game->g->ghost_sheet);
 	}
 }
 
