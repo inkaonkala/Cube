@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3D.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yhsu <yhsu@student.hive.fi>                +#+  +:+       +#+        */
+/*   By: iniska <iniska@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/15 12:55:19 by yhsu              #+#    #+#             */
-/*   Updated: 2024/11/21 17:05:09 by yhsu             ###   ########.fr       */
+/*   Updated: 2024/11/22 10:18:38 by iniska           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -289,7 +289,7 @@ void	draw_player(t_game *game);
 // ghosty 
 //void	draw_g(t_game *game, int frame_w, int frame_l);
 void	ghostie(t_game *game);
-bool	death_check(t_game *game);
+//bool	death_check(t_game *game);
 void	update_g(t_game *game); //, int ray);
 void	animate(t_game *game);
 void	set_ghost(t_game *game);

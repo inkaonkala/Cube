@@ -6,7 +6,7 @@
 /*   By: iniska <iniska@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/08 10:49:10 by iniska            #+#    #+#             */
-/*   Updated: 2024/11/21 09:48:29 by iniska           ###   ########.fr       */
+/*   Updated: 2024/11/22 11:18:05 by iniska           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,10 +52,15 @@ static void	update_distance(t_game *game)
 {
 	size_t	dis_x;
 	size_t	dis_y;
+	double	min_dis;
 
+	min_dis = TILE / 2;
+	dis_x = ((game->g->g_x * TILE) + TILE / 2) - (game->rays->p_x + TILE / 2);
 	dis_x = ((game->g->g_x * TILE) + TILE / 2) - game->rays->p_x;
 	dis_y = ((game->g->g_y * TILE) + TILE / 2) - game->rays->p_y;
 	game->g->distance = sqrt(dis_x * dis_x + dis_y * dis_y);
+	if (game->g->distance < min_dis)
+		game->g->distance = min_dis;
 }
 
 void	update_g(t_game *game)
