@@ -6,21 +6,21 @@
 /*   By: iniska <iniska@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/15 12:55:19 by yhsu              #+#    #+#             */
-/*   Updated: 2024/11/22 10:18:38 by iniska           ###   ########.fr       */
+/*   Updated: 2024/11/25 09:15:02 by iniska           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#  ifndef CUB3D_H
-#define CUB3D_H
+#ifndef CUB3D_H
+# define CUB3D_H
 
 # include "../libft/libft.h"
-# include"../libft/ft_printf.h"
+# include "../libft/ft_printf.h"
 # include "../MLX42/include/MLX42/MLX42.h"
 
-#include <math.h>
-#include <stdlib.h>
-#include <stdio.h>
-#include <string.h>
+# include <math.h>
+# include <stdlib.h>
+# include <stdio.h>
+# include <string.h>
 
 # define WIN_WIDTH 1024
 # define WIN_HEI 1024
@@ -46,14 +46,13 @@
 # define BONUS 1
 # endif
 
-# define gP "./textures/ghosty.png"
+# define GP "./textures/ghosty.png"
 # define WINIMA	"./textures/winning.png"
 # define DOOR_PATH_CLOSE "./textures/door_closed_0.png"
 # define DOOR_PATH_OPEN "./textures/door_opening_1.png"
 # define GAMEOVERI "./textures/gameover.png"
-# define MAX_VIEW_DIS  3 * TILE
 
-typedef struct s_game t_game;
+typedef struct s_game	t_game;
 
 typedef struct s_shape
 {
@@ -71,15 +70,13 @@ typedef struct s_minimap
 	mlx_image_t		*image;
 	size_t			px;
 	size_t			py;
-
-
 }	t_minimap;
 
 typedef struct s_g
 {
 	char			*ghost_pic;
 	mlx_texture_t	*ghost_sheet;
-	mlx_image_t 	*ghosty;
+	mlx_image_t		*ghosty;
 	size_t			g_x;
 	size_t			g_y;
 	int				height;
@@ -101,7 +98,7 @@ typedef struct s_g
 
 typedef struct s_rays
 {	
-	float	n_ray; // float can hold decimals ->fractional numbers
+	float	n_ray;
 	float	ray_angl;
 	bool	wall_flag;
 	float	distance;
@@ -116,29 +113,25 @@ typedef struct s_rays
 
 typedef struct s_flag
 {
-	int	no;
-	int	so;
-	int	we;
-	int	ea;
-	int	f;
-	int	c;
-	int duplicate;
-	int all_flags;
-	t_game *game;
+	int		no;
+	int		so;
+	int		we;
+	int		ea;
+	int		f;
+	int		c;
+	int		duplicate;
+	int		all_flags;
+	t_game	*game;
 }	t_flag;
-
-
-
-//game->map[game->rays->p_x][game->rays->p_y]
 
 typedef struct s_game
 {
 	char			**file_content;
-	char 			**map;
-	char 			*no_texture_path;
-	char 			*so_texture_path;
-	char 			*we_texture_path;
-	char 			*ea_texture_path;
+	char			**map;
+	char			*no_texture_path;
+	char			*so_texture_path;
+	char			*we_texture_path;
+	char			*ea_texture_path;
 	char			*floor_color;
 	char			*ceiling_color;
 	char			**f_split;
@@ -149,8 +142,8 @@ typedef struct s_game
 	uint32_t		ceiling_r;
 	uint32_t		ceiling_g;
 	uint32_t		ceiling_b;
-	size_t 			longest;
-	int 			last_item;
+	size_t			longest;
+	int				last_item;
 	bool			mouse_on;
 	bool			horizon;
 	bool			death;
@@ -158,8 +151,8 @@ typedef struct s_game
 	int				rotation;
 	int				up_down;
 	int				left_right;
-	t_flag 			*flags;
-	size_t 			height;
+	t_flag			*flags;
+	size_t			height;
 	size_t			width;
 	size_t			player_x;
 	size_t			player_y;
@@ -169,24 +162,24 @@ typedef struct s_game
 	mlx_t			*mlx;
 	mlx_image_t		*canvas;
 	mlx_texture_t	*miniplayer_text;
-	mlx_image_t 	*mini_player;
-	mlx_image_t	    *minimap;
+	mlx_image_t		*mini_player;
+	mlx_image_t		*minimap;
 	mlx_texture_t	*no_texture;
 	mlx_texture_t	*so_texture;
 	mlx_texture_t	*we_texture;
 	mlx_texture_t	*ea_texture;
-	t_rays 			*rays;
+	t_rays			*rays;
 	t_g				*g;
 	char			s;
-	char 			d;
+	char			d;
 	bool			door_state;
 	bool			hit_door;
 	size_t			door_x;
 	size_t			door_y;
 	mlx_texture_t	*door_open_texture;
 	mlx_texture_t	*door_close_texture;
-	mlx_image_t 	*door;
-	mlx_image_t		*gameover_image; 
+	mlx_image_t		*door;
+	mlx_image_t		*gameover_image;
 }	t_game;
 
 //get_2d_array
@@ -194,11 +187,11 @@ char	**get_2d_array( char *mapfile);
 char	*readfile(char *mapfile);
 
 //check_elements
-int		check_elements_info(t_game *game,char **file_content, t_flag *flags);
-int		empty_line(char * file);
+int		check_elements_info(t_game *game, char **file_content, t_flag *flags);
+int		empty_line(char *file);
 
 //create_map
-int		create_map(t_game * game, char **file_content);
+int		create_map(t_game *game, char **file_content);
 void	create_rectagle(t_game *game);
 
 //void copy_string( t_game *ame, char *s1, char *s2);
@@ -212,12 +205,12 @@ void	init_flags(t_flag *flags);
 //map validation
 void	map_validate(t_game *game);
 char	**copy_grid(t_game *game, char **map);
-int	check_map_closed(t_game *game, char **map);
+int		check_map_closed(t_game *game, char **map);
 
 //position extention
 int		check_file_extesion(char *filename);
 int		check_texture_extension(t_game *game);
-void	check_player_position(t_game *game, char ** map);
+void	check_player_position(t_game *game, char **map);
 
 //save color
 void	colour_flip(uint32_t *pixels, int width, int height);
@@ -229,12 +222,12 @@ void	set_color(t_game *game);
 
 //init_game
 void	init_game(t_game *game, char *mapfile);
-int		empty_line(char * file);
-int	check_empty_line(t_game *game, char *mapfile);
-int	check_empty_map(t_game *game);
+int		empty_line(char *file);
+int		check_empty_line(t_game *game, char *mapfile);
+int		check_empty_map(t_game *game);
 
 //error
-void 	err_message_exit(char * message);
+void	err_message_exit(char *message);
 void	screenpop(t_game *game);
 
 //move_and_beam
@@ -242,20 +235,24 @@ void	move_and_beam(void *data);
 
 //move_hook
 void	move_hook(t_game *game, double move_x, double move_y);
-void 	raycast(t_game *game);
+void	raycast(t_game *game);
 void	set_walls(t_game *game, int ray);
+
+//move_helpers
+bool	valid(t_game *game, int y, int x, int i);
+void	death_checker(t_game *game, double radius);
 
 // math_stuff
 float	beam_angl(float angl);
 void	count_values(t_game *sgame);
 float	distance(t_game *game, float x, float y);
 
-int 	check_file_extesion(char *filename);
-void 	init_game(t_game *game, char *mapfile);
+int		check_file_extesion(char *filename);
+void	init_game(t_game *game, char *mapfile);
 
-void 	err_message_exit(char * message);
-void 	err_message(char * message);
-void 	free_grid(char **grid);
+void	err_message_exit(char *message);
+void	err_message(char *message);
+void	free_grid(char **grid);
 
 //clean up 
 void	clean_all_exit(t_game *game, char *message);
@@ -279,7 +276,7 @@ void	draw_wall(t_game *game, double bot_pixl, double top_pixl, double wall_hi);
 void	wasd(t_game *game, double *move_x, double *move_y);
 void	keys(t_game *game);
 void	mouse_move(double x, double y, void *data);
-void 	mouse_press(mouse_key_t button, action_t action, modifier_key_t mods, void *data);
+void	mouse_press(mouse_key_t button, action_t action, modifier_key_t mods, void *data);
 
 //BONUS
 //mini_map
@@ -287,9 +284,7 @@ void	draw_mini_map(t_game *game);
 void	draw_player(t_game *game);
 
 // ghosty 
-//void	draw_g(t_game *game, int frame_w, int frame_l);
 void	ghostie(t_game *game);
-//bool	death_check(t_game *game);
 void	update_g(t_game *game); //, int ray);
 void	animate(t_game *game);
 void	set_ghost(t_game *game);
@@ -298,6 +293,6 @@ void	game_over_image(t_game *game);
 //door 
 void	check_door(t_game *game);
 void	init_door(t_game *game);
-void	check_door_position(t_game *game, char ** map);
+void	check_door_position(t_game *game, char **map);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: iniska <iniska@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/19 10:50:10 by iniska            #+#    #+#             */
-/*   Updated: 2024/11/22 10:27:54 by iniska           ###   ########.fr       */
+/*   Updated: 2024/11/25 09:17:24 by iniska           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,48 +22,6 @@ static void	verify_movin(t_game *game, int x, int y)
 		game->rays->p_y += 1;
 }
 
-static bool	valid(t_game *game, int y, int x, int i)
-{
-	if (i == 1)
-	{
-		if ((game->map[y][x] != '1' && game->map[y][game->rays->p_x / TILE]
-		!= '1' && game->map[game->rays->p_y / TILE][x] != '1' )
-		|| (game->map[y][x] != 'G' && game->map[y][game->rays->p_x / TILE]
-		!= 'G' && game->map[game->rays->p_y / TILE][x] != 'G'))
-			return (true);
-	}
-	else if (i == 2)
-	{
-		if (game->map[y][x] != '1'
-		&& game->map[y][game->rays->p_x / TILE] != '1'
-		&& game->map[game->rays->p_y / TILE][x] != '1'
-		&& game->map[y][x] != '1' && game->map[y][game->rays->p_x / TILE] != 'D'
-		&& game->map[game->rays->p_y / TILE][x] != 'D')
-			return (true);
-	}
-	return (false);
-}
-
-
-static void death_checker(t_game *game)
-{
-	double	ghost_center_x;
-	double	ghost_center_y;
-	double	player_x;
-	double	player_y;
-	double	distance;
-	double	radius = TILE * 1.2;
-
-	ghost_center_x = game->g->g_x * TILE + TILE / 2;
-	ghost_center_y = game->g->g_y * TILE + TILE / 2;
-	player_x = game->rays->p_x;
-	player_y = game->rays->p_y;
-	distance = sqrt(pow(player_x - ghost_center_x, 2) + pow(player_y - ghost_center_y, 2));
-	if (distance <= radius)
-		game->death = true;
-}
-
-
 static void	move_player(t_game *game, double move_x, double move_y)
 {
 	int		map_y;
@@ -77,7 +35,8 @@ static void	move_player(t_game *game, double move_x, double move_y)
 	map_y = new_y / TILE;
 	if (valid(game, map_y, map_x, 1))
 	{
-		death_checker(game);
+		if (BONUS > 0)
+			death_checker(game, 0);
 		if (game->map[map_y][map_x] == 'D'
 			&& game->map[map_y][game->rays->p_x / TILE] == 'D'
 			&& game->map[game->rays->p_y / TILE][map_x] == 'D')
