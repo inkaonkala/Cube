@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   save_color.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yhsu <yhsu@student.hive.fi>                +#+  +:+       +#+        */
+/*   By: iniska <iniska@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/07 11:17:58 by iniska            #+#    #+#             */
-/*   Updated: 2024/11/22 17:39:37 by yhsu             ###   ########.fr       */
+/*   Updated: 2024/11/25 11:27:10 by iniska           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/cub3D.h"
 
-static uint32_t	swap_rgb_bgr(uint32_t color)
+uint32_t	swap_rgb_bgr(uint32_t color)
 {
 	uint8_t	r;
 	uint8_t	g;

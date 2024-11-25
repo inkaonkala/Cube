@@ -6,16 +6,18 @@
 /*   By: iniska <iniska@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/18 12:06:33 by iniska            #+#    #+#             */
-/*   Updated: 2024/11/19 10:13:38 by iniska           ###   ########.fr       */
+/*   Updated: 2024/11/25 11:37:08 by iniska           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/cub3D.h"
 
+
 static uint32_t	hexax(uint32_t r, uint32_t g, uint32_t b)
 {
 	return (((r & 0xFF) << 16) | ((g & 0xFF) << 8) | (b & 0xFF));
 }
+
 
 static void	floor_n_ceil(t_game *game, int ray, double bot_pxl, double top_pxl)
 {
@@ -23,8 +25,10 @@ static void	floor_n_ceil(t_game *game, int ray, double bot_pxl, double top_pxl)
 	uint32_t	floor;
 	uint32_t	ceil;
 
-	floor = hexax(game->floor_r, game->floor_g, game->floor_b);
-	ceil = hexax(game->ceiling_r, game->ceiling_g, game->ceiling_b);
+	floor = hexax(game->floor_b, game->floor_g, game->floor_r);
+	printf("F color is: %u\n", floor);
+	ceil = hexax(game->ceiling_b, game->ceiling_g, game->ceiling_r);
+	printf("C color id: %u\n", ceil);
 	i = bot_pxl;
 	while (i < WIN_HEI)
 		set_pixels(game, ray, i++, floor);
