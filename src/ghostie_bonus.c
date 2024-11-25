@@ -6,7 +6,7 @@
 /*   By: iniska <iniska@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/05 08:49:31 by iniska            #+#    #+#             */
-/*   Updated: 2024/11/22 11:29:08 by iniska           ###   ########.fr       */
+/*   Updated: 2024/11/25 08:53:28 by iniska           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,7 @@ static bool	init_g(t_game *game)
 	}
 	if (game->g->ghost_sheet)
 		mlx_delete_texture(game->g->ghost_sheet);
-	game->g->ghost_sheet = mlx_load_png(gP);
+	game->g->ghost_sheet = mlx_load_png(GP);
 	if (!game->g->ghost_sheet)
 	{
 		ft_putendl_fd("No ghost\n", 2);
