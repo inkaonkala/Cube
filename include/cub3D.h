@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3D.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: iniska <iniska@student.hive.fi>            +#+  +:+       +#+        */
+/*   By: yhsu <yhsu@student.hive.fi>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/15 12:55:19 by yhsu              #+#    #+#             */
-/*   Updated: 2024/11/25 13:07:53 by iniska           ###   ########.fr       */
+/*   Updated: 2024/11/25 13:55:18 by yhsu             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,9 +41,9 @@
 # define MINIMAP_IMAGE_SIDE 16
 
 # ifndef USE_BONUS
-# define BONUS 0
+#  define BONUS 0
 # else
-# define BONUS 1
+#  define BONUS 1
 # endif
 
 # define GP "./textures/ghosty.png"
