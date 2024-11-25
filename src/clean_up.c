@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   clean_up.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: iniska <iniska@student.hive.fi>            +#+  +:+       +#+        */
+/*   By: yhsu <yhsu@student.hive.fi>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/15 17:58:39 by yhsu              #+#    #+#             */
-/*   Updated: 2024/11/25 09:09:57 by iniska           ###   ########.fr       */
+/*   Updated: 2024/11/25 13:44:34 by yhsu             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,18 +14,14 @@
 
 static void	free_bonus_texture(t_game *game)
 {
-	dprintf (2, "free1\n");
-	dprintf (2, "free2\n");
 	if (game->door_close_texture)
 	{
 		mlx_delete_texture(game->door_close_texture);
 	}
-	dprintf (2, "free3\n");
 	if (game->door_open_texture)
 	{
 		mlx_delete_texture(game->door_open_texture);
 	}
-	dprintf (2, "free4\n");
 	if (game->g->ghost_sheet)
 	{
 		mlx_delete_texture(game->g->ghost_sheet);

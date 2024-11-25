@@ -6,7 +6,7 @@
 /*   By: yhsu <yhsu@student.hive.fi>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/22 17:03:23 by yhsu              #+#    #+#             */
-/*   Updated: 2024/11/22 17:05:35 by yhsu             ###   ########.fr       */
+/*   Updated: 2024/11/25 13:25:54 by yhsu             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,7 @@ void	set_color(t_game *game)
 {
 	if (count_char(game->ceiling_color, ',') != 2
 		|| count_char(game->floor_color, ',') != 2)
-		clean_all_exit(game, "wrong color fomat, not with two ','");
+		clean_all_exit(game, "wrong color format (with two ',')");
 	game->c_split = ft_split(game->ceiling_color, ',');
 	if (!game->c_split)
 		clean_all_exit(game, "c_split split failed.");
