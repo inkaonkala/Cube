@@ -6,21 +6,21 @@
 /*   By: iniska <iniska@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/15 12:55:19 by yhsu              #+#    #+#             */
-/*   Updated: 2024/11/25 09:15:02 by iniska           ###   ########.fr       */
+/*   Updated: 2024/11/25 11:29:03 by iniska           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef CUB3D_H
-# define CUB3D_H
+#  ifndef CUB3D_H
+#define CUB3D_H
 
 # include "../libft/libft.h"
-# include "../libft/ft_printf.h"
+# include"../libft/ft_printf.h"
 # include "../MLX42/include/MLX42/MLX42.h"
 
-# include <math.h>
-# include <stdlib.h>
-# include <stdio.h>
-# include <string.h>
+#include <math.h>
+#include <stdlib.h>
+#include <stdio.h>
+#include <string.h>
 
 # define WIN_WIDTH 1024
 # define WIN_HEI 1024
@@ -51,8 +51,9 @@
 # define DOOR_PATH_CLOSE "./textures/door_closed_0.png"
 # define DOOR_PATH_OPEN "./textures/door_opening_1.png"
 # define GAMEOVERI "./textures/gameover.png"
+# define MAX_VIEW_DIS  3 * TILE
 
-typedef struct s_game	t_game;
+typedef struct s_game t_game;
 
 typedef struct s_shape
 {
@@ -239,8 +240,8 @@ void	raycast(t_game *game);
 void	set_walls(t_game *game, int ray);
 
 //move_helpers
-bool	valid(t_game *game, int y, int x, int i);
 void	death_checker(t_game *game, double radius);
+bool	valid(t_game *game, int y, int x, int i);
 
 // math_stuff
 float	beam_angl(float angl);
@@ -284,8 +285,9 @@ void	draw_mini_map(t_game *game);
 void	draw_player(t_game *game);
 
 // ghosty 
+
 void	ghostie(t_game *game);
-void	update_g(t_game *game); //, int ray);
+void	update_g(t_game *game);
 void	animate(t_game *game);
 void	set_ghost(t_game *game);
 void	game_over_image(t_game *game);
@@ -294,5 +296,7 @@ void	game_over_image(t_game *game);
 void	check_door(t_game *game);
 void	init_door(t_game *game);
 void	check_door_position(t_game *game, char **map);
+
+uint32_t	swap_rgb_bgr(uint32_t color);
 
 #endif
