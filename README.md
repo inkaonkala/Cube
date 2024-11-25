@@ -5,7 +5,7 @@ A 3D game inspired by Wolfstein3D written in C!
 ## Game Goal
 You need to survive the labyrint and find the exit door, not get hit by the cute ghosty on the way.
 
-![Screenshot from 2024-11-25 13-39-44](https://github.com/user-attachments/assets/4ddaeb14-91b8-453b-a949-16e4a5eae34b)
+[![Demo Video](https://img.youtube.com/vi/EQZ6XAi4fRA/0.jpg)](https://youtube.com/shorts/EQZ6XAi4fRA?feature=share)
 
 
 The [MLX42](https://github.com/codam-coding-college/MLX42) graphics library is used for this project. Detailed information about required dependencies and installation steps for various operating systems is available in its GitHub repository.
