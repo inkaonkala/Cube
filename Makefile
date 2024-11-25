@@ -1,3 +1,4 @@
+############ for Linux
 
 NAME = cub3D
 
@@ -72,14 +73,16 @@ re: fclean all
 ############ for mac
 
 
-# NAME = cub3D
+
+NAME = cub3D
 
 # CC = cc    
 # CFLAGS = -Wall -Wextra -Werror -g #-fsanitize=address
 # #MLX_FLAGS = -L/opt/X11/lib -lX11 -lXext -lglfw -lm # Linux-specific flags
+# MLX_FLAGS = -L/opt/homebrew/opt/glfw/lib -lglfw -framework Cocoa -framework OpenGL -framework IOKit
 
 # #MLX_FLAGS = -L/usr/local/opt/libx11/lib -L/usr/local/opt/libxext/lib -lX11 -lXext
-# MLX_FLAGS = -L/usr/local/opt/glfw/lib -lglfw -framework Cocoa -framework OpenGL -framework IOKit
+
 
 # # Library directories and files
 # LIBFT_DIR = ./libft
@@ -94,7 +97,8 @@ re: fclean all
 
 
 # # 包含选项，指向 libx11 和 libxext 的头文件
-# INCLUDES = -I/usr/local/opt/libx11/include -I/usr/local/opt/libxext/include
+# #INCLUDES = -I/usr/local/opt/libx11/include -I/usr/local/opt/libxext/include
+# INCLUDES = -I/opt/homebrew/opt/glfw/include
 
 
 # # Include directories
@@ -114,6 +118,10 @@ re: fclean all
 # 	@echo "\033[0;32mCreating The Executable✅: ${NAME}\033[0m"
 # 	@$(CC) $(OBJECTS) $(LIBFT) $(MLX42) $(INCLUDES) $(MLX_FLAGS) -L$(LIBFT_DIR) -lft -o $(NAME)
 	
+# # Bonus part
+# bonus: CFLAGS += -DUSE_BONUS=1
+# bonus: re
+
 # # Compile object files
 # objs/%.o: src/%.c
 # 	@mkdir -p objs
