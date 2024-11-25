@@ -18,12 +18,14 @@ The [MLX42](https://github.com/codam-coding-college/MLX42) graphics library is u
  - Run `make` or `make bonus` to see more features  
 
 #### Running:
+  - Select the Makefile that matches your system (Linux or macOS)
   - Run `./cub3d path_to_map` (./maps/bonus_maps/3.cub)
 
 #### Instruction: 
- - Use the "W", "A", "S", and "D" keys to move the player.
- - Use the left or right arrow keys to adjust the player's view angle.
- - Mouse can be used to control the player's movement and view.
+ - Use the "W", "A", "S", and "D" keys to move the player
+ - Press key "E" to open the Door to escape
+ - Use the left or right arrow keys to adjust the player's view angle
+ - Mouse can be used to control the player's movement and view
 
 #### Credits:
  - It's a group project made by [Yunchia-Hsu](https://github.com/Yunchia-Hsu) and [inkaonkala](https://github.com/inkaonkala)
