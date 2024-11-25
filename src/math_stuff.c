@@ -6,7 +6,7 @@
 /*   By: yhsu <yhsu@student.hive.fi>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/17 10:24:06 by iniska            #+#    #+#             */
-/*   Updated: 2024/11/18 16:38:01 by yhsu             ###   ########.fr       */
+/*   Updated: 2024/11/25 14:04:43 by yhsu             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ void	count_values(t_game *game)
 	else if (game->map[game->player_y][game->player_x] == 'W')
 		game->player_angl = PI;
 	else
-		printf("Player not found\n");
+		ft_putendl_fd("Player not found\n", 2);
 	game->fow = (FOW * PI / 180);
 	game->mouse_on = false;
 	game->rotation = 0;

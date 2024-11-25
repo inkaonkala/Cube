@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   drawing_helpers.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: iniska <iniska@student.hive.fi>            +#+  +:+       +#+        */
+/*   By: yhsu <yhsu@student.hive.fi>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/19 11:13:20 by iniska            #+#    #+#             */
-/*   Updated: 2024/11/22 08:38:11 by iniska           ###   ########.fr       */
+/*   Updated: 2024/11/25 14:03:55 by yhsu             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ double	get_setof_x(t_game *game, mlx_texture_t *pic)
 	x = 0;
 	if (!game || !game->rays || !pic || pic->width == 0)
 	{
-		printf("No Picture\n");
+		ft_putendl_fd("No Picture\n", 2);
 		return (x);
 	}
 	if (game->rays->wall_flag == true)

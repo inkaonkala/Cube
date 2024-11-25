@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ghostie_bonus.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: iniska <iniska@student.hive.fi>            +#+  +:+       +#+        */
+/*   By: yhsu <yhsu@student.hive.fi>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/05 08:49:31 by iniska            #+#    #+#             */
-/*   Updated: 2024/11/25 08:53:28 by iniska           ###   ########.fr       */
+/*   Updated: 2024/11/25 14:04:28 by yhsu             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ void	set_ghost(t_game *game)
 	game->g->ghosty = mlx_new_image(game->mlx, game->g->len, game->g->height);
 	if (!game->g->ghosty)
 	{
-		printf("No ghosty\n");
+		ft_putendl_fd("No ghosty\n", 2);
 		return ;
 	}
 	game->g->angl_to_p = atan2(dis_y, dis_x);
