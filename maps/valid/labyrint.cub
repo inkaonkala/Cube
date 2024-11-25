@@ -3,8 +3,8 @@ SO textures/ovi2.png
 WE textures/ovi3.png
 EA textures/ovi4.png
 
-F 2,20,20
-C 200,200,180
+F 200,200,180
+C 2,20,20
 
 111111111111111111111111
 100001111000000000000011
