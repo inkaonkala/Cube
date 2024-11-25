@@ -26,4 +26,4 @@ The [MLX42](https://github.com/codam-coding-college/MLX42) graphics library is u
  - Mouse can be used to control the player's movement and view.
 
 #### Credits:
- - It a group project made by [Yunchia-Hsu](https://github.com/Yunchia-Hsu) and [inkaonkala](https://github.com/inkaonkala)
+ - It's a group project made by [Yunchia-Hsu](https://github.com/Yunchia-Hsu) and [inkaonkala](https://github.com/inkaonkala)
