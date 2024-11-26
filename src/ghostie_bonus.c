@@ -6,7 +6,7 @@
 /*   By: iniska <iniska@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/05 08:49:31 by iniska            #+#    #+#             */
-/*   Updated: 2024/11/26 10:03:00 by iniska           ###   ########.fr       */
+/*   Updated: 2024/11/26 10:15:32 by iniska           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,10 +23,10 @@ void	animate(t_game *game)
 	game->g->len = game->g->ghost_sheet->width / 4;
 	if (delay >= delay_f)
 	{
-		game->g->row = frame_counter / 12;
-		game->g->col = frame_counter % 12;
+		game->g->row = frame_counter / 4;
+		game->g->col = frame_counter % 4;
 		frame_counter++;
-		if (frame_counter >= 96)
+		if (frame_counter >= 16)
 			frame_counter = 0;
 		delay = 0;
 	}
