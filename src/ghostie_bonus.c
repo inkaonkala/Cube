@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ghostie_bonus.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yhsu <yhsu@student.hive.fi>                +#+  +:+       +#+        */
+/*   By: iniska <iniska@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/05 08:49:31 by iniska            #+#    #+#             */
-/*   Updated: 2024/11/25 14:04:28 by yhsu             ###   ########.fr       */
+/*   Updated: 2024/11/26 10:03:00 by iniska           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ void	animate(t_game *game)
 
 	delay_f = 9;
 	game->g->height = game->g->ghost_sheet->height / 4;
-	game->g->len = game->g->ghost_sheet->width / 6;
+	game->g->len = game->g->ghost_sheet->width / 4;
 	if (delay >= delay_f)
 	{
 		game->g->row = frame_counter / 12;

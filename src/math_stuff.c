@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   math_stuff.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yhsu <yhsu@student.hive.fi>                +#+  +:+       +#+        */
+/*   By: iniska <iniska@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/17 10:24:06 by iniska            #+#    #+#             */
-/*   Updated: 2024/11/25 14:04:43 by yhsu             ###   ########.fr       */
+/*   Updated: 2024/11/26 09:43:55 by iniska           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,11 +23,11 @@ float	beam_angl(float angl)
 
 void	save_images_to_struct(t_game *game)
 {
-	game->no_texture = mlx_load_png(game->no_texture_path);
+	game->no_texture = mlx_load_png(game->so_texture_path);
 	if (game->no_texture)
 		colour_flip((uint32_t *)game->no_texture->pixels,
 			game->no_texture->width, game->no_texture->height);
-	game->so_texture = mlx_load_png(game->so_texture_path);
+	game->so_texture = mlx_load_png(game->no_texture_path);
 	if (game->so_texture)
 		colour_flip((uint32_t *)game->so_texture->pixels,
 			game->so_texture->width, game->so_texture->height);
