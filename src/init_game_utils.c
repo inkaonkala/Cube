@@ -6,7 +6,7 @@
 /*   By: yhsu <yhsu@student.hive.fi>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/21 14:59:46 by yhsu              #+#    #+#             */
-/*   Updated: 2024/11/21 15:07:03 by yhsu             ###   ########.fr       */
+/*   Updated: 2024/11/26 12:38:44 by yhsu             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,12 +33,17 @@ static int	check_newline(char *new_line, int empty, int fd)
 	while (new_line)
 	{
 		if (new_line && empty == 1)
+		{
+			free(new_line);
 			return (1);
+		}
 		if ((new_line == NULL || new_line[0] == '\n') && empty == 0)
 			empty = 1;
 		free(new_line);
 		new_line = get_next_line(fd);
 	}
+	if (new_line == NULL)
+		free(new_line);
 	return (0);
 }
 

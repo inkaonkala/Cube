@@ -6,7 +6,7 @@
 /*   By: yhsu <yhsu@student.hive.fi>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/15 14:02:51 by yhsu              #+#    #+#             */
-/*   Updated: 2024/11/25 13:45:29 by yhsu             ###   ########.fr       */
+/*   Updated: 2024/11/26 11:53:18 by yhsu             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,10 @@ static void	parse_file(t_game *game, char *mapfile)
 		clean_all_exit(game, "Cannot read the mapfile!");
 	}
 	if (game->file_content[0] == NULL)
+	{
+		free(game->flags);
 		clean_all_exit(game, "The file is empty!");
+	}
 	parse_element(game, game->flags, mapfile);
 }
 

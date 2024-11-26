@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line_bonus.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yhsu <yhsu@hive.student.fi>                +#+  +:+       +#+        */
+/*   By: yhsu <yhsu@student.hive.fi>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/08 12:46:16 by yhsu              #+#    #+#             */
-/*   Updated: 2023/12/08 15:51:10 by yhsu             ###   ########.fr       */
+/*   Updated: 2024/11/26 12:27:48 by yhsu             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ int	rest_char(t_list **list)
 	dealloc(list, new_node, buffer);
 	return (0);
 }
-
+#include <stdio.h>
 char	*get_the_line(t_list *list)
 {
 	int		len_line;
@@ -50,7 +50,9 @@ char	*get_the_line(t_list *list)
 	len_line = count_line(list);
 	next_line = malloc(len_line + 1);
 	if (next_line == NULL)
+	{
 		return (NULL);
+	}
 	copy_str(list, next_line);
 	return (next_line);
 }
