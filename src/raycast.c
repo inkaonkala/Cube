@@ -6,7 +6,7 @@
 /*   By: iniska <iniska@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/15 20:39:06 by iniska            #+#    #+#             */
-/*   Updated: 2024/11/22 09:23:00 by iniska           ###   ########.fr       */
+/*   Updated: 2024/11/26 10:10:34 by iniska           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,9 +104,9 @@ void	raycast(t_game *game)
 			game->rays->distance = vertical_line;
 		else
 			it_is_a_wall(game, horizon_line);
-		set_walls(game, ray);
 		if (ghosty)
 			update_g(game);
+		set_walls(game, ray);
 		game->rays->ray_angl += (game->fow / WIN_WIDTH);
 		ray++;
 	}
